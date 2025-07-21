@@ -1,0 +1,177 @@
+.admin-data {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 20px;
+}
+
+.admin-data-header {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.admin-data-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #718096;
+  font-weight: 600;
+}
+
+.admin-cleanup-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fed7d7;
+  border: 2px solid #feb2b2;
+  color: #c53030;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-cleanup-button:hover {
+  background: #c53030;
+  color: white;
+  border-color: #c53030;
+  transform: translateY(-2px);
+}
+
+.admin-data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.admin-data-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+.admin-data-card:hover {
+  transform: translateY(-2px);
+}
+
+.admin-data-file-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+
+.admin-data-file-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: #6c63ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-data-file-details {
+  flex: 1;
+}
+
+.admin-data-file-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+.admin-data-file-meta {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #718096;
+  flex-wrap: wrap;
+}
+
+.admin-data-file-meta span {
+  background: #f7fafc;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.admin-data-file-actions {
+  flex-shrink: 0;
+}
+
+.admin-download-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #6c63ff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-download-button:hover {
+  background: #5a52d5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(108, 99, 255, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .admin-data {
+    padding: 15px;
+  }
+  
+  .admin-data-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .admin-data-stats {
+    justify-content: space-between;
+  }
+  
+  .admin-data-card {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  
+  .admin-data-file-info {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .admin-data-file-meta {
+    justify-content: center;
+  }
+  
+  .admin-data-file-actions {
+    align-self: center;
+  }
+} 
