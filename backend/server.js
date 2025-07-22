@@ -35,6 +35,11 @@ app.use('/api/convert', convertRoutes);
 app.use('/api/history', historyRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Root route for health check or default response
+app.get('/', (req, res) => {
+  res.send('FlixConvert backend is running!');
+});
+
 // Health check route
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
