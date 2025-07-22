@@ -19,6 +19,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [adminData, setAdminData] = useState(null);
   const navigate = useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
@@ -36,7 +37,7 @@ export default function AdminDashboard() {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5000/api/admin/dashboard', {
+      const response = await fetch(`${API_BASE_URL}/admin/dashboard`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

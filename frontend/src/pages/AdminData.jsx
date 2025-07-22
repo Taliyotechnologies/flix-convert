@@ -9,6 +9,7 @@ export default function AdminData() {
   const [totalPages, setTotalPages] = useState(1);
   const [totalFiles, setTotalFiles] = useState(0);
   const navigate = useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
@@ -28,7 +29,7 @@ export default function AdminData() {
         limit: 20
       });
 
-      const response = await fetch(`http://localhost:5000/api/admin/data?${params}`, {
+      const response = await fetch(`${API_BASE_URL}/admin/data?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -54,7 +55,7 @@ export default function AdminData() {
   const handleDownload = async (filename) => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`http://localhost:5000/api/admin/data/download/${filename}`, {
+      const response = await fetch(`${API_BASE_URL}/admin/data/download/${filename}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -79,7 +80,7 @@ export default function AdminData() {
   const handleCleanup = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5000/api/admin/data/cleanup', {
+      const response = await fetch(`${API_BASE_URL}/admin/data/cleanup`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
