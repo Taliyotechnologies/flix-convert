@@ -30,11 +30,11 @@ const apiRequest = async (endpoint, options = {}) => {
   }
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
+    const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+      throw new Error(data.error || `HTTP error! status: ${response.status}`);
     }
-    return await response.json();
+    return data;
   } catch (error) {
     console.error('API request failed:', error);
     throw error;
@@ -107,18 +107,21 @@ export const compressionAPI = {
       headers.Authorization = `Bearer ${token}`;
     }
 
-    const response = await fetch(`${API_BASE_URL}/compress/image`, {
-      method: 'POST',
-      headers,
-      body: formData,
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    try {
+      const response = await fetch(`${API_BASE_URL}/compress/image`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+      }
+      return data;
+    } catch (error) {
+      console.error('Image compression failed:', error);
+      throw error;
     }
-
-    return await response.json();
   },
 
   // Video compression
@@ -138,20 +141,14 @@ export const compressionAPI = {
         headers,
         body: formData,
       });
-
+      const data = await response.json().catch(() => ({}));
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error(data.error || `HTTP error! status: ${response.status}`);
       }
-
-      const result = await response.json();
-      if (result.success) {
-        return result;
-      } else {
-        throw new Error(result.error || 'Compression failed');
-      }
+      return data;
     } catch (error) {
-      throw new Error(`Video compression failed: ${error.message}`);
+      console.error('Video compression failed:', error);
+      throw error;
     }
   },
 
@@ -166,18 +163,21 @@ export const compressionAPI = {
       headers.Authorization = `Bearer ${token}`;
     }
 
-    const response = await fetch(`${API_BASE_URL}/compress/pdf`, {
-      method: 'POST',
-      headers,
-      body: formData,
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    try {
+      const response = await fetch(`${API_BASE_URL}/compress/pdf`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+      }
+      return data;
+    } catch (error) {
+      console.error('PDF compression failed:', error);
+      throw error;
     }
-
-    return await response.json();
   },
 
   // Audio compression
@@ -191,18 +191,21 @@ export const compressionAPI = {
       headers.Authorization = `Bearer ${token}`;
     }
 
-    const response = await fetch(`${API_BASE_URL}/compress/audio`, {
-      method: 'POST',
-      headers,
-      body: formData,
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+    try {
+      const response = await fetch(`${API_BASE_URL}/compress/audio`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+      }
+      return data;
+    } catch (error) {
+      console.error('Audio compression failed:', error);
+      throw error;
     }
-
-    return await response.json();
   },
 
   // Get compression history
