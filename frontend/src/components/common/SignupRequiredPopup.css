@@ -1,0 +1,112 @@
+.signup-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.signup-popup {
+  background: var(--color-card);
+  border: 1.5px solid var(--color-border);
+  border-radius: 1.2rem;
+  max-width: 480px;
+  width: 100%;
+  padding: 2rem;
+  color: var(--color-text);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.popup-header h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 0.3rem;
+  transition: color 0.2s, background 0.2s;
+}
+
+.popup-close:hover {
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.popup-content {
+  margin-bottom: 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--color-border);
+  color: var(--color-text-secondary);
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  border: 1.5px solid var(--color-accent);
+  color: #fff;
+  padding: 0.7rem 1.2rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+  .signup-popup {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+} 

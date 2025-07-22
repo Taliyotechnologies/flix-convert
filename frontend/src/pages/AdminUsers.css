@@ -1,0 +1,259 @@
+.admin-users {
+  min-height: 100vh;
+  background: #f8fafc;
+  padding: 20px;
+}
+
+.admin-users-header {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.admin-search-container {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.admin-search-input {
+  width: 100%;
+  padding: 12px 45px 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+}
+
+.admin-search-input:focus {
+  outline: none;
+  border-color: #6c63ff;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+}
+
+.admin-search-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+}
+
+.admin-users-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #718096;
+  font-weight: 600;
+}
+
+.admin-users-table-container {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.admin-users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-users-table th {
+  background: #f7fafc;
+  padding: 20px;
+  text-align: left;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 14px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.admin-users-table td {
+  padding: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.admin-users-table tr:hover {
+  background: #f7fafc;
+}
+
+.admin-user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.admin-user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #6c63ff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-user-name {
+  font-weight: 600;
+  color: #1a202c;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.admin-user-id {
+  font-size: 12px;
+  color: #718096;
+}
+
+.admin-user-email {
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.admin-user-date {
+  color: #718096;
+  font-size: 14px;
+}
+
+.admin-user-status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.admin-user-status.active {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.admin-user-status.inactive {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+.admin-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.admin-pagination-button {
+  background: #f7fafc;
+  border: 2px solid #e2e8f0;
+  color: #4a5568;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-pagination-button:hover:not(:disabled) {
+  background: #6c63ff;
+  color: white;
+  border-color: #6c63ff;
+}
+
+.admin-pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-pagination-pages {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-pagination-page {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e2e8f0;
+  background: #f7fafc;
+  color: #4a5568;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-pagination-page:hover {
+  background: #6c63ff;
+  color: white;
+  border-color: #6c63ff;
+}
+
+.admin-pagination-page.active {
+  background: #6c63ff;
+  color: white;
+  border-color: #6c63ff;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .admin-users {
+    padding: 15px;
+  }
+  
+  .admin-users-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .admin-search-container {
+    max-width: none;
+  }
+  
+  .admin-users-stats {
+    justify-content: space-between;
+  }
+  
+  .admin-users-table {
+    font-size: 14px;
+  }
+  
+  .admin-users-table th,
+  .admin-users-table td {
+    padding: 15px 10px;
+  }
+  
+  .admin-user-info {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .admin-pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .admin-pagination-pages {
+    order: -1;
+  }
+} 
