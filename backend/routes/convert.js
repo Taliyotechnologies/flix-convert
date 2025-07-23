@@ -70,8 +70,22 @@ router.post('/convert', upload.single('file'), async (req, res) => {
           .on('error', reject)
           .save(outPath);
       });
-      await fs.unlink(inputPath);
-      return res.json({ fileName: outName, downloadUrl: `/api/convert/download/${outName}` });
+      // Compare file sizes
+      const [origStats, compStats] = await Promise.all([
+        fs.stat(inputPath),
+        fs.stat(outPath)
+      ]);
+      let finalFile = outPath;
+      let finalName = outName;
+      if (compStats.size >= origStats.size) {
+        // Compressed is larger, use original
+        await fs.unlink(outPath);
+        finalFile = inputPath;
+        finalName = path.basename(inputPath);
+      } else {
+        await fs.unlink(inputPath);
+      }
+      return res.json({ fileName: finalName, downloadUrl: `/api/convert/download/${finalName}` });
     }
 
     // --- Document/Text Conversion (basic: only txt <-> pdf, txt <-> docx, pdf <-> txt) ---
