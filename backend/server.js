@@ -10,7 +10,19 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['https://flixconvert.taliyotechnologies.com', 'http://localhost:5173'],
+  origin: function(origin, callback) {
+    const allowed = [
+      'https://flixconvert.taliyotechnologies.com',
+      'http://localhost:5173',
+      undefined // allow server-to-server or curl
+    ];
+    console.log('CORS request from:', origin);
+    if (allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(helmet());
