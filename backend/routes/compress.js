@@ -33,25 +33,29 @@ router.post('/image', upload.single('image'), async (req, res) => {
     }
     const ext = getExt(req.file.mimetype);
     const originalName = req.file.originalname;
-    // Use sharp to compress (quality 70 for jpg/webp, 8 for png)
+    const baseName = path.parse(originalName).name;
+    const outName = `compressed-${Date.now()}-${baseName}.${ext}`;
+    const outPath = path.join(__dirname, '../uploads', outName);
+    // Use sharp to compress (quality 40 for jpg/webp, 8 for png)
     let sharpStream = sharp(req.file.buffer);
     let compressedBuffer;
     if (ext === 'jpg' || ext === 'jpeg') {
-      compressedBuffer = await sharpStream.jpeg({ quality: 70 }).toBuffer();
+      compressedBuffer = await sharpStream.jpeg({ quality: 40 }).toBuffer();
     } else if (ext === 'png') {
-      compressedBuffer = await sharpStream.png({ quality: 70, compressionLevel: 8 }).toBuffer();
+      compressedBuffer = await sharpStream.png({ quality: 40, compressionLevel: 9 }).toBuffer();
     } else if (ext === 'webp') {
-      compressedBuffer = await sharpStream.webp({ quality: 70 }).toBuffer();
+      compressedBuffer = await sharpStream.webp({ quality: 40 }).toBuffer();
     } else if (ext === 'gif') {
       // GIF: just return original (sharp doesn't compress gif)
       compressedBuffer = req.file.buffer;
     } else {
-      compressedBuffer = await sharpStream.jpeg({ quality: 70 }).toBuffer();
+      compressedBuffer = await sharpStream.jpeg({ quality: 40 }).toBuffer();
     }
+    // Save compressed image to disk
+    await fs.promises.writeFile(outPath, compressedBuffer);
     const compressedSize = compressedBuffer.length;
     const ratio = ((originalSize - compressedSize) / originalSize) * 100;
-    res.setHeader('Content-Type', req.file.mimetype);
-    res.setHeader('Content-Disposition', `attachment; filename="${path.parse(originalName).name}_compressed.${ext}"`);
+    const downloadUrl = `/api/compress/download/${outName}`;
     res.json({
       success: true,
       data: {
@@ -59,12 +63,21 @@ router.post('/image', upload.single('image'), async (req, res) => {
         originalSize,
         compressedSize,
         compressionRatio: ratio.toFixed(2),
-        downloadUrl: null, // frontend expects a downloadUrl, but we send file directly
+        downloadUrl,
       }
     });
   } catch (error) {
     res.status(500).json({ error: 'Image compression failed', details: error.message });
   }
+});
+
+// GET /api/compress/download/:filename
+router.get('/download/:filename', (req, res) => {
+  const filePath = path.join(__dirname, '../uploads', req.params.filename);
+  if (!fs.existsSync(filePath)) {
+    return res.status(404).json({ error: 'File not found' });
+  }
+  res.download(filePath);
 });
 
 module.exports = router;
