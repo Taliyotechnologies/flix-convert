@@ -122,14 +122,15 @@ export default function ImageCompress() {
         }
       }
       setCompressed(compressionResults);
+      setLoading(false);
+      setCompressing(false);
+      setProgress(0);
     } catch (error) {
       setCompressing(false);
-      setError('Compression failed. Please try again.');
-      console.error('Compression error:', error);
-    } finally {
       setLoading(false);
       setProgress(0);
-      setCompressing(false);
+      setError('Compression failed. Please try again.');
+      console.error('Compression error:', error);
     }
   };
 
@@ -275,11 +276,6 @@ export default function ImageCompress() {
                     <div className="result-error">
                       <span className="error-icon">❌</span>
                       <span className="error-text">{truncateFileName(result.originalName)} - {result.error}</span>
-                    </div>
-                  ) : result.alreadyCompressed ? (
-                    <div className="already-compressed-message">
-                      <span className="info-icon">ℹ️</span>
-                      <span className="info-text">{truncateFileName(result.originalName)} - Your image is already compressed</span>
                     </div>
                   ) : (
                     <>
