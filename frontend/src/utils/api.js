@@ -108,7 +108,7 @@ export const compressionAPI = {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/image`, {
+      const response = await fetch(`${API_BASE_URL}/api/compress/image`, {
         method: 'POST',
         headers,
         body: formData,
@@ -136,7 +136,7 @@ export const compressionAPI = {
         headers.Authorization = `Bearer ${token}`;
       }
 
-      const response = await fetch(`${API_BASE_URL}/compress/video`, {
+      const response = await fetch(`${API_BASE_URL}/api/compress/video`, {
         method: 'POST',
         headers,
         body: formData,
@@ -164,7 +164,7 @@ export const compressionAPI = {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/compress/pdf`, {
+      const response = await fetch(`${API_BASE_URL}/api/compress/pdf`, {
         method: 'POST',
         headers,
         body: formData,
@@ -192,7 +192,7 @@ export const compressionAPI = {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/compress/audio`, {
+      const response = await fetch(`${API_BASE_URL}/api/compress/audio`, {
         method: 'POST',
         headers,
         body: formData,
