@@ -140,7 +140,10 @@ export default function ImageCompress() {
       return;
     }
     try {
-      const downloadUrl = fileAPI.downloadFile(result.downloadUrl.split('/').pop());
+      let downloadUrl = result.downloadUrl;
+      if (!/^https?:\/\//.test(downloadUrl)) {
+        downloadUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}${downloadUrl}`;
+      }
       const response = await axios.get(downloadUrl, { responseType: 'blob' });
       if (response.status === 401) {
         const data = response.data;

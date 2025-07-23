@@ -115,7 +115,10 @@ export default function VideoCompress() {
       return;
     }
     try {
-      const downloadUrl = fileAPI.downloadFile(result.downloadUrl.split('/').pop());
+      let downloadUrl = result.downloadUrl;
+      if (!/^https?:\/\//.test(downloadUrl)) {
+        downloadUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}${downloadUrl}`;
+      }
       const response = await axios.get(downloadUrl, { responseType: 'blob' });
       const blob = response.data;
       const link = document.createElement('a');
