@@ -659,6 +659,9 @@ router.post('/audio', createUploadMiddleware('audio', getLimitMBFromAuth), handl
           '-profile:a aac_low'    // AAC low complexity profile
         ])
         .output(compressedPath)
+        .on('stderr', (stderrLine) => {
+          console.error('FFmpeg stderr:', stderrLine);
+        })
         .on('end', async () => {
           try {
             // Get compressed file stats
