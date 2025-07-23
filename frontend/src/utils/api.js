@@ -108,7 +108,7 @@ export const compressionAPI = {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/compress/image`, {
+      const response = await fetch(`${API_BASE_URL}/image`, {
         method: 'POST',
         headers,
         body: formData,
