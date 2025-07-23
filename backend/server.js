@@ -4,11 +4,19 @@ const compressRoutes = require('./routes/compress');
 
 const app = express();
 
-// CORS for frontend
+// CORS for frontend (must be first middleware)
 app.use(cors({
-  origin: ['https://flixconvert.taliyotechnologies.com', 'http://localhost:5173'],
-  credentials: true
+  origin: [
+    'https://flixconvert.taliyotechnologies.com',
+    'http://localhost:5173'
+  ],
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests for all routes
+app.options('*', cors());
 
 // Parse JSON (not needed for file upload, but safe)
 app.use(express.json());
