@@ -6,15 +6,15 @@ export default ({ mode }) => {
   // process.cwd() is available in Vite config context
   const env = loadEnv(mode, process.cwd(), '');
   return defineConfig({
-    plugins: [react()],
-    server: {
-      proxy: {
-        '/api': {
+  plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
           target: env.VITE_API_URL || 'http://localhost:5000',
-          changeOrigin: true,
-          secure: false,
-        },
+        changeOrigin: true,
+        secure: false,
       },
     },
-  });
+  },
+});
 };
