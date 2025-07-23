@@ -24,7 +24,7 @@ export default function VideoCompress() {
   const [largeFiles, setLargeFiles] = useState([]);
   const fileInput = useRef();
   const [fileInputKey, setFileInputKey] = useState(0);
-  const [progress, setProgress] = useState(0); // Progress state
+  const [progressMap, setProgressMap] = useState({}); // Per-file progress
 
   const handleFiles = files => {
     const fileArr = Array.from(files).filter(f => f.type.startsWith('video/'));
@@ -72,66 +72,37 @@ export default function VideoCompress() {
     setLoading(true);
     setError('');
     setCompressed([]);
-    setProgress(0);
+    setProgressMap({});
 
     try {
-      const compressionResults = [];
-
-      for (const video of videos) {
-        try {
-          console.log(`Processing video: ${video.name} (${(video.size / 1024 / 1024).toFixed(2)} MB)`);
-          
-          // Compress video with automatic enhancement
-          const result = await compressionAPI.compressVideo(video, (percent) => setProgress(percent));
-          
-          // Process video compression
-          console.log(`Video processed successfully:`, {
-            originalName: video.name,
-            originalSize: video.size,
-            compressedSize: result.data.compressedSize,
-            compressionRatio: result.data.compressionRatio
-          });
-          
-          compressionResults.push({
-            originalName: video.name,
-            originalSize: video.size,
-            compressedSize: result.data.compressedSize,
-            compressionRatio: result.data.compressionRatio,
-            downloadUrl: result.data.downloadUrl,
-            fileId: result.data.fileId,
-            originalFile: video
-          });
-        } catch (err) {
-          console.error(`Failed to process ${video.name}:`, err);
-          let errorMessage = err.message;
-          
-          // Handle specific error cases
-          if (err.message.includes('Authentication required')) {
-            errorMessage = 'Please login to compress large files';
-          } else if (err.message.includes('Invalid token')) {
-            errorMessage = 'Please login again';
-          } else if (err.message.includes('enhancement failed')) {
-            errorMessage = 'Video compression failed';
-          } else if (err.message.includes('already compressed')) {
-            errorMessage = 'Video already compressed, minimal processing applied';
-          } else if (err.message.includes('FFmpeg')) {
-            errorMessage = 'Video processing failed, please try a different file';
-          }
-          
-          compressionResults.push({
-            originalName: video.name,
-            error: errorMessage
-          });
-        }
-      }
-
-      setCompressed(compressionResults);
+      // Parallel uploads for speed
+      const results = await Promise.allSettled(
+        videos.map(video =>
+          compressionAPI.compressVideo(video, percent => {
+            setProgressMap(prev => ({ ...prev, [video.name]: percent }));
+          })
+            .then(result => ({
+              originalName: video.name,
+              originalSize: video.size,
+              compressedSize: result.data.compressedSize,
+              compressionRatio: result.data.compressionRatio,
+              downloadUrl: result.data.downloadUrl,
+              fileId: result.data.fileId,
+              originalFile: video
+            }))
+            .catch(err => ({
+              originalName: video.name,
+              error: err.message
+            }))
+        )
+      );
+      setCompressed(results.map(r => r.value || r.reason || r));
     } catch (error) {
       setError('Compression failed. Please try again.');
       console.error('Compression error:', error);
     } finally {
       setLoading(false);
-      setProgress(0);
+      setProgressMap({});
     }
   };
 
@@ -232,6 +203,12 @@ export default function VideoCompress() {
                     <line x1="13" y1="5" x2="5" y2="13" stroke="#ff4d4f" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </button>
+                {loading && progressMap[vid.name] !== undefined && (
+                  <div className="progress-bar-container">
+                    <div className="progress-bar" style={{ width: `${progressMap[vid.name]}%` }} />
+                    <div className="progress-label">{progressMap[vid.name]}%</div>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -244,12 +221,6 @@ export default function VideoCompress() {
         >
           {loading ? 'Processing...' : 'Compress Videos'}
         </button>
-        {loading && (
-          <div className="progress-bar-container">
-            <div className="progress-bar" style={{ width: `${progress}%` }} />
-            <div className="progress-label">{progress}%</div>
-          </div>
-        )}
         
         {compressed.length > 0 && (
           <div className="videocompress-results">

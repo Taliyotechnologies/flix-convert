@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+// Use VITE_API_URL from environment variables for production, fallback to localhost for development
+// To set this, create a .env file in your frontend directory with:
+// VITE_API_URL=https://flixconvert.taliyotechnologies.com/api
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Get auth token from localStorage

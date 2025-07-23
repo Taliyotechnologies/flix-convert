@@ -283,16 +283,14 @@ router.post('/video', createUploadMiddleware('video', getLimitMBFromAuth), handl
         userId = decoded.userId;
       } catch (error) {}
     }
-    // Simple compression settings
-    const crf = 28;
-    const preset = 'ultrafast';
+    // Best speed + quality: crf 26, preset ultrafast
     await new Promise((resolve, reject) => {
       ffmpeg(originalPath)
         .videoCodec('libx264')
         .audioCodec('aac')
         .outputOptions([
-          `-crf ${crf}`,
-          `-preset ${preset}`,
+          '-crf 26',
+          '-preset ultrafast',
           '-movflags +faststart'
         ])
         .output(compressedPath)
