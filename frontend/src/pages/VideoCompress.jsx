@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { compressionAPI, fileAPI, formatFileSize, formatCompressionRatio } from '../utils/api';
 import './VideoCompress.css';
 import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 
 const MAX_FREE_SIZE = 10 * 1024 * 1024; // 10MB in bytes
 
@@ -106,16 +107,26 @@ export default function VideoCompress() {
     }
   };
 
-  const handleDownload = (result) => {
+  const handleDownload = async (result) => {
     if (result.error) return;
-    
-    const downloadUrl = fileAPI.downloadFile(result.downloadUrl.split('/').pop());
-    const link = document.createElement('a');
-    link.href = downloadUrl;
-    link.download = result.originalName.replace(/(\.[^.]+)?$/, '_compressed$1');
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    // Block download if compressed file is over 10MB and user is not logged in
+    if (!user && result.compressedSize > MAX_FREE_SIZE) {
+      setShowSignupPopup(true);
+      return;
+    }
+    try {
+      const downloadUrl = fileAPI.downloadFile(result.downloadUrl.split('/').pop());
+      const response = await axios.get(downloadUrl, { responseType: 'blob' });
+      const blob = response.data;
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = result.originalName.replace(/(\.[^.]+)?$/, '_compressed$1');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch {
+      setShowSignupPopup(true);
+    }
   };
 
   return (

@@ -53,8 +53,15 @@ router.post('/convert', upload.single('file'), async (req, res) => {
     // --- Video/Audio Conversion ---
     if (fileType === 'video' || fileType === 'audio') {
       await new Promise((resolve, reject) => {
-    ffmpeg(inputPath)
-          .outputOptions(['-preset ultrafast'])
+        let command = ffmpeg(inputPath)
+          .outputOptions(['-preset ultrafast']);
+        // Use -crf for mp4/webm, otherwise set a lower bitrate
+        if (ext === 'mp4' || ext === 'webm') {
+          command = command.outputOptions(['-crf 28']);
+        } else {
+          command = command.outputOptions(['-b:v 1M']); // 1 Mbps for other formats
+        }
+        command
           .toFormat(ext)
           .on('end', resolve)
           .on('error', reject)

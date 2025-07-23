@@ -134,6 +134,11 @@ export default function ImageCompress() {
 
   const handleDownload = async (result) => {
     if (result.error) return;
+    // Block download if compressed file is over 10MB and user is not logged in
+    if (!user && result.compressedSize > MAX_FREE_SIZE) {
+      setShowSignupRequired(true);
+      return;
+    }
     try {
       const downloadUrl = fileAPI.downloadFile(result.downloadUrl.split('/').pop());
       const response = await axios.get(downloadUrl, { responseType: 'blob' });
