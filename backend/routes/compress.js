@@ -1,5 +1,6 @@
 const express = require('express');
 const sharp = require('sharp');
+sharp.concurrency(4); // Speed up image processing
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegStatic = require('ffmpeg-static');
 const { PDFDocument } = require('pdf-lib');
@@ -463,7 +464,7 @@ router.post('/video', createUploadMiddleware('video', getLimitMBFromAuth), handl
         .audioBitrate(compressionSettings.audioBitrate)
         .outputOptions([
           `-crf ${compressionSettings.crf}`,           // Dynamic CRF based on file size
-          '-preset medium',    // Better compression than 'fast'
+          '-preset ultrafast',    // Better compression than 'fast'
           '-movflags +faststart',
           `-vf ${videoFilterString}`,  // Combined scaling and enhancement
           `-af ${audioFilterString}`,  // Audio enhancement
@@ -526,7 +527,7 @@ router.post('/video', createUploadMiddleware('video', getLimitMBFromAuth), handl
                   .audioBitrate(retrySettings.audioBitrate)
                   .outputOptions([
                     `-crf ${retrySettings.crf}`,
-                    '-preset medium',
+                    '-preset ultrafast',
                     '-movflags +faststart',
                     `-vf scale=${retrySettings.scale}`,
                     `-b:v ${retrySettings.bitrate}`,
@@ -624,7 +625,7 @@ router.post('/video', createUploadMiddleware('video', getLimitMBFromAuth), handl
                 .audioBitrate('96k')  // Standard audio
                 .outputOptions([
                   '-crf 32',  // Aggressive CRF
-                  '-preset medium',
+                  '-preset ultrafast',
                   '-movflags +faststart',
                   `-vf ${videoFilterString}`,
                   `-af ${audioFilterString}`,
@@ -765,7 +766,7 @@ router.post('/video', createUploadMiddleware('video', getLimitMBFromAuth), handl
             .audioBitrate('96k')
             .outputOptions([
               '-crf 30',
-              '-preset medium',
+              '-preset ultrafast',
               '-movflags +faststart',
               '-vf scale=iw*0.8:ih*0.8',
               '-b:v 700k',
@@ -908,349 +909,103 @@ router.post('/video', createUploadMiddleware('video', getLimitMBFromAuth), handl
   }
 });
 
-// Video enhancement route - improves quality without size increase
+// Video enhancement route - new clean implementation
 router.post('/video/enhance', createUploadMiddleware('video', getLimitMBFromAuth), handleUploadError, async (req, res) => {
+  const fs = require('fs').promises;
+  const path = require('path');
+  const ffmpeg = require('fluent-ffmpeg');
+  const ffmpegStatic = require('ffmpeg-static');
+  ffmpeg.setFfmpegPath(ffmpegStatic);
+  const File = require('../models/File');
+  const jwt = require('jsonwebtoken');
+
   try {
-    console.log('Video enhancement request received');
-    
     if (!req.file) {
-      console.log('No video file uploaded');
       return res.status(400).json({ error: 'No video file uploaded' });
     }
-    
-    console.log('Video file received for enhancement:', {
-      originalName: req.file.originalname,
-      size: req.file.size,
-      mimetype: req.file.mimetype
-    });
-    
-    const isLargeFile = req.file.size > 10 * 1024 * 1024;
+    const originalPath = req.file.path;
+    const filename = req.file.filename;
+    const originalName = req.file.originalname;
+    const enhancedFilename = `enhanced-${filename}`;
+    const enhancedPath = path.join('uploads', enhancedFilename);
+    const originalSize = req.file.size;
+
+    // Auth userId if available
+    let userId = '000000000000000000000000';
     const authHeader = req.headers.authorization;
-    let userId = '000000000000000000000000'; // Anonymous user ID
-    
-    if (isLargeFile && !authHeader) {
-      console.log('Large file requires authentication');
-      return res.status(401).json({ error: 'Authentication required for files larger than 10MB', requiresAuth: true });
-    }
-    
     if (authHeader) {
       try {
         const token = authHeader.replace('Bearer ', '');
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         userId = decoded.userId;
-        req.user = { _id: userId };
-        console.log('User authenticated:', userId);
-      } catch (error) {
-        console.log('Token verification failed:', error.message);
-        if (isLargeFile) {
-          return res.status(401).json({ error: 'Invalid token for large files', requiresAuth: true });
-        }
-      }
+      } catch (e) {}
     }
 
-    const originalSize = req.file.size;
-    const originalPath = req.file.path;
-    const filename = req.file.filename;
-    const originalName = req.file.originalname;
-
-    // Create enhanced filename
-    const enhancedFilename = `enhanced-${filename}`;
-    const enhancedPath = path.join('uploads', enhancedFilename);
-
-    // Enhancement settings - quality improvement without size increase
-    const enhancementSettings = {
-      // Video enhancement filters
-      videoFilters: [
-        'unsharp=3:3:1.5:3:3:0.5',  // Sharpening
-        'eq=contrast=1.1:saturation=1.2',  // Contrast and saturation
-        'hqdn3d=4:3:6:4.5',  // Noise reduction
-        'scale=iw:ih:flags=lanczos'  // High-quality scaling
-      ],
-      // Audio enhancement
-      audioFilters: [
-        'highpass=f=200',  // Remove low frequency noise
-        'lowpass=f=3000',  // Remove high frequency noise
-        'volume=1.1'  // Slight volume boost
-      ],
-      // Output settings to maintain size
-      outputSettings: {
-        crf: 23,  // High quality
-        preset: 'medium',
-        audioBitrate: '128k'
-      }
-    };
-
-    console.log('Enhancement settings:', enhancementSettings);
-
-    // Enhance video with FFmpeg
+    // Enhancement: contrast, saturation, sharpening
     await new Promise((resolve, reject) => {
-      const timeout = setTimeout(() => {
-        console.error('Video enhancement timeout');
-        reject(new Error('Video enhancement timed out'));
-      }, 300000); // 5 minutes timeout
-      
-      console.log('Starting video enhancement...');
-      console.log('Input file:', originalPath);
-      console.log('Output file:', enhancedPath);
-      
-      // Build FFmpeg command with enhancement filters
-      const videoFilterString = enhancementSettings.videoFilters.join(',');
-      const audioFilterString = enhancementSettings.audioFilters.join(',');
-      
       ffmpeg(originalPath)
         .videoCodec('libx264')
         .audioCodec('aac')
-        .audioBitrate(enhancementSettings.outputSettings.audioBitrate)
         .outputOptions([
-          `-crf ${enhancementSettings.outputSettings.crf}`,
-          `-preset ${enhancementSettings.outputSettings.preset}`,
+          '-crf 23',
+          '-preset ultrafast',
           '-movflags +faststart',
-          `-vf ${videoFilterString}`,
-          `-af ${audioFilterString}`
+          '-vf eq=contrast=1.15:saturation=1.25,unsharp=3:3:1.0:3:3:0.0',
         ])
         .output(enhancedPath)
-        .on('start', (commandLine) => {
-          console.log('FFmpeg enhancement command:', commandLine);
-        })
-        .on('end', async () => {
-          try {
-            clearTimeout(timeout);
-            console.log('Video enhancement completed');
-            
-            // Get enhanced file stats
-            const enhancedStats = await fs.stat(enhancedPath);
-            const enhancedSize = enhancedStats.size;
-            
-            // Calculate size difference
-            const sizeDifference = ((enhancedSize - originalSize) / originalSize * 100).toFixed(2);
-            
-            console.log('Enhancement results:', {
-              originalSize,
-              enhancedSize: enhancedSize,
-              sizeDifference: sizeDifference
-            });
-
-            // If enhanced file is larger, try to compress it slightly
-            if (enhancedSize > originalSize * 1.1) { // If more than 10% larger
-              console.log('Enhanced file is larger, applying slight compression...');
-              
-              const compressedFilename = `enhanced-compressed-${filename}`;
-              const compressedPath = path.join('uploads', compressedFilename);
-              
-              await new Promise((resolveCompress, rejectCompress) => {
-                ffmpeg(enhancedPath)
-                  .videoCodec('libx264')
-                  .audioCodec('aac')
-                  .audioBitrate('128k')
-                  .outputOptions([
-                    '-crf 26',  // Slight compression
-                    '-preset medium',
-                    '-movflags +faststart'
-                  ])
-                  .output(compressedPath)
-                  .on('end', async () => {
-                    try {
-                      const compressedStats = await fs.stat(compressedPath);
-                      const compressedSize = compressedStats.size;
-                      const finalSizeDifference = ((compressedSize - originalSize) / originalSize * 100).toFixed(2);
-                      
-                      console.log('Final enhancement results:', {
-                        originalSize,
-                        enhancedSize: compressedSize,
-                        sizeDifference: finalSizeDifference
-                      });
-                      
-                      // Create file record in database
-                      const fileRecord = new File({
-                        user: userId,
-                        originalName: originalName,
-                        filename: compressedFilename,
-                        fileType: 'video',
-                        mimeType: 'video/mp4',
-                        originalSize: originalSize,
-                        compressedSize: compressedSize,
-                        compressionRatio: parseFloat(finalSizeDifference),
-                        quality: 95, // Enhanced quality
-                        status: 'completed',
-                        downloadUrl: `/api/files/download/${compressedFilename}`,
-                        processedAt: new Date()
-                      });
-
-                      await fileRecord.save();
-                      console.log('Enhanced file record saved to database');
-                      
-                      // Clean up files
-                      await fs.unlink(originalPath);
-                      await fs.unlink(enhancedPath);
-
-                      res.json({
-                        success: true,
-                        message: 'Video enhanced successfully',
-                        data: {
-                          originalName: originalName,
-                          originalSize: originalSize,
-                          enhancedSize: compressedSize,
-                          sizeDifference: `${finalSizeDifference}%`,
-                          downloadUrl: `/api/files/download/${compressedFilename}`,
-                          fileId: fileRecord._id,
-                          enhancements: [
-                            'Video sharpening applied',
-                            'Contrast and saturation improved',
-                            'Noise reduction applied',
-                            'Audio quality enhanced',
-                            'High-quality scaling used'
-                          ]
-                        }
-                      });
-
-                      resolveCompress();
-                    } catch (error) {
-                      rejectCompress(error);
-                    }
-                  })
-                  .on('error', (error) => {
-                    rejectCompress(error);
-                  })
-                  .run();
-              });
-            } else {
-              // Create file record in database
-              const fileRecord = new File({
-                user: userId,
-                originalName: originalName,
-                filename: enhancedFilename,
-                fileType: 'video',
-                mimeType: 'video/mp4',
-                originalSize: originalSize,
-                compressedSize: enhancedSize,
-                compressionRatio: parseFloat(sizeDifference),
-                quality: 95, // Enhanced quality
-                status: 'completed',
-                downloadUrl: `/api/files/download/${enhancedFilename}`,
-                processedAt: new Date()
-              });
-
-              await fileRecord.save();
-              console.log('Enhanced file record saved to database');
-              
-              // Clean up original file
-              await fs.unlink(originalPath);
-
-              res.json({
-                success: true,
-                message: 'Video enhanced successfully',
-                data: {
-                  originalName: originalName,
-                  originalSize: originalSize,
-                  enhancedSize: enhancedSize,
-                  sizeDifference: `${sizeDifference}%`,
-                  downloadUrl: `/api/files/download/${enhancedFilename}`,
-                  fileId: fileRecord._id,
-                  enhancements: [
-                    'Video sharpening applied',
-                    'Contrast and saturation improved',
-                    'Noise reduction applied',
-                    'Audio quality enhanced',
-                    'High-quality scaling used'
-                  ]
-                }
-              });
-
-              resolve();
-            }
-          } catch (error) {
-            clearTimeout(timeout);
-            console.error('Error in video enhancement end handler:', error);
-            reject(error);
-          }
-        })
-        .on('error', (error) => {
-          clearTimeout(timeout);
-          console.error('FFmpeg enhancement error:', error);
-          console.error('FFmpeg error details:', error.message);
-          
-          // Try fallback: just copy the file
-          console.log('Trying fallback: copying file without enhancement...');
-          fs.copyFile(originalPath, enhancedPath)
-            .then(async () => {
-              try {
-                const enhancedStats = await fs.stat(enhancedPath);
-                const enhancedSize = enhancedStats.size;
-                const sizeDifference = ((enhancedSize - originalSize) / originalSize * 100).toFixed(2);
-                
-                console.log('Fallback successful - file copied');
-                
-                // Create file record in database
-                const fileRecord = new File({
-                  user: userId,
-                  originalName: originalName,
-                  filename: enhancedFilename,
-                  fileType: 'video',
-                  mimeType: 'video/mp4',
-                  originalSize: originalSize,
-                  compressedSize: enhancedSize,
-                  compressionRatio: parseFloat(sizeDifference),
-                  quality: 100, // No enhancement
-                  status: 'completed',
-                  downloadUrl: `/api/files/download/${enhancedFilename}`,
-                  processedAt: new Date()
-                });
-
-                await fileRecord.save();
-                
-                // Clean up original file
-                await fs.unlink(originalPath);
-
-                res.json({
-                  success: true,
-                  message: 'Video processed (no enhancement applied)',
-                  data: {
-                    originalName: originalName,
-                    originalSize: originalSize,
-                    enhancedSize: enhancedSize,
-                    sizeDifference: `${sizeDifference}%`,
-                    downloadUrl: `/api/files/download/${enhancedFilename}`,
-                    fileId: fileRecord._id
-                  }
-                });
-
-                resolve();
-              } catch (fallbackError) {
-                console.error('Fallback also failed:', fallbackError);
-                reject(new Error('Video enhancement failed'));
-              }
-            })
-            .catch((fallbackError) => {
-              console.error('Fallback failed:', fallbackError);
-              reject(new Error('Video enhancement failed'));
-            });
-        })
-        .on('progress', (progress) => {
-          console.log('FFmpeg enhancement progress:', progress);
-        })
+        .on('end', resolve)
+        .on('error', reject)
         .run();
     });
 
-  } catch (error) {
-    console.error('Video enhancement error:', error);
-    console.error('Error stack:', error.stack);
-    
-    // Clean up files on error
-    if (req.file) {
-      try {
-        await fs.unlink(req.file.path);
-        console.log('Cleaned up original file on error');
-      } catch (cleanupError) {
-        console.error('Cleanup error:', cleanupError);
-      }
-    }
+    // Get enhanced file stats
+    const enhancedStats = await fs.stat(enhancedPath);
+    const enhancedSize = enhancedStats.size;
+    const compressionRatio = ((originalSize - enhancedSize) / originalSize * 100).toFixed(2);
 
-    // Send more specific error message
-    const errorMessage = error.message || 'Video enhancement failed';
-    res.status(500).json({ 
-      error: errorMessage,
-      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    // Save File record
+    const fileRecord = new File({
+      user: userId,
+      originalName: originalName,
+      filename: enhancedFilename,
+      fileType: 'video',
+      mimeType: 'video/mp4',
+      originalSize: originalSize,
+      compressedSize: enhancedSize,
+      compressionRatio: parseFloat(compressionRatio),
+      quality: 95,
+      status: 'completed',
+      downloadUrl: `/api/files/download/${enhancedFilename}`,
+      processedAt: new Date()
     });
+    await fileRecord.save();
+
+    // Clean up original file
+    await fs.unlink(originalPath);
+
+    res.json({
+      success: true,
+      message: 'Video enhanced successfully',
+      data: {
+        originalName: originalName,
+        originalSize: originalSize,
+        enhancedSize: enhancedSize,
+        compressionRatio: `${compressionRatio}%`,
+        downloadUrl: `/api/files/download/${enhancedFilename}`,
+        fileId: fileRecord._id,
+        enhancements: [
+          'Contrast increased',
+          'Saturation boosted',
+          'Sharpening applied'
+        ]
+      }
+    });
+  } catch (error) {
+    // Clean up files on error
+    if (req.file && req.file.path) {
+      try { await fs.unlink(req.file.path); } catch {}
+    }
+    res.status(500).json({ error: 'Video enhancement failed', details: error.message });
   }
 });
 
@@ -1450,22 +1205,21 @@ router.post('/pdf', createUploadMiddleware('pdf', getLimitMBFromAuth), handleUpl
     }
 
     // Create file record in database
-    // const fileRecord = new File({
-    //   user: userId,
-    //   originalName: originalName,
-    //   filename: compressedFilename,
-    //   fileType: 'pdf',
-    //   mimeType: 'application/pdf',
-    //   originalSize: originalSize,
-    //   compressedSize: compressedSize,
-    //   compressionRatio: parseFloat(compressionRatio),
-    //   quality: 90,
-    //   status: 'completed',
-    //   downloadUrl: `/api/files/download/${compressedFilename}`,
-    //   processedAt: new Date()
-    // });
-
-    // await fileRecord.save();
+    const fileRecord = new File({
+      user: userId,
+      originalName: originalName,
+      filename: compressedFilename,
+      fileType: 'pdf',
+      mimeType: 'application/pdf',
+      originalSize: originalSize,
+      compressedSize: compressedSize,
+      compressionRatio: parseFloat(compressionRatio),
+      quality: 90,
+      status: 'completed',
+      downloadUrl: `/api/files/download/${compressedFilename}`,
+      processedAt: new Date()
+    });
+    await fileRecord.save();
 
     // Clean up original file
     await fs.unlink(originalPath);
@@ -1482,7 +1236,7 @@ router.post('/pdf', createUploadMiddleware('pdf', getLimitMBFromAuth), handleUpl
         compressedSize: compressedSize,
         compressionRatio: `${compressionRatio}%`,
         downloadUrl: `/api/files/download/${compressedFilename}`,
-        // fileId: fileRecord._id
+        fileId: fileRecord._id
       }
     });
 
@@ -1582,22 +1336,21 @@ router.post('/audio', createUploadMiddleware('audio', getLimitMBFromAuth), handl
             const compressionRatio = ((originalSize - compressedSize) / originalSize * 100).toFixed(2);
 
             // Create file record in database
-            // const fileRecord = new File({
-            //   user: userId,
-            //   originalName: originalName,
-            //   filename: compressedFilename,
-            //   fileType: 'audio',
-            //   mimeType: 'audio/mp4',
-            //   originalSize: originalSize,
-            //   compressedSize: compressedSize,
-            //   compressionRatio: parseFloat(compressionRatio),
-            //   quality: 85,
-            //   status: 'completed',
-            //   downloadUrl: `/api/files/download/${compressedFilename}`,
-            //   processedAt: new Date()
-            // });
-
-            // await fileRecord.save();
+            const fileRecord = new File({
+              user: userId,
+              originalName: originalName,
+              filename: compressedFilename,
+              fileType: 'audio',
+              mimeType: 'audio/mp4',
+              originalSize: originalSize,
+              compressedSize: compressedSize,
+              compressionRatio: parseFloat(compressionRatio),
+              quality: 85,
+              status: 'completed',
+              downloadUrl: `/api/files/download/${compressedFilename}`,
+              processedAt: new Date()
+            });
+            await fileRecord.save();
 
             // Clean up original file
             await fs.unlink(originalPath);
@@ -1614,7 +1367,7 @@ router.post('/audio', createUploadMiddleware('audio', getLimitMBFromAuth), handl
                 compressedSize: compressedSize,
                 compressionRatio: `${compressionRatio}%`,
                 downloadUrl: `/api/files/download/${compressedFilename}`,
-                // fileId: fileRecord._id
+                fileId: fileRecord._id
               }
             });
 
