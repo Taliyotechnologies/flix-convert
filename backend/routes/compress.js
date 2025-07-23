@@ -6,10 +6,10 @@ const fs = require('fs');
 
 const router = express.Router();
 
-// Multer setup for 10MB limit
+// Multer: 10MB limit, memory storage
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
 
 // Helper: get extension from mimetype
@@ -17,7 +17,6 @@ function getExt(mimetype) {
   if (mimetype === 'image/jpeg') return 'jpg';
   if (mimetype === 'image/png') return 'png';
   if (mimetype === 'image/webp') return 'webp';
-  if (mimetype === 'image/gif') return 'gif';
   return 'jpg';
 }
 
@@ -25,39 +24,34 @@ function getExt(mimetype) {
 router.post('/image', upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
-      console.error('No image file uploaded');
       return res.status(400).json({ error: 'No image file uploaded' });
     }
-    const originalSize = req.file.size;
-    console.log(`Received image: ${req.file.originalname}, size: ${originalSize} bytes`);
-    if (originalSize > 10 * 1024 * 1024) {
-      console.error('File too large');
-      return res.status(400).json({ error: 'File too large. Maximum size is 10MB.' });
+    if (req.file.size > 10 * 1024 * 1024) {
+      return res.status(400).json({ error: 'File too large. Maximum size is 10MB. Please login for larger files.' });
     }
     const ext = getExt(req.file.mimetype);
     const originalName = req.file.originalname;
     const baseName = path.parse(originalName).name;
     const outName = `compressed-${Date.now()}-${baseName}.${ext}`;
     const outPath = path.join(__dirname, '../uploads', outName);
-    console.log(`Compressing image to ${outPath}...`);
+    // Try aggressive compression, but keep quality visually good
     let sharpStream = sharp(req.file.buffer);
     let compressedBuffer;
     if (ext === 'jpg' || ext === 'jpeg') {
-      compressedBuffer = await sharpStream.jpeg({ quality: 40 }).toBuffer();
+      compressedBuffer = await sharpStream.jpeg({ quality: 35 }).toBuffer();
     } else if (ext === 'png') {
-      compressedBuffer = await sharpStream.png({ quality: 40, compressionLevel: 9 }).toBuffer();
+      compressedBuffer = await sharpStream.png({ compressionLevel: 9 }).toBuffer();
     } else if (ext === 'webp') {
-      compressedBuffer = await sharpStream.webp({ quality: 40 }).toBuffer();
-    } else if (ext === 'gif') {
-      compressedBuffer = req.file.buffer;
+      compressedBuffer = await sharpStream.webp({ quality: 35 }).toBuffer();
     } else {
-      compressedBuffer = await sharpStream.jpeg({ quality: 40 }).toBuffer();
+      compressedBuffer = await sharpStream.jpeg({ quality: 35 }).toBuffer();
     }
+    // Save compressed image
     await fs.promises.writeFile(outPath, compressedBuffer);
     const compressedSize = compressedBuffer.length;
+    const originalSize = req.file.size;
     const ratio = ((originalSize - compressedSize) / originalSize) * 100;
     const downloadUrl = `/api/compress/download/${outName}`;
-    console.log(`Compression complete: ${outName}, original: ${originalSize}, compressed: ${compressedSize}, ratio: ${ratio.toFixed(2)}%`);
     res.json({
       success: true,
       data: {
@@ -69,7 +63,6 @@ router.post('/image', upload.single('image'), async (req, res) => {
       }
     });
   } catch (error) {
-    console.error('Image compression failed:', error);
     res.status(500).json({ error: 'Image compression failed', details: error.message });
   }
 });
