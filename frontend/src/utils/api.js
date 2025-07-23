@@ -94,19 +94,15 @@ export const authAPI = {
   },
 };
 
-// File upload and compression APIs
+// Robust File upload and compression APIs
 export const compressionAPI = {
-  // Image compression with conditional auth
+  // Image compression
   compressImage: async (file) => {
-    const token = getAuthToken();
+    const token = getAuthToken && getAuthToken();
     const formData = new FormData();
     formData.append('image', file);
-
     const headers = {};
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
-    }
-
+    if (token) headers.Authorization = `Bearer ${token}`;
     try {
       const response = await fetch(`${API_BASE_URL}/api/compress/image`, {
         method: 'POST',
@@ -115,27 +111,25 @@ export const compressionAPI = {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+        throw new Error(data.error || `Image compression failed (status: ${response.status})`);
       }
       return data;
     } catch (error) {
-      console.error('Image compression failed:', error);
+      if (error.name === 'TypeError') {
+        throw new Error('Network error: Unable to reach image compression server.');
+      }
       throw error;
     }
   },
 
   // Video compression
   compressVideo: async (file) => {
+    const token = getAuthToken && getAuthToken();
+    const formData = new FormData();
+    formData.append('video', file);
+    const headers = {};
+    if (token) headers.Authorization = `Bearer ${token}`;
     try {
-      const token = getAuthToken();
-      const formData = new FormData();
-      formData.append('video', file);
-
-      const headers = {};
-      if (token) {
-        headers.Authorization = `Bearer ${token}`;
-      }
-
       const response = await fetch(`${API_BASE_URL}/api/compress/video`, {
         method: 'POST',
         headers,
@@ -143,54 +137,24 @@ export const compressionAPI = {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+        throw new Error(data.error || `Video compression failed (status: ${response.status})`);
       }
       return data;
     } catch (error) {
-      console.error('Video compression failed:', error);
-      throw error;
-    }
-  },
-
-  // PDF compression
-  compressPDF: async (file) => {
-    const token = getAuthToken();
-    const formData = new FormData();
-    formData.append('pdf', file);
-
-    const headers = {};
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
-    }
-
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/compress/pdf`, {
-        method: 'POST',
-        headers,
-        body: formData,
-      });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+      if (error.name === 'TypeError') {
+        throw new Error('Network error: Unable to reach video compression server.');
       }
-      return data;
-    } catch (error) {
-      console.error('PDF compression failed:', error);
       throw error;
     }
   },
 
   // Audio compression
   compressAudio: async (file) => {
-    const token = getAuthToken();
+    const token = getAuthToken && getAuthToken();
     const formData = new FormData();
     formData.append('audio', file);
-
     const headers = {};
-    if (token) {
-      headers.Authorization = `Bearer ${token}`;
-    }
-
+    if (token) headers.Authorization = `Bearer ${token}`;
     try {
       const response = await fetch(`${API_BASE_URL}/api/compress/audio`, {
         method: 'POST',
@@ -199,18 +163,41 @@ export const compressionAPI = {
       });
       const data = await response.json().catch(() => ({}));
       if (!response.ok) {
-        throw new Error(data.error || `HTTP error! status: ${response.status}`);
+        throw new Error(data.error || `Audio compression failed (status: ${response.status})`);
       }
       return data;
     } catch (error) {
-      console.error('Audio compression failed:', error);
+      if (error.name === 'TypeError') {
+        throw new Error('Network error: Unable to reach audio compression server.');
+      }
       throw error;
     }
   },
 
-  // Get compression history
-  getHistory: async (fileType) => {
-    return await apiRequest(`/compress/${fileType}/history`);
+  // PDF compression
+  compressPDF: async (file) => {
+    const token = getAuthToken && getAuthToken();
+    const formData = new FormData();
+    formData.append('pdf', file);
+    const headers = {};
+    if (token) headers.Authorization = `Bearer ${token}`;
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/compress/pdf`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(data.error || `PDF compression failed (status: ${response.status})`);
+      }
+      return data;
+    } catch (error) {
+      if (error.name === 'TypeError') {
+        throw new Error('Network error: Unable to reach PDF compression server.');
+      }
+      throw error;
+    }
   },
 };
 
