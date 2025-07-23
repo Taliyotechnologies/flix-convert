@@ -54,12 +54,15 @@ router.post('/convert', upload.single('file'), async (req, res) => {
     if (fileType === 'video' || fileType === 'audio') {
       await new Promise((resolve, reject) => {
         let command = ffmpeg(inputPath)
-          .outputOptions(['-preset ultrafast']);
-        // Use -crf for mp4/webm, otherwise set a lower bitrate
+          .outputOptions(['-preset veryfast']);
+        // Use aggressive compression for mp4/webm
         if (ext === 'mp4' || ext === 'webm') {
-          command = command.outputOptions(['-crf 28']);
+          command = command
+            .videoCodec('libx264')
+            .outputOptions(['-crf 32', '-b:v 1M', '-maxrate 1M', '-bufsize 2M'])
+            .size('?x720'); // Limit height to 720p
         } else {
-          command = command.outputOptions(['-b:v 1M']); // 1 Mbps for other formats
+          command = command.outputOptions(['-b:v 1M']);
         }
         command
           .toFormat(ext)
@@ -114,7 +117,11 @@ router.post('/convert', upload.single('file'), async (req, res) => {
 router.get('/download/:filename', async (req, res) => {
   try {
     const filePath = path.join('uploads', req.params.filename);
-    res.download(filePath);
+    res.setHeader('Content-Disposition', `attachment; filename="${req.params.filename}"`);
+    res.setHeader('Content-Type', 'application/octet-stream');
+    res.sendFile(path.resolve(filePath), err => {
+      if (err) res.status(404).json({ error: 'File not found' });
+    });
   } catch (error) {
     res.status(404).json({ error: 'File not found' });
   }
