@@ -25,10 +25,13 @@ function getExt(mimetype) {
 router.post('/image', upload.single('image'), async (req, res) => {
   try {
     if (!req.file) {
+      console.error('No image file uploaded');
       return res.status(400).json({ error: 'No image file uploaded' });
     }
     const originalSize = req.file.size;
+    console.log(`Received image: ${req.file.originalname}, size: ${originalSize} bytes`);
     if (originalSize > 10 * 1024 * 1024) {
+      console.error('File too large');
       return res.status(400).json({ error: 'File too large. Maximum size is 10MB.' });
     }
     const ext = getExt(req.file.mimetype);
@@ -36,7 +39,7 @@ router.post('/image', upload.single('image'), async (req, res) => {
     const baseName = path.parse(originalName).name;
     const outName = `compressed-${Date.now()}-${baseName}.${ext}`;
     const outPath = path.join(__dirname, '../uploads', outName);
-    // Use sharp to compress (quality 40 for jpg/webp, 8 for png)
+    console.log(`Compressing image to ${outPath}...`);
     let sharpStream = sharp(req.file.buffer);
     let compressedBuffer;
     if (ext === 'jpg' || ext === 'jpeg') {
@@ -46,16 +49,15 @@ router.post('/image', upload.single('image'), async (req, res) => {
     } else if (ext === 'webp') {
       compressedBuffer = await sharpStream.webp({ quality: 40 }).toBuffer();
     } else if (ext === 'gif') {
-      // GIF: just return original (sharp doesn't compress gif)
       compressedBuffer = req.file.buffer;
     } else {
       compressedBuffer = await sharpStream.jpeg({ quality: 40 }).toBuffer();
     }
-    // Save compressed image to disk
     await fs.promises.writeFile(outPath, compressedBuffer);
     const compressedSize = compressedBuffer.length;
     const ratio = ((originalSize - compressedSize) / originalSize) * 100;
     const downloadUrl = `/api/compress/download/${outName}`;
+    console.log(`Compression complete: ${outName}, original: ${originalSize}, compressed: ${compressedSize}, ratio: ${ratio.toFixed(2)}%`);
     res.json({
       success: true,
       data: {
@@ -67,6 +69,7 @@ router.post('/image', upload.single('image'), async (req, res) => {
       }
     });
   } catch (error) {
+    console.error('Image compression failed:', error);
     res.status(500).json({ error: 'Image compression failed', details: error.message });
   }
 });
