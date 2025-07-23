@@ -29,6 +29,7 @@ export default function ImageCompress() {
   const [showSignupRequired, setShowSignupRequired] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
   const [progress, setProgress] = useState(0); // Progress state
+  const [compressing, setCompressing] = useState(false); // New compressing state
 
   const handleFiles = files => {
     const fileArr = Array.from(files).filter(f => f.type.startsWith('image/'));
@@ -82,38 +83,37 @@ export default function ImageCompress() {
     setError('');
     setCompressed([]);
     setProgress(0);
+    setCompressing(false);
 
     try {
       const compressionResults = [];
-
       for (const image of images) {
         try {
-          const result = await compressionAPI.compressImage(image, (percent) => setProgress(percent));
-          
-          // Check if image is already compressed
-          if (result.data.alreadyCompressed) {
-            compressionResults.push({
-              originalName: image.name,
-              originalSize: image.size,
-              compressedSize: image.size,
-              compressionRatio: '0%',
-              downloadUrl: null,
-              fileId: null,
-              originalFile: image,
-              alreadyCompressed: true
-            });
-          } else {
-            compressionResults.push({
-              originalName: image.name,
-              originalSize: image.size,
-              compressedSize: result.data.compressedSize,
-              compressionRatio: result.data.compressionRatio,
-              downloadUrl: result.data.downloadUrl,
-              fileId: result.data.fileId,
-              originalFile: image
-            });
-          }
+          setCompressing(false);
+          // Upload with progress
+          const resultPromise = compressionAPI.compressImage(image, (percent) => setProgress(percent));
+          // Wait for upload to finish (progress reaches 100)
+          await new Promise(resolve => {
+            const check = () => {
+              if (progress === 100) resolve();
+              else setTimeout(check, 50);
+            };
+            check();
+          });
+          setCompressing(true); // After upload, before backend responds
+          const result = await resultPromise;
+          setCompressing(false);
+          compressionResults.push({
+            originalName: image.name,
+            originalSize: image.size,
+            compressedSize: result.data.compressedSize,
+            compressionRatio: result.data.compressionRatio,
+            downloadUrl: result.data.downloadUrl,
+            fileId: result.data.fileId,
+            originalFile: image
+          });
         } catch (err) {
+          setCompressing(false);
           console.error(`Failed to compress ${image.name}:`, err);
           compressionResults.push({
             originalName: image.name,
@@ -121,14 +121,15 @@ export default function ImageCompress() {
           });
         }
       }
-
       setCompressed(compressionResults);
     } catch (error) {
+      setCompressing(false);
       setError('Compression failed. Please try again.');
       console.error('Compression error:', error);
     } finally {
       setLoading(false);
       setProgress(0);
+      setCompressing(false);
     }
   };
 
@@ -248,12 +249,21 @@ export default function ImageCompress() {
         >
           {loading ? 'Compressing...' : 'Compress Images'}
         </button>
-        {loading && (
-          <div className="progress-bar-container">
-            <div className="progress-bar" style={{ width: `${progress}%` }} />
-            <div className="progress-label">{progress}%</div>
-          </div>
-        )}
+        {/* Progress Bars Section */}
+        <div style={{ margin: '24px 0 8px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+          {loading && progress > 0 && progress < 100 && (
+            <div className="progress-bar-container" style={{ width: '60%', minWidth: 200, maxWidth: 400 }}>
+              <div className="progress-bar" style={{ width: `${progress}%`, background: '#6c63ff' }} />
+              <div className="progress-label">{progress}% Uploading...</div>
+            </div>
+          )}
+          {compressing && (
+            <div className="progress-bar-container" style={{ width: '60%', minWidth: 200, maxWidth: 400 }}>
+              <div className="progress-bar compressing" style={{ width: `100%`, background: '#ffb86c', animation: 'progress-stripes 1s linear infinite' }} />
+              <div className="progress-label">Compressing...</div>
+            </div>
+          )}
+        </div>
         
         {compressed.length > 0 && (
           <div className="imgcompress-results">
