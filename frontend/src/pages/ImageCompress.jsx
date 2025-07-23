@@ -250,17 +250,17 @@ export default function ImageCompress() {
         >
           {loading ? 'Compressing...' : 'Compress Images'}
         </button>
-        {/* Progress Bars Section */}
+        {/* Progress Bars Section (polished for light/dark mode and accessibility) */}
         <div style={{ margin: '24px 0 8px 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
           {loading && progress > 0 && progress < 100 && (
-            <div className="progress-bar-container" style={{ width: '60%', minWidth: 200, maxWidth: 400 }}>
-              <div className="progress-bar" style={{ width: `${progress}%`, background: '#6c63ff' }} />
+            <div className="progress-bar-container" style={{ width: '60%', minWidth: 200, maxWidth: 400 }} aria-label="Uploading Progress">
+              <div className="progress-bar" style={{ width: `${progress}%`, background: 'var(--primary-color, #6c63ff)' }} />
               <div className="progress-label">{progress}% Uploading...</div>
             </div>
           )}
           {compressing && (
-            <div className="progress-bar-container" style={{ width: '60%', minWidth: 200, maxWidth: 400 }}>
-              <div className="progress-bar compressing" style={{ width: `100%`, background: '#ffb86c', animation: 'progress-stripes 1s linear infinite' }} />
+            <div className="progress-bar-container" style={{ width: '60%', minWidth: 200, maxWidth: 400 }} aria-label="Compressing Progress">
+              <div className="progress-bar compressing" style={{ width: `100%`, background: 'var(--accent-color, #ffb86c)', animation: 'progress-stripes 1s linear infinite' }} />
               <div className="progress-label">Compressing...</div>
             </div>
           )}
