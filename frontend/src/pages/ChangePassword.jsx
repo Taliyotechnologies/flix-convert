@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './ChangePassword.css';
+import axios from 'axios';
 
 export default function ChangePassword() {
   const { user, updateUser } = useAuth();
@@ -72,18 +73,14 @@ export default function ChangePassword() {
         requestBody.currentPassword = formData.currentPassword;
       }
 
-      const response = await fetch('http://localhost:5000/api/auth/change-password', {
-        method: 'POST',
+      const response = await axios.post('http://localhost:5000/api/auth/change-password', requestBody, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-        },
-        body: JSON.stringify(requestBody)
+        }
       });
-
-      const data = await response.json();
-
-      if (response.ok) {
+      const data = response.data;
+      if (response.status === 200) {
         setMessage({ type: 'success', text: isOAuthUser ? 'Password set and name updated successfully!' : 'Password and name updated successfully!' });
         setFormData(prev => ({
           ...prev,
@@ -91,8 +88,6 @@ export default function ChangePassword() {
           newPassword: '',
           confirmPassword: ''
         }));
-        
-        // Update user context with new name
         if (updateUser) {
           updateUser({ ...user, name: formData.name });
         }

@@ -3,6 +3,7 @@ import { compressionAPI, fileAPI, formatFileSize, formatCompressionRatio } from 
 import SignupRequiredPopup from '../components/common/SignupRequiredPopup';
 import './ImageCompress.css';
 import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
 
 const MAX_FREE_SIZE = 10 * 1024 * 1024; // 10MB in bytes
 
@@ -27,6 +28,7 @@ export default function ImageCompress() {
   const fileInput = useRef();
   const [showSignupRequired, setShowSignupRequired] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
+  const [progress, setProgress] = useState(0); // Progress state
 
   const handleFiles = files => {
     const fileArr = Array.from(files).filter(f => f.type.startsWith('image/'));
@@ -79,13 +81,14 @@ export default function ImageCompress() {
     setLoading(true);
     setError('');
     setCompressed([]);
+    setProgress(0);
 
     try {
       const compressionResults = [];
 
       for (const image of images) {
         try {
-          const result = await compressionAPI.compressImage(image);
+          const result = await compressionAPI.compressImage(image, (percent) => setProgress(percent));
           
           // Check if image is already compressed
           if (result.data.alreadyCompressed) {
@@ -125,6 +128,7 @@ export default function ImageCompress() {
       console.error('Compression error:', error);
     } finally {
       setLoading(false);
+      setProgress(0);
     }
   };
 
@@ -132,16 +136,16 @@ export default function ImageCompress() {
     if (result.error) return;
     try {
       const downloadUrl = fileAPI.downloadFile(result.downloadUrl.split('/').pop());
-      const response = await fetch(downloadUrl);
+      const response = await axios.get(downloadUrl, { responseType: 'blob' });
       if (response.status === 401) {
-        const data = await response.json();
+        const data = response.data;
         if (data && data.error && data.error.toLowerCase().includes('sign up required')) {
           setShowSignupRequired(true);
           return;
         }
       }
       // If not 401, proceed to download
-      const blob = await response.blob();
+      const blob = response.data;
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);
       link.download = result.originalName.replace(/(\.[^.]+)?$/, '_compressed$1');
@@ -236,6 +240,12 @@ export default function ImageCompress() {
         >
           {loading ? 'Compressing...' : 'Compress Images'}
         </button>
+        {loading && (
+          <div className="progress-bar-container">
+            <div className="progress-bar" style={{ width: `${progress}%` }} />
+            <div className="progress-label">{progress}%</div>
+          </div>
+        )}
         
         {compressed.length > 0 && (
           <div className="imgcompress-results">

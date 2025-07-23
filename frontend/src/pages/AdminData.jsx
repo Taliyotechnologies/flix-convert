@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminData.css';
+import axios from 'axios';
 
 export default function AdminData() {
   const [files, setFiles] = useState([]);
@@ -28,25 +29,20 @@ export default function AdminData() {
         page: currentPage,
         limit: 20
       });
-
-      const response = await fetch(`${API_BASE_URL}/admin/data?${params}`, {
+      const url = `${API_BASE_URL}/admin/data?${params}`;
+      const response = await axios.get(url, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        setFiles(data.files);
-        setTotalPages(data.pagination.pages);
-        setTotalFiles(data.pagination.total);
-      } else {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminData');
-        navigate('/admin/login');
-      }
+      const data = response.data;
+      setFiles(data.files);
+      setTotalPages(data.pagination.pages);
+      setTotalFiles(data.pagination.total);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminData');
+      navigate('/admin/login');
     } finally {
       setLoading(false);
     }
@@ -55,23 +51,22 @@ export default function AdminData() {
   const handleDownload = async (filename) => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${API_BASE_URL}/admin/data/download/${filename}`, {
+      const url = `${API_BASE_URL}/admin/data/download/${filename}`;
+      const response = await axios.get(url, {
         headers: {
           'Authorization': `Bearer ${token}`
-        }
+        },
+        responseType: 'blob'
       });
-
-      if (response.ok) {
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-        document.body.removeChild(a);
-      }
+      const blob = response.data;
+      const urlBlob = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = urlBlob;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(urlBlob);
+      document.body.removeChild(a);
     } catch (error) {
       console.error('Error downloading file:', error);
     }
@@ -80,18 +75,15 @@ export default function AdminData() {
   const handleCleanup = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${API_BASE_URL}/admin/data/cleanup`, {
-        method: 'DELETE',
+      const url = `${API_BASE_URL}/admin/data/cleanup`;
+      const response = await axios.delete(url, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        alert(`Cleanup completed: ${data.deletedCount} files deleted`);
-        fetchData(); // Refresh the list
-      }
+      const data = response.data;
+      alert(`Cleanup completed: ${data.deletedCount} files deleted`);
+      fetchData(); // Refresh the list
     } catch (error) {
       console.error('Error during cleanup:', error);
     }

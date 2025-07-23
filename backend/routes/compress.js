@@ -909,7 +909,7 @@ router.post('/video', createUploadMiddleware('video', getLimitMBFromAuth), handl
   }
 });
 
-// Video enhancement route removed as per request.
+// All video enhancement logic and routes have been completely removed as per user request.
 
 // Get user's image compression history
 router.get('/image/history', auth, async (req, res) => {

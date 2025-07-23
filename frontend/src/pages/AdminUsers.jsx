@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminUsers.css';
+import axios from 'axios';
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -29,25 +30,20 @@ export default function AdminUsers() {
         limit: 20,
         search: search
       });
-
-      const response = await fetch(`http://localhost:5000/api/admin/users?${params}`, {
+      const url = `http://localhost:5000/api/admin/users?${params}`;
+      const response = await axios.get(url, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        setUsers(data.users);
-        setTotalPages(data.pagination.pages);
-        setTotalUsers(data.pagination.total);
-      } else {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminData');
-        navigate('/admin/login');
-      }
+      const data = response.data;
+      setUsers(data.users);
+      setTotalPages(data.pagination.pages);
+      setTotalUsers(data.pagination.total);
     } catch (error) {
-      console.error('Error fetching users:', error);
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminData');
+      navigate('/admin/login');
     } finally {
       setLoading(false);
     }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminSettings.css';
+import axios from 'axios';
 
 export default function AdminSettings() {
   const [profile, setProfile] = useState({ name: '', email: '' });
@@ -25,17 +26,15 @@ export default function AdminSettings() {
     try {
       setLoading(true);
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5000/api/admin/profile', {
+      const url = 'http://localhost:5000/api/admin/profile';
+      const response = await axios.get(url, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
-      if (response.ok) {
-        const data = await response.json();
-        setProfile({ name: data.admin.name, email: data.admin.email });
-      } else {
-        navigate('/admin/login');
-      }
+      const data = response.data;
+      setProfile({ name: data.admin.name, email: data.admin.email });
     } catch {
       setProfileError('Failed to load profile');
+      navigate('/admin/login');
     } finally {
       setLoading(false);
     }
@@ -51,21 +50,15 @@ export default function AdminSettings() {
     setProfileError('');
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5000/api/admin/profile', {
-        method: 'PUT',
+      const url = 'http://localhost:5000/api/admin/profile';
+      await axios.put(url, profile, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(profile)
+        }
       });
-      if (response.ok) {
-        setProfileMsg('Profile updated successfully!');
-      } else {
-        const data = await response.json();
-        setProfileError(data.error || 'Failed to update profile');
-      }
-    } catch {
+      setProfileMsg('Profile updated successfully!');
+    } catch (error) {
       setProfileError('Failed to update profile');
     }
   };
@@ -80,22 +73,16 @@ export default function AdminSettings() {
     setPasswordError('');
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch('http://localhost:5000/api/admin/change-password', {
-        method: 'PUT',
+      const url = 'http://localhost:5000/api/admin/change-password';
+      await axios.put(url, passwordData, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(passwordData)
+        }
       });
-      if (response.ok) {
-        setPasswordMsg('Password changed successfully!');
-        setPasswordData({ currentPassword: '', newPassword: '' });
-      } else {
-        const data = await response.json();
-        setPasswordError(data.error || 'Failed to change password');
-      }
-    } catch {
+      setPasswordMsg('Password changed successfully!');
+      setPasswordData({ currentPassword: '', newPassword: '' });
+    } catch (error) {
       setPasswordError('Failed to change password');
     }
   };

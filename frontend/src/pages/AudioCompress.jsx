@@ -25,6 +25,7 @@ export default function AudioCompress() {
   const fileInput = useRef();
   const [showSignupRequired, setShowSignupRequired] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
+  const [progress, setProgress] = useState(0); // Progress state
 
   const handleFiles = files => {
     const fileArr = Array.from(files).filter(f => f.type.startsWith('audio/'));
@@ -77,13 +78,13 @@ export default function AudioCompress() {
     setLoading(true);
     setError('');
     setCompressed([]);
+    setProgress(0);
 
     try {
       const compressionResults = [];
-
       for (const audio of audios) {
         try {
-          const result = await compressionAPI.compressAudio(audio);
+          const result = await compressionAPI.compressAudio(audio, (percent) => setProgress(percent));
           compressionResults.push({
             originalName: audio.name,
             originalSize: audio.size,
@@ -94,20 +95,18 @@ export default function AudioCompress() {
             originalFile: audio // Store original file for comparison
           });
         } catch (err) {
-          console.error(`Failed to compress ${audio.name}:`, err);
           compressionResults.push({
             originalName: audio.name,
             error: err.message
           });
         }
       }
-
       setCompressed(compressionResults);
     } catch (error) {
       setError('Compression failed. Please try again.');
-      console.error('Compression error:', error);
     } finally {
       setLoading(false);
+      setProgress(0);
     }
   };
 
@@ -215,6 +214,12 @@ export default function AudioCompress() {
         >
           {loading ? 'Compressing...' : 'Compress Audio'}
         </button>
+        {loading && (
+          <div className="progress-bar-container">
+            <div className="progress-bar" style={{ width: `${progress}%` }} />
+            <div className="progress-label">{progress}%</div>
+          </div>
+        )}
         
         {compressed.length > 0 && (
           <div className="audiocompress-results">

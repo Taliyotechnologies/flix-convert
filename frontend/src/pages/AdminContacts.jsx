@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminContacts.css';
+import axios from 'axios';
 
 export default function AdminContacts() {
   const [contacts, setContacts] = useState([]);
@@ -29,25 +30,20 @@ export default function AdminContacts() {
         limit: 20,
         status: statusFilter
       });
-
-      const response = await fetch(`http://localhost:5000/api/admin/contacts?${params}`, {
+      const url = `http://localhost:5000/api/admin/contacts?${params}`;
+      const response = await axios.get(url, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        setContacts(data.contacts);
-        setTotalPages(data.pagination.pages);
-        setTotalContacts(data.pagination.total);
-      } else {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminData');
-        navigate('/admin/login');
-      }
+      const data = response.data;
+      setContacts(data.contacts);
+      setTotalPages(data.pagination.pages);
+      setTotalContacts(data.pagination.total);
     } catch (error) {
-      console.error('Error fetching contacts:', error);
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminData');
+      navigate('/admin/login');
     } finally {
       setLoading(false);
     }
@@ -56,16 +52,14 @@ export default function AdminContacts() {
   const handleStatusUpdate = async (contactId, newStatus) => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`http://localhost:5000/api/admin/contacts/${contactId}/status`, {
-        method: 'PUT',
+      const response = await axios.put(`http://localhost:5000/api/admin/contacts/${contactId}/status`, { status: newStatus }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ status: newStatus })
+        }
       });
 
-      if (response.ok) {
+      if (response.status === 200) {
         // Update the contact in the list
         setContacts(contacts.map(contact => 
           contact._id === contactId 

@@ -25,6 +25,7 @@ export default function PDFCompress() {
   const fileInput = useRef();
   const [showSignupRequired, setShowSignupRequired] = useState(false);
   const [fileInputKey, setFileInputKey] = useState(0);
+  const [progress, setProgress] = useState(0); // Progress state
 
   const handleFiles = files => {
     const fileArr = Array.from(files).filter(f => f.type === 'application/pdf');
@@ -77,13 +78,13 @@ export default function PDFCompress() {
     setLoading(true);
     setError('');
     setCompressed([]);
+    setProgress(0);
 
     try {
       const compressionResults = [];
-
       for (const pdf of pdfs) {
         try {
-          const result = await compressionAPI.compressPDF(pdf);
+          const result = await compressionAPI.compressPDF(pdf, (percent) => setProgress(percent));
           compressionResults.push({
             originalName: pdf.name,
             originalSize: pdf.size,
@@ -94,20 +95,18 @@ export default function PDFCompress() {
             originalFile: pdf // Store original file for comparison
           });
         } catch (err) {
-          console.error(`Failed to compress ${pdf.name}:`, err);
           compressionResults.push({
             originalName: pdf.name,
             error: err.message
           });
         }
       }
-
       setCompressed(compressionResults);
     } catch (error) {
       setError('Compression failed. Please try again.');
-      console.error('Compression error:', error);
     } finally {
       setLoading(false);
+      setProgress(0);
     }
   };
 
@@ -215,6 +214,12 @@ export default function PDFCompress() {
         >
           {loading ? 'Compressing...' : 'Compress PDFs'}
         </button>
+        {loading && (
+          <div className="progress-bar-container">
+            <div className="progress-bar" style={{ width: `${progress}%` }} />
+            <div className="progress-label">{progress}%</div>
+          </div>
+        )}
         
         {compressed.length > 0 && (
           <div className="pdfcompress-results">

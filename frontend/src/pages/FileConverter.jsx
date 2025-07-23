@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FileConverter.css';
+import axios from 'axios';
 
 const FORMAT_OPTIONS = {
   image: [
@@ -171,36 +172,24 @@ export default function FileConverter() {
     formData.append('outputFormat', outputFormat);
 
     try {
-      const response = await fetch('http://localhost:5000/api/convert/convert', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        const errorMessage = errorData.details || errorData.error || 'Conversion failed';
-        
-        // Provide more specific error messages based on the error
-        if (errorMessage.includes('LibreOffice is not installed')) {
-          throw new Error('Advanced document conversion requires LibreOffice. Basic conversions are still available. You can install LibreOffice from: https://www.libreoffice.org/download/download/');
-        } else if (errorMessage.includes('Pandoc is not installed') || errorMessage.includes('Advanced text conversion requires Pandoc')) {
-          throw new Error('Text conversion completed with basic formatting. For advanced text conversions, install Pandoc from: https://pandoc.org/installing.html');
-        } else if (errorMessage.includes('valid image format')) {
-          throw new Error('Please ensure the file is a valid image format. Supported formats: JPG, PNG, WEBP, GIF, BMP, TIFF, HEIC, ICO, AVIF');
-        } else if (errorMessage.includes('valid video format')) {
-          throw new Error('Please ensure the file is a valid video format. Supported formats: MP4, AVI, MOV, WEBM, MKV, FLV, WMV, 3GP, MPEG, MPG, OGV');
-        } else if (errorMessage.includes('valid audio format')) {
-          throw new Error('Please ensure the file is a valid audio format. Supported formats: MP3, WAV, OGG, AAC, FLAC, M4A, WMA, OPUS, AMR');
-        } else {
-          throw new Error(errorMessage);
-        }
-      }
-
-      const result = await response.json();
-      return result;
+      const response = await axios.post('http://localhost:5000/api/convert/convert', formData);
+      return response.data;
     } catch (error) {
-      console.error('Conversion error:', error);
-      throw error;
+      const errorMessage = error.response?.data?.details || error.response?.data?.error || 'Conversion failed';
+      // Provide more specific error messages based on the error
+      if (errorMessage.includes('LibreOffice is not installed')) {
+        throw new Error('Advanced document conversion requires LibreOffice. Basic conversions are still available. You can install LibreOffice from: https://www.libreoffice.org/download/download/');
+      } else if (errorMessage.includes('Pandoc is not installed') || errorMessage.includes('Advanced text conversion requires Pandoc')) {
+        throw new Error('Text conversion completed with basic formatting. For advanced text conversions, install Pandoc from: https://pandoc.org/installing.html');
+      } else if (errorMessage.includes('valid image format')) {
+        throw new Error('Please ensure the file is a valid image format. Supported formats: JPG, PNG, WEBP, GIF, BMP, TIFF, HEIC, ICO, AVIF');
+      } else if (errorMessage.includes('valid video format')) {
+        throw new Error('Please ensure the file is a valid video format. Supported formats: MP4, AVI, MOV, WEBM, MKV, FLV, WMV, 3GP, MPEG, MPG, OGV');
+      } else if (errorMessage.includes('valid audio format')) {
+        throw new Error('Please ensure the file is a valid audio format. Supported formats: MP3, WAV, OGG, AAC, FLAC, M4A, WMA, OPUS, AMR');
+      } else {
+        throw new Error(errorMessage);
+      }
     }
   }
 
@@ -243,8 +232,10 @@ export default function FileConverter() {
         
         // Create download link
         const downloadUrl = `http://localhost:5000/api/convert/download/${result.fileName}`;
+        const downloadResponse = await axios.get(downloadUrl, { responseType: 'blob' });
+        const blob = downloadResponse.data;
         const downloadLink = document.createElement('a');
-        downloadLink.href = downloadUrl;
+        downloadLink.href = window.URL.createObjectURL(blob);
         downloadLink.download = result.fileName;
         downloadLink.style.display = 'none';
         document.body.appendChild(downloadLink);

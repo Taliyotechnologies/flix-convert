@@ -53,7 +53,7 @@ router.post('/convert', upload.single('file'), async (req, res) => {
     // --- Video/Audio Conversion ---
     if (fileType === 'video' || fileType === 'audio') {
       await new Promise((resolve, reject) => {
-        ffmpeg(inputPath)
+    ffmpeg(inputPath)
           .outputOptions(['-preset ultrafast'])
           .toFormat(ext)
           .on('end', resolve)

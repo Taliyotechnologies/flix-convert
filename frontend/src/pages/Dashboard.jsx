@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import './Dashboard.css';
 import { Navigate } from 'react-router-dom';
 import ChangePassword from './ChangePassword';
+import axios from 'axios';
 
 export default function Dashboard({ setTheme, themeMode }) {
   const { user, loading } = useAuth();
@@ -32,26 +33,23 @@ export default function Dashboard({ setTheme, themeMode }) {
   useEffect(() => {
     const fetchHistory = async () => {
       if (!user) return;
-      
       try {
         setHistoryLoading(true);
-        const response = await fetch('http://localhost:5000/api/history/summary', {
+        const token = localStorage.getItem('authToken');
+        const url = 'http://localhost:5000/api/history/summary';
+        const response = await axios.get(url, {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+            'Authorization': `Bearer ${token}`
           }
         });
-        
-        if (response.ok) {
-          const data = await response.json();
-          setHistoryData(data);
-        }
+        const data = response.data;
+        setHistoryData(data);
       } catch (error) {
         console.error('Error fetching history:', error);
       } finally {
         setHistoryLoading(false);
       }
     };
-
     fetchHistory();
   }, [user]);
 

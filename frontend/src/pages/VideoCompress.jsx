@@ -24,6 +24,7 @@ export default function VideoCompress() {
   const [largeFiles, setLargeFiles] = useState([]);
   const fileInput = useRef();
   const [fileInputKey, setFileInputKey] = useState(0);
+  const [progress, setProgress] = useState(0); // Progress state
 
   const handleFiles = files => {
     const fileArr = Array.from(files).filter(f => f.type.startsWith('video/'));
@@ -71,6 +72,7 @@ export default function VideoCompress() {
     setLoading(true);
     setError('');
     setCompressed([]);
+    setProgress(0);
 
     try {
       const compressionResults = [];
@@ -80,7 +82,7 @@ export default function VideoCompress() {
           console.log(`Processing video: ${video.name} (${(video.size / 1024 / 1024).toFixed(2)} MB)`);
           
           // Compress video with automatic enhancement
-          const result = await compressionAPI.compressVideo(video);
+          const result = await compressionAPI.compressVideo(video, (percent) => setProgress(percent));
           
           // Process video compression
           console.log(`Video processed successfully:`, {
@@ -129,6 +131,7 @@ export default function VideoCompress() {
       console.error('Compression error:', error);
     } finally {
       setLoading(false);
+      setProgress(0);
     }
   };
 
@@ -241,6 +244,12 @@ export default function VideoCompress() {
         >
           {loading ? 'Processing...' : 'Compress Videos'}
         </button>
+        {loading && (
+          <div className="progress-bar-container">
+            <div className="progress-bar" style={{ width: `${progress}%` }} />
+            <div className="progress-label">{progress}%</div>
+          </div>
+        )}
         
         {compressed.length > 0 && (
           <div className="videocompress-results">

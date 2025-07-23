@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
+import axios from 'axios';
 
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
@@ -37,24 +38,20 @@ export default function AdminDashboard() {
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${API_BASE_URL}/admin/dashboard`, {
+      const url = `${API_BASE_URL}/admin/dashboard`;
+      const response = await axios.get(url, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        setStats(data.stats);
-        setFileTypeStats(data.fileTypeStats);
-        setRecentActivity(data.recentActivity);
-      } else {
-        localStorage.removeItem('adminToken');
-        localStorage.removeItem('adminData');
-        navigate('/admin/login');
-      }
+      const data = response.data;
+      setStats(data.stats);
+      setFileTypeStats(data.fileTypeStats);
+      setRecentActivity(data.recentActivity);
     } catch (error) {
-      console.error('Error fetching dashboard data:', error);
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminData');
+      navigate('/admin/login');
     } finally {
       setLoading(false);
     }
