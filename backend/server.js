@@ -1,8 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const compressRoutes = require('./routes/compress');
+const mongoose = require('mongoose');
 
 const app = express();
+
+// Show connection string for debugging (hide password)
+const safeUri = (process.env.MONGODB_URI || '').replace(/:\w+@/, ':<password>@');
+console.log('Connecting to MongoDB:', safeUri);
+
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected!'))
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 // CORS for frontend (must be first middleware)
 app.use(cors({
