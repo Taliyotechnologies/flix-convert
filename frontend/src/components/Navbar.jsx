@@ -4,34 +4,43 @@ import './Navbar.css';
 
 function Navbar({ theme, toggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdown, setDropdown] = useState({ company: false, compress: false, convert: false });
+  const [dropdown, setDropdown] = useState(null);
 
   const handleMenuToggle = () => setMenuOpen((open) => !open);
   const handleLinkClick = () => setMenuOpen(false);
 
   const handleDropdown = (name) => {
-    setDropdown((prev) => ({ ...prev, [name]: !prev[name] }));
+    setDropdown((prev) => (prev === name ? null : name));
   };
 
+  // Close dropdowns on mobile when clicking outside
+  React.useEffect(() => {
+    const handleClick = (e) => {
+      if (!e.target.closest('.navbar-dropdown')) setDropdown(null);
+    };
+    if (menuOpen) document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, [menuOpen]);
+
   return (
-    <nav className="navbar">
+    <nav className="navbar" role="navigation" aria-label="Main Navigation">
       <div className="navbar-logo">FlixConvert</div>
-      <button className="navbar-hamburger" onClick={handleMenuToggle} aria-label="Menu">
+      <button className="navbar-hamburger" onClick={handleMenuToggle} aria-label="Open menu" aria-expanded={menuOpen} aria-controls="navbar-links">
         <span className={menuOpen ? 'bar open' : 'bar'}></span>
         <span className={menuOpen ? 'bar open' : 'bar'}></span>
         <span className={menuOpen ? 'bar open' : 'bar'}></span>
       </button>
-      <ul className={`navbar-links${menuOpen ? ' open' : ''}`}>
+      <ul id="navbar-links" className={`navbar-links${menuOpen ? ' open' : ''}`}>
         <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
         <li className="navbar-dropdown">
-          <button type="button" onClick={() => handleDropdown('company')} className="dropdown-btn">Company</button>
-          <ul className={`dropdown-menu${dropdown.company ? ' show' : ''}`}>
+          <button type="button" aria-haspopup="true" aria-expanded={dropdown==='company'} onClick={() => handleDropdown('company')} className="dropdown-btn">Company</button>
+          <ul className={`dropdown-menu${dropdown==='company' ? ' show' : ''}`}> 
             <li><Link to="/contact" onClick={handleLinkClick}>Contact</Link></li>
           </ul>
         </li>
         <li className="navbar-dropdown">
-          <button type="button" onClick={() => handleDropdown('compress')} className="dropdown-btn">Compress</button>
-          <ul className={`dropdown-menu${dropdown.compress ? ' show' : ''}`}>
+          <button type="button" aria-haspopup="true" aria-expanded={dropdown==='compress'} onClick={() => handleDropdown('compress')} className="dropdown-btn">Compress</button>
+          <ul className={`dropdown-menu${dropdown==='compress' ? ' show' : ''}`}> 
             <li><Link to="/compress/image" onClick={handleLinkClick}>Image</Link></li>
             <li><Link to="/compress/video" onClick={handleLinkClick}>Video</Link></li>
             <li><Link to="/compress/pdf" onClick={handleLinkClick}>PDF</Link></li>
@@ -39,8 +48,8 @@ function Navbar({ theme, toggleTheme }) {
           </ul>
         </li>
         <li className="navbar-dropdown">
-          <button type="button" onClick={() => handleDropdown('convert')} className="dropdown-btn">Convert</button>
-          <ul className={`dropdown-menu${dropdown.convert ? ' show' : ''}`}>
+          <button type="button" aria-haspopup="true" aria-expanded={dropdown==='convert'} onClick={() => handleDropdown('convert')} className="dropdown-btn">Convert</button>
+          <ul className={`dropdown-menu${dropdown==='convert' ? ' show' : ''}`}> 
             <li><Link to="/convert/image" onClick={handleLinkClick}>Image</Link></li>
             <li><Link to="/convert/video" onClick={handleLinkClick}>Video</Link></li>
             <li><Link to="/convert/pdf" onClick={handleLinkClick}>PDF</Link></li>

@@ -52,6 +52,28 @@ body.dark {
   margin-bottom: 2rem;
 }
 
+.hero-cta {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.85rem 2.2rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, var(--color-primary) 60%, #7c7afd 100%);
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(108,99,255,0.08);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.hero-cta:hover, .hero-cta:focus {
+  background: linear-gradient(90deg, #7c7afd 60%, var(--color-primary) 100%);
+  box-shadow: 0 4px 16px rgba(108,99,255,0.13);
+  transform: translateY(-2px) scale(1.03);
+  outline: none;
+}
+
 @media (max-width: 600px) {
   .hero-title {
     font-size: 2rem;
@@ -61,5 +83,10 @@ body.dark {
   }
   .hero-section, .page-section {
     padding: 1.5rem 0.5rem 2rem 0.5rem;
+  }
+  .hero-cta {
+    font-size: 1rem;
+    padding: 0.7rem 1.3rem;
+    margin-top: 1.2rem;
   }
 }
