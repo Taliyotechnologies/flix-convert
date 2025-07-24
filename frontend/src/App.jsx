@@ -6,22 +6,25 @@ import Home from './pages/Home';
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
-    // Persist theme in localStorage
-    const stored = localStorage.getItem('darkMode');
-    return stored ? JSON.parse(stored) : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Use system preference or localStorage
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('convertflix-dark-mode');
+      if (stored) return stored === 'true';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
   });
 
   useEffect(() => {
-    localStorage.setItem('darkMode', JSON.stringify(darkMode));
-    document.body.classList.toggle('dark', darkMode);
-    document.body.classList.toggle('light', !darkMode);
+    document.body.className = darkMode ? 'dark' : 'light';
+    localStorage.setItem('convertflix-dark-mode', darkMode);
   }, [darkMode]);
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
     <Router>
-      <div className={`app-container${darkMode ? ' dark' : ' light'}`}>
+      <div className={`app-container${darkMode ? ' dark' : ' light'}`}> 
         <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
         <main>
           <Routes>
