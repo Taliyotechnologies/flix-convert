@@ -13,12 +13,15 @@ const Navbar = () => {
     <nav className={`navbar${darkMode ? ' dark' : ''}`}> 
       <div className="navbar-inner">
         <div className="navbar-logo">
-          {/* Square SVG Logo */}
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="36" height="36" rx="8" fill="#4F46E5"/>
-            <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="18" fontFamily="Arial" dy=".3em">W</text>
+          {/* Modern ConvertFlix Logo: stylized C+F with conversion arrow */}
+          <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="38" height="38" rx="10" fill="#4F46E5"/>
+            <path d="M13 19c0-3.3 2.7-6 6-6h2" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+            <path d="M25 19c0 3.3-2.7 6-6 6h-2" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+            <polyline points="21,13 25,13 25,17" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            <polyline points="17,25 13,25 13,21" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
-          <span className="logo-text">Wana</span>
+          <span className="logo-text">ConvertFlix</span>
         </div>
         <ul className="navbar-links">
           <li><Link to="/">Home</Link></li>
