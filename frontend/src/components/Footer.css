@@ -1,12 +1,14 @@
 .footer {
-  background: var(--footer-bg, #f3f4f6);
-  color: var(--footer-text, #22223b);
-  padding: 2rem 1.5rem 1rem 1.5rem;
+  background: var(--footer-bg, #f8f9fb);
+  color: var(--footer-text, #232336);
+  padding: 2.7rem 2rem 1.2rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-top: 1px solid #e5e7eb;
-  margin-top: 2rem;
+  border-top: 1.5px solid #ececf6;
+  margin-top: 2.5rem;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.01em;
 }
 .footer-links {
   display: flex;
@@ -18,11 +20,12 @@
 .footer-links a {
   color: inherit;
   text-decoration: none;
-  font-weight: 500;
-  font-size: 1rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 6px;
-  transition: background 0.2s;
+  font-weight: 600;
+  font-size: 1.08rem;
+  padding: 0.45rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+  letter-spacing: 0.01em;
 }
 .footer-links a:hover {
   background: rgba(79,70,229,0.08);
