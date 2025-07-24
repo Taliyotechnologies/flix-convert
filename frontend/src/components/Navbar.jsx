@@ -40,27 +40,27 @@ const Navbar = () => {
           </li>
           <li className="dropdown">
             <span onClick={() => setOpenDropdown(openDropdown === 'compress' ? null : 'compress')} tabIndex={0} role="button" aria-haspopup="true" aria-expanded={openDropdown === 'compress'}>Compress</span>
-            {openDropdown === 'compress' && (
+            <div className={`dropdown-menu-wrapper${openDropdown === 'compress' ? ' open' : ''}`}>{openDropdown === 'compress' && (
               <ul className="dropdown-menu">
                 <li><Link to="/compress/image">Image</Link></li>
                 <li><Link to="/compress/video">Video</Link></li>
                 <li><Link to="/compress/audio">Audio</Link></li>
                 <li><Link to="/compress/pdf">PDF</Link></li>
               </ul>
-            )}
+            )}</div>
           </li>
           <li>
             <Link to="/convert">Convert</Link>
           </li>
           <li className="dropdown">
             <span onClick={() => setOpenDropdown(openDropdown === 'company' ? null : 'company')} tabIndex={0} role="button" aria-haspopup="true" aria-expanded={openDropdown === 'company'}>Company</span>
-            {openDropdown === 'company' && (
+            <div className={`dropdown-menu-wrapper${openDropdown === 'company' ? ' open' : ''}`}>{openDropdown === 'company' && (
               <ul className="dropdown-menu">
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
                 <li><Link to="/owner">Owner</Link></li>
               </ul>
-            )}
+            )}</div>
           </li>
         </ul>
         <div className="navbar-actions">
