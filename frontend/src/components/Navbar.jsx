@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [compressOpen, setCompressOpen] = useState(false);
-  const [companyOpen, setCompanyOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null); // 'compress', 'company', or null
+  const navbarRef = useRef(null);
 
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <nav className={`navbar${darkMode ? ' dark' : ''}`}> 
+    <nav className={`navbar${darkMode ? ' dark' : ''}`} ref={navbarRef}> 
       <div className="navbar-inner">
         <div className="navbar-logo">
           {/* Modern ConvertFlix Logo: stylized C+F with conversion arrow */}
@@ -24,10 +35,12 @@ const Navbar = () => {
           <span className="logo-text">ConvertFlix</span>
         </div>
         <ul className="navbar-links">
-          <li><Link to="/">Home</Link></li>
-          <li className="dropdown" onMouseEnter={() => setCompressOpen(true)} onMouseLeave={() => setCompressOpen(false)}>
-            <span>Compress</span>
-            {compressOpen && (
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li className="dropdown">
+            <span onClick={() => setOpenDropdown(openDropdown === 'compress' ? null : 'compress')} tabIndex={0} role="button" aria-haspopup="true" aria-expanded={openDropdown === 'compress'}>Compress</span>
+            {openDropdown === 'compress' && (
               <ul className="dropdown-menu">
                 <li><Link to="/compress/image">Image</Link></li>
                 <li><Link to="/compress/video">Video</Link></li>
@@ -36,10 +49,12 @@ const Navbar = () => {
               </ul>
             )}
           </li>
-          <li><Link to="/convert">Convert</Link></li>
-          <li className="dropdown" onMouseEnter={() => setCompanyOpen(true)} onMouseLeave={() => setCompanyOpen(false)}>
-            <span>Company</span>
-            {companyOpen && (
+          <li>
+            <Link to="/convert">Convert</Link>
+          </li>
+          <li className="dropdown">
+            <span onClick={() => setOpenDropdown(openDropdown === 'company' ? null : 'company')} tabIndex={0} role="button" aria-haspopup="true" aria-expanded={openDropdown === 'company'}>Company</span>
+            {openDropdown === 'company' && (
               <ul className="dropdown-menu">
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
