@@ -1,78 +1,63 @@
 .footer {
-  background: var(--color-footer);
-  color: var(--color-text);
-  padding: 1.5rem 0 1.2rem 0;
-  text-align: center;
-  border-top: 1px solid #e0e0e0;
-  font-size: 1rem;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.03);
-}
-
-.footer-content {
-  max-width: 900px;
-  margin: 0 auto;
+  background: var(--footer-bg, #f3f4f6);
+  color: var(--footer-text, #22223b);
+  padding: 2rem 1.5rem 1rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 2rem;
 }
-
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.footer-links a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.footer-links a:hover {
+  background: rgba(79,70,229,0.08);
+}
+.footer-bottom {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
 .footer-madeby {
-  font-size: 0.97rem;
-  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
 }
 .footer-madeby a {
-  color: var(--color-primary);
+  color: #4F46E5;
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-.footer-madeby a:hover, .footer-madeby a:focus {
-  text-decoration: underline;
-  color: var(--color-primary);
-}
-
-.footer-social {
   display: flex;
-  gap: 1.2rem;
-  margin-top: 0.2rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
 }
-.footer-social a {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 500;
-  padding: 0.2rem 0.7rem;
-  border-radius: 6px;
-  transition: background 0.2s, color 0.2s;
-  position: relative;
-}
-.footer-social a:hover, .footer-social a:focus {
-  color: var(--color-text);
-  background: rgba(108,99,255,0.13);
-  outline: none;
-}
-
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 @media (max-width: 600px) {
-  .footer-content {
-    font-size: 0.97rem;
-    padding: 0 0.5rem;
+  .footer-links {
+    gap: 0.5rem;
+    font-size: 0.9rem;
   }
-  .footer-social {
-    gap: 0.7rem;
+  .footer {
+    padding: 1.2rem 0.5rem 0.7rem 0.5rem;
   }
+}
+.footer.dark {
+  --footer-bg: #18181b;
+  --footer-text: #f3f4f6;
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  border-top: 1px solid #232336;
 } 
