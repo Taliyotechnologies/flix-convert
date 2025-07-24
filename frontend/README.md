@@ -1,12 +1,46 @@
-# React + Vite
+# FlixConvert Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Local Development
 
-Currently, two official plugins are available:
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Build for Production
 
-## Expanding the ESLint configuration
+```bash
+npm run build
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Preview Production Build
+
+```bash
+npm run start
+```
+
+## Deploy to Vercel
+
+1. Push this repo to GitHub.
+2. Go to [Vercel](https://vercel.com/) and import your repo.
+3. Set the project root to `frontend`.
+4. Vercel will auto-detect Vite/React and use the `build` script.
+5. Your site will be live at your Vercel domain (e.g., https://flixconvert.taliyotechnologies.com/).
+
+## Deploy to Render
+
+1. Push this repo to GitHub.
+2. Go to [Render](https://render.com/) and create a new Static Site.
+3. Set the build command to `npm run build` and the publish directory to `dist`.
+4. Set the root to `frontend`.
+5. Your site will be live at your Render domain (e.g., https://flix-convert.onrender.com).
+
+---
+
+For more, see the deployed site:
+- Vercel: https://flixconvert.taliyotechnologies.com/
+- Render: https://flix-convert.onrender.com 
