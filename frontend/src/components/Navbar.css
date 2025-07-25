@@ -62,7 +62,7 @@
 }
 
 .nav-links a:hover {
-  color: #7F5AF0;
+  color: #3B82F6;
 }
 
 /* Dropdown Triggers */
@@ -79,7 +79,7 @@
 }
 
 .nav-dropdown-trigger:hover {
-  color: #7F5AF0;
+  color: #3B82F6;
 }
 
 .nav-dropdown-trigger svg {
@@ -148,8 +148,8 @@
 }
 
 .nav-dropdown a:hover {
-  background: rgba(127, 90, 240, 0.1);
-  color: #7F5AF0;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
 }
 
 /* Theme Toggle */
@@ -199,15 +199,15 @@
 
 .nav-auth-signup a {
   color: #ffffff;
-  background: #7F5AF0;
-  border: 1px solid #7F5AF0;
+  background: #3B82F6;
+  border: 1px solid #3B82F6;
 }
 
 .nav-auth-signup a:hover {
-  background: #6B4CD9;
-  border-color: #6B4CD9;
+  background: #1D4ED8;
+  border-color: #1D4ED8;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(127, 90, 240, 0.3);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 /* Hamburger Menu */
@@ -340,7 +340,7 @@ body.light .nav-dropdown-trigger {
 
 body.light .nav-links a:hover,
 body.light .nav-dropdown-trigger:hover {
-  color: #7F5AF0;
+  color: #3B82F6;
 }
 
 body.light .nav-dropdown {
@@ -357,8 +357,8 @@ body.light .nav-dropdown a {
 }
 
 body.light .nav-dropdown a:hover {
-  background: rgba(127, 90, 240, 0.1);
-  color: #7F5AF0;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3B82F6;
 }
 
 body.light .nav-theme-toggle button {

@@ -83,11 +83,11 @@ body.light .social-link {
 }
 
 .social-link:hover {
-  background: #7F5AF0;
-  border-color: #7F5AF0;
+  background: #3B82F6;
+  border-color: #3B82F6;
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(127, 90, 240, 0.3);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
 }
 
 /* Footer Links Section */
@@ -130,7 +130,7 @@ body.light .footer-section a {
 }
 
 .footer-section a:hover {
-  color: #7F5AF0;
+  color: #3B82F6;
 }
 
 /* Footer Bottom */
@@ -176,7 +176,7 @@ body.light .footer-bottom-links a {
 }
 
 .footer-bottom-links a:hover {
-  color: #7F5AF0;
+  color: #3B82F6;
 }
 
 .made-by {
@@ -190,14 +190,14 @@ body.light .made-by {
 }
 
 .taliyo-link {
-  color: #7F5AF0;
+  color: #3B82F6;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .taliyo-link:hover {
-  color: #6B4CD9;
+  color: #1D4ED8;
 }
 
 /* Responsive Design */

@@ -48,7 +48,7 @@ body.light .hero-title {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #2CB67D 0%, #7F5AF0 100%);
+  background: linear-gradient(135deg, #2CB67D 0%, #3B82F6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

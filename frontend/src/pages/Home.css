@@ -48,7 +48,7 @@ body.light .hero-title {
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #7F5AF0 0%, #2CB67D 100%);
+  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -86,15 +86,15 @@ body.light .hero-description {
 }
 
 .btn-primary {
-  background: #7F5AF0;
+  background: #3B82F6;
   color: #ffffff;
-  box-shadow: 0 4px 20px rgba(127, 90, 240, 0.3);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-  background: #6B4CD9;
+  background: #1D4ED8;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(127, 90, 240, 0.4);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
 }
 
 .btn-secondary {
@@ -299,7 +299,7 @@ body.light .how-it-works {
 .step-number {
   width: 80px;
   height: 80px;
-  background: #7F5AF0;
+  background: #3B82F6;
   color: #ffffff;
   border-radius: 50%;
   display: flex;
@@ -308,7 +308,7 @@ body.light .how-it-works {
   font-size: 1.5rem;
   font-weight: 700;
   margin: 0 auto 24px;
-  box-shadow: 0 4px 20px rgba(127, 90, 240, 0.3);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 .step-card h3 {
@@ -373,7 +373,7 @@ body.light .stat-card:hover {
 .stat-number {
   font-size: 3rem;
   font-weight: 700;
-  color: #7F5AF0;
+  color: #3B82F6;
   margin-bottom: 8px;
   display: block;
 }
@@ -506,12 +506,12 @@ body.light .service-card p {
 }
 
 .service-arrow {
-  color: #7F5AF0;
+  color: #3B82F6;
   transition: transform 0.3s ease;
 }
 
 body.light .service-arrow {
-  color: #7F5AF0;
+  color: #3B82F6;
 }
 
 .service-card:hover .service-arrow {
