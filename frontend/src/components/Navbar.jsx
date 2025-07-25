@@ -45,7 +45,13 @@ const Navbar = () => {
     <nav className={`nav-glass ${theme}`} ref={navRef}>
       <div className="nav-inner">
         <Link to="/" className="nav-logo">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="2" y="2" width="24" height="24" rx="6" fill="#7F5AF0" stroke="#2CB67D" strokeWidth="2"/><rect x="7" y="7" width="14" height="14" rx="4" fill="#fff" stroke="#7F5AF0" strokeWidth="2"/></svg>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="2" y="2" width="28" height="28" rx="8" fill="#7F5AF0" stroke="#2CB67D" strokeWidth="2"/>
+            <rect x="8" y="8" width="16" height="16" rx="4" fill="#ffffff"/>
+            <path d="M12 16h8M16 12v8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+            <circle cx="24" cy="8" r="3" fill="#2CB67D"/>
+            <path d="M22 6l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
           <span>ConvertFlix</span>
         </Link>
         <button className={`nav-hamburger${mobileMenu ? ' open' : ''}`} aria-label="Open menu" onClick={() => setMobileMenu((v) => !v)}>
