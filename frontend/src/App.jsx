@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Compress from './pages/Compress';
+import CompressImage from './pages/CompressImage';
+import CompressVideo from './pages/CompressVideo';
 import Convert from './pages/Convert';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -95,6 +97,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/compress" element={<Compress />} />
+              <Route path="/compress/image" element={<CompressImage />} />
+              <Route path="/compress/video" element={<CompressVideo />} />
               <Route path="/convert" element={<Convert />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />

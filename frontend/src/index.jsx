@@ -5,6 +5,9 @@ import './index.css';
 import './components/Navbar.css';
 import './components/Footer.css';
 import './pages/Home.css';
+import './pages/Compress.css';
+import './pages/CompressImage.css';
+import './pages/CompressVideo.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
