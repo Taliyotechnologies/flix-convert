@@ -4,14 +4,14 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--color-bg, #000000);
+  color: var(--color-text, #ffffff);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 body.dark .compress-image-container {
-  background: #0f172a;
-  color: #f1f5f9;
+  background: #000000;
+  color: #ffffff;
 }
 
 /* Page Header */
@@ -23,16 +23,16 @@ body.dark .compress-image-container {
 }
 
 .header-container {
-  background: var(--color-card);
-  border: 1px solid var(--color-card-border);
+  background: var(--color-card, #111111);
+  border: 1px solid var(--color-card-border, #333333);
   border-radius: 12px;
   padding: 40px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 body.dark .header-container {
-  background: #1e293b;
-  border: 1px solid #334155;
+  background: #111111;
+  border: 1px solid #333333;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -41,29 +41,29 @@ body.dark .header-container {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 16px;
-  color: var(--color-text);
+  color: var(--color-text, #ffffff);
   letter-spacing: -0.025em;
 }
 
 body.dark .page-title {
-  color: #f8fafc;
+  color: #ffffff;
 }
 
 .accent-text {
-  color: var(--color-accent);
+  color: var(--color-accent, #3B82F6);
 }
 
 .page-subtitle {
   font-size: 1.125rem;
   line-height: 1.6;
-  color: var(--color-text);
+  color: var(--color-text, #ffffff);
   opacity: 0.8;
   margin: 0;
   font-weight: 400;
 }
 
 body.dark .page-subtitle {
-  color: #94a3b8;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Upload Section */

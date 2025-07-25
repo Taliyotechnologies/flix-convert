@@ -19,8 +19,8 @@ const Login = () => (
         </div>
         <button type="submit" className="home-cta-btn" style={{marginTop: 16}}>Login</button>
       </form>
-      <div style={{marginTop: 24, textAlign: 'center', color: '#7F5AF0'}}>
-        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style={{marginBottom: 8}}><rect width="32" height="32" rx="8" fill="#7F5AF0"/><path d="M16 10a4 4 0 100 8 4 4 0 000-8z" fill="#fff"/><rect x="10" y="20" width="12" height="4" rx="2" fill="#fff"/></svg>
+              <div style={{marginTop: 24, textAlign: 'center', color: '#3B82F6'}}>
+                  <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style={{marginBottom: 8}}><rect width="32" height="32" rx="8" fill="#3B82F6"/><path d="M16 10a4 4 0 100 8 4 4 0 000-8z" fill="#fff"/><rect x="10" y="20" width="12" height="4" rx="2" fill="#fff"/></svg>
         <div>Don’t have an account? <a href="/signup" style={{color: '#2CB67D', textDecoration: 'underline'}}>Sign up</a></div>
       </div>
     </div>

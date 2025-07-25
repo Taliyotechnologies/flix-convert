@@ -10,10 +10,10 @@ const Owner = () => (
     <div className="home-details animate-details" style={{marginTop: '2.5rem', maxWidth: 600}}>
       <div className="about-owner-card" style={{display: 'flex', alignItems: 'center', gap: 24}}>
         <div className="about-owner-avatar">
-          <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><circle cx="32" cy="24" r="14" fill="#7F5AF0"/><rect x="14" y="40" width="36" height="14" rx="7" fill="#2CB67D"/></svg>
+          <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><circle cx="32" cy="24" r="14" fill="#3B82F6"/><rect x="14" y="40" width="36" height="14" rx="7" fill="#2CB67D"/></svg>
         </div>
         <div>
-          <h3 style={{margin: 0, color: '#7F5AF0', fontWeight: 800}}>Taliyo Technologies</h3>
+          <h3 style={{margin: 0, color: '#3B82F6', fontWeight: 800}}>Taliyo Technologies</h3>
           <p style={{margin: 0, color: 'var(--home-text-light)', fontWeight: 500}}>Building next-gen web tools for everyone.<br/>Contact: <a href="mailto:support@convertflix.com" style={{color: '#2CB67D', textDecoration: 'underline'}}>support@convertflix.com</a></p>
         </div>
       </div>

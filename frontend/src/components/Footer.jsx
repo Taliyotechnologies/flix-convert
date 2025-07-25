@@ -88,7 +88,7 @@ const Footer = () => {
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect x="2" y="2" width="28" height="28" rx="8" fill="#7F5AF0" stroke="#2CB67D" strokeWidth="2"/>
+                <rect x="2" y="2" width="28" height="28" rx="8" fill="#3B82F6" stroke="#2CB67D" strokeWidth="2"/>
                 <rect x="8" y="8" width="16" height="16" rx="4" fill="#ffffff"/>
                 <path d="M12 16h8M16 12v8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
                 <circle cx="24" cy="8" r="3" fill="#2CB67D"/>

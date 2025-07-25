@@ -46,9 +46,9 @@ const Navbar = () => {
       <div className="nav-inner">
         <Link to="/" className="nav-logo">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="2" y="2" width="28" height="28" rx="8" fill="#7F5AF0" stroke="#2CB67D" strokeWidth="2"/>
+            <rect x="2" y="2" width="28" height="28" rx="8" fill="#3B82F6" stroke="#2CB67D" strokeWidth="2"/>
             <rect x="8" y="8" width="16" height="16" rx="4" fill="#ffffff"/>
-            <path d="M12 16h8M16 12v8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+                          <path d="M12 16h8M16 12v8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
             <circle cx="24" cy="8" r="3" fill="#2CB67D"/>
             <path d="M22 6l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
@@ -81,7 +81,7 @@ const Navbar = () => {
               {theme === 'dark' ? (
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" fill="#232336"/><path d="M18 11.7A7.5 7.5 0 1111.7 4a5.8 5.8 0 106.3 7.7z" fill="#FBBF24"/></svg>
               ) : (
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" fill="#7F5AF0"/><circle cx="11" cy="11" r="9" stroke="#7F5AF0" strokeWidth="2"/><path d="M11 2v2M11 18v2M4.22 4.22l1.42 1.42M16.36 16.36l1.42 1.42M2 11h2M18 11h2M4.22 17.78l1.42-1.42M16.36 5.64l1.42-1.42" stroke="#7F5AF0" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="7" fill="#3B82F6"/><circle cx="11" cy="11" r="9" stroke="#3B82F6" strokeWidth="2"/><path d="M11 2v2M11 18v2M4.22 4.22l1.42 1.42M16.36 16.36l1.42 1.42M2 11h2M18 11h2M4.22 17.78l1.42-1.42M16.36 5.64l1.42-1.42" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round"/></svg>
               )}
             </button>
           </li>

@@ -244,8 +244,8 @@ const CompressVideo = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#7F5AF0" opacity="0.1"/>
-                  <path d="M16 20l4 4 8-8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+        <path d="M16 20l4 4 8-8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Quality Control</h3>

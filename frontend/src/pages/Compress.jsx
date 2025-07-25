@@ -7,17 +7,17 @@ const compressServices = [
   {
     icon: (
       <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="8" width="48" height="48" rx="12" fill="#7F5AF0" opacity="0.1"/>
-        <path d="M20 20h24v24H20z" stroke="#7F5AF0" strokeWidth="2"/>
-        <path d="M28 28h8v8h-8z" fill="#7F5AF0" opacity="0.3"/>
-        <path d="M32 16v16M24 24h16" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="48" height="48" rx="12" fill="#3B82F6" opacity="0.1"/>
+        <path d="M20 20h24v24H20z" stroke="#3B82F6" strokeWidth="2"/>
+        <path d="M28 28h8v8h-8z" fill="#3B82F6" opacity="0.3"/>
+        <path d="M32 16v16M24 24h16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "Image Compression",
     description: "Compress images while maintaining quality. Reduce file size for web, email, or storage.",
     features: ["JPG, PNG, WebP support", "Quality control", "Batch processing", "Fast compression"],
     link: "/compress/image",
-    color: "#7F5AF0"
+            color: "#3B82F6"
   },
   {
     icon: (
@@ -101,8 +101,8 @@ const Compress = () => {
           <div className="compression-animation">
             <div className="file-before">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <rect x="8" y="8" width="32" height="32" rx="6" fill="#7F5AF0" opacity="0.2"/>
-                <path d="M16 20h16M16 28h12" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+                        <rect x="8" y="8" width="32" height="32" rx="6" fill="#3B82F6" opacity="0.2"/>
+        <path d="M16 20h16M16 28h12" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
               </svg>
               <span>Original</span>
             </div>
@@ -161,8 +161,8 @@ const Compress = () => {
           <div className="step">
             <div className="step-icon">
               <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <rect x="8" y="8" width="32" height="32" rx="8" fill="#7F5AF0" opacity="0.1"/>
-                <path d="M16 24h16M24 16v16" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+                        <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+        <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
               </svg>
             </div>
             <h3>Upload Your File</h3>

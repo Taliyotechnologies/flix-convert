@@ -64,8 +64,8 @@ const CompressImage = () => {
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
             <div className="upload-icon">
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="8" width="48" height="48" rx="12" fill="#7F5AF0" opacity="0.1"/>
-                <path d="M32 16v24M24 24l8-8 8 8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <rect x="8" y="8" width="48" height="48" rx="12" fill="#3B82F6" opacity="0.1"/>
+        <path d="M32 16v24M24 24l8-8 8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <h3>Upload Your Image</h3>
@@ -85,8 +85,8 @@ const CompressImage = () => {
               <div className="file-details">
                 <div className="file-icon">
                   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect x="6" y="6" width="20" height="20" rx="4" fill="#7F5AF0" opacity="0.1"/>
-                    <path d="M12 14l3 3 5-5" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            <rect x="6" y="6" width="20" height="20" rx="4" fill="#3B82F6" opacity="0.1"/>
+        <path d="M12 14l3 3 5-5" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <div className="file-text">
@@ -230,9 +230,9 @@ const CompressImage = () => {
         <div className="hero-visual">
           <div className="image-preview">
             <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-              <rect x="20" y="20" width="80" height="80" rx="12" fill="#7F5AF0" opacity="0.1"/>
-              <path d="M40 60l10-15 8 10 6-8 6 13" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <circle cx="70" cy="50" r="4" fill="#7F5AF0"/>
+                      <rect x="20" y="20" width="80" height="80" rx="12" fill="#3B82F6" opacity="0.1"/>
+        <path d="M40 60l10-15 8 10 6-8 6 13" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="70" cy="50" r="4" fill="#3B82F6"/>
             </svg>
           </div>
         </div>
@@ -246,8 +246,8 @@ const CompressImage = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#7F5AF0" opacity="0.1"/>
-                  <path d="M16 24h16M24 16v16" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+                          <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+        <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
               <h3>Advanced Algorithms</h3>

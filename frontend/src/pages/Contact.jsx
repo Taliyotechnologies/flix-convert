@@ -23,7 +23,7 @@ const Contact = () => (
         </div>
         <button type="submit" className="home-cta-btn" style={{marginTop: 16}}>Send Message</button>
       </form>
-      <div style={{marginTop: 32, textAlign: 'center', color: '#7F5AF0'}}>
+              <div style={{marginTop: 32, textAlign: 'center', color: '#3B82F6'}}>
         <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style={{marginBottom: 8}}><rect width="32" height="32" rx="8" fill="#2CB67D"/><rect x="8" y="10" width="16" height="12" rx="3" stroke="#fff" strokeWidth="2"/><path d="M8 12l8 6 8-6" stroke="#fff" strokeWidth="2"/></svg>
         <div>Email: <a href="mailto:support@convertflix.com" style={{color: '#2CB67D', textDecoration: 'underline'}}>support@convertflix.com</a></div>
       </div>
