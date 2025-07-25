@@ -45,6 +45,19 @@ const CompressImage = () => {
 
   return (
     <div className={`compress-image-container ${theme}`}>
+      {/* Page Header */}
+      <section className="page-header">
+        <div className="header-container">
+          <h1 className="page-title">
+            Image Compression
+            <span className="gradient-text"> Tool</span>
+          </h1>
+          <p className="page-subtitle">
+            Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, and more formats.
+          </p>
+        </div>
+      </section>
+
       {/* Upload Section - Now First */}
       <section className="upload-section">
         <div className="upload-container">
@@ -187,12 +200,11 @@ const CompressImage = () => {
       {/* Hero Section - Now Below Upload */}
       <section className="compress-image-hero">
         <div className="hero-content">
-          <h1 className="hero-title">
-            Image Compression
-            <span className="gradient-text"> Tool</span>
-          </h1>
+          <h2 className="hero-title">
+            Professional Image Compression
+          </h2>
           <p className="hero-description">
-            Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, and more formats.
+            Our advanced compression technology ensures your images maintain their quality while significantly reducing file size. Perfect for websites, social media, and storage optimization.
           </p>
           <div className="hero-features">
             <div className="feature">
@@ -229,7 +241,7 @@ const CompressImage = () => {
       {/* Features Section */}
       <section className="features-section">
         <div className="features-container">
-          <h2>Why Choose Our Image Compression?</h2>
+          <h2>Why Choose Our Image Compression Tool?</h2>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">
