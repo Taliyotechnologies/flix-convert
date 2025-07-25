@@ -1,45 +1,47 @@
 .footer {
-  background: var(--footer-bg, #f8f9fb);
-  color: var(--footer-text, #232336);
-  padding: 2.7rem 2rem 1.2rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  background: #f6f7fa;
+  color: #232336;
+  padding: 2.2rem 1.5rem 1.1rem 1.5rem;
   border-top: 1.5px solid #ececf6;
-  margin-top: 2.5rem;
+  margin-top: 3.2rem;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-size: 1.08rem;
   letter-spacing: 0.01em;
 }
-.footer-links {
+.footer-links-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 1.3rem 2.2rem;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
 }
-.footer-links a {
-  color: inherit;
+.footer-link {
+  color: #232336;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.08rem;
-  padding: 0.45rem 1.2rem;
-  border-radius: 8px;
-  transition: background 0.22s, color 0.22s, box-shadow 0.22s;
-  letter-spacing: 0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 7px;
+  transition: background 0.18s, color 0.18s;
 }
-.footer-links a:hover {
-  background: rgba(79,70,229,0.08);
+.footer-link:hover {
+  background: #ececf6;
+  color: #4F46E5;
 }
-.footer-bottom {
+.footer-bottom-row {
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 .footer-madeby {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
 }
 .footer-madeby a {
   color: #4F46E5;
@@ -48,19 +50,13 @@
   align-items: center;
   gap: 0.3rem;
 }
-@media (max-width: 600px) {
-  .footer-links {
-    gap: 0.5rem;
-    font-size: 0.9rem;
+@media (max-width: 900px) {
+  .footer-links-row {
+    gap: 0.7rem 1.1rem;
+    font-size: 0.98rem;
   }
   .footer {
     padding: 1.2rem 0.5rem 0.7rem 0.5rem;
+    font-size: 0.98rem;
   }
-}
-.footer.dark {
-  --footer-bg: #18181b;
-  --footer-text: #f3f4f6;
-  background: var(--footer-bg);
-  color: var(--footer-text);
-  border-top: 1px solid #232336;
 } 

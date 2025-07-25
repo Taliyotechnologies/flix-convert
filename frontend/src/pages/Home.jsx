@@ -35,6 +35,52 @@ const Home = () => (
         <p>Get great results with minimum 50% compression and no compromise on quality.</p>
       </div>
     </div>
+    <div className="home-details animate-details">
+      <h2>Explore ConvertFlix</h2>
+      <div className="details-grid">
+        <a href="/compress/image" className="details-link">
+          <span className="details-icon">🖼️</span>
+          <span>Image Compress</span>
+        </a>
+        <a href="/compress/video" className="details-link">
+          <span className="details-icon">🎬</span>
+          <span>Video Compress</span>
+        </a>
+        <a href="/compress/audio" className="details-link">
+          <span className="details-icon">🎵</span>
+          <span>Audio Compress</span>
+        </a>
+        <a href="/compress/pdf" className="details-link">
+          <span className="details-icon">📄</span>
+          <span>PDF Compress</span>
+        </a>
+        <a href="/convert" className="details-link">
+          <span className="details-icon">🔄</span>
+          <span>File Convert</span>
+        </a>
+        <a href="/about" className="details-link">
+          <span className="details-icon">ℹ️</span>
+          <span>About</span>
+        </a>
+        <a href="/contact" className="details-link">
+          <span className="details-icon">📞</span>
+          <span>Contact</span>
+        </a>
+        <a href="/owner" className="details-link">
+          <span className="details-icon">👤</span>
+          <span>Owner</span>
+        </a>
+        <a href="/login" className="details-link">
+          <span className="details-icon">🔑</span>
+          <span>Login</span>
+        </a>
+        <a href="/signup" className="details-link">
+          <span className="details-icon">📝</span>
+          <span>Sign Up</span>
+        </a>
+      </div>
+      <p className="details-description">ConvertFlix is your all-in-one platform for fast, high-quality file conversion and compression. Whether you need to shrink images, videos, audio, or PDFs, or convert files between formats, our tools are designed for speed, quality, and ease of use. Explore our pages to get started!</p>
+    </div>
   </section>
 );
 
