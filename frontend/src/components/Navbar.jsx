@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../App';
 import './Navbar.css';
 
-const Navbar = (props) => {
+const Navbar = () => {
+  const { theme, toggleTheme } = useTheme();
   const [openDropdown, setOpenDropdown] = useState(null); // 'compress', 'company', or null
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navbarRef = useRef(null);
@@ -20,11 +22,12 @@ const Navbar = (props) => {
   }, []);
 
   return (
-    <nav className={`navbar${props.darkMode ? ' dark' : ''}`} ref={navbarRef}>
+    <nav className={`navbar${theme === 'dark' ? ' dark' : ''}`} ref={navbarRef}>
       <div className="navbar-inner">
         <div className="navbar-logo">
+          {/* Modern ConvertFlix Logo: stylized C+F with conversion arrow */}
           <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="38" height="38" rx="10" fill="#4F46E5"/>
+            <rect width="38" height="38" rx="10" fill="var(--color-accent)"/>
             <path d="M13 19c0-3.3 2.7-6 6-6h2" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
             <path d="M25 19c0 3.3-2.7 6-6 6h-2" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
             <polyline points="21,13 25,13 25,17" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -65,21 +68,29 @@ const Navbar = (props) => {
           </li>
           <li className="mobile-only"><Link to="/login" className="btn btn-login" onClick={() => setMobileMenuOpen(false)}>Login</Link></li>
           <li className="mobile-only"><Link to="/signup" className="btn btn-signup" onClick={() => setMobileMenuOpen(false)}>Sign Up</Link></li>
-          <li className="mobile-only"><button className="theme-toggle" onClick={props.toggleDarkMode} aria-label="Toggle dark mode">{props.darkMode ? (
-            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#FBBF24"/></svg>
-          ) : (
-            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="#4F46E5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round"/></svg>
-          )}</button></li>
+          <li className="mobile-only">
+            <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">
+              <span className="theme-toggle-icon">
+                {theme === 'dark' ? (
+                  <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M21 13.79A9 9 0 1113.21 3a7 7 0 109.79 10.79z" fill="#FBBF24"/></svg>
+                ) : (
+                  <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="6" fill="#6366F1"/><path d="M13 2v3M13 21v3M5.22 5.22l2.12 2.12M18.66 18.66l2.12 2.12M2 13h3M21 13h3M5.22 20.78l2.12-2.12M18.66 7.34l2.12-2.12" stroke="#6366F1" strokeWidth="2" strokeLinecap="round"/></svg>
+                )}
+              </span>
+            </button>
+          </li>
         </ul>
         <div className="navbar-actions desktop-only">
           <Link to="/login" className="btn btn-login">Login</Link>
           <Link to="/signup" className="btn btn-signup">Sign Up</Link>
-          <button className="theme-toggle" onClick={props.toggleDarkMode} aria-label="Toggle dark mode">
-            {props.darkMode ? (
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" fill="#FBBF24"/></svg>
-            ) : (
-              <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5" fill="#4F46E5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#4F46E5" strokeWidth="2" strokeLinecap="round"/></svg>
-            )}
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle dark mode">
+            <span className="theme-toggle-icon">
+              {theme === 'dark' ? (
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M21 13.79A9 9 0 1113.21 3a7 7 0 109.79 10.79z" fill="#FBBF24"/></svg>
+              ) : (
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="6" fill="#6366F1"/><path d="M13 2v3M13 21v3M5.22 5.22l2.12 2.12M18.66 18.66l2.12 2.12M2 13h3M21 13h3M5.22 20.78l2.12-2.12M18.66 7.34l2.12-2.12" stroke="#6366F1" strokeWidth="2" strokeLinecap="round"/></svg>
+              )}
+            </span>
           </button>
         </div>
       </div>
