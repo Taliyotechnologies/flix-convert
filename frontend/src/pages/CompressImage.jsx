@@ -45,49 +45,7 @@ const CompressImage = () => {
 
   return (
     <div className={`compress-image-container ${theme}`}>
-      {/* Hero Section */}
-      <section className="compress-image-hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            Image Compression
-            <span className="gradient-text"> Tool</span>
-          </h1>
-          <p className="hero-description">
-            Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, and more formats.
-          </p>
-          <div className="hero-features">
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Quality Control</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Fast Processing</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Batch Support</span>
-            </div>
-          </div>
-        </div>
-        <div className="hero-visual">
-          <div className="image-preview">
-            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-              <rect x="20" y="20" width="80" height="80" rx="12" fill="#7F5AF0" opacity="0.1"/>
-              <path d="M40 60l10-15 8 10 6-8 6 13" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <circle cx="70" cy="50" r="4" fill="#7F5AF0"/>
-            </svg>
-          </div>
-        </div>
-      </section>
-
-      {/* Upload Section */}
+      {/* Upload Section - Now First */}
       <section className="upload-section">
         <div className="upload-container">
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
@@ -225,6 +183,48 @@ const CompressImage = () => {
           </div>
         </section>
       )}
+
+      {/* Hero Section - Now Below Upload */}
+      <section className="compress-image-hero">
+        <div className="hero-content">
+          <h1 className="hero-title">
+            Image Compression
+            <span className="gradient-text"> Tool</span>
+          </h1>
+          <p className="hero-description">
+            Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, and more formats.
+          </p>
+          <div className="hero-features">
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Quality Control</span>
+            </div>
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Fast Processing</span>
+            </div>
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Batch Support</span>
+            </div>
+          </div>
+        </div>
+        <div className="hero-visual">
+          <div className="image-preview">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <rect x="20" y="20" width="80" height="80" rx="12" fill="#7F5AF0" opacity="0.1"/>
+              <path d="M40 60l10-15 8 10 6-8 6 13" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle cx="70" cy="50" r="4" fill="#7F5AF0"/>
+            </svg>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="features-section">
