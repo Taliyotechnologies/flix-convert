@@ -78,6 +78,121 @@ const stats = [
   { number: "24/7", label: "Support" }
 ];
 
+const services = [
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#7F5AF0" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="#7F5AF0" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="#7F5AF0" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Image Compression",
+    description: "Compress images while maintaining quality. Reduce file size for web, email, or storage.",
+    link: "/compress/image",
+    color: "#7F5AF0"
+  },
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#2CB67D" opacity="0.1"/>
+        <path d="M16 20h16M16 28h12" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="20" cy="16" r="2" fill="#2CB67D"/>
+        <circle cx="28" cy="16" r="2" fill="#2CB67D"/>
+      </svg>
+    ),
+    title: "Video Compression",
+    description: "Compress videos with high quality. Perfect for sharing and uploading.",
+    link: "/compress/video",
+    color: "#2CB67D"
+  },
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#FF6B6B" opacity="0.1"/>
+        <path d="M12 20l4-4 4 4" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 20l4-4 4 4" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M16 28h16" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Audio Compression",
+    description: "Reduce audio file size for easy sharing and storage.",
+    link: "/compress/audio",
+    color: "#FF6B6B"
+  },
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#4ECDC4" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="#4ECDC4" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="#4ECDC4" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="#4ECDC4" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "PDF Compression",
+    description: "Make PDFs smaller for easy upload and sharing.",
+    link: "/compress/pdf",
+    color: "#4ECDC4"
+  },
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#FBBF24" opacity="0.1"/>
+        <path d="M16 24h16M24 16v16" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="36" cy="12" r="4" fill="#FBBF24"/>
+        <path d="M34 10l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Image Converter",
+    description: "Convert images between formats: JPG, PNG, WebP, GIF, and more.",
+    link: "/convert/image",
+    color: "#FBBF24"
+  },
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#8B5CF6" opacity="0.1"/>
+        <path d="M16 20h16M16 28h12" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="20" cy="16" r="2" fill="#8B5CF6"/>
+        <circle cx="28" cy="16" r="2" fill="#8B5CF6"/>
+      </svg>
+    ),
+    title: "Video Converter",
+    description: "Convert videos between formats: MP4, AVI, MOV, MKV, and more.",
+    link: "/convert/video",
+    color: "#8B5CF6"
+  },
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
+        <path d="M12 20l4-4 4 4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 20l4-4 4 4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M16 28h16" stroke="#10B981" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "Audio Converter",
+    description: "Convert audio files between formats: MP3, WAV, FLAC, AAC, and more.",
+    link: "/convert/audio",
+    color: "#10B981"
+  },
+  {
+    icon: (
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#EF4444" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="#EF4444" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="#EF4444" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    ),
+    title: "PDF Converter",
+    description: "Convert PDFs to and from other formats like Word, Excel, and images.",
+    link: "/convert/pdf",
+    color: "#EF4444"
+  }
+];
+
 const Home = () => {
   const { theme } = useTheme();
 
@@ -146,6 +261,28 @@ const Home = () => {
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="services-section">
+        <div className="section-header">
+          <h2>Our Services</h2>
+          <p>Professional file compression and conversion tools for all your needs</p>
+        </div>
+        <div className="services-grid">
+          {services.map((service, index) => (
+            <Link key={index} to={service.link} className="service-card">
+              <div className="service-icon">{service.icon}</div>
+              <h3>{service.title}</h3>
+              <p>{service.description}</p>
+              <div className="service-arrow">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+            </Link>
           ))}
         </div>
       </section>

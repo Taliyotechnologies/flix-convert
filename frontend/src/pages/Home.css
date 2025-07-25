@@ -432,6 +432,98 @@ body.light .cta-content p {
   flex-wrap: wrap;
 }
 
+/* Services Section */
+.services-section {
+  padding: 80px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(20px);
+}
+
+body.light .services-section {
+  background: rgba(26, 26, 26, 0.02);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.service-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+body.light .service-card {
+  background: rgba(26, 26, 26, 0.03);
+  border: 1px solid rgba(26, 26, 26, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.light .service-card:hover {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  border-color: rgba(26, 26, 26, 0.2);
+}
+
+.service-icon {
+  margin-bottom: 20px;
+}
+
+.service-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+body.light .service-card h3 {
+  color: #1a1a1a;
+}
+
+.service-card p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+body.light .service-card p {
+  color: rgba(26, 26, 26, 0.7);
+}
+
+.service-arrow {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+body.light .service-arrow {
+  color: rgba(26, 26, 26, 0.5);
+}
+
+.service-card:hover .service-arrow {
+  color: #7F5AF0;
+  transform: translateX(4px);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-section {
@@ -505,6 +597,20 @@ body.light .cta-content p {
     width: 100%;
     max-width: 300px;
     justify-content: center;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .service-card {
+    padding: 24px 20px;
+  }
+  
+  .service-arrow {
+    top: 20px;
+    right: 20px;
   }
 }
 
