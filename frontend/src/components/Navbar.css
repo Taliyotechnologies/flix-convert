@@ -17,7 +17,7 @@
   --transition-theme: background 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
-body.light, .app-container.light {
+body.light {
   --color-bg: #f8f9fb;
   --color-bg-secondary: #ffffff;
   --color-text: #232336;
@@ -28,7 +28,7 @@ body.light, .app-container.light {
   --color-navbar-border: #ececf6;
 }
 
-body.dark, .app-container.dark {
+body.dark {
   --color-bg: #18181b;
   --color-bg-secondary: #232336;
   --color-text: #f3f4f6;
