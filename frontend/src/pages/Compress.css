@@ -4,12 +4,12 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: var(--color-bg, #000000);
-  color: var(--color-text, #ffffff);
+  background: var(--color-bg, #0f172a);
+  color: var(--color-text, #f1f5f9);
 }
 
 body.light .compress-container {
-  background: var(--color-bg, #f8f9fb);
+  background: var(--color-bg, #ffffff);
   color: var(--color-text, #1e293b);
 }
 
@@ -34,28 +34,28 @@ body.light .compress-container {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, rgba(255, 255, 255, 0.8) 100%);
+  background: linear-gradient(135deg, var(--color-text, #f1f5f9) 0%, var(--color-accent, #3B82F6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .hero-title {
-  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, var(--color-accent, #3B82F6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent, #ffffff) 0%, var(--color-accent-2, #cccccc) 100%);
+  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #60A5FA) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent, #000000) 0%, var(--color-accent-2, #333333) 100%);
+  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #2563EB) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,12 +64,12 @@ body.light .gradient-text {
 .hero-description {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-accent, #3B82F6);
   margin-bottom: 40px;
 }
 
 body.light .hero-description {
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--color-accent, #3B82F6);
 }
 
 .hero-stats {
@@ -86,21 +86,21 @@ body.light .hero-description {
   display: block;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-accent, #ffffff);
+  color: var(--color-accent, #3B82F6);
   margin-bottom: 4px;
 }
 
 body.light .stat-number {
-  color: var(--color-accent, #000000);
+  color: var(--color-accent, #3B82F6);
 }
 
 .stat-label {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-secondary, #94a3b8);
 }
 
 body.light .stat-label {
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--color-text-secondary, #64748b);
 }
 
 /* Hero Visual */

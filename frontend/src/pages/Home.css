@@ -4,13 +4,13 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: var(--color-bg, #000000);
+  background: var(--color-bg, #0f172a);
   color: var(--color-text, #ffffff);
 }
 
 body.light .home-container {
   background: var(--color-bg, #ffffff);
-  color: var(--color-text, #000000);
+  color: var(--color-text, #1e293b);
 }
 
 /* Hero Section */
@@ -34,28 +34,28 @@ body.light .home-container {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, var(--color-accent, #1a5f3c) 100%);
+  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, var(--color-accent, #3B82F6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .hero-title {
-  background: linear-gradient(135deg, var(--color-text, #000000) 0%, var(--color-accent, #1a5f3c) 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, var(--color-accent, #3B82F6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent, #1a5f3c) 0%, var(--color-accent-2, #2d7a4f) 100%);
+  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #60A5FA) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent, #1a5f3c) 0%, var(--color-accent-2, #0f4c2e) 100%);
+  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #2563EB) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,12 +64,12 @@ body.light .gradient-text {
 .hero-description {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: var(--color-accent, #1a5f3c);
+  color: var(--color-accent, #3B82F6);
   margin-bottom: 40px;
 }
 
 body.light .hero-description {
-  color: var(--color-accent, #1a5f3c);
+  color: var(--color-accent, #3B82F6);
 }
 
 .hero-buttons {
@@ -93,50 +93,50 @@ body.light .hero-description {
 }
 
 .btn-primary {
-  background: var(--color-accent, #1a5f3c);
+  background: var(--color-accent, #3B82F6);
   color: #ffffff;
-  box-shadow: 0 4px 20px rgba(26, 95, 60, 0.3);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-  background: var(--color-accent-2, #2d7a4f);
+  background: var(--color-accent-2, #60A5FA);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(26, 95, 60, 0.4);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
 }
 
 body.light .btn-primary {
-  background: var(--color-accent, #1a5f3c);
+  background: var(--color-accent, #3B82F6);
   color: #ffffff;
-  box-shadow: 0 4px 20px rgba(26, 95, 60, 0.3);
+  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 body.light .btn-primary:hover {
-  background: var(--color-accent-2, #0f4c2e);
-  box-shadow: 0 8px 30px rgba(26, 95, 60, 0.4);
+  background: var(--color-accent-2, #2563EB);
+  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(26, 95, 60, 0.1);
-  color: var(--color-accent, #1a5f3c);
-  border: 1px solid rgba(26, 95, 60, 0.3);
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-accent, #3B82F6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-  background: rgba(26, 95, 60, 0.15);
-  border-color: rgba(26, 95, 60, 0.4);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
   transform: translateY(-2px);
 }
 
 body.light .btn-secondary {
-  background: rgba(26, 95, 60, 0.1);
-  color: var(--color-accent, #1a5f3c);
-  border: 1px solid rgba(26, 95, 60, 0.3);
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-accent, #3B82F6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 body.light .btn-secondary:hover {
-  background: rgba(26, 95, 60, 0.15);
-  border-color: rgba(26, 95, 60, 0.4);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
 /* Hero Visual */
@@ -148,9 +148,9 @@ body.light .btn-secondary:hover {
 
 .floating-card {
   position: absolute;
-  background: rgba(26, 95, 60, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(26, 95, 60, 0.2);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: 16px;
   padding: 20px;
   display: flex;
@@ -161,15 +161,15 @@ body.light .btn-secondary:hover {
 }
 
 body.light .floating-card {
-  background: rgba(26, 95, 60, 0.1);
-  border: 1px solid rgba(26, 95, 60, 0.2);
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .floating-card span {
   font-weight: 600;
   font-size: 14px;
-  color: var(--color-accent, #1a5f3c);
+  color: var(--color-accent, #3B82F6);
 }
 
 .card-1 {
@@ -205,14 +205,14 @@ body.light .floating-card {
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, var(--color-accent, #1a5f3c) 100%);
+  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, var(--color-accent, #3B82F6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .section-header h2 {
-  background: linear-gradient(135deg, var(--color-text, #000000) 0%, var(--color-accent, #1a5f3c) 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, var(--color-accent, #3B82F6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -220,13 +220,13 @@ body.light .section-header h2 {
 
 .section-header p {
   font-size: 1.125rem;
-  color: var(--color-accent, #1a5f3c);
+  color: var(--color-accent, #3B82F6);
   max-width: 600px;
   margin: 0 auto;
 }
 
 body.light .section-header p {
-  color: var(--color-accent, #1a5f3c);
+  color: var(--color-accent, #3B82F6);
 }
 
 /* Features Section - Full Width */
@@ -338,7 +338,7 @@ body.light .how-it-works {
 }
 
 body.light .step-card h3 {
-  color: #1a1a1a;
+  color: #1e293b;
 }
 
 .step-card p {
