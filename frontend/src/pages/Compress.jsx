@@ -1,74 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useTheme } from '../App';
 import './Compress.css';
 
-const compressServices = [
-  {
-    icon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="8" width="48" height="48" rx="12" fill="#3B82F6" opacity="0.1"/>
-        <path d="M20 20h24v24H20z" stroke="#3B82F6" strokeWidth="2"/>
-        <path d="M28 28h8v8h-8z" fill="#3B82F6" opacity="0.3"/>
-        <path d="M32 16v16M24 24h16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: "Image Compression",
-    description: "Compress images while maintaining quality. Reduce file size for web, email, or storage.",
-    features: ["JPG, PNG, WebP support", "Quality control", "Batch processing", "Fast compression"],
-    link: "/compress/image",
-            color: "#3B82F6"
-  },
-  {
-    icon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="8" width="48" height="48" rx="12" fill="#2CB67D" opacity="0.1"/>
-        <path d="M20 24h24M20 32h20" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="24" cy="20" r="2" fill="#2CB67D"/>
-        <circle cx="32" cy="20" r="2" fill="#2CB67D"/>
-        <circle cx="40" cy="20" r="2" fill="#2CB67D"/>
-      </svg>
-    ),
-    title: "Video Compression",
-    description: "Compress videos with high quality. Perfect for sharing and uploading.",
-    features: ["MP4, AVI, MOV support", "Quality preservation", "Size optimization", "Fast processing"],
-    link: "/compress/video",
-    color: "#2CB67D"
-  },
-  {
-    icon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="8" width="48" height="48" rx="12" fill="#FF6B6B" opacity="0.1"/>
-        <path d="M16 24l8-8 8 8" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M24 24l8-8 8 8" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M20 32h24" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: "Audio Compression",
-    description: "Reduce audio file size for easy sharing and storage.",
-    features: ["MP3, WAV, FLAC support", "Quality control", "Bitrate optimization", "Fast compression"],
-    link: "/compress/audio",
-    color: "#FF6B6B"
-  },
-  {
-    icon: (
-      <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-        <rect x="8" y="8" width="48" height="48" rx="12" fill="#4ECDC4" opacity="0.1"/>
-        <path d="M20 20h24v24H20z" stroke="#4ECDC4" strokeWidth="2"/>
-        <path d="M28 28h8v8h-8z" fill="#4ECDC4" opacity="0.3"/>
-        <path d="M32 16v16M24 24h16" stroke="#4ECDC4" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: "PDF Compression",
-    description: "Make PDFs smaller for easy upload and sharing.",
-    features: ["PDF optimization", "Image compression", "Text preservation", "Fast processing"],
-    link: "/compress/pdf",
-    color: "#4ECDC4"
-  }
-];
-
 const Compress = () => {
   const { theme } = useTheme();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [compressionLevel, setCompressionLevel] = useState(80);
+  const [isCompressing, setIsCompressing] = useState(false);
+  const [result, setResult] = useState(null);
+
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setResult(null);
+    }
+  };
+
+  const handleCompress = async () => {
+    if (!selectedFile) return;
+    
+    setIsCompressing(true);
+    
+    // Simulate compression process
+    setTimeout(() => {
+      const originalSize = selectedFile.size;
+      const compressedSize = Math.round(originalSize * (compressionLevel / 100));
+      const reduction = Math.round(((originalSize - compressedSize) / originalSize) * 100);
+      
+      setResult({
+        originalSize,
+        compressedSize,
+        reduction,
+        fileName: selectedFile.name
+      });
+      setIsCompressing(false);
+    }, 3000);
+  };
+
+  const handleDownload = () => {
+    // Simulate download
+    alert('Download started!');
+  };
 
   return (
     <div className={`compress-container ${theme}`}>
@@ -77,44 +50,46 @@ const Compress = () => {
         <div className="hero-content">
           <h1 className="hero-title">
             File Compression
-            <span className="gradient-text"> Made Simple</span>
+            <span className="gradient-text"> Tool</span>
           </h1>
           <p className="hero-description">
-            Professional compression tools for images, videos, audio, and PDFs. Reduce file sizes while maintaining excellent quality.
+            Compress your files while maintaining excellent quality. Support for images, videos, documents, and more formats.
           </p>
-          <div className="hero-stats">
-            <div className="stat">
-              <span className="stat-number">50%</span>
-              <span className="stat-label">Average Size Reduction</span>
+          <div className="hero-features">
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Quality Preservation</span>
             </div>
-            <div className="stat">
-              <span className="stat-number">10s</span>
-              <span className="stat-label">Processing Time</span>
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Fast Processing</span>
             </div>
-            <div className="stat">
-              <span className="stat-number">100%</span>
-              <span className="stat-label">Secure & Private</span>
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Multiple Formats</span>
             </div>
           </div>
         </div>
         <div className="hero-visual">
           <div className="compression-animation">
             <div className="file-before">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                        <rect x="8" y="8" width="32" height="32" rx="6" fill="#3B82F6" opacity="0.2"/>
-        <path d="M16 20h16M16 28h12" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="14,2 14,8 20,8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <span>Original</span>
             </div>
-            <div className="compression-arrow">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <path d="M8 16h16M16 8l8 8-8 8" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
+            <div className="compression-arrow">→</div>
             <div className="file-after">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <rect x="8" y="8" width="32" height="32" rx="6" fill="#2CB67D" opacity="0.2"/>
-                <path d="M16 20h16M16 28h12" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <polyline points="14,2 14,8 20,8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <span>Compressed</span>
             </div>
@@ -122,83 +97,179 @@ const Compress = () => {
         </div>
       </section>
 
-      {/* Services Grid */}
-      <section className="compress-services">
-        <div className="section-header">
-          <h2>Choose Your Compression Tool</h2>
-          <p>Professional compression for all your file types</p>
-        </div>
-        <div className="services-grid">
-          {compressServices.map((service, index) => (
-            <Link key={index} to={service.link} className="service-card">
-              <div className="service-icon">{service.icon}</div>
-              <div className="service-content">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
-                <ul className="service-features">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx}>{feature}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="service-arrow">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section className="compress-how-it-works">
-        <div className="section-header">
-          <h2>How Compression Works</h2>
-          <p>Simple 3-step process to optimize your files</p>
-        </div>
-        <div className="steps-container">
-          <div className="step">
-            <div className="step-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                        <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
-        <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+      {/* Upload Section */}
+      <section className="upload-section">
+        <div className="upload-container">
+          <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
+            <div className="upload-icon">
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <rect x="8" y="8" width="48" height="48" rx="12" fill="#3B82F6" opacity="0.1"/>
+                <path d="M32 16v24M24 24l8-8 8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <h3>Upload Your File</h3>
-            <p>Drag and drop or click to upload any supported file format</p>
+            <p>Drag and drop or click to select a file</p>
+            <span className="file-types">Supports: Images, Videos, Documents, Archives</span>
+            <input
+              id="file-input"
+              type="file"
+              onChange={handleFileSelect}
+              style={{ display: 'none' }}
+            />
           </div>
-          <div className="step">
-            <div className="step-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <rect x="8" y="8" width="32" height="32" rx="8" fill="#2CB67D" opacity="0.1"/>
-                <path d="M16 20l4 4 8-8" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+          
+          {selectedFile && (
+            <div className="file-info">
+              <div className="file-details">
+                <div className="file-icon">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="6" y="6" width="20" height="20" rx="4" fill="#3B82F6" opacity="0.1"/>
+                    <path d="M12 14l3 3 5-5" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="file-text">
+                  <h4>{selectedFile.name}</h4>
+                  <p>{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                </div>
+              </div>
             </div>
-            <h3>Choose Settings</h3>
-            <p>Select compression level and quality settings</p>
-          </div>
-          <div className="step">
-            <div className="step-icon">
-              <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                <rect x="8" y="8" width="32" height="32" rx="8" fill="#FF6B6B" opacity="0.1"/>
-                <path d="M12 20l4-4 4 4" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <h3>Download Result</h3>
-            <p>Get your optimized file in seconds, ready to use</p>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="compress-cta">
-        <div className="cta-content">
-          <h2>Ready to Compress Your Files?</h2>
-          <p>Join millions of users who trust ConvertFlix for their compression needs</p>
-          <div className="cta-buttons">
-            <Link to="/compress/image" className="btn-primary">Start Compressing</Link>
-            <Link to="/convert" className="btn-secondary">Convert Files</Link>
+      {/* Compression Settings */}
+      {selectedFile && (
+        <section className="compression-settings">
+          <div className="settings-container">
+            <h2>Compression Settings</h2>
+            <div className="setting-group">
+              <label htmlFor="compression-level">Quality Level: {compressionLevel}%</label>
+              <input
+                id="compression-level"
+                type="range"
+                min="10"
+                max="100"
+                value={compressionLevel}
+                onChange={(e) => setCompressionLevel(parseInt(e.target.value))}
+                className="slider"
+              />
+              <div className="quality-labels">
+                <span>High Compression</span>
+                <span>Balanced</span>
+                <span>High Quality</span>
+              </div>
+            </div>
+            
+            <div className="format-options">
+              <h3>Output Format</h3>
+              <div className="format-buttons">
+                <button className="format-btn active">Original</button>
+                <button className="format-btn">Optimized</button>
+                <button className="format-btn">Compressed</button>
+              </div>
+            </div>
+            
+            <button 
+              className="compress-btn"
+              onClick={handleCompress}
+              disabled={isCompressing}
+            >
+              {isCompressing ? (
+                <>
+                  <svg className="spinner" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="12.566" strokeDashoffset="12.566">
+                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;12.566" repeatCount="indefinite"/>
+                    </circle>
+                  </svg>
+                  Compressing...
+                </>
+              ) : (
+                'Compress File'
+              )}
+            </button>
+          </div>
+        </section>
+      )}
+
+      {/* Results Section */}
+      {result && (
+        <section className="results-section">
+          <div className="results-container">
+            <h2>Compression Results</h2>
+            <div className="results-grid">
+              <div className="result-card">
+                <h3>Original</h3>
+                <div className="file-size">{(result.originalSize / 1024 / 1024).toFixed(2)} MB</div>
+                <div className="file-name">{result.fileName}</div>
+              </div>
+              <div className="result-arrow">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <div className="result-card compressed">
+                <h3>Compressed</h3>
+                <div className="file-size">{(result.compressedSize / 1024 / 1024).toFixed(2)} MB</div>
+                <div className="reduction">-{result.reduction}%</div>
+              </div>
+            </div>
+            
+            <div className="compression-stats">
+              <div className="stat">
+                <span className="stat-number">{result.reduction}%</span>
+                <span className="stat-label">Size Reduction</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">{(result.originalSize - result.compressedSize) / 1024 / 1024} MB</span>
+                <span className="stat-label">Space Saved</span>
+              </div>
+            </div>
+            
+            <button className="download-btn" onClick={handleDownload}>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M10 2v12M6 10l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Download Compressed File
+            </button>
+          </div>
+        </section>
+      )}
+
+      {/* Features Section */}
+      <section className="features-section">
+        <div className="features-container">
+          <h2>Why Choose Our File Compression?</h2>
+          <div className="features-grid">
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+                  <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <h3>Advanced Algorithms</h3>
+              <p>Uses modern compression algorithms for optimal file size reduction while maintaining quality.</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
+                  <path d="M16 20l4 4 8-8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3>Quality Control</h3>
+              <p>Fine-tune compression settings to balance file size and quality according to your needs.</p>
+            </div>
+            <div className="feature-card">
+              <div className="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M12 20l4-4 4 4" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3>Fast Processing</h3>
+              <p>Process files quickly with our optimized compression engine designed for speed and efficiency.</p>
+            </div>
           </div>
         </div>
       </section>

@@ -35,7 +35,7 @@ const CompressImage = () => {
         fileName: selectedFile.name
       });
       setIsCompressing(false);
-    }, 2000);
+    }, 3000);
   };
 
   const handleDownload = () => {
@@ -45,27 +45,56 @@ const CompressImage = () => {
 
   return (
     <div className={`compress-image-container ${theme}`}>
-      {/* Page Header */}
-      <section className="page-header">
-        <div className="header-container">
-          <h1 className="page-title">
+      {/* Hero Section */}
+      <section className="compress-image-hero">
+        <div className="hero-content">
+          <h1 className="hero-title">
             Image Compression
-            <span className="accent-text"> Tool</span>
+            <span className="gradient-text"> Tool</span>
           </h1>
-          <p className="page-subtitle">
+          <p className="hero-description">
             Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, and more formats.
           </p>
+          <div className="hero-features">
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Quality Preservation</span>
+            </div>
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Fast Processing</span>
+            </div>
+            <div className="feature">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>Multiple Formats</span>
+            </div>
+          </div>
+        </div>
+        <div className="hero-visual">
+          <div className="image-preview">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <rect x="20" y="20" width="80" height="80" rx="12" fill="#3B82F6" opacity="0.1"/>
+              <path d="M32 40l8 8 12-12 8 8v16H32V40z" fill="#3B82F6"/>
+              <circle cx="44" cy="36" r="3" fill="#ffffff"/>
+            </svg>
+          </div>
         </div>
       </section>
 
-      {/* Upload Section - Now First */}
+      {/* Upload Section */}
       <section className="upload-section">
         <div className="upload-container">
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
             <div className="upload-icon">
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                        <rect x="8" y="8" width="48" height="48" rx="12" fill="#3B82F6" opacity="0.1"/>
-        <path d="M32 16v24M24 24l8-8 8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect x="8" y="8" width="48" height="48" rx="12" fill="#3B82F6" opacity="0.1"/>
+                <path d="M32 16v24M24 24l8-8 8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <h3>Upload Your Image</h3>
@@ -85,8 +114,8 @@ const CompressImage = () => {
               <div className="file-details">
                 <div className="file-icon">
                   <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                            <rect x="6" y="6" width="20" height="20" rx="4" fill="#3B82F6" opacity="0.1"/>
-        <path d="M12 14l3 3 5-5" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <rect x="6" y="6" width="20" height="20" rx="4" fill="#3B82F6" opacity="0.1"/>
+                    <path d="M12 14l3 3 5-5" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <div className="file-text">
@@ -166,7 +195,7 @@ const CompressImage = () => {
               </div>
               <div className="result-arrow">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div className="result-card compressed">
@@ -197,67 +226,26 @@ const CompressImage = () => {
         </section>
       )}
 
-      {/* Hero Section - Now Below Upload */}
-      <section className="compress-image-hero">
-        <div className="hero-content">
-          <h2 className="hero-title">
-            Professional Image Compression
-          </h2>
-          <p className="hero-description">
-            Our advanced compression technology ensures your images maintain their quality while significantly reducing file size. Perfect for websites, social media, and storage optimization.
-          </p>
-          <div className="hero-features">
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Quality Control</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Fast Processing</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Batch Support</span>
-            </div>
-          </div>
-        </div>
-        <div className="hero-visual">
-          <div className="image-preview">
-            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-                      <rect x="20" y="20" width="80" height="80" rx="12" fill="#3B82F6" opacity="0.1"/>
-        <path d="M40 60l10-15 8 10 6-8 6 13" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="70" cy="50" r="4" fill="#3B82F6"/>
-            </svg>
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section className="features-section">
         <div className="features-container">
-          <h2>Why Choose Our Image Compression Tool?</h2>
+          <h2>Why Choose Our Image Compression?</h2>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                          <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
-        <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+                  <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
-              <h3>Advanced Algorithms</h3>
-              <p>Uses state-of-the-art compression algorithms to achieve maximum file size reduction while preserving quality.</p>
+              <h3>Smart Compression</h3>
+              <p>Uses advanced algorithms to reduce file size while preserving image quality and details.</p>
             </div>
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#2CB67D" opacity="0.1"/>
-                  <path d="M16 20l4 4 8-8" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
+                  <path d="M16 20l4 4 8-8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Quality Control</h3>
@@ -266,12 +254,12 @@ const CompressImage = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#FF6B6B" opacity="0.1"/>
-                  <path d="M12 20l4-4 4 4" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M12 20l4-4 4 4" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Fast Processing</h3>
-              <p>Process images in seconds with our optimized compression engine designed for speed and efficiency.</p>
+              <p>Process images quickly with our optimized compression engine designed for speed and efficiency.</p>
             </div>
           </div>
         </div>
