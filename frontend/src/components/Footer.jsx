@@ -39,36 +39,5 @@ const icons = {
   ),
 };
 
-const Footer = () => {
-  const { theme } = useTheme();
-  return (
-    <footer className={`footer${theme === 'dark' ? ' dark' : ''}`}>
-      <div className="footer-links-row">
-        <Link to="/" className="footer-link">{icons.home} Home</Link>
-        <Link to="/compress/image" className="footer-link">{icons.image} Image</Link>
-        <Link to="/compress/video" className="footer-link">{icons.video} Video</Link>
-        <Link to="/compress/audio" className="footer-link">{icons.audio} Audio</Link>
-        <Link to="/compress/pdf" className="footer-link">{icons.pdf} PDF</Link>
-        <Link to="/convert" className="footer-link">{icons.convert} Convert</Link>
-        <Link to="/about" className="footer-link">{icons.about} About</Link>
-        <Link to="/contact" className="footer-link">{icons.contact} Contact</Link>
-        <Link to="/owner" className="footer-link">{icons.owner} Owner</Link>
-        <Link to="/login" className="footer-link">{icons.login} Login</Link>
-        <Link to="/signup" className="footer-link">{icons.signup} Sign Up</Link>
-      </div>
-      <div className="footer-bottom-row">
-        <div className="footer-madeby">
-          <a href="https://taliyo.com" target="_blank" rel="noopener noreferrer">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style={{marginRight: 6}}>
-              <rect width="20" height="20" rx="4" fill="#4F46E5"/>
-              <text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial" dy=".3em">TT</text>
-            </svg>
-            Made by Taliyo Technologies
-          </a>
-        </div>
-      </div>
-    </footer>
-  );
-};
-
+const Footer = () => null;
 export default Footer; 
