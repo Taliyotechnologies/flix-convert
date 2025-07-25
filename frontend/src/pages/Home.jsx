@@ -7,10 +7,10 @@ const features = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
-        <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="36" cy="12" r="4" fill="#2CB67D"/>
-        <path d="M34 10l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 24h16M24 16v16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="36" cy="12" r="4" fill="currentColor"/>
+        <path d="M34 10l2 2 2-2" stroke="var(--color-bg)" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
     ),
     title: "Lightning Fast",
@@ -19,9 +19,9 @@ const features = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#2CB67D" opacity="0.1"/>
-        <path d="M16 20l4 4 8-8" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M20 24l4 4 8-8" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 20l4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 24l4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
     title: "High Quality",
@@ -30,10 +30,10 @@ const features = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#FF6B6B" opacity="0.1"/>
-        <path d="M16 16h16v16H16z" stroke="#FF6B6B" strokeWidth="2"/>
-        <path d="M20 20h8v8h-8z" fill="#FF6B6B" opacity="0.3"/>
-        <path d="M24 12v8M20 16h8" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="currentColor" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="currentColor" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "Multiple Formats",
@@ -42,10 +42,10 @@ const features = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#4ECDC4" opacity="0.1"/>
-        <path d="M16 20h16M16 28h12" stroke="#4ECDC4" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="20" cy="16" r="2" fill="#4ECDC4"/>
-        <circle cx="28" cy="16" r="2" fill="#4ECDC4"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 20h16M16 28h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="20" cy="16" r="2" fill="currentColor"/>
+        <circle cx="28" cy="16" r="2" fill="currentColor"/>
       </svg>
     ),
     title: "Secure & Private",
@@ -82,114 +82,106 @@ const services = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
-        <path d="M16 16h16v16H16z" stroke="#3B82F6" strokeWidth="2"/>
-        <path d="M20 20h8v8h-8z" fill="#3B82F6" opacity="0.3"/>
-        <path d="M24 12v8M20 16h8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="currentColor" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="currentColor" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "Image Compression",
     description: "Compress images while maintaining quality. Reduce file size for web, email, or storage.",
-    link: "/compress/image",
-            color: "#3B82F6"
+    link: "/compress/image"
   },
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#2CB67D" opacity="0.1"/>
-        <path d="M16 20h16M16 28h12" stroke="#2CB67D" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="20" cy="16" r="2" fill="#2CB67D"/>
-        <circle cx="28" cy="16" r="2" fill="#2CB67D"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 20h16M16 28h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="20" cy="16" r="2" fill="currentColor"/>
+        <circle cx="28" cy="16" r="2" fill="currentColor"/>
       </svg>
     ),
     title: "Video Compression",
     description: "Compress videos with high quality. Perfect for sharing and uploading.",
-    link: "/compress/video",
-    color: "#2CB67D"
+    link: "/compress/video"
   },
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#FF6B6B" opacity="0.1"/>
-        <path d="M12 20l4-4 4 4" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M20 20l4-4 4 4" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M16 28h16" stroke="#FF6B6B" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M12 20l4-4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 20l4-4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M16 28h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "Audio Compression",
     description: "Reduce audio file size for easy sharing and storage.",
-    link: "/compress/audio",
-    color: "#FF6B6B"
+    link: "/compress/audio"
   },
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#4ECDC4" opacity="0.1"/>
-        <path d="M16 16h16v16H16z" stroke="#4ECDC4" strokeWidth="2"/>
-        <path d="M20 20h8v8h-8z" fill="#4ECDC4" opacity="0.3"/>
-        <path d="M24 12v8M20 16h8" stroke="#4ECDC4" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="currentColor" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="currentColor" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "PDF Compression",
     description: "Make PDFs smaller for easy upload and sharing.",
-    link: "/compress/pdf",
-    color: "#4ECDC4"
+    link: "/compress/pdf"
   },
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#FBBF24" opacity="0.1"/>
-        <path d="M16 24h16M24 16v16" stroke="#FBBF24" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="36" cy="12" r="4" fill="#FBBF24"/>
-        <path d="M34 10l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 24h16M24 16v16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="36" cy="12" r="4" fill="currentColor"/>
+        <path d="M34 10l2 2 2-2" stroke="var(--color-bg)" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
     ),
     title: "Image Converter",
     description: "Convert images between formats: JPG, PNG, WebP, GIF, and more.",
-    link: "/convert/image",
-    color: "#FBBF24"
+    link: "/convert/image"
   },
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#8B5CF6" opacity="0.1"/>
-        <path d="M16 20h16M16 28h12" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="20" cy="16" r="2" fill="#8B5CF6"/>
-        <circle cx="28" cy="16" r="2" fill="#8B5CF6"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 20h16M16 28h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <circle cx="20" cy="16" r="2" fill="currentColor"/>
+        <circle cx="28" cy="16" r="2" fill="currentColor"/>
       </svg>
     ),
     title: "Video Converter",
     description: "Convert videos between formats: MP4, AVI, MOV, MKV, and more.",
-    link: "/convert/video",
-    color: "#8B5CF6"
+    link: "/convert/video"
   },
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
-        <path d="M12 20l4-4 4 4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M20 20l4-4 4 4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M16 28h16" stroke="#10B981" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M12 20l4-4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M20 20l4-4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M16 28h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "Audio Converter",
     description: "Convert audio files between formats: MP3, WAV, FLAC, AAC, and more.",
-    link: "/convert/audio",
-    color: "#10B981"
+    link: "/convert/audio"
   },
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#EF4444" opacity="0.1"/>
-        <path d="M16 16h16v16H16z" stroke="#EF4444" strokeWidth="2"/>
-        <path d="M20 20h8v8h-8z" fill="#EF4444" opacity="0.3"/>
-        <path d="M24 12v8M20 16h8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="currentColor" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="currentColor" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "PDF Converter",
-    description: "Convert PDFs to and from other formats like Word, Excel, and images.",
-    link: "/convert/pdf",
-    color: "#EF4444"
+    description: "Convert PDFs to and from various formats.",
+    link: "/convert/pdf"
   }
 ];
 
