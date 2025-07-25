@@ -1,43 +1,51 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useTheme } from '../App';
 import './Footer.css';
 
-const icons = {
-  home: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><path d="M5 10l5-5 5 5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/><rect x="7" y="10" width="6" height="5" rx="1" fill="#fff"/></svg>
-  ),
-  image: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><path d="M5 15l4-6 3 4 3-5 1.5 2.5V15H5z" fill="#fff"/><rect x="5" y="5" width="10" height="10" rx="2" stroke="#fff" strokeWidth="1.2"/></svg>
-  ),
-  video: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><rect x="5" y="6" width="6" height="8" rx="1.2" stroke="#fff" strokeWidth="1.2"/><path d="M14 8v4l2 1V7l-2 1z" fill="#fff"/></svg>
-  ),
-  audio: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><rect x="7" y="8" width="2" height="4" rx="1" fill="#fff"/><rect x="11" y="5" width="2" height="8" rx="1" fill="#fff"/></svg>
-  ),
-  pdf: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><rect x="7" y="5" width="6" height="10" rx="1.2" stroke="#fff" strokeWidth="1.2"/><path d="M9 8h4M9 11h4M9 14h4" stroke="#fff" strokeWidth="1.2"/></svg>
-  ),
-  convert: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><path d="M6 10c0-2.2 1.8-4 4-4h1.5" stroke="#fff" strokeWidth="1.2" strokeLinecap="round"/><path d="M14 10c0 2.2-1.8 4-4 4H8.5" stroke="#fff" strokeWidth="1.2" strokeLinecap="round"/><polyline points="11,6 14,6 14,9" fill="none" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/><polyline points="9,14 6,14 6,11" fill="none" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-  ),
-  about: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><circle cx="10" cy="10" r="3" stroke="#fff" strokeWidth="1.2"/><rect x="9" y="7" width="2" height="5" rx="1" fill="#fff"/><rect x="9" y="13" width="2" height="1.2" rx="0.6" fill="#fff"/></svg>
-  ),
-  contact: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><rect x="5" y="6" width="10" height="8" rx="1.2" stroke="#fff" strokeWidth="1.2"/><path d="M5 8l5 4 5-4" stroke="#fff" strokeWidth="1.2"/></svg>
-  ),
-  owner: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><circle cx="10" cy="8" r="2.5" fill="#fff"/><rect x="7" y="12" width="6" height="2.5" rx="1.2" fill="#fff"/></svg>
-  ),
-  login: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><circle cx="10" cy="8" r="2.5" fill="#fff"/><rect x="8" y="12" width="4" height="1.2" rx="0.6" fill="#fff"/></svg>
-  ),
-  signup: (
-    <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect width="20" height="20" rx="5" fill="var(--color-accent)"/><circle cx="10" cy="8" r="2.5" fill="#fff"/><rect x="8" y="12" width="4" height="1.2" rx="0.6" fill="#fff"/><rect x="9" y="14" width="2" height="2" rx="1" fill="#fff"/></svg>
-  ),
-};
+const links = [
+  { label: 'Home', to: '/' },
+  { label: 'Compress', to: '/compress' },
+  { label: 'Convert', to: '/convert' },
+  { label: 'About', to: '/about' },
+  { label: 'Contact', to: '/contact' },
+  { label: 'Owner', to: '/owner' },
+  { label: 'Login', to: '/login' },
+  { label: 'Sign Up', to: '/signup' },
+];
 
-const Footer = () => null;
+const Footer = () => (
+  <footer className="footer-glass">
+    <div className="footer-main">
+      <div className="footer-brand">
+        <Link to="/" className="footer-logo">
+          <svg width="36" height="36" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="12" fill="url(#g1)"/><defs><linearGradient id="g1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stopColor="#7F5AF0"/><stop offset="1" stopColor="#2CB67D"/></linearGradient></defs><path d="M13 20c0-4 3-7 7-7h3" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/><path d="M27 20c0 4-3 7-7 7h-3" stroke="#fff" strokeWidth="2.5" strokeLinecap="round"/><polyline points="22,13 27,13 27,18" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><polyline points="18,27 13,27 13,22" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          <span>ConvertFlix</span>
+        </Link>
+        <div className="footer-madeby">
+          <a href="https://taliyo.com" target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect width="20" height="20" rx="4" fill="#7F5AF0"/><text x="50%" y="55%" textAnchor="middle" fill="#fff" fontSize="10" fontFamily="Arial" dy=".3em">TT</text></svg>
+            Made by Taliyo Technologies
+          </a>
+        </div>
+      </div>
+      <div className="footer-links">
+        {links.map((l) => (
+          <Link to={l.to} className="footer-link" key={l.to}>{l.label}</Link>
+        ))}
+      </div>
+      <div className="footer-social">
+        <a href="https://github.com/Taliyotechnologies/flix-convert" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <svg width="28" height="28" fill="none" viewBox="0 0 28 28"><circle cx="14" cy="14" r="14" fill="#232336"/><path d="M18.5 21v-2.2c0-.6-.2-1-.6-1.3 2-.2 4-1 4-4.3 0-.9-.3-1.6-.8-2.2.1-.2.3-1-.1-2.1 0 0-.7-.2-2.3.8-.7-.2-1.5-.3-2.3-.3s-1.6.1-2.3.3c-1.6-1-2.3-.8-2.3-.8-.4 1.1-.2 1.9-.1 2.1-.5.6-.8 1.3-.8 2.2 0 3.3 2 4.1 4 4.3-.2.2-.4.5-.5 1v2.2" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/></svg>
+        </a>
+        <a href="mailto:support@convertflix.com" aria-label="Email">
+          <svg width="28" height="28" fill="none" viewBox="0 0 28 28"><circle cx="14" cy="14" r="14" fill="#2CB67D"/><rect x="7" y="10" width="14" height="8" rx="2" stroke="#fff" strokeWidth="2"/><path d="M7 12l7 5 7-5" stroke="#fff" strokeWidth="2"/></svg>
+        </a>
+      </div>
+    </div>
+    <div className="footer-bottom">
+      <span>© {new Date().getFullYear()} ConvertFlix. All rights reserved.</span>
+    </div>
+  </footer>
+);
+
 export default Footer; 

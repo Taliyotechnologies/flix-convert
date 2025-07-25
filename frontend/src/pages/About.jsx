@@ -21,11 +21,11 @@ const About = () => (
       <h2 style={{marginTop: '2.5rem'}}>Meet the Creator</h2>
       <div className="about-owner-card">
         <div className="about-owner-avatar">
-          <svg width="56" height="56" fill="none" viewBox="0 0 56 56"><circle cx="28" cy="20" r="12" fill="var(--color-accent)"/><rect x="12" y="36" width="32" height="12" rx="6" fill="var(--color-accent)"/></svg>
+          <svg width="56" height="56" fill="none" viewBox="0 0 56 56"><circle cx="28" cy="20" r="12" fill="#7F5AF0"/><rect x="12" y="36" width="32" height="12" rx="6" fill="#2CB67D"/></svg>
         </div>
         <div>
-          <h3 style={{margin: 0, color: 'var(--color-accent)'}}>Taliyo Technologies</h3>
-          <p style={{margin: 0, color: 'var(--color-text)'}}>Building next-gen web tools for everyone.</p>
+          <h3 style={{margin: 0, color: '#7F5AF0'}}>Taliyo Technologies</h3>
+          <p style={{margin: 0, color: 'var(--home-text-light)'}}>Building next-gen web tools for everyone.</p>
         </div>
       </div>
     </div>

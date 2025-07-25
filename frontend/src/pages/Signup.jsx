@@ -23,9 +23,9 @@ const Signup = () => (
         </div>
         <button type="submit" className="home-cta-btn" style={{marginTop: 16}}>Sign Up</button>
       </form>
-      <div style={{marginTop: 24, textAlign: 'center', color: 'var(--color-accent)'}}>
-        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style={{marginBottom: 8}}><rect width="32" height="32" rx="8" fill="var(--color-accent)"/><path d="M16 10a4 4 0 100 8 4 4 0 000-8z" fill="#fff"/><rect x="10" y="20" width="12" height="4" rx="2" fill="#fff"/></svg>
-        <div>Already have an account? <a href="/login" style={{color: 'var(--color-accent)', textDecoration: 'underline'}}>Login</a></div>
+      <div style={{marginTop: 24, textAlign: 'center', color: '#7F5AF0'}}>
+        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style={{marginBottom: 8}}><rect width="32" height="32" rx="8" fill="#7F5AF0"/><path d="M16 10a4 4 0 100 8 4 4 0 000-8z" fill="#fff"/><rect x="10" y="20" width="12" height="4" rx="2" fill="#fff"/></svg>
+        <div>Already have an account? <a href="/login" style={{color: '#2CB67D', textDecoration: 'underline'}}>Login</a></div>
       </div>
     </div>
   </section>
