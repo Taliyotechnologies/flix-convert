@@ -50,7 +50,7 @@ const CompressImage = () => {
         <div className="header-container">
           <h1 className="page-title">
             Image Compression
-            <span className="gradient-text"> Tool</span>
+            <span className="accent-text"> Tool</span>
           </h1>
           <p className="page-subtitle">
             Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, and more formats.
