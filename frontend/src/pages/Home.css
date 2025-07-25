@@ -34,21 +34,28 @@ body.light .home-container {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, rgba(59, 130, 246, 0.8) 100%);
+  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, rgba(255, 255, 255, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .hero-title {
-  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, rgba(59, 130, 246, 0.8) 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, rgba(0, 0, 0, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #1D4ED8) 100%);
+  background: linear-gradient(135deg, var(--color-accent, #ffffff) 0%, var(--color-accent-2, #cccccc) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.light .gradient-text {
+  background: linear-gradient(135deg, var(--color-accent, #000000) 0%, var(--color-accent-2, #333333) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -57,12 +64,12 @@ body.light .hero-title {
 .hero-description {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: rgba(59, 130, 246, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 40px;
 }
 
 body.light .hero-description {
-  color: rgba(59, 130, 246, 0.9);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .hero-buttons {
@@ -86,39 +93,50 @@ body.light .hero-description {
 }
 
 .btn-primary {
-  background: var(--color-accent, #3B82F6);
-  color: #ffffff;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+  background: var(--color-accent, #ffffff);
+  color: #000000;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
 }
 
 .btn-primary:hover {
-  background: var(--color-accent-2, #1D4ED8);
+  background: var(--color-accent-2, #cccccc);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
+}
+
+body.light .btn-primary {
+  background: var(--color-accent, #000000);
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.light .btn-primary:hover {
+  background: var(--color-accent-2, #333333);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--color-accent, #3B82F6);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-accent, #ffffff);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-  background: rgba(59, 130, 246, 0.15);
-  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
   transform: translateY(-2px);
 }
 
 body.light .btn-secondary {
-  background: rgba(59, 130, 246, 0.1);
-  color: var(--color-accent, #3B82F6);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: rgba(0, 0, 0, 0.1);
+  color: var(--color-accent, #000000);
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 body.light .btn-secondary:hover {
-  background: rgba(59, 130, 246, 0.15);
-  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Hero Visual */

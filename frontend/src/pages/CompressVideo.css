@@ -34,21 +34,28 @@ body.light .compress-video-container {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, rgba(59, 130, 246, 0.8) 100%);
+  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, rgba(255, 255, 255, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .hero-title {
-  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, rgba(59, 130, 246, 0.8) 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, rgba(0, 0, 0, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #1D4ED8) 100%);
+  background: linear-gradient(135deg, var(--color-accent, #ffffff) 0%, var(--color-accent-2, #cccccc) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.light .gradient-text {
+  background: linear-gradient(135deg, var(--color-accent, #000000) 0%, var(--color-accent-2, #333333) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -57,12 +64,12 @@ body.light .hero-title {
 .hero-description {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: rgba(59, 130, 246, 0.9);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 32px;
 }
 
 body.light .hero-description {
-  color: rgba(59, 130, 246, 0.9);
+  color: rgba(0, 0, 0, 0.9);
 }
 
 .hero-features {
@@ -76,11 +83,11 @@ body.light .hero-description {
   align-items: center;
   gap: 8px;
   font-size: 0.875rem;
-  color: rgba(59, 130, 246, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 body.light .feature {
-  color: rgba(59, 130, 246, 0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .hero-visual {
