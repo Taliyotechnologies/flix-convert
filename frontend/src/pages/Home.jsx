@@ -7,8 +7,8 @@ const features = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#7F5AF0" opacity="0.1"/>
-        <path d="M16 24h16M24 16v16" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+        <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
         <circle cx="36" cy="12" r="4" fill="#2CB67D"/>
         <path d="M34 10l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round"/>
       </svg>
@@ -82,16 +82,16 @@ const services = [
   {
     icon: (
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="#7F5AF0" opacity="0.1"/>
-        <path d="M16 16h16v16H16z" stroke="#7F5AF0" strokeWidth="2"/>
-        <path d="M20 20h8v8h-8z" fill="#7F5AF0" opacity="0.3"/>
-        <path d="M24 12v8M20 16h8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+        <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+        <path d="M16 16h16v16H16z" stroke="#3B82F6" strokeWidth="2"/>
+        <path d="M20 20h8v8h-8z" fill="#3B82F6" opacity="0.3"/>
+        <path d="M24 12v8M20 16h8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
       </svg>
     ),
     title: "Image Compression",
     description: "Compress images while maintaining quality. Reduce file size for web, email, or storage.",
     link: "/compress/image",
-    color: "#7F5AF0"
+            color: "#3B82F6"
   },
   {
     icon: (
@@ -226,8 +226,8 @@ const Home = () => {
         <div className="hero-visual">
           <div className="floating-card card-1">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect x="4" y="4" width="24" height="24" rx="6" fill="#7F5AF0" opacity="0.1"/>
-              <path d="M12 16h8M16 12v8" stroke="#7F5AF0" strokeWidth="2" strokeLinecap="round"/>
+                      <rect x="4" y="4" width="24" height="24" rx="6" fill="#3B82F6" opacity="0.1"/>
+        <path d="M12 16h8M16 12v8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
             </svg>
             <span>Image</span>
           </div>

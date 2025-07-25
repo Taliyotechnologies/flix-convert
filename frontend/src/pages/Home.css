@@ -4,13 +4,13 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
+  background: var(--color-bg, #0a0a0a);
+  color: var(--color-text, #ffffff);
 }
 
 body.light .home-container {
-  background: #ffffff;
-  color: #1a1a1a;
+  background: var(--color-bg, #f8f9fb);
+  color: var(--color-text, #1e293b);
 }
 
 /* Hero Section */
@@ -34,21 +34,21 @@ body.light .home-container {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, rgba(59, 130, 246, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .hero-title {
-  background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, rgba(59, 130, 246, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #1D4ED8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -57,12 +57,12 @@ body.light .hero-title {
 .hero-description {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(59, 130, 246, 0.9);
   margin-bottom: 40px;
 }
 
 body.light .hero-description {
-  color: rgba(26, 26, 26, 0.8);
+  color: rgba(59, 130, 246, 0.9);
 }
 
 .hero-buttons {
@@ -86,39 +86,39 @@ body.light .hero-description {
 }
 
 .btn-primary {
-  background: #3B82F6;
+  background: var(--color-accent, #3B82F6);
   color: #ffffff;
   box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
-  background: #1D4ED8;
+  background: var(--color-accent-2, #1D4ED8);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(59, 130, 246, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-accent, #3B82F6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
   transform: translateY(-2px);
 }
 
 body.light .btn-secondary {
-  background: rgba(26, 26, 26, 0.1);
-  color: #1a1a1a;
-  border: 1px solid rgba(26, 26, 26, 0.2);
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--color-accent, #3B82F6);
+  border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
 body.light .btn-secondary:hover {
-  background: rgba(26, 26, 26, 0.15);
-  border-color: rgba(26, 26, 26, 0.3);
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
 }
 
 /* Hero Visual */

@@ -4,13 +4,13 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #0a0a0a;
-  color: #ffffff;
+  background: var(--color-bg, #0a0a0a);
+  color: var(--color-text, #ffffff);
 }
 
 body.light .compress-video-container {
-  background: #ffffff;
-  color: #1a1a1a;
+  background: var(--color-bg, #f8f9fb);
+  color: var(--color-text, #1e293b);
 }
 
 /* Hero Section */
@@ -34,21 +34,21 @@ body.light .compress-video-container {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  background: linear-gradient(135deg, var(--color-text, #ffffff) 0%, rgba(59, 130, 246, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 body.light .hero-title {
-  background: linear-gradient(135deg, #1a1a1a 0%, #4a4a4a 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, rgba(59, 130, 246, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #2CB67D 0%, #3B82F6 100%);
+  background: linear-gradient(135deg, var(--color-accent, #3B82F6) 0%, var(--color-accent-2, #1D4ED8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -57,12 +57,12 @@ body.light .hero-title {
 .hero-description {
   font-size: 1.25rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(59, 130, 246, 0.9);
   margin-bottom: 32px;
 }
 
 body.light .hero-description {
-  color: rgba(26, 26, 26, 0.8);
+  color: rgba(59, 130, 246, 0.9);
 }
 
 .hero-features {
@@ -76,11 +76,11 @@ body.light .hero-description {
   align-items: center;
   gap: 8px;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(59, 130, 246, 0.8);
 }
 
 body.light .feature {
-  color: rgba(26, 26, 26, 0.7);
+  color: rgba(59, 130, 246, 0.8);
 }
 
 .hero-visual {
