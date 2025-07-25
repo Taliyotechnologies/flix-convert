@@ -35,15 +35,6 @@ const footerLinks = {
       { label: "Contact Support", to: "/contact" },
       { label: "Status", to: "/status" }
     ]
-  },
-  legal: {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", to: "/privacy" },
-      { label: "Terms of Service", to: "/terms" },
-      { label: "Cookie Policy", to: "/cookies" },
-      { label: "GDPR", to: "/gdpr" }
-    ]
   }
 };
 
