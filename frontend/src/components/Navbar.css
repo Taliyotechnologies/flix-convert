@@ -62,7 +62,7 @@
 }
 
 .nav-links a:hover {
-  color: var(--color-accent, #000000);
+  color: var(--color-accent, #1a5f3c);
 }
 
 /* Dropdown Triggers */
@@ -79,7 +79,7 @@
 }
 
 .nav-dropdown-trigger:hover {
-  color: var(--color-accent, #ffffff);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .nav-dropdown-trigger svg {
@@ -148,8 +148,8 @@
 }
 
 .nav-dropdown a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--color-accent, #ffffff);
+  background: rgba(26, 95, 60, 0.1);
+  color: var(--color-accent, #1a5f3c);
 }
 
 /* Theme Toggle */
@@ -168,7 +168,7 @@
 }
 
 .nav-theme-toggle button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(26, 95, 60, 0.1);
 }
 
 /* Auth Buttons */
@@ -188,26 +188,26 @@
 
 .nav-auth-login a {
   color: var(--color-navbar-text, #ffffff);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(26, 95, 60, 0.3);
   background: transparent;
 }
 
 .nav-auth-login a:hover {
-  border-color: var(--color-accent, #ffffff);
-  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-accent, #1a5f3c);
+  background: rgba(26, 95, 60, 0.1);
 }
 
 .nav-auth-signup a {
   color: var(--color-btn-text, #ffffff);
-  background: var(--color-btn-bg, linear-gradient(90deg, #ffffff 0%, #cccccc 100%));
-  border: 1px solid var(--color-accent, #ffffff);
+  background: var(--color-btn-bg, linear-gradient(90deg, #1a5f3c 0%, #2d7a4f 100%));
+  border: 1px solid var(--color-accent, #1a5f3c);
 }
 
 .nav-auth-signup a:hover {
-  background: var(--color-btn-bg-hover, linear-gradient(90deg, #cccccc 0%, #ffffff 100%));
-  border-color: var(--color-accent-2, #cccccc);
+  background: var(--color-btn-bg-hover, linear-gradient(90deg, #2d7a4f 0%, #1a5f3c 100%));
+  border-color: var(--color-accent-2, #2d7a4f);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 95, 60, 0.3);
 }
 
 /* Hamburger Menu */

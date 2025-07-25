@@ -46,11 +46,11 @@ const Navbar = () => {
       <div className="nav-inner">
         <Link to="/" className="nav-logo">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="2" y="2" width="28" height="28" rx="8" fill="currentColor" stroke="currentColor" strokeWidth="2"/>
-            <rect x="8" y="8" width="16" height="16" rx="4" fill="currentColor"/>
-            <path d="M12 16h8M16 12v8" stroke="var(--color-bg)" strokeWidth="2" strokeLinecap="round"/>
-            <circle cx="24" cy="8" r="3" fill="currentColor"/>
-            <path d="M22 6l2 2 2-2" stroke="var(--color-bg)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <rect x="2" y="2" width="28" height="28" rx="8" fill="#1a5f3c" stroke="#1a5f3c" strokeWidth="2"/>
+            <rect x="8" y="8" width="16" height="16" rx="4" fill="#ffffff"/>
+            <path d="M12 16h8M16 12v8" stroke="#1a5f3c" strokeWidth="2" strokeLinecap="round"/>
+            <circle cx="24" cy="8" r="3" fill="#1a5f3c"/>
+            <path d="M22 6l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           <span>ConvertFlix</span>
         </Link>

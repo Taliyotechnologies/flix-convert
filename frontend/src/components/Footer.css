@@ -48,13 +48,13 @@ body.light .footer-glass {
 }
 
 .footer-description {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-accent, #1a5f3c);
   line-height: 1.6;
   margin-bottom: 24px;
 }
 
 body.light .footer-description {
-  color: rgba(0, 0, 0, 0.8);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .footer-social {
@@ -68,33 +68,33 @@ body.light .footer-description {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(26, 95, 60, 0.1);
+  border: 1px solid rgba(26, 95, 60, 0.2);
   border-radius: 10px;
-  color: var(--color-accent, #ffffff);
+  color: var(--color-accent, #1a5f3c);
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 body.light .social-link {
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: var(--color-accent, #000000);
+  background: rgba(26, 95, 60, 0.1);
+  border: 1px solid rgba(26, 95, 60, 0.2);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .social-link:hover {
-  background: var(--color-accent, #ffffff);
-  border-color: var(--color-accent, #ffffff);
-  color: #000000;
+  background: var(--color-accent, #1a5f3c);
+  border-color: var(--color-accent, #1a5f3c);
+  color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 24px rgba(26, 95, 60, 0.3);
 }
 
 body.light .social-link:hover {
-  background: var(--color-accent, #000000);
-  border-color: var(--color-accent, #000000);
+  background: var(--color-accent, #1a5f3c);
+  border-color: var(--color-accent, #1a5f3c);
   color: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(26, 95, 60, 0.3);
 }
 
 /* Footer Links Section */
@@ -112,7 +112,7 @@ body.light .social-link:hover {
 }
 
 body.light .footer-section h3 {
-  color: var(--color-text, #1a1a1a);
+  color: var(--color-text, #000000);
 }
 
 .footer-section ul {
@@ -126,22 +126,22 @@ body.light .footer-section h3 {
 }
 
 .footer-section a {
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-accent, #1a5f3c);
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.2s ease;
 }
 
 body.light .footer-section a {
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .footer-section a:hover {
-  color: var(--color-accent, #ffffff);
+  color: var(--color-accent-2, #2d7a4f);
 }
 
 body.light .footer-section a:hover {
-  color: var(--color-accent, #000000);
+  color: var(--color-accent-2, #0f4c2e);
 }
 
 /* Footer Bottom */
@@ -162,12 +162,12 @@ body.light .footer-bottom {
 }
 
 .copyright {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-accent, #1a5f3c);
   font-size: 0.875rem;
 }
 
 body.light .copyright {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .footer-bottom-links {
@@ -176,51 +176,51 @@ body.light .copyright {
 }
 
 .footer-bottom-links a {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-accent, #1a5f3c);
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.2s ease;
 }
 
 body.light .footer-bottom-links a {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .footer-bottom-links a:hover {
-  color: var(--color-accent, #ffffff);
+  color: var(--color-accent-2, #2d7a4f);
 }
 
 body.light .footer-bottom-links a:hover {
-  color: var(--color-accent, #000000);
+  color: var(--color-accent-2, #0f4c2e);
 }
 
 .made-by {
   text-align: center;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-accent, #1a5f3c);
   font-size: 0.875rem;
 }
 
 body.light .made-by {
-  color: rgba(0, 0, 0, 0.6);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .taliyo-link {
-  color: var(--color-accent, #ffffff);
+  color: var(--color-accent, #1a5f3c);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 body.light .taliyo-link {
-  color: var(--color-accent, #000000);
+  color: var(--color-accent, #1a5f3c);
 }
 
 .taliyo-link:hover {
-  color: var(--color-accent-2, #cccccc);
+  color: var(--color-accent-2, #2d7a4f);
 }
 
 body.light .taliyo-link:hover {
-  color: var(--color-accent-2, #333333);
+  color: var(--color-accent-2, #0f4c2e);
 }
 
 /* Responsive Design */
