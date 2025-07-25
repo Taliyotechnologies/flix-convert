@@ -16,6 +16,11 @@
   align-items: center;
   margin-bottom: 1.2rem;
 }
+.footer-link svg {
+  margin-right: 0.4rem;
+  vertical-align: middle;
+  display: inline-block;
+}
 .footer-link {
   color: #232336;
   text-decoration: none;
@@ -26,6 +31,7 @@
   padding: 0.3rem 0.7rem;
   border-radius: 7px;
   transition: background 0.18s, color 0.18s;
+  font-size: 1.08rem;
 }
 .footer-link:hover {
   background: #ececf6;
