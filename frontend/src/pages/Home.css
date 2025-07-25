@@ -1,6 +1,9 @@
 /* Modern Premium Home Page - Clean, Glassy, No Gradients */
 .home-container {
   min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   background: #0a0a0a;
   color: #ffffff;
 }
