@@ -260,7 +260,6 @@ body.light .stat-item .stat-label {
 
 body.light .upload-area {
   background: var(--color-bg-glass, rgba(245, 158, 11, 0.04));
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 body.light .upload-area:hover {
@@ -494,13 +493,11 @@ body.light .format-tag {
   border: 1px solid var(--color-card-border, #334155);
   border-radius: 20px;
   padding: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 body.light .file-info {
   background: var(--color-bg-glass, rgba(245, 158, 11, 0.05));
   border: 1px solid var(--color-card-border, #e2e8f0);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .file-details {
@@ -643,13 +640,11 @@ body.light .file-type {
   border: 1px solid var(--color-card-border, #334155);
   border-radius: 24px;
   padding: 48px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
 }
 
 body.light .settings-container {
   background: var(--color-bg-glass, rgba(245, 158, 11, 0.05));
   border: 1px solid var(--color-card-border, #e2e8f0);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
 }
 
 .settings-header {
@@ -1009,7 +1004,7 @@ body.light .preview-stat {
 }
 
 body.light .preview-stat:hover {
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 32px rgba(245, 158, 11, 0.15);
 }
 
 .stat-icon {
@@ -1227,13 +1222,11 @@ body.light .step-text {
   border: 1px solid var(--color-card-border, #334155);
   border-radius: 24px;
   padding: 48px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
 }
 
 body.light .results-container {
   background: var(--color-bg-glass, rgba(245, 158, 11, 0.04));
   border: 1px solid var(--color-card-border, #e2e8f0);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
 }
 
 .results-header {
@@ -1339,7 +1332,7 @@ body.light .result-card {
 }
 
 body.light .result-card:hover {
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 16px 40px rgba(245, 158, 11, 0.15);
 }
 
 .result-card.compressed {
