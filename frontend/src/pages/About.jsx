@@ -23,13 +23,13 @@ const About = () => {
           <div className="story-content">
             <h2>Our Story</h2>
             <p>
-              ConvertFlix was born from a simple yet powerful idea: file conversion and compression 
-              should be accessible to everyone, regardless of technical expertise. Founded in 2024, 
-              our platform has grown from a small startup to a trusted solution used by millions of 
-              users worldwide.
+              ConvertFlix was developed by <strong>Taliyo Technologies</strong>, a leading software development 
+              company specializing in innovative web solutions and digital tools. Founded with a vision to 
+              create user-friendly applications that solve real-world problems, Taliyo Technologies has been 
+              at the forefront of digital innovation.
             </p>
             <p>
-              We started with a mission to solve the common pain points users face when working with 
+              The idea for ConvertFlix emerged from the common challenges users face when working with 
               different file formats. Whether it's converting PDFs to Word documents, compressing 
               large images for web use, or transforming video files for different platforms, we 
               wanted to create a solution that was both powerful and user-friendly.
@@ -37,8 +37,47 @@ const About = () => {
             <p>
               Today, ConvertFlix stands as a comprehensive platform that handles all major file types 
               with advanced processing capabilities, ensuring quality preservation while delivering 
-              lightning-fast results.
+              lightning-fast results. This project represents Taliyo Technologies' commitment to 
+              creating tools that make digital workflows more efficient and accessible.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* About Taliyo Technologies Section */}
+      <section className="company-section">
+        <div className="container">
+          <h2>About Taliyo Technologies</h2>
+          <div className="company-content">
+            <div className="company-info">
+              <h3>Who We Are</h3>
+              <p>
+                Taliyo Technologies is a dynamic software development company dedicated to creating 
+                innovative digital solutions that enhance productivity and user experience. We specialize 
+                in web development, mobile applications, and cloud-based services that help businesses 
+                and individuals achieve their digital goals.
+              </p>
+              <p>
+                Our team of experienced developers, designers, and technology experts work together 
+                to deliver cutting-edge solutions that are not only functional but also intuitive and 
+                user-friendly. We believe in the power of technology to transform how people work and 
+                interact with digital content.
+              </p>
+            </div>
+            <div className="company-stats">
+              <div className="company-stat">
+                <span className="stat-number">5+</span>
+                <span className="stat-label">Years Experience</span>
+              </div>
+              <div className="company-stat">
+                <span className="stat-number">50+</span>
+                <span className="stat-label">Projects Completed</span>
+              </div>
+              <div className="company-stat">
+                <span className="stat-number">100%</span>
+                <span className="stat-label">Client Satisfaction</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -244,7 +283,7 @@ const About = () => {
         <div className="container">
           <h2>Our Team</h2>
           <p className="team-intro">
-            ConvertFlix is powered by a dedicated team of professionals passionate about 
+            ConvertFlix is powered by the talented team at Taliyo Technologies, passionate about 
             creating the best file conversion experience for our users.
           </p>
           <div className="team-grid">
@@ -291,11 +330,12 @@ const About = () => {
           <h2>Get in Touch</h2>
           <p>
             Have questions, suggestions, or need support? We'd love to hear from you! 
-            Our team is here to help and always welcomes feedback to improve our platform.
+            Our team at Taliyo Technologies is here to help and always welcomes feedback to improve our platform.
           </p>
           <div className="contact-options">
             <a href="/contact" className="contact-btn primary">Contact Support</a>
             <a href="/contact" className="contact-btn secondary">Send Feedback</a>
+            <a href="https://taliyotechnologies.com/" target="_blank" rel="noopener noreferrer" className="contact-btn secondary">Visit Taliyo Technologies</a>
           </div>
         </div>
       </section>
