@@ -103,7 +103,7 @@
 
 .hero-stats {
   display: flex;
-  gap: 32px;
+  gap: 24px;
 }
 
 .stat-item {
@@ -113,15 +113,15 @@
 }
 
 .stat-number {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-accent, #3B82F6);
 }
 
 .stat-label {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: var(--color-text-secondary, #94a3b8);
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .hero-visual {
@@ -631,6 +631,15 @@
 
   .hero-stats {
     justify-content: center;
+    gap: 20px;
+  }
+
+  .stat-number {
+    font-size: 1.125rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
   }
 
   .floating-card {
@@ -691,6 +700,18 @@
   .btn-primary, .btn-secondary {
     padding: 12px 24px;
     font-size: 0.875rem;
+  }
+
+  .hero-stats {
+    gap: 16px;
+  }
+
+  .stat-number {
+    font-size: 1rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
   }
 
   .stats-grid {
