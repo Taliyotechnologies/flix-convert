@@ -241,43 +241,58 @@ body.light .upload-area p {
   50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
 }
 
-.upload-features {
+.drag-indicator {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
+  margin: 24px 0;
   position: relative;
   z-index: 1;
 }
 
-.feature-tag {
+.drag-border {
+  width: 200px;
+  height: 120px;
+  border: 3px dashed var(--color-accent, #F59E0B);
+  border-radius: 16px;
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.875rem;
-  color: var(--color-accent, #F59E0B);
-  background: var(--color-card, #1e293b);
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--color-card-border, #334155);
-  font-weight: 500;
+  justify-content: center;
+  position: relative;
+  background: rgba(245, 158, 11, 0.05);
   transition: all 0.3s ease;
 }
 
-body.light .feature-tag {
-  background: var(--color-card, #f8fafc);
-  border: 1px solid var(--color-card-border, #e2e8f0);
+body.light .drag-border {
+  border-color: var(--color-accent, #F59E0B);
+  background: rgba(245, 158, 11, 0.02);
 }
 
-.feature-tag:hover {
-  background: var(--color-accent, #F59E0B);
-  color: white;
-  transform: translateY(-2px);
+.upload-area:hover .drag-border {
+  border-color: #D97706;
+  background: rgba(245, 158, 11, 0.1);
+  transform: scale(1.02);
 }
 
-.feature-icon {
-  font-size: 1rem;
+.upload-area.drag-active .drag-border {
+  border-color: #D97706;
+  background: rgba(245, 158, 11, 0.15);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+}
+
+.drag-dots {
+  width: 60px;
+  height: 40px;
+  background-image: radial-gradient(circle, var(--color-accent, #F59E0B) 2px, transparent 2px);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
+  opacity: 0.6;
+  animation: dragPulse 2s ease-in-out infinite;
+}
+
+@keyframes dragPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
 }
 
 .supported-formats {
@@ -1309,13 +1324,13 @@ body.light .feature-card p {
     font-size: 1rem;
   }
   
-  .upload-features {
-    gap: 12px;
+  .drag-indicator {
+    margin: 16px 0;
   }
   
-  .feature-tag {
-    font-size: 0.75rem;
-    padding: 6px 10px;
+  .drag-border {
+    width: 160px;
+    height: 100px;
   }
   
   .settings-container,
@@ -1380,9 +1395,13 @@ body.light .feature-card p {
     padding: 40px 20px;
   }
   
-  .upload-features {
-    flex-direction: column;
-    align-items: center;
+  .drag-indicator {
+    margin: 12px 0;
+  }
+  
+  .drag-border {
+    width: 140px;
+    height: 80px;
   }
   
   .settings-container,

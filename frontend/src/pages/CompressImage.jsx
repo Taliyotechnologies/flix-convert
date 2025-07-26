@@ -183,18 +183,9 @@ const CompressImage = () => {
               </div>
               <h3>Drop Your Image Here</h3>
               <p>Or click to browse from your device</p>
-              <div className="upload-features">
-                <div className="feature-tag">
-                  <span className="feature-icon">⚡</span>
-                  <span>Lightning Fast</span>
-                </div>
-                <div className="feature-tag">
-                  <span className="feature-icon">🔒</span>
-                  <span>100% Secure</span>
-                </div>
-                <div className="feature-tag">
-                  <span className="feature-icon">🎯</span>
-                  <span>AI Optimized</span>
+              <div className="drag-indicator">
+                <div className="drag-border">
+                  <div className="drag-dots"></div>
                 </div>
               </div>
               <div className="supported-formats">
