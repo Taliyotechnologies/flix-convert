@@ -609,8 +609,7 @@ body.light .features-section {
 }
 
 .features-container {
-  max-width: 1200px;
-  margin: 0 auto;
+  text-align: center;
 }
 
 .features-container h2 {
