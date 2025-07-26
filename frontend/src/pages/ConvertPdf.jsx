@@ -52,35 +52,35 @@ const ConvertPdf = () => {
   };
 
   const formatOptions = [
-    { value: 'DOCX', label: 'Word Document', icon: '📄', desc: 'Microsoft Word format' },
-    { value: 'TXT', label: 'Text File', icon: '📝', desc: 'Plain text format' },
-    { value: 'HTML', label: 'Web Page', icon: '🌐', desc: 'Web format' },
-    { value: 'RTF', label: 'Rich Text', icon: '📋', desc: 'Rich text format' },
-    { value: 'EPUB', label: 'E-Book', icon: '📚', desc: 'E-book format' },
-    { value: 'MOBI', label: 'Kindle', icon: '📖', desc: 'Kindle format' }
+    { value: 'DOCX', label: 'Word Document', icon: '📄', desc: 'Microsoft Word format', color: '#3B82F6' },
+    { value: 'TXT', label: 'Text File', icon: '📝', desc: 'Plain text format', color: '#10B981' },
+    { value: 'HTML', label: 'Web Page', icon: '🌐', desc: 'Web format', color: '#F59E0B' },
+    { value: 'RTF', label: 'Rich Text', icon: '📋', desc: 'Rich text format', color: '#EF4444' },
+    { value: 'EPUB', label: 'E-Book', icon: '📚', desc: 'E-book format', color: '#8B5CF6' },
+    { value: 'MOBI', label: 'Kindle', icon: '📖', desc: 'Kindle format', color: '#06B6D4' }
   ];
 
   return (
     <div className={`convert-pdf-container ${theme}`}>
-      {/* Header Section */}
+      {/* Modern Header */}
       <section className="convert-header">
         <div className="header-content">
           <div className="header-icon">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-              <rect x="8" y="8" width="48" height="48" rx="12" fill="#EF4444" opacity="0.1"/>
-              <rect x="16" y="12" width="24" height="32" rx="4" fill="#EF4444" opacity="0.2"/>
-              <path d="M20 20h16M20 24h16M20 28h12" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M20 32h8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="36" cy="32" r="2" fill="#EF4444"/>
-              <path d="M24 16h6v6h-6z" fill="#EF4444"/>
-              <path d="M27 19v3" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M25 21h2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-              <path d="M40 20l4 4-4 4M40 28l4 4-4 4" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <rect x="12" y="12" width="56" height="56" rx="16" fill="#EF4444" opacity="0.1"/>
+              <rect x="20" y="20" width="40" height="40" rx="8" fill="#EF4444" opacity="0.2"/>
+              <path d="M28 28h24v24H28z" stroke="#EF4444" strokeWidth="2"/>
+              <path d="M32 32h16v16H32z" fill="#EF4444" opacity="0.3"/>
+              <path d="M36 36h8v8h-8z" fill="#EF4444" opacity="0.5"/>
+              <path d="M40 20v16M32 28h16" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="52" cy="28" r="4" fill="#EF4444"/>
+              <path d="M50 26l2 2 2-2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </div>
           <h1 className="page-title">PDF Converter</h1>
           <p className="page-description">
-            Convert your PDF files to different formats. Support for Word, Text, HTML, RTF, EPUB, MOBI and more formats.
+            Convert your PDF files to different formats with lightning speed and exceptional quality. 
+            Support for Word, Text, HTML, RTF, EPUB, MOBI and more formats.
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ const ConvertPdf = () => {
             <input
               id="file-input"
               type="file"
-              accept=".pdf,application/pdf"
+              accept=".pdf"
               onChange={handleFileSelect}
               style={{ display: 'none' }}
             />
@@ -109,91 +109,73 @@ const ConvertPdf = () => {
           
           {selectedFile && (
             <div className="file-info">
-              <div className="file-details">
-                <div className="file-preview">
+              <div className="file-preview">
+                {pdfPreview && (
                   <div className="pdf-preview">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                      <rect x="8" y="8" width="32" height="32" rx="6" fill="#EF4444" opacity="0.1"/>
-                      <rect x="12" y="12" width="16" height="20" rx="2" stroke="#EF4444" strokeWidth="2"/>
-                      <path d="M16 18h8M16 22h8M16 26h6" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+                    <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+                      <rect x="4" y="4" width="52" height="72" rx="4" fill="#EF4444" opacity="0.1"/>
+                      <rect x="8" y="8" width="44" height="64" rx="2" fill="#EF4444" opacity="0.2"/>
+                      <path d="M12 16h36M12 24h36M12 32h28M12 40h36M12 48h24M12 56h32" stroke="#EF4444" strokeWidth="1.5" strokeLinecap="round"/>
                     </svg>
                     <span>PDF Preview</span>
                   </div>
-                </div>
-                <div className="file-text">
-                  <h4>{selectedFile.name}</h4>
-                  <p>{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
-                  <span className="file-type">PDF</span>
-                </div>
-                <div className="file-actions">
-                  <button className="remove-btn" onClick={() => {
-                    setSelectedFile(null);
-                    setPdfPreview(null);
-                  }}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
-                  </button>
-                </div>
+                )}
+              </div>
+              <div className="file-details">
+                <h4>{selectedFile.name}</h4>
+                <p>Size: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                <p>Type: PDF Document</p>
               </div>
             </div>
           )}
         </div>
       </section>
 
-      {/* Conversion Settings */}
+      {/* Format Selection */}
       {selectedFile && (
-        <section className="conversion-settings">
-          <div className="settings-container">
-            <h2>Conversion Settings</h2>
-            
-            <div className="format-options">
-              <h3>Output Format</h3>
-              <div className="format-grid">
-                {formatOptions.map((format) => (
-                  <div 
-                    key={format.value}
-                    className={`format-card ${outputFormat === format.value ? 'active' : ''}`}
-                    onClick={() => setOutputFormat(format.value)}
-                  >
-                    <span className="format-icon">{format.icon}</span>
-                    <span className="format-label">{format.label}</span>
-                    <span className="format-desc">{format.desc || format.value}</span>
+        <section className="format-section">
+          <div className="format-container">
+            <h3>Select Output Format</h3>
+            <div className="format-grid">
+              {formatOptions.map((format) => (
+                <div
+                  key={format.value}
+                  className={`format-option ${outputFormat === format.value ? 'selected' : ''}`}
+                  onClick={() => setOutputFormat(format.value)}
+                  style={{ '--format-color': format.color }}
+                >
+                  <div className="format-icon">{format.icon}</div>
+                  <div className="format-info">
+                    <h4>{format.label}</h4>
+                    <p>{format.desc}</p>
                   </div>
-                ))}
-              </div>
+                  <div className="format-check">
+                    {outputFormat === format.value && (
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="8" fill="currentColor"/>
+                        <path d="M7 10l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    )}
+                  </div>
+                </div>
+              ))}
             </div>
+          </div>
+        </section>
+      )}
 
-            <div className="conversion-preview">
-              <h3>Conversion Preview</h3>
-              <div className="preview-stats">
-                <div className="preview-stat">
-                  <span className="stat-label">Original Format</span>
-                  <span className="stat-value">PDF</span>
-                </div>
-                <div className="preview-stat">
-                  <span className="stat-label">Target Format</span>
-                  <span className="stat-value">{outputFormat}</span>
-                </div>
-                <div className="preview-stat">
-                  <span className="stat-label">File Size</span>
-                  <span className="stat-value">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
-                </div>
-              </div>
-            </div>
-            
-            <button 
+      {/* Convert Button */}
+      {selectedFile && !result && (
+        <section className="convert-section">
+          <div className="convert-container">
+            <button
               className="convert-btn"
               onClick={handleConvert}
               disabled={isConverting}
             >
               {isConverting ? (
                 <>
-                  <svg className="spinner" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="12.566" strokeDashoffset="12.566">
-                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;12.566" repeatCount="indefinite"/>
-                    </circle>
-                  </svg>
+                  <div className="spinner"></div>
                   Converting...
                 </>
               ) : (
@@ -209,43 +191,43 @@ const ConvertPdf = () => {
         </section>
       )}
 
-      {/* Results Section */}
+      {/* Result Section */}
       {result && (
-        <section className="results-section">
-          <div className="results-container">
-            <h2>Conversion Results</h2>
-            <div className="results-grid">
-              <div className="result-card">
-                <h3>Original</h3>
+        <section className="result-section">
+          <div className="result-container">
+            <div className="result-header">
+              <h3>Conversion Complete!</h3>
+              <p>Your PDF has been successfully converted to {result.format}</p>
+            </div>
+            
+            <div className="result-cards">
+              <div className="result-card original">
+                <h4>Original</h4>
                 <div className="file-size">{(result.originalSize / 1024 / 1024).toFixed(2)} MB</div>
-                <div className="file-name">{result.fileName}</div>
                 <div className="file-format">{result.originalFormat}</div>
               </div>
+              
               <div className="result-arrow">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M4 12h16M12 4l8 8-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
+              
               <div className="result-card converted">
-                <h3>Converted</h3>
+                <h4>Converted</h4>
                 <div className="file-size">{(result.convertedSize / 1024 / 1024).toFixed(2)} MB</div>
-                <div className="file-name">{result.fileName}</div>
                 <div className="file-format">{result.format}</div>
               </div>
             </div>
             
-            <div className="conversion-stats">
-              <div className="stat">
-                <span className="stat-number">{result.originalFormat}</span>
-                <span className="stat-label">Original Format</span>
-              </div>
-              <div className="stat">
-                <span className="stat-number">{result.format}</span>
-                <span className="stat-label">New Format</span>
-              </div>
-              <div className="stat">
+            <div className="result-stats">
+              <div className="stat-item">
+                <span className="stat-label">Size Reduced</span>
                 <span className="stat-number">{(result.originalSize - result.convertedSize) / 1024 / 1024} MB</span>
-                <span className="stat-label">Size Difference</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-label">Compression</span>
+                <span className="stat-number">{Math.round((1 - result.convertedSize / result.originalSize) * 100)}%</span>
               </div>
             </div>
             
@@ -262,36 +244,21 @@ const ConvertPdf = () => {
       {/* Features Section */}
       <section className="features-section">
         <div className="features-container">
-          <h2>Why Choose Our PDF Conversion?</h2>
+          <h3>Why Choose Our PDF Converter?</h3>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
-                  <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3>Multiple Formats</h3>
+              <div className="feature-icon">🚀</div>
+              <h4>Lightning Fast</h4>
               <p>Convert PDFs to Word, Text, HTML, RTF, EPUB, MOBI and more formats with ease.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
-                  <path d="M16 20l4 4 8-8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3>Text Preservation</h3>
+              <div className="feature-icon">✨</div>
+              <h4>High Quality</h4>
               <p>Maintain text formatting and layout while converting between different document formats.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#F59E0B" opacity="0.1"/>
-                  <path d="M12 20l4-4 4 4" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <h3>Fast Processing</h3>
+              <div className="feature-icon">🔒</div>
+              <h4>Secure & Private</h4>
               <p>Convert PDFs quickly with our optimized conversion engine designed for speed and accuracy.</p>
             </div>
           </div>
