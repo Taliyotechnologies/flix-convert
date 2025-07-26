@@ -4,54 +4,13 @@ import './Owner.css';
 const Owner = () => {
   return (
     <div className="owner-container">
-      {/* Hero Section */}
-      <section className="owner-hero">
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span>🏢 Company Profile</span>
-          </div>
-          <h1 className="hero-title">
-            Meet <span className="gradient-text">Taliyo Technologies</span>
-          </h1>
-          <p className="hero-description">
-            The innovative software development company behind ConvertFlix, dedicated to creating 
-            cutting-edge digital solutions that empower businesses and individuals worldwide.
-          </p>
-          <div className="hero-stats">
-            <div className="stat-item">
-              <span className="stat-number">5+</span>
-              <span className="stat-label">Years Experience</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">100+</span>
-              <span className="stat-label">Projects Completed</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">50+</span>
-              <span className="stat-label">Happy Clients</span>
-            </div>
-          </div>
+      {/* Page Header */}
+      <div className="page-header">
+        <div className="container">
+          <h1>About Taliyo Technologies</h1>
+          <p>The innovative software development company behind ConvertFlix</p>
         </div>
-        <div className="hero-visual">
-          <div className="company-logo">
-            <div className="logo-container">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <rect width="80" height="80" rx="16" fill="url(#gradient)"/>
-                <circle cx="40" cy="30" r="12" fill="white"/>
-                <rect x="28" cy="48" width="24" height="10" rx="5" fill="white"/>
-                <defs>
-                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#3B82F6"/>
-                    <stop offset="100%" stopColor="#10B981"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            <h3>Taliyo Technologies</h3>
-            <p>Innovation • Excellence • Trust</p>
-          </div>
-        </div>
-      </section>
+      </div>
 
       {/* Company Overview */}
       <section className="company-overview">

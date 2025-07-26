@@ -3,76 +3,29 @@
   min-height: 100vh;
   background: var(--color-bg, #0f172a);
   color: var(--color-text, #f1f5f9);
+  padding-top: 80px; /* Add top padding for navbar */
 }
 
-/* Hero Section */
-.about-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 120px 5% 80px;
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
+/* Page Header - Simple header instead of hero */
+.page-header {
+  padding: 60px 0 40px;
+  background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
+  border-bottom: 1px solid var(--color-card-border, #334155);
+  text-align: center;
 }
 
-.hero-content {
-  flex: 1;
-  max-width: 600px;
-  z-index: 2;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  border-radius: 50px;
-  padding: 8px 16px;
-  margin-bottom: 24px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-accent, #3B82F6);
-  backdrop-filter: blur(10px);
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 24px;
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
   color: var(--color-text, #f1f5f9);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #3B82F6, #10B981);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-description {
-  font-size: 1.25rem;
-  line-height: 1.6;
+.page-header p {
+  font-size: 1.125rem;
   color: var(--color-text-secondary, #94a3b8);
-  margin-bottom: 40px;
-}
-
-.hero-visual {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-}
-
-.hero-illustration {
-  text-align: center;
-  padding: 40px;
-  background: rgba(59, 130, 246, 0.05);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* Container */
@@ -472,14 +425,12 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .about-hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 80px 5% 60px;
+  .page-header {
+    padding: 40px 0 30px;
   }
 
-  .hero-title {
-    font-size: 2.5rem;
+  .page-header h1 {
+    font-size: 2rem;
   }
 
   .mission-content,
@@ -508,11 +459,11 @@
 }
 
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 2rem;
+  .page-header h1 {
+    font-size: 1.75rem;
   }
 
-  .hero-description {
+  .page-header p {
     font-size: 1rem;
   }
 

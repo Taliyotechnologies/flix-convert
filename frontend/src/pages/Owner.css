@@ -3,23 +3,20 @@
   min-height: 100vh;
   background: var(--color-bg, #0f172a);
   color: var(--color-text, #f1f5f9);
+  padding-top: 80px; /* Add top padding for navbar */
 }
 
-/* Hero Section */
+/* Hero Section - Changed to normal page header */
 .owner-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 120px 5% 80px;
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
+  padding: 60px 5% 40px;
+  text-align: center;
+  background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
+  border-bottom: 1px solid var(--color-card-border, #334155);
 }
 
 .hero-content {
-  flex: 1;
-  max-width: 600px;
-  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .hero-badge {
@@ -37,10 +34,10 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 24px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
   color: var(--color-text, #f1f5f9);
 }
 
@@ -52,15 +49,17 @@
 }
 
 .hero-description {
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   line-height: 1.6;
   color: var(--color-text-secondary, #94a3b8);
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .hero-stats {
   display: flex;
   gap: 32px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .stat-item {
@@ -82,11 +81,7 @@
 }
 
 .hero-visual {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
+  display: none; /* Remove the visual element */
 }
 
 .company-logo {
@@ -600,13 +595,15 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .owner-hero {
-    flex-direction: column;
-    text-align: center;
-    padding: 80px 5% 60px;
+    padding: 40px 5% 30px;
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
   }
 
   .hero-stats {
@@ -649,12 +646,16 @@
 }
 
 @media (max-width: 480px) {
+  .owner-hero {
+    padding: 30px 5% 20px;
+  }
+
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 
   .hero-description {
-    font-size: 1rem;
+    font-size: 0.875rem;
   }
 
   .btn-primary, .btn-secondary {

@@ -4,36 +4,13 @@ import './About.css';
 const About = () => {
   return (
     <div className="about-container">
-      {/* Hero Section */}
-      <section className="about-hero">
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span>📖 About Us</span>
-          </div>
-          <h1 className="hero-title">
-            About <span className="gradient-text">ConvertFlix</span>
-          </h1>
-          <p className="hero-description">
-            Your trusted platform for file conversion and compression. We make digital file 
-            management simple, fast, and secure for everyone.
-          </p>
+      {/* Page Header */}
+      <div className="page-header">
+        <div className="container">
+          <h1>About ConvertFlix</h1>
+          <p>Your trusted platform for file conversion and compression</p>
         </div>
-        <div className="hero-visual">
-          <div className="hero-illustration">
-            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-              <circle cx="60" cy="60" r="50" fill="url(#heroGradient)" opacity="0.1"/>
-              <path d="M40 40h40v40H40z" stroke="url(#heroGradient)" strokeWidth="2" fill="none"/>
-              <path d="M50 50h20v20H50z" fill="url(#heroGradient)"/>
-              <defs>
-                <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#3B82F6"/>
-                  <stop offset="100%" stopColor="#10B981"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-        </div>
-      </section>
+      </div>
 
       {/* Our Story */}
       <section className="story-section">
