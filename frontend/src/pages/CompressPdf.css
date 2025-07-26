@@ -1,11 +1,11 @@
-/* Modern Premium PDF Compression Page - Clean, Glassy, No Gradients */
+/* Modern Professional PDF Compression Page - Clean, Glassy, No Gradients */
 .compress-pdf-container {
   min-height: 100vh;
   width: 100%;
   margin: 0;
   padding: 0;
-  background: var(--color-bg, #0f172a);
-  color: var(--color-text, #f1f5f9);
+  background: var(--color-bg, #0a0f1c);
+  color: var(--color-text, #f8fafc);
 }
 
 body.light .compress-pdf-container {
@@ -69,9 +69,9 @@ body.light .page-description {
 }
 
 .upload-area {
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.1));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.08));
   backdrop-filter: blur(20px);
-  border: 2px dashed var(--color-accent, #3B82F6);
+  border: 2px dashed var(--color-accent, #14b8a6);
   border-radius: 20px;
   padding: 60px 40px;
   text-align: center;
@@ -81,19 +81,19 @@ body.light .page-description {
 }
 
 body.light .upload-area {
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.04));
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
 
 .upload-area:hover {
-  border-color: var(--color-error, #EF4444);
-  background: var(--color-bg-glass-strong, rgba(239, 68, 68, 0.1));
+  border-color: var(--color-success, #10b981);
+  background: var(--color-bg-glass-strong, rgba(16, 185, 129, 0.1));
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 body.light .upload-area:hover {
-  background: var(--color-bg-glass-strong, rgba(239, 68, 68, 0.05));
+  background: var(--color-bg-glass-strong, rgba(16, 185, 129, 0.05));
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
 }
 
@@ -453,7 +453,7 @@ body.light .stat-value {
 .compress-btn {
   width: 100%;
   padding: 16px 32px;
-  background: var(--color-error, #EF4444);
+  background: var(--color-accent, #14b8a6);
   color: white;
   border: none;
   border-radius: 12px;
@@ -465,13 +465,13 @@ body.light .stat-value {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 20px rgba(20, 184, 166, 0.3);
 }
 
 .compress-btn:hover:not(:disabled) {
-  background: #DC2626;
+  background: var(--color-accent-2, #0d9488);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 8px 30px rgba(20, 184, 166, 0.4);
 }
 
 .compress-btn:disabled {
@@ -496,7 +496,7 @@ body.light .stat-value {
 }
 
 .results-container {
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.1));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.08));
   backdrop-filter: blur(20px);
   border: 1px solid var(--color-card-border, #334155);
   border-radius: 20px;
@@ -505,7 +505,7 @@ body.light .stat-value {
 }
 
 body.light .results-container {
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.04));
   border: 1px solid var(--color-card-border, #e2e8f0);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }
@@ -638,7 +638,7 @@ body.light .stat-label {
 .download-btn {
   width: 100%;
   padding: 16px 32px;
-  background: var(--color-error, #EF4444);
+  background: var(--color-accent, #14b8a6);
   color: white;
   border: none;
   border-radius: 12px;
@@ -650,24 +650,24 @@ body.light .stat-label {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 20px rgba(20, 184, 166, 0.3);
 }
 
 .download-btn:hover {
-  background: #DC2626;
+  background: var(--color-accent-2, #0d9488);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 8px 30px rgba(20, 184, 166, 0.4);
 }
 
 /* Features Section */
 .features-section {
   padding: 80px 24px;
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.04));
   backdrop-filter: blur(20px);
 }
 
 body.light .features-section {
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.02));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.02));
 }
 
 .features-container {
@@ -694,7 +694,7 @@ body.light .features-container h2 {
 }
 
 .feature-card {
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.1));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.08));
   backdrop-filter: blur(20px);
   border: 1px solid var(--color-card-border, #334155);
   border-radius: 20px;
@@ -704,7 +704,7 @@ body.light .features-container h2 {
 }
 
 body.light .feature-card {
-  background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
+  background: var(--color-bg-glass, rgba(20, 184, 166, 0.04));
   border: 1px solid var(--color-card-border, #e2e8f0);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
 }

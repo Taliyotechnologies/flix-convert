@@ -1,8 +1,8 @@
 /* CompressImage Page Styles */
 .compress-image-container {
   min-height: 100vh;
-  background: var(--color-bg, #0f172a);
-  color: var(--color-text, #f1f5f9);
+  background: var(--color-bg, #0a0f1c);
+  color: var(--color-text, #f8fafc);
   padding-top: 70px;
 }
 
@@ -58,7 +58,7 @@
   align-items: center;
   padding: 80px 40px;
   background: var(--color-card, #1e293b);
-  border: 2px dashed var(--color-accent, #3B82F6);
+  border: 2px dashed var(--color-accent, #14b8a6);
   border-radius: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -67,7 +67,7 @@
 }
 
 .upload-area:hover {
-  border-color: #10B981;
+  border-color: var(--color-success, #10b981);
   background: rgba(16, 185, 129, 0.05);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
@@ -92,12 +92,12 @@
 
 .file-types {
   font-size: 0.875rem;
-  color: var(--color-accent, #3B82F6);
+  color: var(--color-accent, #14b8a6);
   font-weight: 500;
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(20, 184, 166, 0.1);
   padding: 8px 16px;
   border-radius: 20px;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(20, 184, 166, 0.2);
 }
 
 /* File Info */
@@ -341,7 +341,7 @@
 .compress-btn {
   width: 100%;
   padding: 16px 32px;
-  background: #10B981;
+  background: var(--color-accent, #14b8a6);
   color: white;
   border: none;
   border-radius: 12px;
@@ -356,9 +356,9 @@
 }
 
 .compress-btn:hover:not(:disabled) {
-  background: #059669;
+  background: var(--color-accent-2, #0d9488);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 8px 24px rgba(20, 184, 166, 0.3);
 }
 
 .compress-btn:disabled {
@@ -385,7 +385,7 @@
 .results-container {
   max-width: 800px;
   margin: 0 auto;
-  background: var(--color-bg, #0f172a);
+  background: var(--color-bg, #0a0f1c);
   border: 1px solid var(--color-card-border, #334155);
   border-radius: 16px;
   padding: 40px;
@@ -492,7 +492,7 @@
 .download-btn {
   width: 100%;
   padding: 16px 32px;
-  background: #3B82F6;
+  background: var(--color-accent, #14b8a6);
   color: white;
   border: none;
   border-radius: 12px;
@@ -507,15 +507,15 @@
 }
 
 .download-btn:hover {
-  background: #2563EB;
+  background: var(--color-accent-2, #0d9488);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 24px rgba(20, 184, 166, 0.3);
 }
 
 /* Features Section */
 .features-section {
   padding: 80px 24px;
-  background: var(--color-bg, #0f172a);
+  background: var(--color-bg, #0a0f1c);
 }
 
 .features-container {

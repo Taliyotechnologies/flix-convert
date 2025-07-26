@@ -262,8 +262,8 @@ const CompressImage = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
-                  <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#14b8a6" opacity="0.1"/>
+                  <path d="M16 24h16M24 16v16" stroke="#14b8a6" strokeWidth="2" strokeLinecap="round"/>
                 </svg>
               </div>
               <h3>Smart Compression</h3>
@@ -272,8 +272,8 @@ const CompressImage = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
-                  <path d="M16 20l4 4 8-8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#10b981" opacity="0.1"/>
+                  <path d="M16 20l4 4 8-8" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Quality Control</h3>
@@ -282,8 +282,8 @@ const CompressImage = () => {
             <div className="feature-card">
               <div className="feature-icon">
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#F59E0B" opacity="0.1"/>
-                  <path d="M12 20l4-4 4 4" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#0d9488" opacity="0.1"/>
+                  <path d="M12 20l4-4 4 4" stroke="#0d9488" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Fast Processing</h3>
