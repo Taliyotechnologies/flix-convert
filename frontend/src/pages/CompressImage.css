@@ -217,14 +217,14 @@ body.light .stat-item .stat-label {
 
 .upload-area:hover {
   border-color: var(--color-success, #D97706);
-  background: var(--color-bg-glass-strong, rgba(217, 119, 6, 0.15));
+  background: var(--color-bg-glass-strong, rgba(217, 119, 6, 0.05));
   transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 32px 80px rgba(245, 158, 11, 0.4), 0 0 0 1px rgba(245, 158, 11, 0.1);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.1);
   border-width: 4px;
 }
 
 .upload-area:hover::before {
-  opacity: 1;
+  opacity: 0;
 }
 
 
@@ -285,7 +285,7 @@ body.light .upload-area.drag-active {
 
 .upload-area:hover .upload-icon {
   transform: scale(1.15) rotate(5deg);
-  filter: drop-shadow(0 0 30px rgba(245, 158, 11, 0.8));
+  filter: drop-shadow(0 0 30px rgba(0, 0, 0, 0.3));
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -300,9 +300,9 @@ body.light .upload-area.drag-active {
 }
 
 .upload-area:hover h3 {
-  color: var(--color-accent, #F59E0B);
+  color: var(--color-text, #f1f5f9);
   transform: translateY(-4px);
-  text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -320,7 +320,7 @@ body.light .upload-area h3 {
 }
 
 .upload-area:hover p {
-  color: var(--color-accent, #F59E0B);
+  color: var(--color-text-secondary, #94a3b8);
   transform: translateY(-2px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -346,7 +346,7 @@ body.light .upload-area p {
   transform: translate(-50%, -50%);
   width: 100px;
   height: 100px;
-  background: radial-gradient(circle, rgba(245, 158, 11, 0.3) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, transparent 70%);
   border-radius: 50%;
   animation: glowPulse 2s ease-in-out infinite;
 }
@@ -381,10 +381,10 @@ body.light .upload-area p {
 
 .upload-area:hover .drag-border {
   opacity: 1;
-  border-color: rgba(217, 119, 6, 0.8);
+  border-color: rgba(0, 0, 0, 0.3);
   border-width: 3px;
   transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -395,7 +395,7 @@ body.light .upload-area p {
   transform: translate(-50%, -50%);
   width: 80px;
   height: 80px;
-  background-image: radial-gradient(circle, rgba(245, 158, 11, 0.6) 3px, transparent 3px);
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.3) 3px, transparent 3px);
   background-size: 24px 24px;
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
