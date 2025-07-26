@@ -15,7 +15,6 @@ const ConvertVideo = () => {
     if (file && file.type.startsWith('video/')) {
       setSelectedFile(file);
       setResult(null);
-      
       // Create video preview
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -27,14 +26,11 @@ const ConvertVideo = () => {
 
   const handleConvert = async () => {
     if (!selectedFile) return;
-    
     setIsConverting(true);
-    
     // Simulate conversion process
     setTimeout(() => {
       const originalSize = selectedFile.size;
-      const convertedSize = Math.round(originalSize * 0.95); // Simulate size change
-      
+      const convertedSize = Math.round(originalSize * 0.85); // Simulate size change
       setResult({
         originalSize,
         convertedSize,
@@ -52,24 +48,24 @@ const ConvertVideo = () => {
   };
 
   const formatOptions = [
-    { value: 'MP4', label: 'MP4 Video', icon: '🎥', desc: 'Most compatible' },
-    { value: 'AVI', label: 'AVI Video', icon: '📹', desc: 'Windows format' },
-    { value: 'MOV', label: 'MOV Video', icon: '🍎', desc: 'Apple format' },
-    { value: 'WebM', label: 'WebM Video', icon: '🌐', desc: 'Web optimized' },
-    { value: 'MKV', label: 'MKV Video', icon: '🎬', desc: 'High quality' },
-    { value: 'FLV', label: 'FLV Video', icon: '📺', desc: 'Flash format' }
+    { value: 'MP4', label: 'MP4 Video', desc: 'Most compatible' },
+    { value: 'AVI', label: 'AVI Video', desc: 'Windows standard' },
+    { value: 'MOV', label: 'MOV Video', desc: 'Apple format' },
+    { value: 'MKV', label: 'MKV Video', desc: 'Open source' },
+    { value: 'WebM', label: 'WebM Video', desc: 'Web optimized' },
+    { value: 'FLV', label: 'FLV Video', desc: 'Flash format' }
   ];
 
   return (
     <div className={`convert-video-container ${theme}`}>
-      {/* Simple Header */}
-      <section className="convert-header">
+      {/* Header */}
+      <section className="convert-header" style={{marginTop: '40px'}}>
         <div className="header-content">
           <h1 className="page-title">
             Video Converter
           </h1>
           <p className="page-description">
-            Convert your videos to different formats. Support for MP4, AVI, MOV, WebM, MKV, FLV, and more formats.
+            Convert your videos to different formats. Support for MP4, AVI, MOV, MKV, WebM, FLV and more formats.
           </p>
         </div>
       </section>
@@ -79,14 +75,14 @@ const ConvertVideo = () => {
         <div className="upload-container">
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
             <div className="upload-icon">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="8" width="48" height="48" rx="12" fill="#10B981" opacity="0.1"/>
-                <path d="M32 16v24M24 24l8-8 8 8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                <rect x="8" y="8" width="56" height="56" rx="16" fill="#F59E0B" opacity="0.1"/>
+                <path d="M36 16v32M28 24l8-8 8 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <h3>Upload Your Video</h3>
             <p>Drag and drop or click to select a video file</p>
-            <span className="file-types">Supports: MP4, AVI, MOV, WebM, MKV, FLV</span>
+            <span className="file-types">Supports: MP4, AVI, MOV, MKV, WebM, FLV</span>
             <input
               id="file-input"
               type="file"
@@ -95,7 +91,6 @@ const ConvertVideo = () => {
               style={{ display: 'none' }}
             />
           </div>
-          
           {selectedFile && (
             <div className="file-info">
               <div className="file-details">
@@ -103,9 +98,8 @@ const ConvertVideo = () => {
                   {videoPreview && (
                     <video 
                       src={videoPreview} 
-                      controls 
                       className="preview-video"
-                      preload="metadata"
+                      controls
                     />
                   )}
                 </div>
@@ -119,8 +113,8 @@ const ConvertVideo = () => {
                     setSelectedFile(null);
                     setVideoPreview(null);
                   }}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                      <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path d="M13.5 4.5L4.5 13.5M4.5 4.5l9 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </button>
                 </div>
@@ -134,25 +128,24 @@ const ConvertVideo = () => {
       {selectedFile && (
         <section className="conversion-settings">
           <div className="settings-container">
-            <h2>Conversion Settings</h2>
-            
+            <div className="settings-header">
+              <h2>Conversion Settings</h2>
+            </div>
             <div className="format-options">
               <h3>Output Format</h3>
-              <div className="format-grid">
+              <div className="format-buttons">
                 {formatOptions.map((format) => (
                   <button 
                     key={format.value}
-                    className={`format-card ${outputFormat === format.value ? 'active' : ''}`}
+                    className={`format-btn ${outputFormat === format.value ? 'active' : ''}`}
                     onClick={() => setOutputFormat(format.value)}
                   >
-                    <span className="format-icon">{format.icon}</span>
                     <span className="format-label">{format.label}</span>
                     <span className="format-desc">{format.desc}</span>
                   </button>
                 ))}
               </div>
             </div>
-
             <div className="conversion-preview">
               <h3>Conversion Preview</h3>
               <div className="preview-stats">
@@ -170,7 +163,6 @@ const ConvertVideo = () => {
                 </div>
               </div>
             </div>
-            
             <button 
               className="convert-btn"
               onClick={handleConvert}
@@ -178,17 +170,17 @@ const ConvertVideo = () => {
             >
               {isConverting ? (
                 <>
-                  <svg className="spinner" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="12.566" strokeDashoffset="12.566">
-                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;12.566" repeatCount="indefinite"/>
+                  <svg className="spinner" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="31.416" strokeDashoffset="31.416">
+                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;31.416" repeatCount="indefinite"/>
                     </circle>
                   </svg>
                   Converting...
                 </>
               ) : (
                 <>
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 3v14M3 10h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2v20M2 12h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                   Convert Video
                 </>
@@ -212,7 +204,7 @@ const ConvertVideo = () => {
               </div>
               <div className="result-arrow">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div className="result-card converted">
@@ -222,7 +214,6 @@ const ConvertVideo = () => {
                 <div className="file-format">{result.format}</div>
               </div>
             </div>
-            
             <div className="conversion-stats">
               <div className="stat">
                 <span className="stat-number">{result.originalFormat}</span>
@@ -237,10 +228,9 @@ const ConvertVideo = () => {
                 <span className="stat-label">Size Difference</span>
               </div>
             </div>
-            
             <button className="download-btn" onClick={handleDownload}>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 2v12M6 10l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v16M6 12l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               Download Converted Video
             </button>
@@ -251,23 +241,25 @@ const ConvertVideo = () => {
       {/* Features Section */}
       <section className="features-section">
         <div className="features-container">
-          <h2>Why Choose Our Video Conversion?</h2>
+          <div className="features-header">
+            <h2>Why Choose Our Video Conversion?</h2>
+          </div>
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
-                  <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M20 28h16M28 20v16" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round"/>
                 </svg>
               </div>
               <h3>Multiple Formats</h3>
-              <p>Convert between MP4, AVI, MOV, WebM, MKV, FLV and more formats with ease.</p>
+              <p>Convert between MP4, AVI, MOV, MKV, WebM, FLV and more formats with ease.</p>
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
-                  <path d="M16 20l4 4 8-8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M20 24l6 6 10-10" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Quality Preservation</h3>
@@ -275,9 +267,9 @@ const ConvertVideo = () => {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#F59E0B" opacity="0.1"/>
-                  <path d="M12 20l4-4 4 4" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#D97706" opacity="0.1"/>
+                  <path d="M16 24l6-6 6 6" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Fast Processing</h3>
