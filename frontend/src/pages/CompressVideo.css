@@ -16,46 +16,44 @@ body.light .compress-video-container {
 
 /* Header Section */
 .compress-header {
-  padding: 100px 24px 80px;
-  max-width: 900px;
+  padding: 80px 24px 60px;
+  max-width: 800px;
   margin: 0 auto;
   text-align: center;
 }
 
 .header-content {
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .header-icon {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .page-title {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: 3rem;
+  font-weight: 700;
   line-height: 1.1;
   margin-bottom: 24px;
-  background: linear-gradient(135deg, var(--color-text, #f1f5f9) 0%, var(--color-accent, #F59E0B) 100%);
+  background: linear-gradient(135deg, var(--color-text, #f1f5f9) 0%, #F59E0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.02em;
 }
 
 body.light .page-title {
-  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, var(--color-accent, #F59E0B) 100%);
+  background: linear-gradient(135deg, var(--color-text, #1e293b) 0%, #F59E0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .page-description {
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   line-height: 1.6;
   color: var(--color-text-secondary, #94a3b8);
-  margin-bottom: 48px;
-  font-weight: 400;
+  margin-bottom: 32px;
 }
 
 body.light .page-description {
@@ -66,7 +64,7 @@ body.light .page-description {
   display: flex;
   justify-content: center;
   gap: 48px;
-  margin-top: 48px;
+  margin-top: 32px;
 }
 
 .stat-item {
@@ -74,19 +72,18 @@ body.light .page-description {
 }
 
 .stat-item .stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #F59E0B;
   display: block;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: var(--color-accent, #F59E0B);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .stat-item .stat-label {
   font-size: 0.875rem;
   color: var(--color-text-secondary, #94a3b8);
-  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.5px;
 }
 
 body.light .stat-item .stat-label {
@@ -942,7 +939,7 @@ body.light .feature-card p {
 /* Responsive Design */
 @media (max-width: 768px) {
   .compress-header {
-    padding: 80px 16px 60px;
+    padding: 60px 16px 40px;
   }
   
   .page-title {
@@ -950,22 +947,34 @@ body.light .feature-card p {
   }
   
   .header-stats {
-    flex-direction: column;
-    gap: 32px;
+    display: none; /* Hide statistics on mobile */
   }
   
   .upload-area {
-    padding: 60px 32px;
+    padding: 60px 24px;
+  }
+  
+  .upload-area h3 {
+    font-size: 1.5rem;
+  }
+  
+  .upload-area p {
+    font-size: 1rem;
   }
   
   .settings-container,
   .results-container {
-    padding: 32px;
+    padding: 32px 24px;
+  }
+  
+  .settings-header h2,
+  .results-header h2 {
+    font-size: 1.75rem;
   }
   
   .results-grid {
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
   
   .compression-stats {
@@ -979,7 +988,7 @@ body.light .feature-card p {
   }
   
   .features-header h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
   
   .preview-stats {
@@ -994,9 +1003,10 @@ body.light .feature-card p {
     width: 100%;
   }
   
-  .supported-formats {
+  .file-details {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
+    gap: 16px;
   }
 }
 
@@ -1006,20 +1016,19 @@ body.light .feature-card p {
   }
   
   .features-header h2 {
-    font-size: 2rem;
-  }
-  
-  .file-details {
-    flex-direction: column;
-    text-align: center;
+    font-size: 1.75rem;
   }
   
   .upload-area {
-    padding: 40px 24px;
+    padding: 40px 20px;
   }
   
   .settings-container,
   .results-container {
-    padding: 24px;
+    padding: 24px 20px;
+  }
+  
+  .feature-card {
+    padding: 32px 24px;
   }
 } 

@@ -1028,8 +1028,7 @@ body.light .feature-card p {
   }
   
   .header-stats {
-    flex-direction: column;
-    gap: 24px;
+    display: none; /* Hide statistics on mobile */
   }
   
   .upload-area {
@@ -1082,10 +1081,6 @@ body.light .feature-card p {
   }
   
   .format-btn {
-    width: 100%;
-  }
-  
-  .preview-audio {
     width: 100%;
   }
   
