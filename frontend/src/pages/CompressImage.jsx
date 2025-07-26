@@ -6,14 +6,23 @@ const CompressImage = () => {
   const { theme } = useTheme();
   const [selectedFile, setSelectedFile] = useState(null);
   const [compressionLevel, setCompressionLevel] = useState(80);
+  const [outputFormat, setOutputFormat] = useState('JPG');
   const [isCompressing, setIsCompressing] = useState(false);
   const [result, setResult] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith('image/')) {
       setSelectedFile(file);
       setResult(null);
+      
+      // Create image preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -32,7 +41,8 @@ const CompressImage = () => {
         originalSize,
         compressedSize,
         reduction,
-        fileName: selectedFile.name
+        fileName: selectedFile.name,
+        format: outputFormat
       });
       setIsCompressing(false);
     }, 3000);
@@ -43,46 +53,59 @@ const CompressImage = () => {
     alert('Download started!');
   };
 
+  const formatOptions = ['JPG', 'PNG', 'WebP', 'AVIF'];
+
   return (
     <div className={`compress-image-container ${theme}`}>
       {/* Hero Section */}
       <section className="compress-image-hero">
         <div className="hero-content">
+          <div className="hero-badge">
+            <span>Professional Image Compression</span>
+          </div>
           <h1 className="hero-title">
             Image Compression
             <span className="gradient-text"> Tool</span>
           </h1>
           <p className="hero-description">
-            Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, and more formats.
+            Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, AVIF, and more formats. Optimize file size without losing visual quality.
           </p>
           <div className="hero-features">
             <div className="feature">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <span>Quality Preservation</span>
             </div>
             <div className="feature">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <span>Fast Processing</span>
             </div>
             <div className="feature">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               <span>Multiple Formats</span>
             </div>
           </div>
         </div>
         <div className="hero-visual">
-          <div className="image-preview">
-            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-              <rect x="20" y="20" width="80" height="80" rx="12" fill="#3B82F6" opacity="0.1"/>
-              <path d="M32 40l8 8 12-12 8 8v16H32V40z" fill="#3B82F6"/>
-              <circle cx="44" cy="36" r="3" fill="#ffffff"/>
-            </svg>
+          <div className="image-preview-container">
+            <div className="image-icon">
+              <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+                <rect x="20" y="20" width="80" height="80" rx="12" fill="#10B981" opacity="0.1"/>
+                <path d="M32 40l8 8 12-12 8 8v16H32V40z" fill="#10B981"/>
+                <circle cx="44" cy="36" r="3" fill="#ffffff"/>
+              </svg>
+            </div>
+            <div className="compression-indicator">
+              <div className="compression-bar">
+                <div className="compression-progress"></div>
+              </div>
+              <span>Compression Ready</span>
+            </div>
           </div>
         </div>
       </section>
@@ -93,13 +116,13 @@ const CompressImage = () => {
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
             <div className="upload-icon">
               <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="8" width="48" height="48" rx="12" fill="#3B82F6" opacity="0.1"/>
-                <path d="M32 16v24M24 24l8-8 8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect x="8" y="8" width="48" height="48" rx="12" fill="#10B981" opacity="0.1"/>
+                <path d="M32 16v24M24 24l8-8 8 8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <h3>Upload Your Image</h3>
             <p>Drag and drop or click to select an image file</p>
-            <span className="file-types">Supports: JPG, PNG, WebP, GIF</span>
+            <span className="file-types">Supports: JPG, PNG, WebP, AVIF, GIF, BMP</span>
             <input
               id="file-input"
               type="file"
@@ -112,15 +135,25 @@ const CompressImage = () => {
           {selectedFile && (
             <div className="file-info">
               <div className="file-details">
-                <div className="file-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect x="6" y="6" width="20" height="20" rx="4" fill="#3B82F6" opacity="0.1"/>
-                    <path d="M12 14l3 3 5-5" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                <div className="file-preview">
+                  {imagePreview && (
+                    <img src={imagePreview} alt="Preview" className="preview-image" />
+                  )}
                 </div>
                 <div className="file-text">
                   <h4>{selectedFile.name}</h4>
                   <p>{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <span className="file-type">{selectedFile.type.split('/')[1].toUpperCase()}</span>
+                </div>
+                <div className="file-actions">
+                  <button className="remove-btn" onClick={() => {
+                    setSelectedFile(null);
+                    setImagePreview(null);
+                  }}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -133,6 +166,7 @@ const CompressImage = () => {
         <section className="compression-settings">
           <div className="settings-container">
             <h2>Compression Settings</h2>
+            
             <div className="setting-group">
               <label htmlFor="compression-level">Quality Level: {compressionLevel}%</label>
               <input
@@ -154,9 +188,33 @@ const CompressImage = () => {
             <div className="format-options">
               <h3>Output Format</h3>
               <div className="format-buttons">
-                <button className="format-btn active">JPG</button>
-                <button className="format-btn">PNG</button>
-                <button className="format-btn">WebP</button>
+                {formatOptions.map((format) => (
+                  <button 
+                    key={format}
+                    className={`format-btn ${outputFormat === format ? 'active' : ''}`}
+                    onClick={() => setOutputFormat(format)}
+                  >
+                    {format}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="compression-preview">
+              <h3>Estimated Results</h3>
+              <div className="preview-stats">
+                <div className="preview-stat">
+                  <span className="stat-label">Original Size</span>
+                  <span className="stat-value">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                </div>
+                <div className="preview-stat">
+                  <span className="stat-label">Estimated Size</span>
+                  <span className="stat-value">{(selectedFile.size * (compressionLevel / 100) / 1024 / 1024).toFixed(2)} MB</span>
+                </div>
+                <div className="preview-stat">
+                  <span className="stat-label">Size Reduction</span>
+                  <span className="stat-value reduction">-{Math.round(((selectedFile.size - (selectedFile.size * (compressionLevel / 100))) / selectedFile.size) * 100)}%</span>
+                </div>
               </div>
             </div>
             
@@ -175,7 +233,12 @@ const CompressImage = () => {
                   Compressing...
                 </>
               ) : (
-                'Compress Image'
+                <>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 3v14M3 10h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  </svg>
+                  Compress Image
+                </>
               )}
             </button>
           </div>
@@ -192,16 +255,18 @@ const CompressImage = () => {
                 <h3>Original</h3>
                 <div className="file-size">{(result.originalSize / 1024 / 1024).toFixed(2)} MB</div>
                 <div className="file-name">{result.fileName}</div>
+                <div className="file-format">Original Format</div>
               </div>
               <div className="result-arrow">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div className="result-card compressed">
                 <h3>Compressed</h3>
                 <div className="file-size">{(result.compressedSize / 1024 / 1024).toFixed(2)} MB</div>
                 <div className="reduction">-{result.reduction}%</div>
+                <div className="file-format">{result.format}</div>
               </div>
             </div>
             
@@ -213,6 +278,10 @@ const CompressImage = () => {
               <div className="stat">
                 <span className="stat-number">{(result.originalSize - result.compressedSize) / 1024 / 1024} MB</span>
                 <span className="stat-label">Space Saved</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">{result.format}</span>
+                <span className="stat-label">Output Format</span>
               </div>
             </div>
             
