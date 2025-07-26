@@ -57,56 +57,15 @@ const CompressImage = () => {
 
   return (
     <div className={`compress-image-container ${theme}`}>
-      {/* Hero Section */}
-      <section className="compress-image-hero">
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span>Professional Image Compression</span>
-          </div>
-          <h1 className="hero-title">
-            Image Compression
-            <span className="gradient-text"> Tool</span>
+      {/* Simple Header */}
+      <section className="compress-header">
+        <div className="header-content">
+          <h1 className="page-title">
+            Image Compressor
           </h1>
-          <p className="hero-description">
-            Compress your images while maintaining excellent quality. Support for JPG, PNG, WebP, AVIF, and more formats. Optimize file size without losing visual quality.
+          <p className="page-description">
+            Compress your images while maintaining quality. Support for JPG, PNG, WebP, AVIF, and more formats.
           </p>
-          <div className="hero-features">
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Quality Preservation</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Fast Processing</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Multiple Formats</span>
-            </div>
-          </div>
-        </div>
-        <div className="hero-visual">
-          <div className="image-preview-container">
-            <div className="image-icon">
-              <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-                <rect x="20" y="20" width="80" height="80" rx="12" fill="#10B981" opacity="0.1"/>
-                <path d="M32 40l8 8 12-12 8 8v16H32V40z" fill="#10B981"/>
-                <circle cx="44" cy="36" r="3" fill="#ffffff"/>
-              </svg>
-            </div>
-            <div className="compression-indicator">
-              <div className="compression-bar">
-                <div className="compression-progress"></div>
-              </div>
-              <span>Compression Ready</span>
-            </div>
-          </div>
         </div>
       </section>
 
