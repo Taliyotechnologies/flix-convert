@@ -18,7 +18,7 @@ body.light .compress-image-container {
 
 /* ===== HEADER SECTION ===== */
 .compress-header {
-  padding: 80px 24px 60px;
+  padding: 80px 0 60px;
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
@@ -1139,7 +1139,7 @@ body.light .stat-label {
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .compress-header {
-    padding: 60px 20px 40px;
+    padding: 60px 0 40px;
   }
   
   .page-title {
