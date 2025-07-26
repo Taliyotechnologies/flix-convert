@@ -58,37 +58,14 @@ const CompressAudio = () => {
   return (
     <div className={`compress-audio-container ${theme}`}>
       {/* Professional Header */}
-      <section className="compress-header">
+      <section className="compress-header" style={{marginTop: '40px'}}>
         <div className="header-content">
-          <div className="header-icon">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <rect x="8" y="8" width="32" height="32" rx="8" fill="#8B5CF6" opacity="0.1"/>
-              <circle cx="24" cy="24" r="12" fill="#8B5CF6" opacity="0.2"/>
-              <path d="M20 16v16M28 12v24M16 20h16M16 28h16" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="24" cy="24" r="4" fill="#8B5CF6"/>
-              <path d="M24 20v8M20 24h8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </div>
           <h1 className="page-title">
             Professional Audio Compression
           </h1>
           <p className="page-description">
             Compress your audio files while maintaining exceptional quality. Support for MP3, AAC, OGG, WAV, FLAC, and more formats with advanced compression algorithms.
           </p>
-          <div className="header-stats">
-            <div className="stat-item">
-              <div className="stat-number">99.8%</div>
-              <div className="stat-label">Quality Retention</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">85%</div>
-              <div className="stat-label">Size Reduction</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">15+</div>
-              <div className="stat-label">Audio Formats</div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -97,11 +74,11 @@ const CompressAudio = () => {
         <div className="upload-container">
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
             <div className="upload-icon">
-              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                <rect x="8" y="8" width="48" height="48" rx="12" fill="#8B5CF6" opacity="0.1"/>
-                <path d="M32 16v24M24 24l8-8 8 8" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="32" cy="32" r="4" fill="#8B5CF6"/>
-                <path d="M28 28l8 8M36 28l-8 8" stroke="#8B5CF6" strokeWidth="1.5" strokeLinecap="round"/>
+              <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                <rect x="8" y="8" width="56" height="56" rx="16" fill="#F59E0B" opacity="0.1"/>
+                <path d="M36 16v32M28 24l8-8 8 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="36" cy="36" r="4" fill="#F59E0B"/>
+                <path d="M32 32l8 8M40 32l-8 8" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
             </div>
             <h3>Upload Your Audio</h3>
@@ -146,8 +123,8 @@ const CompressAudio = () => {
                     setSelectedFile(null);
                     setAudioPreview(null);
                   }}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path d="M13.5 4.5L4.5 13.5M4.5 4.5l9 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </button>
                 </div>
@@ -168,7 +145,8 @@ const CompressAudio = () => {
             
             <div className="setting-group">
               <label htmlFor="compression-level">
-                Quality Level: <span className="quality-value">{compressionLevel}%</span>
+                <span>Quality Level</span>
+                <span className="quality-value">{compressionLevel}%</span>
               </label>
               <input
                 id="compression-level"
@@ -206,8 +184,8 @@ const CompressAudio = () => {
               <div className="preview-stats">
                 <div className="preview-stat">
                   <div className="stat-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M10 2v16M6 6h8M6 10h8M6 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2v20M2 12h20" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </div>
                   <span className="stat-label">Original Size</span>
@@ -215,8 +193,8 @@ const CompressAudio = () => {
                 </div>
                 <div className="preview-stat">
                   <div className="stat-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M10 2v16M6 6h8M6 10h8M6 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                   <span className="stat-label">Estimated Size</span>
@@ -224,8 +202,8 @@ const CompressAudio = () => {
                 </div>
                 <div className="preview-stat">
                   <div className="stat-icon">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M10 2v16M6 6h8M6 10h8M6 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2v20M2 12h20" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </div>
                   <span className="stat-label">Size Reduction</span>
@@ -241,17 +219,17 @@ const CompressAudio = () => {
             >
               {isCompressing ? (
                 <>
-                  <svg className="spinner" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="12.566" strokeDashoffset="12.566">
-                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;12.566" repeatCount="indefinite"/>
+                  <svg className="spinner" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="31.416" strokeDashoffset="31.416">
+                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;31.416" repeatCount="indefinite"/>
                     </circle>
                   </svg>
                   Compressing...
                 </>
               ) : (
                 <>
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 3v14M3 10h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2v20M2 12h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                   Start Compression
                 </>
@@ -266,15 +244,15 @@ const CompressAudio = () => {
         <section className="results-section">
           <div className="results-container">
             <div className="results-header">
-              <h2>Compression Results</h2>
-              <p>Your audio has been successfully compressed with optimal quality</p>
+              <h2>Compression Complete</h2>
+              <p>Your audio has been successfully compressed</p>
             </div>
             <div className="results-grid">
               <div className="result-card">
                 <div className="card-header">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <polyline points="14,2 14,8 20,8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="24" height="24" rx="8" fill="#6B7280" opacity="0.1"/>
+                    <path d="M12 12h8M12 16h8M12 20h6" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                   <h3>Original</h3>
                 </div>
@@ -283,15 +261,15 @@ const CompressAudio = () => {
                 <div className="file-format">Original Format</div>
               </div>
               <div className="result-arrow">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <path d="M8 20h24M20 8l12 12-12 12" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div className="result-card compressed">
                 <div className="card-header">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <polyline points="14,2 14,8 20,8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="24" height="24" rx="8" fill="#F59E0B" opacity="0.1"/>
+                    <path d="M12 16l4 4 8-8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   <h3>Compressed</h3>
                 </div>
@@ -304,8 +282,8 @@ const CompressAudio = () => {
             <div className="compression-stats">
               <div className="stat">
                 <div className="stat-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 2v16M6 6h8M6 10h8M6 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 4v24M4 16h24" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
                 <span className="stat-number">{result.reduction}%</span>
@@ -313,8 +291,8 @@ const CompressAudio = () => {
               </div>
               <div className="stat">
                 <div className="stat-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 2v16M6 6h8M6 10h8M6 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M8 16h16M16 8l8 8-8 8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <span className="stat-number">{(result.originalSize - result.compressedSize) / 1024 / 1024} MB</span>
@@ -322,8 +300,9 @@ const CompressAudio = () => {
               </div>
               <div className="stat">
                 <div className="stat-icon">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 2v16M6 6h8M6 10h8M6 14h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="24" height="24" rx="4" fill="#3B82F6" opacity="0.1"/>
+                    <path d="M12 12h8M12 16h8M12 20h6" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
                 <span className="stat-number">{result.format}</span>
@@ -332,8 +311,8 @@ const CompressAudio = () => {
             </div>
             
             <button className="download-btn" onClick={handleDownload}>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10 2v12M6 10l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v16M6 12l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               Download Compressed Audio
             </button>
@@ -351,10 +330,10 @@ const CompressAudio = () => {
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#8B5CF6" opacity="0.1"/>
-                  <path d="M16 24h16M24 16v16" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round"/>
-                  <circle cx="24" cy="24" r="2" fill="#8B5CF6"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M20 28h16M28 20v16" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round"/>
+                  <circle cx="28" cy="28" r="2" fill="#F59E0B"/>
                 </svg>
               </div>
               <h3>Advanced Codecs</h3>
@@ -362,10 +341,10 @@ const CompressAudio = () => {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#7C3AED" opacity="0.1"/>
-                  <path d="M16 20l4 4 8-8" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="24" cy="24" r="2" fill="#7C3AED"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M20 24l6 6 10-10" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="28" cy="28" r="2" fill="#F59E0B"/>
                 </svg>
               </div>
               <h3>Quality Control</h3>
@@ -373,10 +352,10 @@ const CompressAudio = () => {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#6D28D9" opacity="0.1"/>
-                  <path d="M12 20l4-4 4 4" stroke="#6D28D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="24" cy="24" r="2" fill="#6D28D9"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#D97706" opacity="0.1"/>
+                  <path d="M16 24l6-6 6 6" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <circle cx="28" cy="28" r="2" fill="#D97706"/>
                 </svg>
               </div>
               <h3>Fast Processing</h3>
