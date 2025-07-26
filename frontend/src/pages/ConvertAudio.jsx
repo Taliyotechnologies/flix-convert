@@ -52,31 +52,24 @@ const ConvertAudio = () => {
   };
 
   const formatOptions = [
-    { value: 'MP3', label: 'MP3 Audio', icon: '🎵', desc: 'Most popular', color: '#3B82F6' },
-    { value: 'AAC', label: 'AAC Audio', icon: '🎧', desc: 'High quality', color: '#10B981' },
-    { value: 'OGG', label: 'OGG Audio', icon: '🎶', desc: 'Open source', color: '#F59E0B' },
-    { value: 'WAV', label: 'WAV Audio', icon: '🎼', desc: 'Uncompressed', color: '#EF4444' },
-    { value: 'FLAC', label: 'FLAC Audio', icon: '🎹', desc: 'Lossless', color: '#8B5CF6' },
-    { value: 'M4A', label: 'M4A Audio', icon: '🍎', desc: 'Apple format', color: '#06B6D4' }
+    { value: 'MP3', label: 'MP3 Audio', icon: '🎵', desc: 'Most popular' },
+    { value: 'AAC', label: 'AAC Audio', icon: '🎧', desc: 'High quality' },
+    { value: 'OGG', label: 'OGG Audio', icon: '🎶', desc: 'Open source' },
+    { value: 'WAV', label: 'WAV Audio', icon: '🎼', desc: 'Uncompressed' },
+    { value: 'FLAC', label: 'FLAC Audio', icon: '🎹', desc: 'Lossless' },
+    { value: 'M4A', label: 'M4A Audio', icon: '🍎', desc: 'Apple format' }
   ];
 
   return (
     <div className={`convert-audio-container ${theme}`}>
-      {/* Modern Header */}
+      {/* Simple Header */}
       <section className="convert-header">
         <div className="header-content">
-          <div className="header-icon">
-            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-              <rect x="12" y="12" width="56" height="56" rx="16" fill="#F59E0B" opacity="0.1"/>
-              <path d="M32 16v32M24 24h16M24 32h16" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="32" cy="12" r="4" fill="#F59E0B"/>
-              <path d="M30 10l2 2 2-2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </div>
-          <h1 className="page-title">Audio Converter</h1>
+          <h1 className="page-title">
+            Audio Converter
+          </h1>
           <p className="page-description">
-            Convert your audio files to different formats with lightning speed and exceptional quality. 
-            Support for MP3, AAC, OGG, WAV, FLAC, M4A, and more formats.
+            Convert your audio files to different formats. Support for MP3, AAC, OGG, WAV, FLAC, M4A, and more formats.
           </p>
         </div>
       </section>
@@ -86,9 +79,9 @@ const ConvertAudio = () => {
         <div className="upload-container">
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
             <div className="upload-icon">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <rect x="12" y="12" width="56" height="56" rx="16" fill="#F59E0B" opacity="0.1"/>
-                <path d="M40 20v32M28 32l12-12 12 12" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                <rect x="8" y="8" width="48" height="48" rx="12" fill="#F59E0B" opacity="0.1"/>
+                <path d="M32 16v24M24 24l8-8 8 8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <h3>Upload Your Audio</h3>
@@ -105,69 +98,91 @@ const ConvertAudio = () => {
           
           {selectedFile && (
             <div className="file-info">
-              <div className="file-preview">
-                {audioPreview && (
-                  <audio controls className="preview-audio">
-                    <source src={audioPreview} type={selectedFile.type} />
-                    Your browser does not support the audio element.
-                  </audio>
-                )}
-              </div>
               <div className="file-details">
-                <h4>{selectedFile.name}</h4>
-                <p>Size: {(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
-                <p>Type: {selectedFile.type.split('/')[1].toUpperCase()}</p>
+                <div className="file-preview">
+                  {audioPreview && (
+                    <audio 
+                      src={audioPreview} 
+                      controls 
+                      className="preview-audio"
+                      preload="metadata"
+                    />
+                  )}
+                </div>
+                <div className="file-text">
+                  <h4>{selectedFile.name}</h4>
+                  <p>{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <span className="file-type">{selectedFile.type.split('/')[1].toUpperCase()}</span>
+                </div>
+                <div className="file-actions">
+                  <button className="remove-btn" onClick={() => {
+                    setSelectedFile(null);
+                    setAudioPreview(null);
+                  }}>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           )}
         </div>
       </section>
 
-      {/* Format Selection */}
+      {/* Conversion Settings */}
       {selectedFile && (
-        <section className="format-section">
-          <div className="format-container">
-            <h3>Select Output Format</h3>
-            <div className="format-grid">
-              {formatOptions.map((format) => (
-                <div
-                  key={format.value}
-                  className={`format-option ${outputFormat === format.value ? 'selected' : ''}`}
-                  onClick={() => setOutputFormat(format.value)}
-                  style={{ '--format-color': format.color }}
-                >
-                  <div className="format-icon">{format.icon}</div>
-                  <div className="format-info">
-                    <h4>{format.label}</h4>
-                    <p>{format.desc}</p>
-                  </div>
-                  <div className="format-check">
-                    {outputFormat === format.value && (
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                        <circle cx="10" cy="10" r="8" fill="currentColor"/>
-                        <path d="M7 10l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    )}
-                  </div>
-                </div>
-              ))}
+        <section className="conversion-settings">
+          <div className="settings-container">
+            <h2>Conversion Settings</h2>
+            
+            <div className="format-options">
+              <h3>Output Format</h3>
+              <div className="format-grid">
+                {formatOptions.map((format) => (
+                  <button 
+                    key={format.value}
+                    className={`format-card ${outputFormat === format.value ? 'active' : ''}`}
+                    onClick={() => setOutputFormat(format.value)}
+                  >
+                    <span className="format-icon">{format.icon}</span>
+                    <span className="format-label">{format.label}</span>
+                    <span className="format-desc">{format.desc}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      )}
 
-      {/* Convert Button */}
-      {selectedFile && !result && (
-        <section className="convert-section">
-          <div className="convert-container">
-            <button
+            <div className="conversion-preview">
+              <h3>Conversion Preview</h3>
+              <div className="preview-stats">
+                <div className="preview-stat">
+                  <span className="stat-label">Original Format</span>
+                  <span className="stat-value">{selectedFile.type.split('/')[1].toUpperCase()}</span>
+                </div>
+                <div className="preview-stat">
+                  <span className="stat-label">Target Format</span>
+                  <span className="stat-value">{outputFormat}</span>
+                </div>
+                <div className="preview-stat">
+                  <span className="stat-label">File Size</span>
+                  <span className="stat-value">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                </div>
+              </div>
+            </div>
+            
+            <button 
               className="convert-btn"
               onClick={handleConvert}
               disabled={isConverting}
             >
               {isConverting ? (
                 <>
-                  <div className="spinner"></div>
+                  <svg className="spinner" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="12.566" strokeDashoffset="12.566">
+                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;12.566" repeatCount="indefinite"/>
+                    </circle>
+                  </svg>
                   Converting...
                 </>
               ) : (
@@ -183,43 +198,43 @@ const ConvertAudio = () => {
         </section>
       )}
 
-      {/* Result Section */}
+      {/* Results Section */}
       {result && (
-        <section className="result-section">
-          <div className="result-container">
-            <div className="result-header">
-              <h3>Conversion Complete!</h3>
-              <p>Your audio has been successfully converted to {result.format}</p>
-            </div>
-            
-            <div className="result-cards">
-              <div className="result-card original">
-                <h4>Original</h4>
+        <section className="results-section">
+          <div className="results-container">
+            <h2>Conversion Results</h2>
+            <div className="results-grid">
+              <div className="result-card">
+                <h3>Original</h3>
                 <div className="file-size">{(result.originalSize / 1024 / 1024).toFixed(2)} MB</div>
+                <div className="file-name">{result.fileName}</div>
                 <div className="file-format">{result.originalFormat}</div>
               </div>
-              
               <div className="result-arrow">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 12h16M12 4l8 8-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              
-              <div className="result-card converted">
-                <h4>Converted</h4>
+              <div className="result-card">
+                <h3>Converted</h3>
                 <div className="file-size">{(result.convertedSize / 1024 / 1024).toFixed(2)} MB</div>
+                <div className="file-name">{result.fileName}</div>
                 <div className="file-format">{result.format}</div>
               </div>
             </div>
             
-            <div className="result-stats">
-              <div className="stat-item">
-                <span className="stat-label">Size Reduced</span>
-                <span className="stat-number">{(result.originalSize - result.convertedSize) / 1024 / 1024} MB</span>
+            <div className="conversion-stats">
+              <div className="stat">
+                <span className="stat-number">{result.originalFormat}</span>
+                <span className="stat-label">Original Format</span>
               </div>
-              <div className="stat-item">
-                <span className="stat-label">Compression</span>
-                <span className="stat-number">{Math.round((1 - result.convertedSize / result.originalSize) * 100)}%</span>
+              <div className="stat">
+                <span className="stat-number">{result.format}</span>
+                <span className="stat-label">New Format</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">{(result.originalSize - result.convertedSize) / 1024 / 1024} MB</span>
+                <span className="stat-label">Size Difference</span>
               </div>
             </div>
             
@@ -236,21 +251,36 @@ const ConvertAudio = () => {
       {/* Features Section */}
       <section className="features-section">
         <div className="features-container">
-          <h3>Why Choose Our Audio Converter?</h3>
+          <h2>Why Choose Our Audio Conversion?</h2>
           <div className="features-grid">
             <div className="feature-card">
-              <div className="feature-icon">🚀</div>
-              <h4>Lightning Fast</h4>
+              <div className="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#3B82F6" opacity="0.1"/>
+                  <path d="M16 24h16M24 16v16" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
+              <h3>Multiple Formats</h3>
               <p>Convert between MP3, AAC, OGG, WAV, FLAC, M4A and more formats with ease.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">✨</div>
-              <h4>High Quality</h4>
+              <div className="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M16 20l4 4 8-8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3>Quality Preservation</h3>
               <p>Maintain audio quality while converting between different formats and optimizing file size.</p>
             </div>
             <div className="feature-card">
-              <div className="feature-icon">🔒</div>
-              <h4>Secure & Private</h4>
+              <div className="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#10B981" opacity="0.1"/>
+                  <path d="M12 20l4-4 4 4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h3>Fast Processing</h3>
               <p>Convert audio files quickly with our optimized conversion engine designed for speed and efficiency.</p>
             </div>
           </div>
