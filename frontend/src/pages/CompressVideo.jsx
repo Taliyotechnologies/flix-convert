@@ -6,14 +6,23 @@ const CompressVideo = () => {
   const { theme } = useTheme();
   const [selectedFile, setSelectedFile] = useState(null);
   const [compressionLevel, setCompressionLevel] = useState(80);
+  const [outputFormat, setOutputFormat] = useState('MP4');
   const [isCompressing, setIsCompressing] = useState(false);
   const [result, setResult] = useState(null);
+  const [videoPreview, setVideoPreview] = useState(null);
 
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
     if (file && file.type.startsWith('video/')) {
       setSelectedFile(file);
       setResult(null);
+      
+      // Create video preview
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setVideoPreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -32,7 +41,8 @@ const CompressVideo = () => {
         originalSize,
         compressedSize,
         reduction,
-        fileName: selectedFile.name
+        fileName: selectedFile.name,
+        format: outputFormat
       });
       setIsCompressing(false);
     }, 3000);
@@ -43,58 +53,19 @@ const CompressVideo = () => {
     alert('Download started!');
   };
 
+  const formatOptions = ['MP4', 'AVI', 'MOV', 'WebM', 'MKV'];
+
   return (
     <div className={`compress-video-container ${theme}`}>
-      {/* Hero Section */}
-      <section className="compress-video-hero">
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span>Professional Video Compression</span>
-          </div>
-          <h1 className="hero-title">
-            Video Compression
-            <span className="gradient-text"> Tool</span>
+      {/* Simple Header */}
+      <section className="compress-header">
+        <div className="header-content">
+          <h1 className="page-title">
+            Video Compressor
           </h1>
-          <p className="hero-description">
-            Compress your videos while maintaining excellent quality. Support for MP4, AVI, MOV, and more formats. Optimize file size without losing visual quality.
+          <p className="page-description">
+            Compress your videos while maintaining quality. Support for MP4, AVI, MOV, WebM, MKV, and more formats.
           </p>
-          <div className="hero-features">
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Quality Preservation</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Fast Processing</span>
-            </div>
-            <div className="feature">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M9 12l2 2 4-4" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>Multiple Formats</span>
-            </div>
-          </div>
-        </div>
-        <div className="hero-visual">
-          <div className="video-preview">
-            <div className="video-icon">
-              <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-                <rect x="20" y="20" width="80" height="80" rx="12" fill="#10B981" opacity="0.1"/>
-                <path d="M40 50l20 15-20 15V50z" fill="#10B981"/>
-                <circle cx="60" cy="60" r="30" stroke="#10B981" strokeWidth="2" fill="none"/>
-              </svg>
-            </div>
-            <div className="compression-indicator">
-              <div className="compression-bar">
-                <div className="compression-progress"></div>
-              </div>
-              <span>Compression Ready</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -110,7 +81,7 @@ const CompressVideo = () => {
             </div>
             <h3>Upload Your Video</h3>
             <p>Drag and drop or click to select a video file</p>
-            <span className="file-types">Supports: MP4, AVI, MOV, MKV, WebM</span>
+            <span className="file-types">Supports: MP4, AVI, MOV, WebM, MKV, FLV</span>
             <input
               id="file-input"
               type="file"
@@ -123,18 +94,26 @@ const CompressVideo = () => {
           {selectedFile && (
             <div className="file-info">
               <div className="file-details">
-                <div className="file-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect x="6" y="6" width="20" height="20" rx="4" fill="#10B981" opacity="0.1"/>
-                    <path d="M12 14l3 3 5-5" stroke="#10B981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                <div className="file-preview">
+                  {videoPreview && (
+                    <video 
+                      src={videoPreview} 
+                      controls 
+                      className="preview-video"
+                      preload="metadata"
+                    />
+                  )}
                 </div>
                 <div className="file-text">
                   <h4>{selectedFile.name}</h4>
                   <p>{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <span className="file-type">{selectedFile.type.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className="file-actions">
-                  <button className="remove-btn" onClick={() => setSelectedFile(null)}>
+                  <button className="remove-btn" onClick={() => {
+                    setSelectedFile(null);
+                    setVideoPreview(null);
+                  }}>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
@@ -151,6 +130,7 @@ const CompressVideo = () => {
         <section className="compression-settings">
           <div className="settings-container">
             <h2>Compression Settings</h2>
+            
             <div className="setting-group">
               <label htmlFor="compression-level">Quality Level: {compressionLevel}%</label>
               <input
@@ -172,10 +152,33 @@ const CompressVideo = () => {
             <div className="format-options">
               <h3>Output Format</h3>
               <div className="format-buttons">
-                <button className="format-btn active">MP4</button>
-                <button className="format-btn">AVI</button>
-                <button className="format-btn">MOV</button>
-                <button className="format-btn">WebM</button>
+                {formatOptions.map((format) => (
+                  <button 
+                    key={format}
+                    className={`format-btn ${outputFormat === format ? 'active' : ''}`}
+                    onClick={() => setOutputFormat(format)}
+                  >
+                    {format}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="compression-preview">
+              <h3>Estimated Results</h3>
+              <div className="preview-stats">
+                <div className="preview-stat">
+                  <span className="stat-label">Original Size</span>
+                  <span className="stat-value">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                </div>
+                <div className="preview-stat">
+                  <span className="stat-label">Estimated Size</span>
+                  <span className="stat-value">{(selectedFile.size * (compressionLevel / 100) / 1024 / 1024).toFixed(2)} MB</span>
+                </div>
+                <div className="preview-stat">
+                  <span className="stat-label">Size Reduction</span>
+                  <span className="stat-value reduction">-{Math.round(((selectedFile.size - (selectedFile.size * (compressionLevel / 100))) / selectedFile.size) * 100)}%</span>
+                </div>
               </div>
             </div>
             
@@ -216,6 +219,7 @@ const CompressVideo = () => {
                 <h3>Original</h3>
                 <div className="file-size">{(result.originalSize / 1024 / 1024).toFixed(2)} MB</div>
                 <div className="file-name">{result.fileName}</div>
+                <div className="file-format">Original Format</div>
               </div>
               <div className="result-arrow">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -226,6 +230,7 @@ const CompressVideo = () => {
                 <h3>Compressed</h3>
                 <div className="file-size">{(result.compressedSize / 1024 / 1024).toFixed(2)} MB</div>
                 <div className="reduction">-{result.reduction}%</div>
+                <div className="file-format">{result.format}</div>
               </div>
             </div>
             
@@ -237,6 +242,10 @@ const CompressVideo = () => {
               <div className="stat">
                 <span className="stat-number">{(result.originalSize - result.compressedSize) / 1024 / 1024} MB</span>
                 <span className="stat-label">Space Saved</span>
+              </div>
+              <div className="stat">
+                <span className="stat-number">{result.format}</span>
+                <span className="stat-label">Output Format</span>
               </div>
             </div>
             
@@ -263,7 +272,7 @@ const CompressVideo = () => {
                 </svg>
               </div>
               <h3>Advanced Codecs</h3>
-              <p>Uses modern video codecs like H.264 and H.265 for optimal compression and quality.</p>
+              <p>Uses modern video codecs like H.264, H.265, and VP9 for optimal compression and quality preservation.</p>
             </div>
             <div className="feature-card">
               <div className="feature-icon">

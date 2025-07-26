@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './theme.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -100,28 +100,37 @@ function ThemeProvider({ children }) {
   );
 }
 
+function AppContent() {
+  const location = useLocation();
+  const isCompressPage = location.pathname.startsWith('/compress');
+  
+  return (
+    <div className="app-container">
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/compress" element={<Compress />} />
+          <Route path="/compress/image" element={<CompressImage />} />
+          <Route path="/compress/video" element={<CompressVideo />} />
+          <Route path="/convert" element={<Convert />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/owner" element={<Owner />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </main>
+      {!isCompressPage && <Footer />}
+    </div>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="app-container">
-          <Navbar />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/compress" element={<Compress />} />
-              <Route path="/compress/image" element={<CompressImage />} />
-              <Route path="/compress/video" element={<CompressVideo />} />
-              <Route path="/convert" element={<Convert />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/owner" element={<Owner />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <AppContent />
       </Router>
     </ThemeProvider>
   );
