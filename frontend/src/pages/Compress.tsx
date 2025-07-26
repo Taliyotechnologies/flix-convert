@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Upload, Image, Settings, Download, X, Compress } from 'lucide-react';
+import { Upload, Image, Download, X, FileDown } from 'lucide-react';
 import './CompressImage.css';
 
 interface CompressFile {
@@ -190,7 +190,7 @@ const Compress: React.FC = () => {
           >
             <div className="settings-card">
               <div className="settings-header">
-                <Compress className="settings-icon" />
+                <FileDown className="settings-icon" />
                 <h3>Compression Settings</h3>
               </div>
 

@@ -77,14 +77,14 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div className="social-links">
-              <h3>Follow Us</h3>
-              <div className="social-icons">
-                <a href="#" className="social-icon">Twitter</a>
-                <a href="#" className="social-icon">LinkedIn</a>
-                <a href="#" className="social-icon">GitHub</a>
+                          <div className="social-links">
+                <h3>Follow Us</h3>
+                <div className="social-icons">
+                  <a href="https://twitter.com/flixconvert" className="social-icon">Twitter</a>
+                  <a href="https://linkedin.com/company/flixconvert" className="social-icon">LinkedIn</a>
+                  <a href="https://github.com/flixconvert" className="social-icon">GitHub</a>
+                </div>
               </div>
-            </div>
           </motion.div>
 
           <motion.div

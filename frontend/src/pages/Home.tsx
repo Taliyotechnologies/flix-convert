@@ -9,7 +9,6 @@ import {
   Download, 
   Upload, 
   Shield, 
-  Clock, 
   Users, 
   Star,
   ArrowRight,
