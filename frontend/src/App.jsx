@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Compress from './pages/Compress';
 import CompressImage from './pages/CompressImage';
 import CompressVideo from './pages/CompressVideo';
+import CompressAudio from './pages/CompressAudio';
+import CompressPdf from './pages/CompressPdf';
 import Convert from './pages/Convert';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -113,6 +115,8 @@ function AppContent() {
           <Route path="/compress" element={<Compress />} />
           <Route path="/compress/image" element={<CompressImage />} />
           <Route path="/compress/video" element={<CompressVideo />} />
+          <Route path="/compress/audio" element={<CompressAudio />} />
+          <Route path="/compress/pdf" element={<CompressPdf />} />
           <Route path="/convert" element={<Convert />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
