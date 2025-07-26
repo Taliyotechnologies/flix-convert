@@ -91,10 +91,26 @@ const howItWorks = [
 ];
 
 const stats = [
-  { number: "10M+", label: "Files Processed", icon: "📁" },
-  { number: "50+", label: "Supported Formats", icon: "🔄" },
-  { number: "99.9%", label: "Uptime", icon: "⚡" },
-  { number: "24/7", label: "Support", icon: "🛡️" }
+  { number: "10M+", label: "Files Processed", icon: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points="14,2 14,8 20,8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )},
+  { number: "50+", label: "Supported Formats", icon: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M8 2v4M6 6h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M16 2v4M14 6h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M8 18v4M6 22h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <path d="M16 18v4M14 22h4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  )},
+  { number: "24/7", label: "Support", icon: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M8 1l6 3v6c0 3.3-2.7 6-6 6s-6-2.7-6-6V4l6-3z" stroke="currentColor" strokeWidth="2"/>
+      <path d="M6 8l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  )}
 ];
 
 const services = [

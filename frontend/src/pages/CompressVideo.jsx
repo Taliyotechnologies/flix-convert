@@ -49,7 +49,7 @@ const CompressVideo = () => {
       <section className="compress-video-hero">
         <div className="hero-content">
           <div className="hero-badge">
-            <span>🎥 Professional Video Compression</span>
+            <span>Professional Video Compression</span>
           </div>
           <h1 className="hero-title">
             Video Compression

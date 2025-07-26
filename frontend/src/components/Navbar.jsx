@@ -6,21 +6,77 @@ import './Navbar.css';
 const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'Compress', dropdown: [
-    { label: 'Image Compression', to: '/compress/image', icon: '🖼️' },
-    { label: 'Video Compression', to: '/compress/video', icon: '🎥' },
-    { label: 'Audio Compression', to: '/compress/audio', icon: '🎵' },
-    { label: 'PDF Compression', to: '/compress/pdf', icon: '📄' },
+    { label: 'Image Compression', to: '/compress/image', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M6 6h4v4H6z" fill="currentColor" opacity="0.3"/>
+        <path d="M8 4v4M6 6h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
+    { label: 'Video Compression', to: '/compress/video', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M6 6l2 1.5L6 9V6z" fill="currentColor"/>
+      </svg>
+    )},
+    { label: 'Audio Compression', to: '/compress/audio', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 2v12M4 6h8M4 10h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
+    { label: 'PDF Compression', to: '/compress/pdf', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 2h10v12H3V2z" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M3 6h10M5 9h6M5 11h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
   ]},
   { label: 'Convert', dropdown: [
-    { label: 'Image Converter', to: '/convert/image', icon: '🔄' },
-    { label: 'Video Converter', to: '/convert/video', icon: '🎬' },
-    { label: 'Audio Converter', to: '/convert/audio', icon: '🎧' },
-    { label: 'PDF Converter', to: '/convert/pdf', icon: '📋' },
+    { label: 'Image Converter', to: '/convert/image', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M6 6l2-2 2 2M6 10l2 2 2-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
+    { label: 'Video Converter', to: '/convert/video', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M6 6l2 1.5L6 9V6z" fill="currentColor"/>
+        <path d="M8 2v4M6 6h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
+    { label: 'Audio Converter', to: '/convert/audio', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 2v12M2 8h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M6 6l2-2 2 2M6 10l2 2 2-2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
+    { label: 'PDF Converter', to: '/convert/pdf', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 2h10v12H3V2z" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M8 2v4M6 6h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
   ]},
   { label: 'Company', dropdown: [
-    { label: 'About Us', to: '/about', icon: 'ℹ️' },
-    { label: 'Contact', to: '/contact', icon: '📞' },
-    { label: 'Owner', to: '/owner', icon: '👤' },
+    { label: 'About Us', to: '/about', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M8 4v4M6 8h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
+    { label: 'Contact', to: '/contact', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M2 4h12v8H2V4z" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M2 4l6 4 6-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    )},
+    { label: 'Owner', to: '/owner', icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <circle cx="8" cy="6" r="3" stroke="currentColor" strokeWidth="1.5"/>
+        <path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" strokeWidth="1.5"/>
+      </svg>
+    )},
   ]},
 ];
 
