@@ -7,33 +7,33 @@ const footerLinks = {
   services: {
     title: "Services",
     links: [
-      { label: "Image Compression", to: "/compress/image" },
-      { label: "Video Compression", to: "/compress/video" },
-      { label: "Audio Compression", to: "/compress/audio" },
-      { label: "PDF Compression", to: "/compress/pdf" },
-      { label: "Image Converter", to: "/convert/image" },
-      { label: "Video Converter", to: "/convert/video" },
-      { label: "Audio Converter", to: "/convert/audio" },
-      { label: "PDF Converter", to: "/convert/pdf" }
+      { label: "Image Compression", to: "/compress/image", icon: "🖼️" },
+      { label: "Video Compression", to: "/compress/video", icon: "🎥" },
+      { label: "Audio Compression", to: "/compress/audio", icon: "🎵" },
+      { label: "PDF Compression", to: "/compress/pdf", icon: "📄" },
+      { label: "Image Converter", to: "/convert/image", icon: "🔄" },
+      { label: "Video Converter", to: "/convert/video", icon: "🎬" },
+      { label: "Audio Converter", to: "/convert/audio", icon: "🎧" },
+      { label: "PDF Converter", to: "/convert/pdf", icon: "📋" }
     ]
   },
   company: {
     title: "Company",
     links: [
-      { label: "About Us", to: "/about" },
-      { label: "Contact", to: "/contact" },
-      { label: "Owner", to: "/owner" },
-      { label: "Privacy Policy", to: "/privacy" },
-      { label: "Terms of Service", to: "/terms" }
+      { label: "About Us", to: "/about", icon: "ℹ️" },
+      { label: "Contact", to: "/contact", icon: "📞" },
+      { label: "Owner", to: "/owner", icon: "👤" },
+      { label: "Privacy Policy", to: "/privacy", icon: "🔒" },
+      { label: "Terms of Service", to: "/terms", icon: "📜" }
     ]
   },
   support: {
     title: "Support",
     links: [
-      { label: "Help Center", to: "/help" },
-      { label: "FAQ", to: "/faq" },
-      { label: "Contact Support", to: "/contact" },
-      { label: "Status", to: "/status" }
+      { label: "Help Center", to: "/help", icon: "❓" },
+      { label: "FAQ", to: "/faq", icon: "💡" },
+      { label: "Contact Support", to: "/contact", icon: "🆘" },
+      { label: "Status", to: "/status", icon: "📊" }
     ]
   }
 };
@@ -87,18 +87,34 @@ const Footer = () => {
         <div className="footer-main">
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect x="2" y="2" width="28" height="28" rx="8" fill="#3B82F6" stroke="#2CB67D" strokeWidth="2"/>
-                <rect x="8" y="8" width="16" height="16" rx="4" fill="#ffffff"/>
-                                  <path d="M12 16h8M16 12v8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
-                <circle cx="24" cy="8" r="3" fill="#2CB67D"/>
-                <path d="M22 6l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span>ConvertFlix</span>
+              <div className="logo-container">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <rect x="2" y="2" width="28" height="28" rx="8" fill="#3B82F6" stroke="#10B981" strokeWidth="2"/>
+                  <rect x="8" y="8" width="16" height="16" rx="4" fill="#ffffff"/>
+                  <path d="M12 16h8M16 12v8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
+                  <circle cx="24" cy="8" r="3" fill="#10B981"/>
+                  <path d="M22 6l2 2 2-2" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <span className="logo-text">ConvertFlix</span>
             </Link>
             <p className="footer-description">
-              Professional file conversion and compression tools. Transform your files with lightning speed and exceptional quality.
+              Professional file conversion and compression tools. Transform your files with lightning speed and exceptional quality. Trusted by millions of users worldwide.
             </p>
+            <div className="footer-stats">
+              <div className="stat-item">
+                <span className="stat-number">10M+</span>
+                <span className="stat-label">Files Processed</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">50+</span>
+                <span className="stat-label">Formats</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">99.9%</span>
+                <span className="stat-label">Uptime</span>
+              </div>
+            </div>
             <div className="footer-social">
               {socialLinks.map((social, index) => (
                 <a
@@ -118,11 +134,14 @@ const Footer = () => {
           <div className="footer-links">
             {Object.entries(footerLinks).map(([key, section]) => (
               <div key={key} className="footer-section">
-                <h3>{section.title}</h3>
-                <ul>
+                <h3 className="section-title">{section.title}</h3>
+                <ul className="section-links">
                   {section.links.map((link, index) => (
                     <li key={index}>
-                      <Link to={link.to}>{link.label}</Link>
+                      <Link to={link.to} className="footer-link">
+                        <span className="link-icon">{link.icon}</span>
+                        <span className="link-text">{link.label}</span>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -131,19 +150,23 @@ const Footer = () => {
           </div>
         </div>
         
+        <div className="footer-divider"></div>
+        
         <div className="footer-bottom">
           <div className="footer-bottom-content">
             <p className="copyright">
               © 2024 ConvertFlix. All rights reserved.
             </p>
             <div className="footer-bottom-links">
-              <Link to="/privacy">Privacy</Link>
-              <Link to="/terms">Terms</Link>
-              <Link to="/cookies">Cookies</Link>
+              <Link to="/privacy" className="bottom-link">Privacy</Link>
+              <Link to="/terms" className="bottom-link">Terms</Link>
+              <Link to="/cookies" className="bottom-link">Cookies</Link>
             </div>
           </div>
           <div className="made-by">
-            <span>Made with ❤️ by </span>
+            <span>Made with </span>
+            <span className="heart">❤️</span>
+            <span> by </span>
             <a 
               href="https://taliyotechnologies.com" 
               target="_blank" 
