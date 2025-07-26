@@ -86,8 +86,8 @@
 /* Footer Stats */
 .footer-stats {
   display: flex;
-  gap: 20px;
-  margin-top: 6px;
+  gap: 16px;
+  margin-top: 4px;
 }
 
 .stat-item {
@@ -98,14 +98,14 @@
 }
 
 .stat-number {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 700;
   color: var(--color-accent, #3B82F6);
-  margin-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .stat-label {
-  font-size: 0.65rem;
+  font-size: 0.55rem;
   color: var(--color-text-secondary, #94a3b8);
   font-weight: 500;
 }
@@ -290,16 +290,16 @@
   }
 
   .footer-stats {
-    gap: 16px;
-    margin-top: 4px;
+    gap: 12px;
+    margin-top: 3px;
   }
 
   .stat-number {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
   }
 
   .stat-label {
-    font-size: 0.6rem;
+    font-size: 0.5rem;
   }
 
   .footer-bottom {
@@ -324,16 +324,16 @@
   }
 
   .footer-stats {
-    gap: 12px;
-    margin-top: 3px;
+    gap: 8px;
+    margin-top: 2px;
   }
 
   .stat-number {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
 
   .stat-label {
-    font-size: 0.55rem;
+    font-size: 0.45rem;
   }
 
   .footer-social {
