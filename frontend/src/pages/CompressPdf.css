@@ -1041,12 +1041,12 @@ body.light .feature-card p {
     font-size: 2.5rem;
   }
   
-  .header-stats {
-    display: none; /* Hide statistics on mobile */
-  }
-  
   .header-icon {
     display: none; /* Hide header icon on mobile */
+  }
+  
+  .header-stats {
+    display: none; /* Hide statistics on mobile */
   }
   
   .upload-area {
