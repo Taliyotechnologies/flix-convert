@@ -246,6 +246,7 @@ body.light .convert-image-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: var(--color-text, #f8fafc);
 }
 
 .format-btn:hover {
@@ -438,35 +439,28 @@ body.light .convert-image-container {
 
 /* Conversion Stats */
 .conversion-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 48px;
   margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
 .stat {
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.stat-icon {
-  margin-bottom: 8px;
 }
 
 .stat-number {
-  font-size: 1.25rem;
+  display: block;
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--color-text, #f8fafc);
+  color: var(--color-accent, #F59E0B);
   margin-bottom: 4px;
 }
 
 .stat-label {
   font-size: 0.875rem;
   color: var(--color-text-secondary, #94a3b8);
-  letter-spacing: 0.025em;
 }
 
 /* Download Button */

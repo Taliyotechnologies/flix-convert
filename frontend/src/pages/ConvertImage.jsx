@@ -48,12 +48,12 @@ const ConvertImage = () => {
   };
 
   const formatOptions = [
-    { value: 'PNG', label: 'PNG' },
-    { value: 'JPEG', label: 'JPEG' },
-    { value: 'WebP', label: 'WebP' },
-    { value: 'GIF', label: 'GIF' },
-    { value: 'BMP', label: 'BMP' },
-    { value: 'TIFF', label: 'TIFF' }
+    { value: 'PNG', label: 'PNG', desc: 'Portable Network Graphics' },
+    { value: 'JPEG', label: 'JPEG', desc: 'Joint Photographic Experts Group' },
+    { value: 'WebP', label: 'WebP', desc: 'Web Picture format' },
+    { value: 'GIF', label: 'GIF', desc: 'Graphics Interchange Format' },
+    { value: 'BMP', label: 'BMP', desc: 'Bitmap Picture' },
+    { value: 'TIFF', label: 'TIFF', desc: 'Tagged Image File Format' }
   ];
 
   return (
@@ -62,10 +62,10 @@ const ConvertImage = () => {
       <section className="convert-header" style={{marginTop: '40px'}}>
         <div className="header-content">
           <h1 className="page-title">
-            Professional Image Converter
+            Image Converter
           </h1>
           <p className="page-description">
-            Convert your images to different formats with a professional, modern interface. Supports PNG, JPEG, WebP, GIF, BMP, TIFF, and more.
+            Convert your images to different formats. Support for PNG, JPEG, WebP, GIF, BMP, TIFF, and more formats.
           </p>
         </div>
       </section>
@@ -144,40 +144,26 @@ const ConvertImage = () => {
                     className={`format-btn ${outputFormat === format.value ? 'active' : ''}`}
                     onClick={() => setOutputFormat(format.value)}
                   >
-                    {format.label}
+                    <span className="format-label">{format.label}</span>
+                    <span className="format-desc">{format.desc}</span>
                   </button>
                 ))}
               </div>
             </div>
             <div className="conversion-preview">
-              <h3>Estimated Results</h3>
+              <h3>Conversion Preview</h3>
               <div className="preview-stats">
                 <div className="preview-stat">
-                  <div className="stat-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2v20M2 12h20" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
-                  </div>
-                  <span className="stat-label">Original Size</span>
-                  <span className="stat-value">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                  <span className="stat-label">Original Format</span>
+                  <span className="stat-value">{selectedFile.type.split('/')[1].toUpperCase()}</span>
                 </div>
                 <div className="preview-stat">
-                  <div className="stat-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <span className="stat-label">Estimated Size</span>
-                  <span className="stat-value">{(selectedFile.size * 0.9 / 1024 / 1024).toFixed(2)} MB</span>
-                </div>
-                <div className="preview-stat">
-                  <div className="stat-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2v20M2 12h20" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
-                    </svg>
-                  </div>
-                  <span className="stat-label">Format</span>
+                  <span className="stat-label">Target Format</span>
                   <span className="stat-value">{outputFormat}</span>
+                </div>
+                <div className="preview-stat">
+                  <span className="stat-label">File Size</span>
+                  <span className="stat-value">{(selectedFile.size / 1024 / 1024).toFixed(2)} MB</span>
                 </div>
               </div>
             </div>
@@ -200,7 +186,7 @@ const ConvertImage = () => {
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M12 2v20M2 12h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
-                  Start Conversion
+                  Convert Image
                 </>
               )}
             </button>
@@ -212,35 +198,22 @@ const ConvertImage = () => {
         <section className="results-section">
           <div className="results-container">
             <div className="results-header">
-              <h2>Conversion Complete</h2>
-              <p>Your image has been successfully converted</p>
+              <h2>Conversion Results</h2>
             </div>
             <div className="results-grid">
               <div className="result-card">
-                <div className="card-header">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect x="4" y="4" width="24" height="24" rx="8" fill="#6B7280" opacity="0.1"/>
-                    <path d="M12 12h8M12 16h8M12 20h6" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                  <h3>Original</h3>
-                </div>
+                <h3>Original</h3>
                 <div className="file-size">{(result.originalSize / 1024 / 1024).toFixed(2)} MB</div>
                 <div className="file-name">{result.fileName}</div>
                 <div className="file-format">{result.originalFormat}</div>
               </div>
               <div className="result-arrow">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <path d="M8 20h24M20 8l12 12-12 12" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M8 16h16M16 8l8 8-8 8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div className="result-card converted">
-                <div className="card-header">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect x="4" y="4" width="24" height="24" rx="8" fill="#F59E0B" opacity="0.1"/>
-                    <path d="M12 16l4 4 8-8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <h3>Converted</h3>
-                </div>
+                <h3>Converted</h3>
                 <div className="file-size">{(result.convertedSize / 1024 / 1024).toFixed(2)} MB</div>
                 <div className="file-name">{result.fileName}</div>
                 <div className="file-format">{result.format}</div>
@@ -248,32 +221,16 @@ const ConvertImage = () => {
             </div>
             <div className="conversion-stats">
               <div className="stat">
-                <div className="stat-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path d="M16 4v24M4 16h24" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </div>
                 <span className="stat-number">{result.originalFormat}</span>
                 <span className="stat-label">Original Format</span>
               </div>
               <div className="stat">
-                <div className="stat-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <path d="M8 16h16M16 8l8 8-8 8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
                 <span className="stat-number">{result.format}</span>
                 <span className="stat-label">New Format</span>
               </div>
               <div className="stat">
-                <div className="stat-icon">
-                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                    <rect x="4" y="4" width="24" height="24" rx="4" fill="#3B82F6" opacity="0.1"/>
-                    <path d="M12 12h8M12 16h8M12 20h6" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </div>
-                <span className="stat-number">{((result.originalSize - result.convertedSize) / 1024 / 1024).toFixed(2)} MB</span>
-                <span className="stat-label">Space Saved</span>
+                <span className="stat-number">{(result.originalSize - result.convertedSize) / 1024 / 1024} MB</span>
+                <span className="stat-label">Size Difference</span>
               </div>
             </div>
             <button className="download-btn" onClick={handleDownload}>
@@ -289,8 +246,7 @@ const ConvertImage = () => {
       <section className="features-section">
         <div className="features-container">
           <div className="features-header">
-            <h2>Why Choose Our Professional Image Conversion?</h2>
-            <p>Advanced technology meets user-friendly design for the best image conversion experience</p>
+            <h2>Why Choose Our Image Conversion?</h2>
           </div>
           <div className="features-grid">
             <div className="feature-card">
