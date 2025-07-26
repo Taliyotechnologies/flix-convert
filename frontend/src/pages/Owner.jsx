@@ -1,28 +1,334 @@
 import React from 'react';
-import './Home.css';
+import './Owner.css';
 
-const Owner = () => (
-  <section className="home">
-    <div className="home-hero animate-hero">
-      <h1 className="animate-title">Meet the Creator</h1>
-      <p className="home-subtitle animate-subtitle">ConvertFlix is built and maintained by Taliyo Technologies, dedicated to building next-gen web tools for everyone.</p>
-    </div>
-    <div className="home-details animate-details" style={{marginTop: '2.5rem', maxWidth: 600}}>
-      <div className="about-owner-card" style={{display: 'flex', alignItems: 'center', gap: 24}}>
-        <div className="about-owner-avatar">
-          <svg width="64" height="64" fill="none" viewBox="0 0 64 64"><circle cx="32" cy="24" r="14" fill="#3B82F6"/><rect x="14" y="40" width="36" height="14" rx="7" fill="#2CB67D"/></svg>
+const Owner = () => {
+  return (
+    <div className="owner-container">
+      {/* Hero Section */}
+      <section className="owner-hero">
+        <div className="hero-content">
+          <div className="hero-badge">
+            <span>🏢 Company Profile</span>
+          </div>
+          <h1 className="hero-title">
+            Meet <span className="gradient-text">Taliyo Technologies</span>
+          </h1>
+          <p className="hero-description">
+            The innovative software development company behind ConvertFlix, dedicated to creating 
+            cutting-edge digital solutions that empower businesses and individuals worldwide.
+          </p>
+          <div className="hero-stats">
+            <div className="stat-item">
+              <span className="stat-number">5+</span>
+              <span className="stat-label">Years Experience</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">100+</span>
+              <span className="stat-label">Projects Completed</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">50+</span>
+              <span className="stat-label">Happy Clients</span>
+            </div>
+          </div>
         </div>
-        <div>
-          <h3 style={{margin: 0, color: '#3B82F6', fontWeight: 800}}>Taliyo Technologies</h3>
-          <p style={{margin: 0, color: 'var(--home-text-light)', fontWeight: 500}}>Building next-gen web tools for everyone.<br/>Contact: <a href="mailto:support@convertflix.com" style={{color: '#2CB67D', textDecoration: 'underline'}}>support@convertflix.com</a></p>
+        <div className="hero-visual">
+          <div className="company-logo">
+            <div className="logo-container">
+              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                <rect width="80" height="80" rx="16" fill="url(#gradient)"/>
+                <circle cx="40" cy="30" r="12" fill="white"/>
+                <rect x="28" cy="48" width="24" height="10" rx="5" fill="white"/>
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#3B82F6"/>
+                    <stop offset="100%" stopColor="#10B981"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <h3>Taliyo Technologies</h3>
+            <p>Innovation • Excellence • Trust</p>
+          </div>
         </div>
-      </div>
-      <div style={{marginTop: 32, textAlign: 'center', color: '#2CB67D'}}>
-        <svg width="32" height="32" fill="none" viewBox="0 0 32 32" style={{marginBottom: 8}}><rect width="32" height="32" rx="8" fill="#2CB67D"/><circle cx="16" cy="12" r="6" fill="#fff"/><rect x="10" y="20" width="12" height="6" rx="3" fill="#fff"/></svg>
-        <div>Website: <a href="https://taliyo.com" target="_blank" rel="noopener noreferrer" style={{color: '#2CB67D', textDecoration: 'underline'}}>taliyo.com</a></div>
-      </div>
+      </section>
+
+      {/* Company Overview */}
+      <section className="company-overview">
+        <div className="container">
+          <div className="section-header">
+            <h2>About Taliyo Technologies</h2>
+            <p>Leading the digital transformation with innovative web solutions</p>
+          </div>
+          <div className="overview-content">
+            <div className="overview-text">
+              <h3>Who We Are</h3>
+              <p>
+                Taliyo Technologies is a dynamic software development company founded with a vision 
+                to create user-friendly applications that solve real-world problems. We specialize 
+                in web development, mobile applications, and cloud-based services that help 
+                businesses and individuals achieve their digital goals.
+              </p>
+              <p>
+                Our team of experienced developers, designers, and digital strategists work 
+                together to deliver cutting-edge solutions that drive growth and innovation. 
+                We believe in the power of technology to transform businesses and improve lives.
+              </p>
+            </div>
+            <div className="overview-features">
+              <div className="feature-item">
+                <div className="feature-icon">🚀</div>
+                <h4>Innovation First</h4>
+                <p>Pioneering new technologies and approaches</p>
+              </div>
+              <div className="feature-item">
+                <div className="feature-icon">💎</div>
+                <h4>Quality Focus</h4>
+                <p>Delivering excellence in every project</p>
+              </div>
+              <div className="feature-item">
+                <div className="feature-icon">🤝</div>
+                <h4>Client Partnership</h4>
+                <p>Building long-term relationships</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="services-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Our Services</h2>
+            <p>Comprehensive digital solutions for modern businesses</p>
+          </div>
+          <div className="services-grid">
+            <div className="service-card">
+              <div className="service-icon">🌐</div>
+              <h3>Web Development</h3>
+              <p>Custom websites, web applications, and e-commerce solutions built with modern technologies.</p>
+              <ul>
+                <li>React & Next.js Applications</li>
+                <li>E-commerce Platforms</li>
+                <li>Progressive Web Apps</li>
+                <li>API Development</li>
+              </ul>
+            </div>
+            <div className="service-card">
+              <div className="service-icon">📱</div>
+              <h3>Mobile Development</h3>
+              <p>Native and cross-platform mobile applications for iOS and Android platforms.</p>
+              <ul>
+                <li>React Native Apps</li>
+                <li>Flutter Development</li>
+                <li>Native iOS/Android</li>
+                <li>App Maintenance</li>
+              </ul>
+            </div>
+            <div className="service-card">
+              <div className="service-icon">☁️</div>
+              <h3>Cloud Solutions</h3>
+              <p>Scalable cloud infrastructure and DevOps services for optimal performance.</p>
+              <ul>
+                <li>AWS & Azure Setup</li>
+                <li>CI/CD Pipelines</li>
+                <li>Server Management</li>
+                <li>Security Implementation</li>
+              </ul>
+            </div>
+            <div className="service-card">
+              <div className="service-icon">🎨</div>
+              <h3>UI/UX Design</h3>
+              <p>User-centered design solutions that enhance user experience and engagement.</p>
+              <ul>
+                <li>User Interface Design</li>
+                <li>User Experience Research</li>
+                <li>Prototyping</li>
+                <li>Design Systems</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements Section */}
+      <section className="achievements-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Our Achievements</h2>
+            <p>Milestones that define our journey of excellence</p>
+          </div>
+          <div className="achievements-grid">
+            <div className="achievement-card">
+              <div className="achievement-number">100+</div>
+              <div className="achievement-label">Projects Delivered</div>
+              <div className="achievement-desc">Successfully completed projects across various industries</div>
+            </div>
+            <div className="achievement-card">
+              <div className="achievement-number">50+</div>
+              <div className="achievement-label">Happy Clients</div>
+              <div className="achievement-desc">Long-term partnerships with satisfied customers</div>
+            </div>
+            <div className="achievement-card">
+              <div className="achievement-number">5+</div>
+              <div className="achievement-label">Years Experience</div>
+              <div className="achievement-desc">Deep expertise in modern technologies</div>
+            </div>
+            <div className="achievement-card">
+              <div className="achievement-number">24/7</div>
+              <div className="achievement-label">Support Available</div>
+              <div className="achievement-desc">Round-the-clock technical support</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="team-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Our Team</h2>
+            <p>Meet the talented professionals behind our success</p>
+          </div>
+          <div className="team-content">
+            <div className="team-intro">
+              <h3>Expert Team</h3>
+              <p>
+                Our team consists of experienced developers, designers, and digital strategists 
+                who are passionate about creating innovative solutions. Each team member brings 
+                unique expertise and creativity to every project.
+              </p>
+            </div>
+            <div className="team-roles">
+              <div className="role-item">
+                <div className="role-icon">👨‍💻</div>
+                <h4>Full-Stack Developers</h4>
+                <p>Expert in modern web technologies and frameworks</p>
+              </div>
+              <div className="role-item">
+                <div className="role-icon">🎨</div>
+                <h4>UI/UX Designers</h4>
+                <p>Creating beautiful and functional user experiences</p>
+              </div>
+              <div className="role-item">
+                <div className="role-icon">📱</div>
+                <h4>Mobile Developers</h4>
+                <p>Building native and cross-platform mobile apps</p>
+              </div>
+              <div className="role-item">
+                <div className="role-icon">🔧</div>
+                <h4>DevOps Engineers</h4>
+                <p>Managing infrastructure and deployment pipelines</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ConvertFlix Project */}
+      <section className="project-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>ConvertFlix Project</h2>
+            <p>Our flagship file conversion platform</p>
+          </div>
+          <div className="project-content">
+            <div className="project-info">
+              <h3>About ConvertFlix</h3>
+              <p>
+                ConvertFlix is one of our most successful projects - a comprehensive file 
+                conversion platform that helps users convert and compress various file formats 
+                including images, videos, audio, and PDFs. Built with modern web technologies, 
+                it provides a seamless user experience with powerful conversion capabilities.
+              </p>
+              <div className="project-features">
+                <div className="project-feature">
+                  <span className="feature-icon">⚡</span>
+                  <span>Fast & Efficient</span>
+                </div>
+                <div className="project-feature">
+                  <span className="feature-icon">🔒</span>
+                  <span>Secure Processing</span>
+                </div>
+                <div className="project-feature">
+                  <span className="feature-icon">📱</span>
+                  <span>Mobile Optimized</span>
+                </div>
+                <div className="project-feature">
+                  <span className="feature-icon">🌐</span>
+                  <span>Multiple Formats</span>
+                </div>
+              </div>
+            </div>
+            <div className="project-stats">
+              <div className="project-stat">
+                <div className="stat-number">10M+</div>
+                <div className="stat-label">Files Processed</div>
+              </div>
+              <div className="project-stat">
+                <div className="stat-number">50+</div>
+                <div className="stat-label">Supported Formats</div>
+              </div>
+              <div className="project-stat">
+                <div className="stat-number">99.9%</div>
+                <div className="stat-label">Uptime</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="contact-section">
+        <div className="container">
+          <div className="section-header">
+            <h2>Get In Touch</h2>
+            <p>Ready to start your next project? Let's talk!</p>
+          </div>
+          <div className="contact-content">
+            <div className="contact-info">
+              <div className="contact-item">
+                <div className="contact-icon">🌐</div>
+                <div>
+                  <h4>Website</h4>
+                  <a href="https://taliyotechnologies.com" target="_blank" rel="noopener noreferrer">
+                    taliyotechnologies.com
+                  </a>
+                </div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">📧</div>
+                <div>
+                  <h4>Email</h4>
+                  <a href="mailto:support@convertflix.com">support@convertflix.com</a>
+                </div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">💼</div>
+                <div>
+                  <h4>Services</h4>
+                  <p>Web Development, Mobile Apps, Cloud Solutions</p>
+                </div>
+              </div>
+            </div>
+            <div className="contact-cta">
+              <h3>Start Your Project</h3>
+              <p>Let's discuss how we can help bring your ideas to life</p>
+              <div className="cta-buttons">
+                <a href="mailto:support@convertflix.com" className="btn-primary">
+                  Contact Us
+                </a>
+                <a href="https://taliyotechnologies.com" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                  Visit Website
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  </section>
-);
+  );
+};
 
 export default Owner; 

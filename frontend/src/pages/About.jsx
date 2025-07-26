@@ -1,341 +1,253 @@
 import React from 'react';
-import { useTheme } from '../App';
 import './About.css';
 
 const About = () => {
-  const { theme } = useTheme();
-
   return (
-    <div className={`about-container ${theme}`}>
+    <div className="about-container">
       {/* Hero Section */}
       <section className="about-hero">
         <div className="hero-content">
-          <h1 className="hero-title">About ConvertFlix</h1>
-          <p className="hero-subtitle">
-            Empowering users worldwide with professional file conversion and compression solutions
+          <div className="hero-badge">
+            <span>📖 About Us</span>
+          </div>
+          <h1 className="hero-title">
+            About <span className="gradient-text">ConvertFlix</span>
+          </h1>
+          <p className="hero-description">
+            Your trusted platform for file conversion and compression. We make digital file 
+            management simple, fast, and secure for everyone.
           </p>
+        </div>
+        <div className="hero-visual">
+          <div className="hero-illustration">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+              <circle cx="60" cy="60" r="50" fill="url(#heroGradient)" opacity="0.1"/>
+              <path d="M40 40h40v40H40z" stroke="url(#heroGradient)" strokeWidth="2" fill="none"/>
+              <path d="M50 50h20v20H50z" fill="url(#heroGradient)"/>
+              <defs>
+                <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#3B82F6"/>
+                  <stop offset="100%" stopColor="#10B981"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
         </div>
       </section>
 
-      {/* Company Story Section */}
+      {/* Our Story */}
       <section className="story-section">
         <div className="container">
           <div className="story-content">
             <h2>Our Story</h2>
             <p>
-              ConvertFlix was developed by <strong>Taliyo Technologies</strong>, a leading software development 
-              company specializing in innovative web solutions and digital tools. Founded with a vision to 
-              create user-friendly applications that solve real-world problems, Taliyo Technologies has been 
-              at the forefront of digital innovation.
+              ConvertFlix was born from a simple need - to make file conversion and compression 
+              accessible to everyone. In today's digital world, we constantly work with various 
+              file formats, and the need to convert or compress files arises frequently.
             </p>
             <p>
-              The idea for ConvertFlix emerged from the common challenges users face when working with 
-              different file formats. Whether it's converting PDFs to Word documents, compressing 
-              large images for web use, or transforming video files for different platforms, we 
-              wanted to create a solution that was both powerful and user-friendly.
+              Our platform was designed with user experience in mind. We believe that powerful 
+              tools should be simple to use, fast, and secure. Whether you're a student, 
+              professional, or casual user, ConvertFlix provides the tools you need to manage 
+              your digital files effectively.
             </p>
             <p>
-              Today, ConvertFlix stands as a comprehensive platform that handles all major file types 
-              with advanced processing capabilities, ensuring quality preservation while delivering 
-              lightning-fast results. This project represents Taliyo Technologies' commitment to 
-              creating tools that make digital workflows more efficient and accessible.
+              We're committed to continuous improvement and innovation, always looking for ways 
+              to enhance our services and provide better solutions for our users.
             </p>
           </div>
         </div>
       </section>
 
-      {/* About Taliyo Technologies Section */}
-      <section className="company-section">
+      {/* Mission & Vision */}
+      <section className="mission-section">
         <div className="container">
-          <h2>About Taliyo Technologies</h2>
-          <div className="company-content">
-            <div className="company-info">
-              <h3>Who We Are</h3>
-              <p>
-                Taliyo Technologies is a dynamic software development company dedicated to creating 
-                innovative digital solutions that enhance productivity and user experience. We specialize 
-                in web development, mobile applications, and cloud-based services that help businesses 
-                and individuals achieve their digital goals.
-              </p>
-              <p>
-                Our team of experienced developers, designers, and technology experts work together 
-                to deliver cutting-edge solutions that are not only functional but also intuitive and 
-                user-friendly. We believe in the power of technology to transform how people work and 
-                interact with digital content.
-              </p>
-            </div>
-            <div className="company-stats">
-              <div className="company-stat">
-                <span className="stat-number">5+</span>
-                <span className="stat-label">Years Experience</span>
-              </div>
-              <div className="company-stat">
-                <span className="stat-number">50+</span>
-                <span className="stat-label">Projects Completed</span>
-              </div>
-              <div className="company-stat">
-                <span className="stat-number">100%</span>
-                <span className="stat-label">Client Satisfaction</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision Section */}
-      <section className="mission-vision-section">
-        <div className="container">
-          <div className="mission-vision-grid">
+          <div className="mission-content">
             <div className="mission-card">
-              <div className="card-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <circle cx="24" cy="24" r="20" stroke="#3B82F6" strokeWidth="2"/>
-                  <path d="M24 12v24M12 24h24" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
+              <div className="mission-icon">🎯</div>
               <h3>Our Mission</h3>
               <p>
-                To democratize file conversion and compression technology, making professional-grade 
-                tools accessible to everyone. We believe that quality file management should be 
-                simple, fast, and secure.
+                To provide fast, reliable, and user-friendly file conversion and compression 
+                services that help people work more efficiently with their digital files.
               </p>
             </div>
-            <div className="vision-card">
-              <div className="card-icon">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <path d="M24 4l6 6-6 6M24 44l-6-6 6-6" stroke="#10B981" strokeWidth="2" strokeLinecap="round"/>
-                  <circle cx="24" cy="24" r="8" stroke="#10B981" strokeWidth="2"/>
-                </svg>
-              </div>
+            <div className="mission-card">
+              <div className="mission-icon">🔮</div>
               <h3>Our Vision</h3>
               <p>
-                To become the world's leading platform for file transformation, setting industry 
-                standards for speed, quality, and user experience while maintaining the highest 
-                levels of security and privacy.
+                To become the leading platform for digital file management, offering comprehensive 
+                solutions that simplify the way people handle their files across all devices.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Values Section */}
+      {/* Core Values */}
       <section className="values-section">
         <div className="container">
-          <h2>Our Core Values</h2>
+          <div className="section-header">
+            <h2>Our Core Values</h2>
+            <p>The principles that guide everything we do</p>
+          </div>
           <div className="values-grid">
             <div className="value-card">
-              <div className="value-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <rect x="8" y="8" width="24" height="24" rx="4" stroke="#EF4444" strokeWidth="2"/>
-                  <path d="M16 20l4 4 8-8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3>Quality First</h3>
-              <p>We never compromise on the quality of our conversions and compressions, ensuring your files maintain their integrity.</p>
-            </div>
-            <div className="value-card">
-              <div className="value-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="20" r="16" stroke="#F59E0B" strokeWidth="2"/>
-                  <path d="M20 8v24M8 20h24" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
+              <div className="value-icon">⚡</div>
               <h3>Speed & Efficiency</h3>
-              <p>Our optimized processing engine ensures your files are converted and compressed in seconds, not minutes.</p>
+              <p>We prioritize fast processing and quick results to save your valuable time.</p>
             </div>
             <div className="value-card">
-              <div className="value-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <rect x="8" y="8" width="24" height="24" rx="4" stroke="#8B5CF6" strokeWidth="2"/>
-                  <path d="M16 16h8v8h-8z" fill="#8B5CF6" opacity="0.2"/>
-                </svg>
-              </div>
-              <h3>Privacy & Security</h3>
-              <p>Your files are processed locally and never stored on our servers. Your privacy is our top priority.</p>
+              <div className="value-icon">🔒</div>
+              <h3>Security & Privacy</h3>
+              <p>Your files are processed securely and deleted immediately after conversion.</p>
             </div>
             <div className="value-card">
-              <div className="value-icon">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                  <circle cx="20" cy="20" r="16" stroke="#06B6D4" strokeWidth="2"/>
-                  <path d="M20 12v16M12 20h16" stroke="#06B6D4" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
+              <div className="value-icon">🎨</div>
+              <h3>User Experience</h3>
+              <p>We design our tools to be intuitive and easy to use for everyone.</p>
+            </div>
+            <div className="value-card">
+              <div className="value-icon">🌐</div>
               <h3>Accessibility</h3>
-              <p>We believe technology should be accessible to everyone, which is why our platform is free and requires no registration.</p>
+              <p>Our services are available to everyone, regardless of technical expertise.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Technology Section */}
+      {/* Technology */}
       <section className="technology-section">
         <div className="container">
-          <h2>Our Technology</h2>
+          <div className="section-header">
+            <h2>Our Technology</h2>
+            <p>Built with modern, reliable technologies</p>
+          </div>
           <div className="tech-content">
             <div className="tech-info">
-              <h3>Advanced Processing Engine</h3>
+              <h3>Modern Stack</h3>
               <p>
-                ConvertFlix utilizes cutting-edge algorithms and machine learning techniques to 
-                deliver superior file conversion and compression results. Our technology stack 
-                includes:
+                ConvertFlix is built using cutting-edge web technologies to ensure fast, 
+                reliable, and secure file processing. Our platform leverages the latest 
+                advancements in web development to provide the best possible user experience.
               </p>
-              <ul className="tech-list">
-                <li>Advanced compression algorithms for optimal file size reduction</li>
-                <li>AI-powered quality preservation during conversions</li>
-                <li>Real-time processing with cloud-based infrastructure</li>
-                <li>Multi-format support with continuous updates</li>
-                <li>Secure processing with end-to-end encryption</li>
-              </ul>
+              <div className="tech-features">
+                <div className="tech-feature">
+                  <span className="feature-icon">⚡</span>
+                  <span>High Performance</span>
+                </div>
+                <div className="tech-feature">
+                  <span className="feature-icon">🔒</span>
+                  <span>Secure Processing</span>
+                </div>
+                <div className="tech-feature">
+                  <span className="feature-icon">📱</span>
+                  <span>Mobile Optimized</span>
+                </div>
+                <div className="tech-feature">
+                  <span className="feature-icon">🌐</span>
+                  <span>Cross-Platform</span>
+                </div>
+              </div>
             </div>
             <div className="tech-stats">
-              <div className="stat-item">
-                <span className="stat-number">50+</span>
-                <span className="stat-label">Supported Formats</span>
+              <div className="tech-stat">
+                <div className="stat-number">99.9%</div>
+                <div className="stat-label">Uptime</div>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">99.9%</span>
-                <span className="stat-label">Uptime</span>
+              <div className="tech-stat">
+                <div className="stat-number">&lt;5s</div>
+                <div className="stat-label">Average Processing</div>
               </div>
-              <div className="stat-item">
-                <span className="stat-number">2M+</span>
-                <span className="stat-label">Files Processed</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">&lt;30s</span>
-                <span className="stat-label">Average Processing Time</span>
+              <div className="tech-stat">
+                <div className="stat-number">256-bit</div>
+                <div className="stat-label">Encryption</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* Features */}
       <section className="features-section">
         <div className="container">
-          <h2>Why Choose ConvertFlix?</h2>
+          <div className="section-header">
+            <h2>What We Offer</h2>
+            <p>Comprehensive file management solutions</p>
+          </div>
           <div className="features-grid">
-            <div className="feature-item">
-              <div className="feature-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M12 16l4 4 8-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3>100% Privacy</h3>
-              <p>Your files are processed locally and never stored on our servers. Complete privacy guaranteed.</p>
+            <div className="feature-card">
+              <div className="feature-icon">🖼️</div>
+              <h3>Image Conversion</h3>
+              <p>Convert images between JPG, PNG, WebP, GIF, and more formats with quality preservation.</p>
             </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 8v16M8 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3>Lightning Fast</h3>
-              <p>Advanced processing engine ensures your files are converted and compressed in seconds.</p>
+            <div className="feature-card">
+              <div className="feature-icon">🎥</div>
+              <h3>Video Conversion</h3>
+              <p>Convert videos to MP4, AVI, MOV, and other popular formats with customizable settings.</p>
             </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <rect x="6" y="6" width="20" height="20" rx="2" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M10 10h12v12H10z" fill="currentColor" opacity="0.3"/>
-                </svg>
-              </div>
-              <h3>All Major Formats</h3>
-              <p>Support for PDF, images, videos, audio, and documents. We handle all your conversion needs.</p>
+            <div className="feature-card">
+              <div className="feature-icon">🎵</div>
+              <h3>Audio Conversion</h3>
+              <p>Convert audio files between MP3, WAV, FLAC, AAC, and other audio formats.</p>
             </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 10v12M10 16h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3>Free & No Sign-up</h3>
-              <p>Use our platform completely free. No registration, no hidden fees, no limitations.</p>
+            <div className="feature-card">
+              <div className="feature-icon">📄</div>
+              <h3>PDF Conversion</h3>
+              <p>Convert PDFs to Word, Text, HTML, and other editable formats.</p>
             </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <rect x="4" y="4" width="24" height="24" rx="4" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M12 12h8v8h-8z" fill="currentColor" opacity="0.2"/>
-                </svg>
-              </div>
-              <h3>Quality Preservation</h3>
-              <p>Advanced algorithms ensure your files maintain their quality during conversion and compression.</p>
+            <div className="feature-card">
+              <div className="feature-icon">🗜️</div>
+              <h3>File Compression</h3>
+              <p>Compress images, videos, audio, and PDFs to reduce file size while maintaining quality.</p>
             </div>
-            <div className="feature-item">
-              <div className="feature-icon">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 8l4 4-4 4M16 24l-4-4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
-              </div>
-              <h3>Cross-Platform</h3>
-              <p>Works seamlessly on desktop, tablet, and mobile devices. Access from anywhere, anytime.</p>
+            <div className="feature-card">
+              <div className="feature-icon">📱</div>
+              <h3>Mobile Friendly</h3>
+              <p>Access all our tools on any device with our responsive, mobile-optimized interface.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="team-section">
-        <div className="container">
-          <h2>Our Team</h2>
-          <p className="team-intro">
-            ConvertFlix is powered by the talented team at Taliyo Technologies, passionate about 
-            creating the best file conversion experience for our users.
-          </p>
-          <div className="team-grid">
-            <div className="team-member">
-              <div className="member-avatar">
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                  <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="40" cy="32" r="12" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 64c0-13.3 10.7-24 24-24s24 10.7 24 24" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-              </div>
-              <h3>Development Team</h3>
-              <p>Expert engineers and developers working on cutting-edge file processing technology.</p>
-            </div>
-            <div className="team-member">
-              <div className="member-avatar">
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                  <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="40" cy="32" r="12" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 64c0-13.3 10.7-24 24-24s24 10.7 24 24" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-              </div>
-              <h3>Design Team</h3>
-              <p>Creative designers focused on creating intuitive and beautiful user experiences.</p>
-            </div>
-            <div className="team-member">
-              <div className="member-avatar">
-                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                  <circle cx="40" cy="40" r="36" stroke="currentColor" strokeWidth="2"/>
-                  <circle cx="40" cy="32" r="12" stroke="currentColor" strokeWidth="2"/>
-                  <path d="M16 64c0-13.3 10.7-24 24-24s24 10.7 24 24" stroke="currentColor" strokeWidth="2"/>
-                </svg>
-              </div>
-              <h3>Support Team</h3>
-              <p>Dedicated support specialists ready to help you with any questions or issues.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
+      {/* Contact */}
       <section className="contact-section">
         <div className="container">
-          <h2>Get in Touch</h2>
-          <p>
-            Have questions, suggestions, or need support? We'd love to hear from you! 
-            Our team at Taliyo Technologies is here to help and always welcomes feedback to improve our platform.
-          </p>
-          <div className="contact-options">
-            <a href="/contact" className="contact-btn primary">Contact Support</a>
-            <a href="/contact" className="contact-btn secondary">Send Feedback</a>
-            <a href="https://taliyotechnologies.com/" target="_blank" rel="noopener noreferrer" className="contact-btn secondary">Visit Taliyo Technologies</a>
+          <div className="section-header">
+            <h2>Get In Touch</h2>
+            <p>Have questions or feedback? We'd love to hear from you!</p>
+          </div>
+          <div className="contact-content">
+            <div className="contact-info">
+              <div className="contact-item">
+                <div className="contact-icon">📧</div>
+                <div>
+                  <h4>Email Support</h4>
+                  <a href="mailto:support@convertflix.com">support@convertflix.com</a>
+                </div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">💬</div>
+                <div>
+                  <h4>Feedback</h4>
+                  <p>Share your thoughts and suggestions with us</p>
+                </div>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">🚀</div>
+                <div>
+                  <h4>Feature Requests</h4>
+                  <p>Let us know what features you'd like to see</p>
+                </div>
+              </div>
+            </div>
+            <div className="contact-cta">
+              <h3>Ready to Get Started?</h3>
+              <p>Try our tools today and experience the difference</p>
+              <div className="contact-options">
+                <a href="/" className="contact-btn primary">Start Converting</a>
+                <a href="/contact" className="contact-btn secondary">Contact Support</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
