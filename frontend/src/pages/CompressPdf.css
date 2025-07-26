@@ -1045,6 +1045,10 @@ body.light .feature-card p {
     display: none; /* Hide statistics on mobile */
   }
   
+  .header-icon {
+    display: none; /* Hide header icon on mobile */
+  }
+  
   .upload-area {
     padding: 60px 24px;
   }
