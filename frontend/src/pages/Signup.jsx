@@ -107,12 +107,6 @@ const Signup = () => {
                     <span className="checkmark"></span>
                     I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>
                   </label>
-                  
-                  <label className="checkbox-label">
-                    <input type="checkbox" name="newsletter" />
-                    <span className="checkmark"></span>
-                    Subscribe to our newsletter for updates and tips
-                  </label>
                 </div>
                 
                 <button type="submit" className="signup-btn">

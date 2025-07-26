@@ -156,8 +156,9 @@
 .form-options {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   font-size: 0.875rem;
+  margin-bottom: 8px;
 }
 
 .checkbox-label {
