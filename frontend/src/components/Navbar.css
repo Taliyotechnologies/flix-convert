@@ -16,15 +16,16 @@
   box-shadow: var(--color-navbar-shadow, 0 4px 20px rgba(0, 0, 0, 0.3));
 }
 
+/* --- Compact Navbar Adjustments --- */
 .nav-inner {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 70px;
-  gap: 24px;
+  gap: 0;
 }
 
 /* Logo Styles */
@@ -71,12 +72,12 @@
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   list-style: none;
   margin: 0;
   padding: 0;
-  flex: 1;
-  justify-content: center;
+  flex: unset;
+  justify-content: unset;
 }
 
 .nav-item {
@@ -204,7 +205,7 @@
 
 /* Theme Toggle */
 .nav-theme-toggle {
-  margin-left: 8px;
+  margin-left: 4px;
   flex-shrink: 0;
 }
 
@@ -231,8 +232,8 @@
 .nav-auth {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-left: 16px;
+  gap: 4px;
+  margin-left: 8px;
   flex-shrink: 0;
 }
 
@@ -305,27 +306,27 @@
 /* Large Screen Responsive */
 @media (min-width: 1200px) {
   .nav-inner {
-    max-width: 1400px;
-    padding: 0 32px;
+    max-width: 1200px;
+    padding: 0 20px;
   }
   
   .nav-links {
-    gap: 12px;
+    gap: 8px;
   }
   
   .nav-link {
-    padding: 10px 20px;
+    padding: 8px 14px;
   }
   
   .nav-dropdown-trigger {
-    padding: 10px 20px;
+    padding: 8px 14px;
   }
 }
 
 @media (min-width: 1400px) {
   .nav-inner {
-    max-width: 1600px;
-    padding: 0 40px;
+    max-width: 1300px;
+    padding: 0 24px;
   }
 }
 
