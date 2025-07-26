@@ -6,107 +6,26 @@
   padding-top: 80px; /* Add top padding for navbar */
 }
 
-/* Hero Section - Changed to normal page header */
-.owner-hero {
-  padding: 60px 5% 40px;
-  text-align: center;
+/* Page Header - Simple header instead of hero */
+.page-header {
+  padding: 60px 0 40px;
   background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
   border-bottom: 1px solid var(--color-card-border, #334155);
+  text-align: center;
 }
 
-.hero-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  border-radius: 50px;
-  padding: 8px 16px;
-  margin-bottom: 24px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-accent, #3B82F6);
-  backdrop-filter: blur(10px);
-}
-
-.hero-title {
+.page-header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: var(--color-text, #f1f5f9);
 }
 
-.gradient-text {
-  background: linear-gradient(135deg, #3B82F6, #10B981);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-description {
+.page-header p {
   font-size: 1.125rem;
-  line-height: 1.6;
   color: var(--color-text-secondary, #94a3b8);
-  margin-bottom: 30px;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.stat-number {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-accent, #3B82F6);
-}
-
-.stat-label {
-  font-size: 0.875rem;
-  color: var(--color-text-secondary, #94a3b8);
-  margin-top: 4px;
-}
-
-.hero-visual {
-  display: none; /* Remove the visual element */
-}
-
-.company-logo {
-  text-align: center;
-  padding: 40px;
-  background: rgba(59, 130, 246, 0.05);
-  border: 1px solid rgba(59, 130, 246, 0.1);
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-}
-
-.logo-container {
-  margin-bottom: 20px;
-}
-
-.company-logo h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--color-text, #f1f5f9);
-}
-
-.company-logo p {
-  color: var(--color-text-secondary, #94a3b8);
-  font-size: 0.875rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 /* Container */
@@ -594,21 +513,12 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .owner-hero {
-    padding: 40px 5% 30px;
+  .page-header {
+    padding: 40px 0 30px;
   }
 
-  .hero-title {
+  .page-header h1 {
     font-size: 2rem;
-  }
-
-  .hero-description {
-    font-size: 1rem;
-  }
-
-  .hero-stats {
-    justify-content: center;
-    gap: 24px;
   }
 
   .overview-content,
@@ -646,16 +556,12 @@
 }
 
 @media (max-width: 480px) {
-  .owner-hero {
-    padding: 30px 5% 20px;
-  }
-
-  .hero-title {
+  .page-header h1 {
     font-size: 1.75rem;
   }
 
-  .hero-description {
-    font-size: 0.875rem;
+  .page-header p {
+    font-size: 1rem;
   }
 
   .btn-primary, .btn-secondary {
@@ -665,17 +571,5 @@
 
   .achievements-grid {
     grid-template-columns: 1fr;
-  }
-
-  .hero-stats {
-    gap: 20px;
-  }
-
-  .stat-number {
-    font-size: 1.25rem;
-  }
-
-  .stat-label {
-    font-size: 0.75rem;
   }
 } 
