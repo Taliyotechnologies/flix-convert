@@ -10,6 +10,10 @@ import CompressVideo from './pages/CompressVideo';
 import CompressAudio from './pages/CompressAudio';
 import CompressPdf from './pages/CompressPdf';
 import Convert from './pages/Convert';
+import ConvertImage from './pages/ConvertImage';
+import ConvertVideo from './pages/ConvertVideo';
+import ConvertAudio from './pages/ConvertAudio';
+import ConvertPdf from './pages/ConvertPdf';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Owner from './pages/Owner';
@@ -118,6 +122,10 @@ function AppContent() {
           <Route path="/compress/audio" element={<CompressAudio />} />
           <Route path="/compress/pdf" element={<CompressPdf />} />
           <Route path="/convert" element={<Convert />} />
+          <Route path="/convert/image" element={<ConvertImage />} />
+          <Route path="/convert/video" element={<ConvertVideo />} />
+          <Route path="/convert/audio" element={<ConvertAudio />} />
+          <Route path="/convert/pdf" element={<ConvertPdf />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/owner" element={<Owner />} />
