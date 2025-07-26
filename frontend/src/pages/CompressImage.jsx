@@ -61,6 +61,7 @@ const CompressImage = () => {
     if (!selectedFile) return;
     setIsCompressing(true);
     setCompressionProgress(0);
+    setUploadProgress(0);
     
     // Simulate upload progress
     const uploadInterval = setInterval(() => {
@@ -106,7 +107,12 @@ const CompressImage = () => {
     alert('Download started!');
   };
 
-  const formatOptions = ['JPG', 'PNG', 'WebP', 'AVIF'];
+  const formatOptions = [
+    { name: 'JPG', icon: '🖼️', desc: 'Best for photos' },
+    { name: 'PNG', icon: '📷', desc: 'Lossless quality' },
+    { name: 'WebP', icon: '🌐', desc: 'Modern format' },
+    { name: 'AVIF', icon: '🎨', desc: 'Next-gen format' }
+  ];
 
   // Auto-reset progress when file changes
   useEffect(() => {
@@ -178,15 +184,15 @@ const CompressImage = () => {
               <h3>Drop Your Image Here</h3>
               <p>Or click to browse from your device</p>
               <div className="upload-features">
-                <div className="feature-item">
+                <div className="feature-tag">
                   <span className="feature-icon">⚡</span>
                   <span>Lightning Fast</span>
                 </div>
-                <div className="feature-item">
+                <div className="feature-tag">
                   <span className="feature-icon">🔒</span>
                   <span>100% Secure</span>
                 </div>
-                <div className="feature-item">
+                <div className="feature-tag">
                   <span className="feature-icon">🎯</span>
                   <span>AI Optimized</span>
                 </div>
@@ -251,6 +257,12 @@ const CompressImage = () => {
         <section className="compression-settings">
           <div className="settings-container">
             <div className="settings-header">
+              <div className="header-icon">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <rect x="8" y="8" width="32" height="32" rx="8" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M16 24h16M24 16v16" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
+              </div>
               <h2>Compression Settings</h2>
               <p>Fine-tune your compression for the perfect balance of quality and file size</p>
             </div>
@@ -286,12 +298,15 @@ const CompressImage = () => {
               <div className="format-buttons">
                 {formatOptions.map((format) => (
                   <button 
-                    key={format}
-                    className={`format-btn ${outputFormat === format ? 'active' : ''}`}
-                    onClick={() => setOutputFormat(format)}
+                    key={format.name}
+                    className={`format-btn ${outputFormat === format.name ? 'active' : ''}`}
+                    onClick={() => setOutputFormat(format.name)}
                   >
-                    <span className="format-icon">{format === 'JPG' ? '🖼️' : format === 'PNG' ? '📷' : format === 'WebP' ? '🌐' : '🎨'}</span>
-                    {format}
+                    <span className="format-icon">{format.icon}</span>
+                    <div className="format-info">
+                      <span className="format-name">{format.name}</span>
+                      <span className="format-desc">{format.desc}</span>
+                    </div>
                   </button>
                 ))}
               </div>
@@ -389,12 +404,14 @@ const CompressImage = () => {
         <section className="results-section">
           <div className="results-container">
             <div className="results-header">
-              <div className="success-badge">
-                <span className="success-icon">🎉</span>
-                <span>Compression Complete!</span>
+              <div className="success-icon">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                  <circle cx="32" cy="32" r="28" fill="#10B981" opacity="0.1"/>
+                  <path d="M20 32l8 8 16-16" stroke="#10B981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
-              <h2>Your Image is Ready</h2>
-              <p>Successfully compressed with optimal quality preservation</p>
+              <h2>Compression Complete!</h2>
+              <p>Your image has been successfully compressed with optimal quality preservation</p>
             </div>
             
             <div className="results-grid">
