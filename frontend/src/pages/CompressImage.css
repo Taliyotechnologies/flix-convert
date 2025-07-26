@@ -399,6 +399,7 @@ body.light .upload-area p {
   border-width: 3px;
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .drag-dots {
