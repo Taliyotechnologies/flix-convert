@@ -3,6 +3,7 @@
   min-height: 100vh;
   background: var(--color-bg, #0f172a);
   color: var(--color-text, #f1f5f9);
+  padding: 0 20px;
 }
 
 /* Hero Section */
@@ -15,7 +16,7 @@
   position: relative;
   overflow: hidden;
   max-width: 1400px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .hero-content {
@@ -215,7 +216,7 @@
   font-size: 1.125rem;
   color: var(--color-text-secondary, #94a3b8);
   max-width: 600px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 /* Features Section */
@@ -229,7 +230,7 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
   max-width: 1200px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .feature-card {
@@ -297,7 +298,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
   max-width: 1200px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .service-card {
@@ -384,7 +385,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 32px;
   max-width: 1200px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .step-card {
@@ -448,7 +449,7 @@
 
 .testimonials-container {
   max-width: 800px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .testimonials-grid {
@@ -537,7 +538,7 @@
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 16px;
   max-width: 600px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .stat-card {
@@ -582,7 +583,7 @@
 
 .cta-content {
   max-width: 600px;
-  margin: 0;
+  margin: 0 auto;
   position: relative;
   z-index: 2;
 }
@@ -676,6 +677,10 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .home-container {
+    padding: 0 16px;
+  }
+
   .hero-section {
     flex-direction: column;
     text-align: center;
@@ -765,6 +770,10 @@
 }
 
 @media (max-width: 480px) {
+  .home-container {
+    padding: 0 12px;
+  }
+
   .hero-title {
     font-size: 2rem;
   }
