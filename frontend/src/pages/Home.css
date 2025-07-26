@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 120px 5% 80px;
+  padding: 120px 0 80px;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
@@ -220,7 +220,7 @@
 
 /* Features Section */
 .features-section {
-  padding: 100px 5%;
+  padding: 100px 0;
   background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
 }
 
@@ -289,7 +289,7 @@
 
 /* Services Section */
 .services-section {
-  padding: 100px 5%;
+  padding: 100px 0;
 }
 
 .services-grid {
@@ -375,7 +375,7 @@
 
 /* How It Works */
 .how-it-works {
-  padding: 100px 5%;
+  padding: 100px 0;
   background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
 }
 
@@ -443,7 +443,7 @@
 
 /* Testimonials Section */
 .testimonials-section {
-  padding: 100px 5%;
+  padding: 100px 0;
 }
 
 .testimonials-container {
@@ -528,7 +528,7 @@
 
 /* Stats Section */
 .stats-section {
-  padding: 40px 5%;
+  padding: 40px 0;
   background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
 }
 
@@ -574,7 +574,7 @@
 
 /* CTA Section */
 .cta-section {
-  padding: 100px 5%;
+  padding: 100px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -624,7 +624,7 @@
 @media (min-width: 1400px) {
   .hero-section {
     max-width: 1600px;
-    padding: 120px 6% 80px;
+    padding: 120px 0 80px;
   }
   
   .hero-title {
@@ -643,7 +643,7 @@
 @media (min-width: 1200px) {
   .hero-section {
     max-width: 1400px;
-    padding: 120px 5% 80px;
+    padding: 120px 0 80px;
   }
   
   .hero-title {
@@ -658,7 +658,7 @@
 /* Medium Screen Responsive */
 @media (max-width: 1024px) {
   .hero-section {
-    padding: 120px 4% 80px;
+    padding: 120px 0 80px;
   }
   
   .hero-content {
@@ -679,7 +679,7 @@
   .hero-section {
     flex-direction: column;
     text-align: center;
-    padding: 100px 5% 60px;
+    padding: 100px 0 60px;
     gap: 40px;
   }
 
