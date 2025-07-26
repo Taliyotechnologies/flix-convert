@@ -147,10 +147,16 @@
 }
 
 /* Features Section - Clean Grid */
+section.features-section,
 .features-section {
-  padding: 120px 0;
-  background: linear-gradient(180deg, rgba(59, 130, 246, 0.03) 0%, transparent 100%);
-  margin: 0;
+  padding: 120px 0 !important;
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.03) 0%, transparent 100%) !important;
+  margin: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
 }
 
 .features-container {
