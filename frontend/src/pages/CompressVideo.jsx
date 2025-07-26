@@ -58,35 +58,14 @@ const CompressVideo = () => {
   return (
     <div className={`compress-video-container ${theme}`}>
       {/* Professional Header */}
-      <section className="compress-header">
+      <section className="compress-header" style={{marginTop: '40px'}}>
         <div className="header-content">
-          <div className="header-icon">
-            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-              <rect x="8" y="8" width="64" height="64" rx="16" fill="#F59E0B" opacity="0.1"/>
-              <path d="M24 24h32v32H24z" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round"/>
-              <path d="M32 32l8 6-8 6V32z" fill="#F59E0B"/>
-            </svg>
-          </div>
           <h1 className="page-title">
             Professional Video Compression
           </h1>
           <p className="page-description">
             Optimize your videos with advanced compression algorithms. Reduce file sizes while maintaining quality across MP4, AVI, MOV, WebM, MKV, and more formats.
           </p>
-          <div className="header-stats">
-            <div className="stat-item">
-              <span className="stat-number">90%</span>
-              <span className="stat-label">Quality Retention</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">80%</span>
-              <span className="stat-label">Size Reduction</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">15+</span>
-              <span className="stat-label">Video Formats</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -222,7 +201,7 @@ const CompressVideo = () => {
                 <div className="preview-stat">
                   <div className="stat-icon">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                      <path d="M12 2v20M2 12h20" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+                      <path d="M12 2v20M2 12h20" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </div>
                   <span className="stat-label">Size Reduction</span>
