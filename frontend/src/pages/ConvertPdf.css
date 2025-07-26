@@ -643,8 +643,7 @@ body.light .stat-label {
 /* Features Section */
 .features-section {
   padding: 60px 24px;
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 body.light .features-section {

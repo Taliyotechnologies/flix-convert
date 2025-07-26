@@ -600,6 +600,7 @@ body.light .stat-label {
 /* Features Section */
 .features-section {
   padding: 80px 24px;
+  margin: 0;
   background: var(--color-bg-glass, rgba(59, 130, 246, 0.05));
   backdrop-filter: blur(20px);
 }
