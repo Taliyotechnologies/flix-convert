@@ -63,8 +63,10 @@ const CompressAudio = () => {
           <div className="header-icon">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
               <rect x="8" y="8" width="32" height="32" rx="8" fill="#8B5CF6" opacity="0.1"/>
-              <path d="M16 20l4 4 8-8M16 28l4 4 8-8" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <circle cx="24" cy="24" r="2" fill="#8B5CF6"/>
+              <circle cx="24" cy="24" r="12" fill="#8B5CF6" opacity="0.2"/>
+              <path d="M20 16v16M28 12v24M16 20h16M16 28h16" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="24" cy="24" r="4" fill="#8B5CF6"/>
+              <path d="M24 20v8M20 24h8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
           </div>
           <h1 className="page-title">

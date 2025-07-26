@@ -63,8 +63,12 @@ const CompressPdf = () => {
           <div className="header-icon">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
               <rect x="8" y="8" width="32" height="32" rx="8" fill="#EF4444" opacity="0.1"/>
-              <path d="M14 18h20M14 24h16M14 30h12" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
-              <path d="M16 12h8v8h-8z" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <rect x="12" y="12" width="24" height="24" rx="4" fill="#EF4444" opacity="0.2"/>
+              <path d="M16 18h16M16 22h16M16 26h12" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M16 30h8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="28" cy="30" r="2" fill="#EF4444"/>
+              <path d="M20 16h4v4h-4z" fill="#EF4444"/>
+              <path d="M22 18v2" stroke="white" strokeWidth="1" strokeLinecap="round"/>
             </svg>
           </div>
           <h1 className="page-title">

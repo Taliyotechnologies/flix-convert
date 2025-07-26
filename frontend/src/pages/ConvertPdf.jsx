@@ -68,8 +68,14 @@ const ConvertPdf = () => {
           <div className="header-icon">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
               <rect x="8" y="8" width="48" height="48" rx="12" fill="#EF4444" opacity="0.1"/>
-              <rect x="16" y="12" width="24" height="32" rx="4" stroke="#EF4444" strokeWidth="2"/>
+              <rect x="16" y="12" width="24" height="32" rx="4" fill="#EF4444" opacity="0.2"/>
               <path d="M20 20h16M20 24h16M20 28h12" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M20 32h8" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
+              <circle cx="36" cy="32" r="2" fill="#EF4444"/>
+              <path d="M24 16h6v6h-6z" fill="#EF4444"/>
+              <path d="M27 19v3" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M25 21h2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+              <path d="M40 20l4 4-4 4M40 28l4 4-4 4" stroke="#EF4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
           <h1 className="page-title">PDF Converter</h1>
