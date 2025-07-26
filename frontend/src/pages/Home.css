@@ -148,7 +148,7 @@
 
 /* Features Section - Clean Grid */
 .features-section {
-  padding: 120px 24px;
+  padding: 120px 12px;
   background: linear-gradient(180deg, rgba(59, 130, 246, 0.03) 0%, transparent 100%);
 }
 
@@ -160,6 +160,7 @@
 .section-header {
   text-align: center;
   margin-bottom: 80px;
+  padding: 0 12px;
 }
 
 .section-header h2 {
@@ -182,6 +183,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 32px;
+  padding: 0 12px;
 }
 
 .feature-card {
@@ -589,7 +591,10 @@
     padding: 100px 20px 60px;
   }
   
-  .features-section,
+  .features-section {
+    padding: 100px 8px;
+  }
+  
   .services-section,
   .how-it-works,
   .testimonials-section,
@@ -638,7 +643,10 @@
     align-items: center;
   }
   
-  .features-section,
+  .features-section {
+    padding: 80px 8px;
+  }
+  
   .services-section,
   .how-it-works,
   .testimonials-section,
@@ -671,7 +679,10 @@
     gap: 16px;
   }
   
-  .features-section,
+  .features-section {
+    padding: 60px 6px;
+  }
+  
   .services-section,
   .how-it-works,
   .testimonials-section,
