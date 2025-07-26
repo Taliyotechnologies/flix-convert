@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../App';
 import './Home.css';
@@ -14,7 +14,8 @@ const features = [
       </svg>
     ),
     title: "Lightning Fast",
-    description: "Convert and compress files in under 10 seconds with our optimized algorithms"
+    description: "Convert and compress files in under 10 seconds with our optimized algorithms",
+    color: "#3B82F6"
   },
   {
     icon: (
@@ -25,7 +26,8 @@ const features = [
       </svg>
     ),
     title: "High Quality",
-    description: "Maintain excellent quality with minimum 50% compression ratio"
+    description: "Maintain excellent quality with minimum 50% compression ratio",
+    color: "#10B981"
   },
   {
     icon: (
@@ -37,7 +39,8 @@ const features = [
       </svg>
     ),
     title: "Multiple Formats",
-    description: "Support for images, videos, audio, and PDF files"
+    description: "Support for images, videos, audio, and PDF files",
+    color: "#F59E0B"
   },
   {
     icon: (
@@ -49,7 +52,8 @@ const features = [
       </svg>
     ),
     title: "Secure & Private",
-    description: "Your files are processed locally and never stored on our servers"
+    description: "Your files are processed locally and never stored on our servers",
+    color: "#EF4444"
   }
 ];
 
@@ -57,25 +61,40 @@ const howItWorks = [
   {
     step: "01",
     title: "Upload Your File",
-    description: "Drag and drop or click to upload any supported file format"
+    description: "Drag and drop or click to upload any supported file format",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M16 8v16M8 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    )
   },
   {
     step: "02", 
     title: "Choose Settings",
-    description: "Select compression level or target format for conversion"
+    description: "Select compression level or target format for conversion",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M8 16h16M16 8v16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    )
   },
   {
     step: "03",
     title: "Process & Download",
-    description: "Get your optimized file in seconds, ready to use"
+    description: "Get your optimized file in seconds, ready to use",
+    icon: (
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M8 16h16M16 8l8 8-8 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    )
   }
 ];
 
 const stats = [
-  { number: "10M+", label: "Files Processed" },
-  { number: "50+", label: "Supported Formats" },
-  { number: "99.9%", label: "Uptime" },
-  { number: "24/7", label: "Support" }
+  { number: "10M+", label: "Files Processed", icon: "📁" },
+  { number: "50+", label: "Supported Formats", icon: "🔄" },
+  { number: "99.9%", label: "Uptime", icon: "⚡" },
+  { number: "24/7", label: "Support", icon: "🛡️" }
 ];
 
 const services = [
@@ -90,7 +109,9 @@ const services = [
     ),
     title: "Image Compression",
     description: "Compress images while maintaining quality. Reduce file size for web, email, or storage.",
-    link: "/compress/image"
+    link: "/compress/image",
+    color: "#3B82F6",
+    features: ["JPG, PNG, WebP", "Quality Control", "Batch Processing"]
   },
   {
     icon: (
@@ -103,7 +124,9 @@ const services = [
     ),
     title: "Video Compression",
     description: "Compress videos with high quality. Perfect for sharing and uploading.",
-    link: "/compress/video"
+    link: "/compress/video",
+    color: "#10B981",
+    features: ["MP4, AVI, MOV", "Quality Preservation", "Fast Processing"]
   },
   {
     icon: (
@@ -116,7 +139,9 @@ const services = [
     ),
     title: "Audio Compression",
     description: "Reduce audio file size for easy sharing and storage.",
-    link: "/compress/audio"
+    link: "/compress/audio",
+    color: "#F59E0B",
+    features: ["MP3, WAV, FLAC", "Bitrate Control", "High Quality"]
   },
   {
     icon: (
@@ -129,76 +154,58 @@ const services = [
     ),
     title: "PDF Compression",
     description: "Make PDFs smaller for easy upload and sharing.",
-    link: "/compress/pdf"
+    link: "/compress/pdf",
+    color: "#EF4444",
+    features: ["PDF Optimization", "Image Compression", "Text Preservation"]
+  }
+];
+
+const testimonials = [
+  {
+    name: "Sarah Johnson",
+    role: "Web Designer",
+    content: "ConvertFlix has saved me hours of work. The image compression is incredible - I get 70% size reduction without losing quality!",
+    avatar: "👩‍🎨"
   },
   {
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
-        <path d="M16 24h16M24 16v16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="36" cy="12" r="4" fill="currentColor"/>
-        <path d="M34 10l2 2 2-2" stroke="var(--color-bg)" strokeWidth="1.5" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: "Image Converter",
-    description: "Convert images between formats: JPG, PNG, WebP, GIF, and more.",
-    link: "/convert/image"
+    name: "Mike Chen",
+    role: "Content Creator",
+    content: "Perfect for my YouTube videos. Fast compression and the quality stays amazing. Highly recommended!",
+    avatar: "👨‍💻"
   },
   {
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
-        <path d="M16 20h16M16 28h12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-        <circle cx="20" cy="16" r="2" fill="currentColor"/>
-        <circle cx="28" cy="16" r="2" fill="currentColor"/>
-      </svg>
-    ),
-    title: "Video Converter",
-    description: "Convert videos between formats: MP4, AVI, MOV, MKV, and more.",
-    link: "/convert/video"
-  },
-  {
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
-        <path d="M12 20l4-4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M20 20l4-4 4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M16 28h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: "Audio Converter",
-    description: "Convert audio files between formats: MP3, WAV, FLAC, AAC, and more.",
-    link: "/convert/audio"
-  },
-  {
-    icon: (
-      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-        <rect x="8" y="8" width="32" height="32" rx="8" fill="currentColor" opacity="0.1"/>
-        <path d="M16 16h16v16H16z" stroke="currentColor" strokeWidth="2"/>
-        <path d="M20 20h8v8h-8z" fill="currentColor" opacity="0.3"/>
-        <path d="M24 12v8M20 16h8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    ),
-    title: "PDF Converter",
-    description: "Convert PDFs to and from various formats.",
-    link: "/convert/pdf"
+    name: "Emma Davis",
+    role: "Marketing Manager",
+    content: "We use it daily for our marketing materials. The batch processing feature is a game-changer for our team.",
+    avatar: "👩‍💼"
   }
 ];
 
 const Home = () => {
   const { theme } = useTheme();
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className={`home-container ${theme}`}>
       {/* Hero Section */}
       <section className="hero-section">
         <div className="hero-content">
+          <div className="hero-badge">
+            <span>🚀 Fastest File Processing Tool</span>
+          </div>
           <h1 className="hero-title">
             Convert & Compress Files
             <span className="gradient-text"> Instantly</span>
           </h1>
           <p className="hero-description">
-            Professional file conversion and compression tools. Transform images, videos, audio, and PDFs with lightning speed and exceptional quality.
+            Professional file conversion and compression tools. Transform images, videos, audio, and PDFs with lightning speed and exceptional quality. Trusted by millions of users worldwide.
           </p>
           <div className="hero-buttons">
             <Link to="/compress" className="btn-primary">
@@ -213,6 +220,20 @@ const Home = () => {
               </svg>
               Convert Files
             </Link>
+          </div>
+          <div className="hero-stats">
+            <div className="stat-item">
+              <span className="stat-number">10M+</span>
+              <span className="stat-label">Files Processed</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">50+</span>
+              <span className="stat-label">Formats</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-number">99.9%</span>
+              <span className="stat-label">Uptime</span>
+            </div>
           </div>
         </div>
         <div className="hero-visual">
@@ -237,6 +258,7 @@ const Home = () => {
             </svg>
             <span>Audio</span>
           </div>
+          <div className="hero-glow"></div>
         </div>
       </section>
 
@@ -248,10 +270,11 @@ const Home = () => {
         </div>
         <div className="features-grid">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card">
+            <div key={index} className="feature-card" style={{'--feature-color': feature.color}}>
               <div className="feature-icon">{feature.icon}</div>
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>
+              <div className="feature-glow"></div>
             </div>
           ))}
         </div>
@@ -265,10 +288,15 @@ const Home = () => {
         </div>
         <div className="services-grid">
           {services.map((service, index) => (
-            <Link key={index} to={service.link} className="service-card">
+            <Link key={index} to={service.link} className="service-card" style={{'--service-color': service.color}}>
               <div className="service-icon">{service.icon}</div>
               <h3>{service.title}</h3>
               <p>{service.description}</p>
+              <div className="service-features">
+                {service.features.map((feature, idx) => (
+                  <span key={idx} className="service-feature">{feature}</span>
+                ))}
+              </div>
               <div className="service-arrow">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -289,10 +317,47 @@ const Home = () => {
           {howItWorks.map((step, index) => (
             <div key={index} className="step-card">
               <div className="step-number">{step.step}</div>
+              <div className="step-icon">{step.icon}</div>
               <h3>{step.title}</h3>
               <p>{step.description}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="testimonials-section">
+        <div className="section-header">
+          <h2>What Our Users Say</h2>
+          <p>Join thousands of satisfied customers worldwide</p>
+        </div>
+        <div className="testimonials-container">
+          <div className="testimonials-grid">
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={index} 
+                className={`testimonial-card ${index === currentTestimonial ? 'active' : ''}`}
+              >
+                <div className="testimonial-content">
+                  <div className="testimonial-avatar">{testimonial.avatar}</div>
+                  <p className="testimonial-text">"{testimonial.content}"</p>
+                  <div className="testimonial-author">
+                    <h4>{testimonial.name}</h4>
+                    <span>{testimonial.role}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="testimonial-dots">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`dot ${index === currentTestimonial ? 'active' : ''}`}
+                onClick={() => setCurrentTestimonial(index)}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -301,6 +366,7 @@ const Home = () => {
         <div className="stats-grid">
           {stats.map((stat, index) => (
             <div key={index} className="stat-card">
+              <div className="stat-icon">{stat.icon}</div>
               <div className="stat-number">{stat.number}</div>
               <div className="stat-label">{stat.label}</div>
             </div>
@@ -318,6 +384,7 @@ const Home = () => {
             <Link to="/convert" className="btn-secondary">Convert Files</Link>
           </div>
         </div>
+        <div className="cta-glow"></div>
       </section>
     </div>
   );
