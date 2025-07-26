@@ -1,14 +1,16 @@
 /* Convert PDF Page Styles */
 .convert-pdf-container {
   min-height: 100vh;
-  background: var(--color-bg, #0f172a);
-  color: var(--color-text, #f1f5f9);
-  padding-top: 80px;
+  background: var(--color-bg, #0a0f1c);
+  color: var(--color-text, #f8fafc);
+  padding: 0;
+  position: relative;
+  z-index: 1;
 }
 
 body.light .convert-pdf-container {
-  background: var(--color-bg, #ffffff);
-  color: var(--color-text, #1e293b);
+  background: var(--color-bg, #ffffff) !important;
+  color: var(--color-text, #1e293b) !important;
 }
 
 /* Modern Header */

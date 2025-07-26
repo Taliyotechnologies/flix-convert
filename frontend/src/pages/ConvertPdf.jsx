@@ -65,18 +65,6 @@ const ConvertPdf = () => {
       {/* Modern Header */}
       <section className="convert-header">
         <div className="header-content">
-          <div className="header-icon">
-            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-              <rect x="12" y="12" width="56" height="56" rx="16" fill="#EF4444" opacity="0.1"/>
-              <rect x="20" y="20" width="40" height="40" rx="8" fill="#EF4444" opacity="0.2"/>
-              <path d="M28 28h24v24H28z" stroke="#EF4444" strokeWidth="2"/>
-              <path d="M32 32h16v16H32z" fill="#EF4444" opacity="0.3"/>
-              <path d="M36 36h8v8h-8z" fill="#EF4444" opacity="0.5"/>
-              <path d="M40 20v16M32 28h16" stroke="#EF4444" strokeWidth="2" strokeLinecap="round"/>
-              <circle cx="52" cy="28" r="4" fill="#EF4444"/>
-              <path d="M50 26l2 2 2-2" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </div>
           <h1 className="page-title">PDF Converter</h1>
           <p className="page-description">
             Convert your PDF files to different formats with lightning speed and exceptional quality. 
@@ -144,7 +132,6 @@ const ConvertPdf = () => {
                   onClick={() => setOutputFormat(format.value)}
                   style={{ '--format-color': format.color }}
                 >
-                  <div className="format-icon">{format.icon}</div>
                   <div className="format-info">
                     <h4>{format.label}</h4>
                     <p>{format.desc}</p>
