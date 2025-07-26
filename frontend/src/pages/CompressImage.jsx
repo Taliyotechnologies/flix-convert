@@ -16,7 +16,6 @@ const CompressImage = () => {
     if (file && file.type.startsWith('image/')) {
       setSelectedFile(file);
       setResult(null);
-      
       // Create image preview
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -28,15 +27,12 @@ const CompressImage = () => {
 
   const handleCompress = async () => {
     if (!selectedFile) return;
-    
     setIsCompressing(true);
-    
     // Simulate compression process
     setTimeout(() => {
       const originalSize = selectedFile.size;
       const compressedSize = Math.round(originalSize * (compressionLevel / 100));
       const reduction = Math.round(((originalSize - compressedSize) / originalSize) * 100);
-      
       setResult({
         originalSize,
         compressedSize,
@@ -58,36 +54,14 @@ const CompressImage = () => {
   return (
     <div className={`compress-image-container ${theme}`}>
       {/* Professional Header */}
-      <section className="compress-header">
+      <section className="compress-header" style={{marginTop: '40px'}}>
         <div className="header-content">
-          <div className="header-icon">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
-              <rect x="10" y="10" width="80" height="80" rx="20" fill="#fbbf24" opacity="0.2"/>
-              <path d="M25 25h50v50H25z" stroke="#fbbf24" strokeWidth="4" strokeLinecap="round"/>
-              <circle cx="50" cy="50" r="6" fill="#fbbf24"/>
-              <path d="M25 60l10-10 5 5 10-10 10 10" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
           <h1 className="page-title">
             Professional Image Compression
           </h1>
           <p className="page-description">
-            Optimize your images with advanced compression algorithms. Reduce file sizes while maintaining visual quality across JPG, PNG, WebP, AVIF, and more formats.
+            Optimize your images with advanced compression algorithms. Reduce file sizes while maintaining quality across JPG, PNG, WebP, AVIF, and more formats.
           </p>
-          <div className="header-stats">
-            <div className="stat-item">
-              <span className="stat-number">95%</span>
-              <span className="stat-label">Quality Retention</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">70%</span>
-              <span className="stat-label">Size Reduction</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">10+</span>
-              <span className="stat-label">Image Formats</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -96,9 +70,9 @@ const CompressImage = () => {
         <div className="upload-container">
           <div className="upload-area" onClick={() => document.getElementById('file-input').click()}>
             <div className="upload-icon">
-              <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-                <rect x="8" y="8" width="64" height="64" rx="16" fill="#fbbf24" opacity="0.2"/>
-                <path d="M40 20v32M32 28l8-8 8 8" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+                <rect x="8" y="8" width="56" height="56" rx="16" fill="#F59E0B" opacity="0.1"/>
+                <path d="M36 16v32M28 24l8-8 8 8" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <h3>Upload Your Image</h3>
@@ -119,7 +93,6 @@ const CompressImage = () => {
               style={{ display: 'none' }}
             />
           </div>
-          
           {selectedFile && (
             <div className="file-info">
               <div className="file-details">
@@ -138,8 +111,8 @@ const CompressImage = () => {
                     setSelectedFile(null);
                     setImagePreview(null);
                   }}>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <path d="M15 5L5 15M5 5l10 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path d="M13.5 4.5L4.5 13.5M4.5 4.5l9 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </button>
                 </div>
@@ -157,7 +130,6 @@ const CompressImage = () => {
               <h2>Compression Settings</h2>
               <p>Configure your image compression preferences for optimal results</p>
             </div>
-            
             <div className="setting-group">
               <label htmlFor="compression-level">
                 <span>Quality Level</span>
@@ -178,7 +150,6 @@ const CompressImage = () => {
                 <span>High Quality</span>
               </div>
             </div>
-            
             <div className="format-options">
               <h3>Output Format</h3>
               <div className="format-buttons">
@@ -193,15 +164,13 @@ const CompressImage = () => {
                 ))}
               </div>
             </div>
-
             <div className="compression-preview">
               <h3>Estimated Results</h3>
               <div className="preview-stats">
                 <div className="preview-stat">
                   <div className="stat-icon">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                      <rect x="4" y="4" width="24" height="24" rx="8" fill="#fbbf24" opacity="0.2"/>
-                      <path d="M12 12h8M12 16h8M12 20h6" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2v20M2 12h20" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </div>
                   <span className="stat-label">Original Size</span>
@@ -209,9 +178,8 @@ const CompressImage = () => {
                 </div>
                 <div className="preview-stat">
                   <div className="stat-icon">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                      <rect x="4" y="4" width="24" height="24" rx="8" fill="#fbbf24" opacity="0.2"/>
-                      <path d="M8 16h16M16 8l8 8-8 8" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </div>
                   <span className="stat-label">Estimated Size</span>
@@ -219,9 +187,8 @@ const CompressImage = () => {
                 </div>
                 <div className="preview-stat">
                   <div className="stat-icon">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                      <rect x="4" y="4" width="24" height="24" rx="8" fill="#fbbf24" opacity="0.2"/>
-                      <path d="M12 8l4 4 4-4M12 24l4-4 4 4" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 2v20M2 12h20" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
                   </div>
                   <span className="stat-label">Size Reduction</span>
@@ -229,7 +196,6 @@ const CompressImage = () => {
                 </div>
               </div>
             </div>
-            
             <button 
               className="compress-btn"
               onClick={handleCompress}
@@ -237,18 +203,17 @@ const CompressImage = () => {
             >
               {isCompressing ? (
                 <>
-                  <svg className="spinner" width="28" height="28" viewBox="0 0 28 28" fill="none">
-                    <circle cx="14" cy="14" r="12" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeDasharray="75.4" strokeDashoffset="75.4">
-                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;75.4" repeatCount="indefinite"/>
+                  <svg className="spinner" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="31.416" strokeDashoffset="31.416">
+                      <animate attributeName="stroke-dashoffset" dur="1s" values="0;31.416" repeatCount="indefinite"/>
                     </circle>
                   </svg>
                   Compressing...
                 </>
               ) : (
                 <>
-                  <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                    <rect x="4" y="4" width="20" height="20" rx="6" fill="#1f2937" opacity="0.1"/>
-                    <path d="M10 14h8M14 10v8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"/>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2v20M2 12h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                   Start Compression
                 </>
@@ -257,7 +222,6 @@ const CompressImage = () => {
           </div>
         </section>
       )}
-
       {/* Results Section */}
       {result && (
         <section className="results-section">
@@ -269,9 +233,9 @@ const CompressImage = () => {
             <div className="results-grid">
               <div className="result-card">
                 <div className="card-header">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect x="6" y="6" width="28" height="28" rx="10" fill="#6B7280" opacity="0.2"/>
-                    <path d="M14 14h12M14 18h12M14 22h10" stroke="#6B7280" strokeWidth="2.5" strokeLinecap="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="24" height="24" rx="8" fill="#6B7280" opacity="0.1"/>
+                    <path d="M12 12h8M12 16h8M12 20h6" stroke="#6B7280" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                   <h3>Original</h3>
                 </div>
@@ -280,15 +244,15 @@ const CompressImage = () => {
                 <div className="file-format">Original Format</div>
               </div>
               <div className="result-arrow">
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-                  <path d="M10 24h28M24 10l14 14-14 14" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <path d="M8 20h24M20 8l12 12-12 12" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <div className="result-card compressed">
                 <div className="card-header">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect x="6" y="6" width="28" height="28" rx="10" fill="#fbbf24" opacity="0.2"/>
-                    <path d="M14 18l4 4 8-8" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="24" height="24" rx="8" fill="#F59E0B" opacity="0.1"/>
+                    <path d="M12 16l4 4 8-8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   <h3>Compressed</h3>
                 </div>
@@ -297,13 +261,11 @@ const CompressImage = () => {
                 <div className="file-format">{result.format}</div>
               </div>
             </div>
-            
             <div className="compression-stats">
               <div className="stat">
                 <div className="stat-icon">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect x="6" y="6" width="28" height="28" rx="8" fill="#fbbf24" opacity="0.2"/>
-                    <path d="M20 10v20M10 20h20" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M16 4v24M4 16h24" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
                 <span className="stat-number">{result.reduction}%</span>
@@ -311,9 +273,8 @@ const CompressImage = () => {
               </div>
               <div className="stat">
                 <div className="stat-icon">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect x="6" y="6" width="28" height="28" rx="8" fill="#fbbf24" opacity="0.2"/>
-                    <path d="M10 20h20M20 10l10 10-10 10" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <path d="M8 16h16M16 8l8 8-8 8" stroke="#F59E0B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <span className="stat-number">{(result.originalSize - result.compressedSize) / 1024 / 1024} MB</span>
@@ -321,26 +282,24 @@ const CompressImage = () => {
               </div>
               <div className="stat">
                 <div className="stat-icon">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                    <rect x="6" y="6" width="28" height="28" rx="6" fill="#fbbf24" opacity="0.2"/>
-                    <path d="M14 14h12M14 18h12M14 22h10" stroke="#fbbf24" strokeWidth="2.5" strokeLinecap="round"/>
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="4" y="4" width="24" height="24" rx="4" fill="#3B82F6" opacity="0.1"/>
+                    <path d="M12 12h8M12 16h8M12 20h6" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </div>
                 <span className="stat-number">{result.format}</span>
                 <span className="stat-label">Output Format</span>
               </div>
             </div>
-            
             <button className="download-btn" onClick={handleDownload}>
-              <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-                <path d="M14 4v16M8 14l6 6 6-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v16M6 12l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               Download Compressed Image
             </button>
           </div>
         </section>
       )}
-
       {/* Features Section */}
       <section className="features-section">
         <div className="features-container">
@@ -351,9 +310,9 @@ const CompressImage = () => {
           <div className="features-grid">
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                  <rect x="10" y="10" width="44" height="44" rx="14" fill="#fbbf24" opacity="0.2"/>
-                  <path d="M22 32h20M32 22v20" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M20 28h16M28 20v16" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round"/>
                 </svg>
               </div>
               <h3>Smart Compression</h3>
@@ -361,9 +320,9 @@ const CompressImage = () => {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                  <rect x="10" y="10" width="44" height="44" rx="14" fill="#fbbf24" opacity="0.2"/>
-                  <path d="M22 28l8 8 16-16" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#F59E0B" opacity="0.1"/>
+                  <path d="M20 24l6 6 10-10" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Quality Assurance</h3>
@@ -371,9 +330,9 @@ const CompressImage = () => {
             </div>
             <div className="feature-card">
               <div className="feature-icon">
-                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-                  <rect x="10" y="10" width="44" height="44" rx="14" fill="#fbbf24" opacity="0.2"/>
-                  <path d="M18 28l8-8 8 8" stroke="#fbbf24" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                  <rect x="8" y="8" width="40" height="40" rx="12" fill="#D97706" opacity="0.1"/>
+                  <path d="M16 24l6-6 6 6" stroke="#D97706" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
               <h3>Lightning Fast</h3>
