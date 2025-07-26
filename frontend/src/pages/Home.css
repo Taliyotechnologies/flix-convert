@@ -15,7 +15,7 @@
   position: relative;
   overflow: hidden;
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .hero-content {
@@ -215,7 +215,7 @@
   font-size: 1.125rem;
   color: var(--color-text-secondary, #94a3b8);
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 /* Features Section */
@@ -229,7 +229,7 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .feature-card {
@@ -297,7 +297,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .service-card {
@@ -384,7 +384,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 32px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .step-card {
@@ -448,7 +448,7 @@
 
 .testimonials-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .testimonials-grid {
@@ -537,7 +537,7 @@
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 16px;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .stat-card {
@@ -582,7 +582,7 @@
 
 .cta-content {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
   position: relative;
   z-index: 2;
 }
