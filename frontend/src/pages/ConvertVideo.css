@@ -679,6 +679,7 @@ body.light .feature-card p {
 @media (max-width: 768px) {
   .convert-header {
     padding: 60px 16px 40px;
+    margin-top: 20px; /* Add space from navigation in mobile view */
   }
   
   .page-title {

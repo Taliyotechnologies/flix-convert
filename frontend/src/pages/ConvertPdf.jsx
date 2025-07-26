@@ -52,12 +52,12 @@ const ConvertPdf = () => {
   };
 
   const formatOptions = [
-    { value: 'DOCX', label: 'Word Document', icon: '📄' },
-    { value: 'TXT', label: 'Text File', icon: '📝' },
-    { value: 'HTML', label: 'Web Page', icon: '🌐' },
-    { value: 'RTF', label: 'Rich Text', icon: '📋' },
-    { value: 'EPUB', label: 'E-Book', icon: '📚' },
-    { value: 'MOBI', label: 'Kindle', icon: '📖' }
+    { value: 'DOCX', label: 'Word Document', icon: '📄', desc: 'Microsoft Word format' },
+    { value: 'TXT', label: 'Text File', icon: '📝', desc: 'Plain text format' },
+    { value: 'HTML', label: 'Web Page', icon: '🌐', desc: 'Web format' },
+    { value: 'RTF', label: 'Rich Text', icon: '📋', desc: 'Rich text format' },
+    { value: 'EPUB', label: 'E-Book', icon: '📚', desc: 'E-book format' },
+    { value: 'MOBI', label: 'Kindle', icon: '📖', desc: 'Kindle format' }
   ];
 
   return (
@@ -145,15 +145,15 @@ const ConvertPdf = () => {
               <h3>Output Format</h3>
               <div className="format-grid">
                 {formatOptions.map((format) => (
-                  <button 
+                  <div 
                     key={format.value}
                     className={`format-card ${outputFormat === format.value ? 'active' : ''}`}
                     onClick={() => setOutputFormat(format.value)}
                   >
                     <span className="format-icon">{format.icon}</span>
                     <span className="format-label">{format.label}</span>
-                    <span className="format-value">{format.value}</span>
-                  </button>
+                    <span className="format-desc">{format.desc || format.value}</span>
+                  </div>
                 ))}
               </div>
             </div>
