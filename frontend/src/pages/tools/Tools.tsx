@@ -12,8 +12,7 @@ import {
   Play,
   Sparkles,
   Zap,
-  Shield,
-  Clock
+
 } from 'lucide-react';
 
 const Tools: React.FC = () => {
@@ -331,7 +330,7 @@ const Tools: React.FC = () => {
           <div className="lg:col-span-1">
             <h2 className="text-2xl font-bold mb-8 gradient-text">Available Tools</h2>
             <div className="space-y-4">
-              {tools.map((tool, index) => (
+              {tools.map((tool) => (
                 <ToolCard key={tool.id} tool={tool} />
               ))}
             </div>

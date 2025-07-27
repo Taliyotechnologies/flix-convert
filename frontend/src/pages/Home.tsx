@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Image, 
@@ -13,31 +13,25 @@ import {
   Users,
   Star,
   TrendingUp,
-  Sparkles,
-  Download,
+
   Upload,
   Play,
   File,
-  Layers,
+
   Globe,
   Award,
   Heart,
   Rocket,
   Cpu,
-  Database,
-  Wifi,
-  Target,
-  Eye,
+
   Brain,
   User
 } from 'lucide-react';
 
 const Home: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
 
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
+
+
 
   const features = [
     {

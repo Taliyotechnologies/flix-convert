@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X, ChevronDown, User, LogIn, Sparkles } from 'lucide-react';
+import { Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
 const Navbar: React.FC = () => {

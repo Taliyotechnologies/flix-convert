@@ -8,7 +8,7 @@ import {
   Heart,
   TrendingUp,
   CheckCircle,
-  Star,
+
   Award,
   Rocket,
   Lightbulb
