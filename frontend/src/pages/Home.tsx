@@ -66,38 +66,39 @@ const Home: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-primary text-white py-20 lg:py-32">
-        {/* Animated background elements */}
+      <section className="relative overflow-hidden bg-gradient-hero text-white section-padding">
+        {/* Enhanced animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full animate-float"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-white/10 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute bottom-20 left-1/4 w-16 h-16 bg-white/10 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-1/2 left-1/3 w-20 h-20 bg-white/5 rounded-full animate-pulse"></div>
+          <div className="absolute top-20 left-10 w-40 h-40 bg-white/10 rounded-full animate-float blur-xl"></div>
+          <div className="absolute top-40 right-20 w-32 h-32 bg-white/10 rounded-full animate-float blur-xl" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-white/10 rounded-full animate-float blur-xl" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/2 left-1/3 w-28 h-28 bg-white/5 rounded-full animate-pulse blur-lg"></div>
+          <div className="absolute top-1/3 right-1/4 w-20 h-20 bg-white/5 rounded-full animate-float blur-lg" style={{ animationDelay: '1.5s' }}></div>
         </div>
 
         <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+          <div className="max-w-5xl mx-auto text-center animate-fade-in">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
               Convert & Compress
               <span className="block gradient-text-accent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                 Everything
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl mb-10 text-white/90 max-w-4xl mx-auto leading-relaxed">
               Professional-grade file conversion and compression tools. 
               Images, videos, PDFs, and audio files - all in one place.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-slide-in">
               <Link
                 to="/tools"
-                className="btn bg-white text-primary-color hover:bg-gray-100 text-lg px-8 py-4 shadow-xl"
+                className="btn bg-white text-primary-color hover:bg-gray-100 text-lg px-10 py-5 shadow-2xl rounded-2xl"
               >
                 Start Converting
-                <ArrowRight size={20} />
+                <ArrowRight size={24} />
               </Link>
               <Link
                 to="/company"
-                className="btn glass border-2 border-white/20 text-white hover:bg-white/10 text-lg px-8 py-4 backdrop-blur-sm"
+                className="btn glass border-2 border-white/20 text-white hover:bg-white/10 text-lg px-10 py-5 rounded-2xl backdrop-blur-sm"
               >
                 Learn More
               </Link>
@@ -107,13 +108,13 @@ const Home: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 lg:py-32 bg-bg-secondary">
+      <section className="section-padding bg-bg-secondary">
         <div className="container">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+          <div className="text-center mb-20 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
               Powerful Tools
             </h2>
-            <p className="text-xl text-text-secondary max-w-2xl mx-auto">
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
               Everything you need to convert and compress your files with professional quality
             </p>
           </div>
@@ -124,17 +125,17 @@ const Home: React.FC = () => {
               return (
                 <div 
                   key={index} 
-                  className="card group hover:shadow-xl transition-all duration-500 animate-fade-in"
+                  className="card group hover:shadow-2xl transition-all duration-500 animate-fade-in rounded-3xl"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div 
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
+                    className="w-20 h-20 rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300 shadow-lg"
                     style={{ background: feature.gradient }}
                   >
-                    <Icon size={32} className="text-white" />
+                    <Icon size={36} className="text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-text-secondary leading-relaxed">{feature.description}</p>
+                  <h3 className="text-2xl font-semibold mb-4">{feature.title}</h3>
+                  <p className="text-text-secondary leading-relaxed text-lg">{feature.description}</p>
                 </div>
               );
             })}
@@ -143,88 +144,89 @@ const Home: React.FC = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 lg:py-32">
+      <section className="section-padding">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
             <div className="animate-slide-in">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 gradient-text">
                 Why Choose FlixConvert?
               </h2>
-              <p className="text-xl text-text-secondary mb-8 leading-relaxed">
+              <p className="text-xl text-text-secondary mb-10 leading-relaxed">
                 We provide the fastest, most secure, and most reliable file conversion and compression services.
               </p>
               
-              <div className="space-y-6">
+              <div className="space-y-8">
                 {benefits.map((benefit, index) => {
                   const Icon = benefit.icon;
                   return (
-                    <div key={index} className="flex items-start gap-4 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                      <div className="w-10 h-10 rounded-xl bg-gradient-primary flex items-center justify-center flex-shrink-0 mt-1">
-                        <Icon size={20} className="text-white" />
+                    <div key={index} className="flex items-start gap-6 animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                      <div className="w-12 h-12 rounded-2xl bg-gradient-primary flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
+                        <Icon size={24} className="text-white" />
                       </div>
-                      <span className="text-text-primary leading-relaxed">{benefit.text}</span>
+                      <span className="text-text-primary leading-relaxed text-lg">{benefit.text}</span>
                     </div>
                   );
                 })}
               </div>
 
-              <div className="mt-8">
+              <div className="mt-12">
                 <Link
                   to="/tools"
-                  className="btn btn-primary text-lg px-8 py-4 shadow-xl"
+                  className="btn btn-primary text-lg px-10 py-5 shadow-2xl rounded-2xl"
                 >
                   Try Our Tools
-                  <ArrowRight size={20} />
+                  <ArrowRight size={24} />
                 </Link>
               </div>
             </div>
 
             <div className="relative animate-fade-in">
-              <div className="card p-8 bg-gradient-to-br from-primary-color/10 to-accent-color/10 border-0 shadow-xl">
-                <div className="grid grid-cols-2 gap-6">
+              <div className="card p-10 bg-gradient-to-br from-primary-color/10 to-accent-color/10 border-0 shadow-2xl rounded-3xl">
+                <div className="grid grid-cols-2 gap-8">
                   {stats.map((stat, index) => (
                     <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                      <div className={`text-3xl font-bold mb-2 ${stat.color}`}>{stat.number}</div>
-                      <div className="text-text-secondary">{stat.label}</div>
+                      <div className={`text-4xl font-bold mb-3 ${stat.color}`}>{stat.number}</div>
+                      <div className="text-text-secondary text-lg">{stat.label}</div>
                     </div>
                   ))}
                 </div>
               </div>
               
-              {/* Floating elements */}
-              <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-accent rounded-full opacity-20 animate-pulse"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-secondary rounded-full opacity-20 animate-float"></div>
+              {/* Enhanced floating elements */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-accent rounded-full opacity-20 animate-pulse blur-lg"></div>
+              <div className="absolute -bottom-6 -left-6 w-20 h-20 bg-gradient-secondary rounded-full opacity-20 animate-float blur-lg"></div>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 lg:py-32 bg-gradient-secondary text-white relative overflow-hidden">
-        {/* Background decoration */}
+      <section className="section-padding bg-gradient-secondary text-white relative overflow-hidden">
+        {/* Enhanced background decoration */}
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-float"></div>
-          <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-10 left-10 w-40 h-40 bg-white/10 rounded-full animate-float blur-xl"></div>
+          <div className="absolute bottom-10 right-10 w-32 h-32 bg-white/10 rounded-full animate-float blur-xl" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-white/5 rounded-full animate-pulse blur-lg"></div>
         </div>
         
         <div className="container text-center relative z-10">
-          <div className="max-w-3xl mx-auto animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <div className="max-w-4xl mx-auto animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">
               Ready to Get Started?
             </h2>
-            <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl mb-10 text-white/90 max-w-3xl mx-auto leading-relaxed">
               Join thousands of users who trust FlixConvert for their file conversion and compression needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-in">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center animate-slide-in">
               <Link
                 to="/signup"
-                className="btn bg-white text-primary-color hover:bg-gray-100 text-lg px-8 py-4 shadow-xl"
+                className="btn bg-white text-primary-color hover:bg-gray-100 text-lg px-10 py-5 shadow-2xl rounded-2xl"
               >
                 Create Free Account
               </Link>
               <Link
                 to="/tools"
-                className="btn glass border-2 border-white/20 text-white hover:bg-white/10 text-lg px-8 py-4 backdrop-blur-sm"
+                className="btn glass border-2 border-white/20 text-white hover:bg-white/10 text-lg px-10 py-5 rounded-2xl backdrop-blur-sm"
               >
                 Try Without Signup
               </Link>
