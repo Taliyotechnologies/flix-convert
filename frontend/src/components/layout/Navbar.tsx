@@ -88,22 +88,18 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 shadow-lg' 
-        : 'bg-transparent'
-    }`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-800 border-b border-gray-600">
       <div className="container">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
-              {/* Blue square (bottom) */}
-              <div className="w-8 h-8 bg-blue-500 rounded-md shadow-lg group-hover:shadow-xl transition-all duration-300"></div>
-              {/* Green square (top-right) */}
-              <div className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-md shadow-lg group-hover:shadow-xl transition-all duration-300"></div>
+              {/* Blue square (bottom-right) */}
+              <div className="w-8 h-8 border-2 border-blue-500 rounded-md"></div>
+              {/* Green square (top-left) */}
+              <div className="absolute -top-1 -left-1 w-6 h-6 border-2 border-green-500 rounded-md"></div>
             </div>
-            <span className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+            <span className="text-xl lg:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
               ImageResizer
             </span>
           </Link>
@@ -117,8 +113,8 @@ const Navbar: React.FC = () => {
                     <button
                       onClick={() => handleDropdownToggle(item.name)}
                       onMouseEnter={() => setActiveDropdown(item.name)}
-                      className={`flex items-center gap-1 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 font-medium ${
-                        isActive(item.path) ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20' : ''
+                      className={`flex items-center gap-1 px-4 py-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
+                        isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
                       }`}
                     >
                       {item.name}
@@ -130,14 +126,14 @@ const Navbar: React.FC = () => {
                     {/* Dropdown Menu */}
                     {activeDropdown === item.name && (
                       <div 
-                        className="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50"
+                        className="absolute top-full left-0 mt-1 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-600 py-2 z-50"
                         onMouseLeave={() => setActiveDropdown(null)}
                       >
                         {item.dropdownItems?.map((dropdownItem) => (
                           <Link
                             key={dropdownItem.name}
                             to={dropdownItem.path}
-                            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+                            className="block px-4 py-2 text-sm text-white hover:text-blue-400 hover:bg-gray-700 transition-colors duration-200"
                             onClick={closeDropdowns}
                           >
                             {dropdownItem.name}
@@ -149,8 +145,8 @@ const Navbar: React.FC = () => {
                 ) : (
                   <Link
                     to={item.path}
-                    className={`px-4 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 font-medium ${
-                      isActive(item.path) ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20' : ''
+                    className={`px-4 py-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
+                      isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
                     }`}
                   >
                     {item.name}
@@ -164,7 +160,7 @@ const Navbar: React.FC = () => {
           <div className="hidden lg:flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
+              className="p-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200"
               aria-label="Toggle theme"
             >
               {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
@@ -172,7 +168,7 @@ const Navbar: React.FC = () => {
             
             <Link
               to="/login"
-              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 font-medium"
+              className="px-4 py-2 rounded-lg border border-gray-600 text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium"
             >
               Login
             </Link>
@@ -188,7 +184,7 @@ const Navbar: React.FC = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
+            className="lg:hidden p-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200"
             aria-label="Toggle menu"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -197,7 +193,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 animate-fade-in">
+          <div className="lg:hidden border-t border-gray-600 bg-gray-800 animate-fade-in">
             <div className="px-4 py-6 space-y-2">
               {navItems.map((item) => (
                 <div key={item.name}>
@@ -205,8 +201,8 @@ const Navbar: React.FC = () => {
                     <div>
                       <button
                         onClick={() => handleDropdownToggle(item.name)}
-                        className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-left text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 font-medium ${
-                          isActive(item.path) ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20' : ''
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-left text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
+                          isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
                         }`}
                       >
                         {item.name}
@@ -221,7 +217,7 @@ const Navbar: React.FC = () => {
                             <Link
                               key={dropdownItem.name}
                               to={dropdownItem.path}
-                              className="block px-4 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors duration-200"
+                              className="block px-4 py-2 text-sm text-gray-300 hover:text-blue-400 hover:bg-gray-700 rounded-lg transition-colors duration-200"
                               onClick={() => {
                                 setIsMenuOpen(false);
                                 setActiveDropdown(null);
@@ -236,8 +232,8 @@ const Navbar: React.FC = () => {
                   ) : (
                     <Link
                       to={item.path}
-                      className={`block px-4 py-3 rounded-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200 font-medium ${
-                        isActive(item.path) ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20' : ''
+                      className={`block px-4 py-3 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
+                        isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -247,12 +243,12 @@ const Navbar: React.FC = () => {
                 </div>
               ))}
               
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="pt-4 border-t border-gray-600">
                 <div className="flex items-center justify-between px-4 py-3">
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">Theme</span>
+                  <span className="text-white font-medium">Theme</span>
                   <button
                     onClick={toggleTheme}
-                    className="p-2 rounded-lg text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-200"
+                    className="p-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200"
                   >
                     {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
                   </button>
@@ -261,7 +257,7 @@ const Navbar: React.FC = () => {
                 <div className="flex flex-col gap-3 px-4 py-3">
                   <Link
                     to="/login"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 transition-all duration-200 font-medium text-center"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-600 text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium text-center"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Login
