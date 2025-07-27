@@ -91,31 +91,82 @@ const Home: React.FC = () => {
     <div className="home">
       {/* Hero Section */}
       <section className="hero">
+        <div className="hero-background">
+          <div className="hero-shape hero-shape-1"></div>
+          <div className="hero-shape hero-shape-2"></div>
+          <div className="hero-shape hero-shape-3"></div>
+        </div>
+        
         <div className="container">
           <div className="hero-content">
-            <h1 className="hero-title">
-              Transform Your Files with Professional Precision
-            </h1>
-            <p className="hero-subtitle">
-              The ultimate file conversion platform trusted by millions. Convert, compress, and optimize your files with enterprise-grade technology - all for free up to 10MB.
-            </p>
-            <div className="hero-buttons">
-              <Link to="/tools" className="btn btn-primary">
-                Start Converting Now
-              </Link>
-              <Link to="/company" className="btn btn-secondary">
-                Learn More
-              </Link>
+            <div className="hero-text">
+              <div className="hero-badge">
+                <span>✨ Free up to 10MB</span>
+              </div>
+              
+              <h1 className="hero-title">
+                The Ultimate File
+                <span className="hero-title-accent"> Conversion</span>
+                <br />
+                Platform
+              </h1>
+              
+              <p className="hero-subtitle">
+                Transform your files with professional precision. Convert, compress, and optimize images, videos, PDFs, and audio files with enterprise-grade technology.
+              </p>
+              
+              <div className="hero-buttons">
+                <Link to="/tools" className="btn btn-primary hero-btn-primary">
+                  <svg className="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  Start Converting Now
+                </Link>
+                <Link to="/company" className="btn btn-secondary hero-btn-secondary">
+                  Learn More
+                </Link>
+              </div>
+              
+              <div className="hero-trust">
+                <div className="trust-text">Trusted by millions worldwide</div>
+                <div className="trust-stats">
+                  {stats.map((stat, index) => (
+                    <div key={index} className="trust-stat">
+                      <div className="trust-number">{stat.number}</div>
+                      <div className="trust-label">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
             
-            {/* Stats */}
-            <div className="hero-stats">
-              {stats.map((stat, index) => (
-                <div key={index} className="stat-item">
-                  <div className="stat-number">{stat.number}</div>
-                  <div className="stat-label">{stat.label}</div>
+            <div className="hero-visual">
+              <div className="hero-card">
+                <div className="card-header">
+                  <div className="card-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
                 </div>
-              ))}
+                <div className="card-content">
+                  <div className="file-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <div className="file-info">
+                    <div className="file-name">document.pdf</div>
+                    <div className="file-size">2.4 MB</div>
+                  </div>
+                  <div className="conversion-status">
+                    <div className="status-bar">
+                      <div className="status-progress"></div>
+                    </div>
+                    <div className="status-text">Converting...</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
