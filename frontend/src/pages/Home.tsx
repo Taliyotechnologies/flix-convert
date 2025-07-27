@@ -221,7 +221,7 @@ const Home: React.FC = () => {
               <div className="badge-icon">
                 <Sparkles size={14} />
               </div>
-              <span>AI-Powered File Processing</span>
+              <span>🚀 AI-Powered File Processing</span>
             </div>
             
             <h1 className="hero-title">
@@ -233,7 +233,7 @@ const Home: React.FC = () => {
             
             <p className="hero-description">
               Transform, compress, and convert your files with enterprise-grade technology. 
-              Lightning-fast processing with zero quality loss.
+              Lightning-fast processing with zero quality loss. Trusted by 100,000+ users worldwide.
             </p>
 
             <div className="hero-actions">
@@ -253,19 +253,34 @@ const Home: React.FC = () => {
                 <div className="trust-icon">
                   <Shield size={14} />
                 </div>
-                <span>Enterprise Security</span>
+                <span>🔒 Enterprise Security</span>
               </div>
               <div className="trust-item">
                 <div className="trust-icon">
                   <Clock size={14} />
                 </div>
-                <span>Instant Results</span>
+                <span>⚡ Instant Results</span>
               </div>
               <div className="trust-item">
                 <div className="trust-icon">
                   <Globe size={14} />
                 </div>
-                <span>Global Infrastructure</span>
+                <span>🌍 Global Infrastructure</span>
+              </div>
+            </div>
+
+            <div className="hero-stats">
+              <div className="stat-item">
+                <span className="stat-number">100K+</span>
+                <span className="stat-label">Happy Users</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">50+</span>
+                <span className="stat-label">File Formats</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">99.9%</span>
+                <span className="stat-label">Uptime</span>
               </div>
             </div>
           </div>
@@ -336,6 +351,21 @@ const Home: React.FC = () => {
                   <Download size={24} />
                   <span>Download</span>
                 </div>
+              </div>
+            </div>
+
+            <div className="floating-elements">
+              <div className="floating-icon floating-1">
+                <FileImage size={16} />
+              </div>
+              <div className="floating-icon floating-2">
+                <FileVideo size={16} />
+              </div>
+              <div className="floating-icon floating-3">
+                <FileAudio size={16} />
+              </div>
+              <div className="floating-icon floating-4">
+                <FileText size={16} />
               </div>
             </div>
           </div>
