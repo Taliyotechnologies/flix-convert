@@ -29,6 +29,13 @@
   --gradient-secondary: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
   --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
   
+  /* Accent Colors for File Types */
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-green: #10b981;
+  --accent-orange: #f59e0b;
+  --accent-primary: #6366f1;
+  
   /* Theme Transition */
   --transition-theme: all 0.3s ease;
 }

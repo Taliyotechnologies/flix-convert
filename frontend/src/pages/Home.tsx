@@ -18,36 +18,67 @@ import {
   ArrowDown,
   Clock,
   Globe,
-  Award
+  Award,
+  Compress,
+  File,
+  Settings,
+  BarChart3
 } from 'lucide-react';
 import './Home.css';
 
 const Home: React.FC = () => {
+  const fileTypes = [
+    {
+      icon: <FileImage className="file-type-icon" />,
+      name: "Images",
+      formats: ["JPG", "PNG", "WEBP", "SVG", "GIF"],
+      color: "var(--accent-blue)"
+    },
+    {
+      icon: <FileVideo className="file-type-icon" />,
+      name: "Videos", 
+      formats: ["MP4", "AVI", "MOV", "MKV", "WEBM"],
+      color: "var(--accent-purple)"
+    },
+    {
+      icon: <FileAudio className="file-type-icon" />,
+      name: "Audio",
+      formats: ["MP3", "WAV", "AAC", "FLAC", "OGG"],
+      color: "var(--accent-green)"
+    },
+    {
+      icon: <FileText className="file-type-icon" />,
+      name: "Documents",
+      formats: ["PDF", "DOC", "DOCX", "TXT", "RTF"],
+      color: "var(--accent-orange)"
+    }
+  ];
+
   const features = [
     {
-      icon: <FileVideo className="feature-icon" />,
-      title: "Video Conversion",
-      description: "Convert videos to any format with high quality and fast processing"
+      icon: <Compress className="feature-icon" />,
+      title: "Smart Compression",
+      description: "Reduce file sizes by up to 80% while maintaining quality"
     },
     {
-      icon: <FileAudio className="feature-icon" />,
-      title: "Audio Conversion",
-      description: "Transform audio files between different formats seamlessly"
+      icon: <Settings className="feature-icon" />,
+      title: "Format Conversion",
+      description: "Convert between 50+ formats with one-click simplicity"
     },
     {
-      icon: <FileImage className="feature-icon" />,
-      title: "Image Conversion",
-      description: "Convert images to various formats while maintaining quality"
+      icon: <Shield className="feature-icon" />,
+      title: "Secure Processing",
+      description: "Your files are encrypted and automatically deleted after processing"
     },
     {
-      icon: <FileText className="feature-icon" />,
-      title: "PDF Conversion",
-      description: "Convert PDFs to different formats with precision"
+      icon: <Zap className="feature-icon" />,
+      title: "Lightning Fast",
+      description: "Process files in seconds with our optimized cloud infrastructure"
     }
   ];
 
   const stats = [
-    { number: "10M+", label: "Files Converted", icon: <Download /> },
+    { number: "50M+", label: "Files Processed", icon: <File /> },
     { number: "50+", label: "Supported Formats", icon: <FileVideo /> },
     { number: "99.9%", label: "Uptime", icon: <Shield /> },
     { number: "24/7", label: "Support", icon: <Users /> }
@@ -78,7 +109,7 @@ const Home: React.FC = () => {
     <div className="home">
       <div className="bg-pattern"></div>
       
-      {/* Premium Hero Section */}
+      {/* Professional Hero Section */}
       <section className="hero-section">
         <div className="hero-background">
           <div className="hero-gradient-overlay"></div>
@@ -87,31 +118,51 @@ const Home: React.FC = () => {
             <div className="shape shape-2"></div>
             <div className="shape shape-3"></div>
             <div className="shape shape-4"></div>
+            <div className="shape shape-5"></div>
           </div>
         </div>
         
         <div className="container">
           <div className="hero-content">
-            {/* Premium Badge */}
+            {/* Professional Badge */}
             <div className="hero-badge">
               <div className="badge-icon">
                 <Sparkles size={16} />
               </div>
-              <span>AI-Powered File Conversion</span>
+              <span>Professional File Processing</span>
               <div className="badge-pulse"></div>
             </div>
             
             {/* Main Heading */}
             <h1 className="hero-title">
-              Transform Files with
-              <span className="gradient-text"> Lightning Speed</span>
+              Compress & Convert Files
+              <span className="gradient-text"> Like a Pro</span>
             </h1>
             
             {/* Subtitle */}
             <p className="hero-description">
-              Experience the future of file conversion with our advanced AI-powered platform. 
-              Convert videos, audio, images, and PDFs instantly with professional quality and blazing fast speed.
+              Transform images, videos, audio, and documents with our advanced compression and conversion engine. 
+              Reduce file sizes, change formats, and optimize your content with professional-grade tools.
             </p>
+            
+            {/* File Types Showcase */}
+            <div className="file-types-showcase">
+              {fileTypes.map((type, index) => (
+                <div key={index} className="file-type-card" style={{ '--accent-color': type.color } as React.CSSProperties}>
+                  <div className="file-type-icon-wrapper">
+                    {type.icon}
+                  </div>
+                  <div className="file-type-info">
+                    <h4>{type.name}</h4>
+                    <div className="file-formats">
+                      {type.formats.map((format, idx) => (
+                        <span key={idx} className="format-tag">{format}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
             
             {/* Premium Features */}
             <div className="hero-features">
@@ -127,21 +178,28 @@ const Home: React.FC = () => {
                 <Shield size={18} />
                 <span>100% Secure</span>
               </div>
+              <div className="feature-item">
+                <BarChart3 size={18} />
+                <span>Smart Optimization</span>
+              </div>
             </div>
             
             {/* CTA Buttons */}
             <div className="hero-buttons">
-              <Link to="/convert" className="btn-primary">
+              <Link to="/compress" className="btn-primary">
                 <div className="btn-content">
-                  <Play size={20} />
-                  <span>Start Converting Now</span>
+                  <Compress size={20} />
+                  <span>Compress Files</span>
                   <ArrowRight size={20} />
                 </div>
                 <div className="btn-glow"></div>
               </Link>
-              <Link to="/about" className="btn-secondary">
-                <span>Learn More</span>
-                <ArrowDown size={16} />
+              <Link to="/convert" className="btn-secondary">
+                <div className="btn-content">
+                  <Settings size={20} />
+                  <span>Convert Format</span>
+                  <ArrowRight size={20} />
+                </div>
               </Link>
             </div>
             
@@ -154,6 +212,10 @@ const Home: React.FC = () => {
               <div className="trust-item">
                 <Award size={16} />
                 <span>Industry Leading</span>
+              </div>
+              <div className="trust-item">
+                <Shield size={16} />
+                <span>GDPR Compliant</span>
               </div>
             </div>
             
@@ -172,7 +234,7 @@ const Home: React.FC = () => {
         
         {/* Scroll Indicator */}
         <div className="scroll-indicator">
-          <div className="scroll-text">Scroll to explore</div>
+          <div className="scroll-text">Explore features</div>
           <div className="scroll-arrow">
             <ArrowDown size={20} />
           </div>
@@ -185,7 +247,7 @@ const Home: React.FC = () => {
           <div className="section-header">
             <h2 className="section-title">Why Choose ConvertFlix?</h2>
             <p className="section-subtitle">
-              Experience the future of file conversion with our cutting-edge technology
+              Professional-grade tools for all your file processing needs
             </p>
           </div>
           
@@ -226,10 +288,10 @@ const Home: React.FC = () => {
             <div className="step-card glass-card">
               <div className="step-number">2</div>
               <div className="step-icon">
-                <Zap size={32} />
+                <Settings size={32} />
               </div>
-              <h3>Choose Format</h3>
-              <p>Select your desired output format from our extensive list of options.</p>
+              <h3>Choose Settings</h3>
+              <p>Select compression level or target format. Our AI suggests optimal settings.</p>
             </div>
             
             <div className="step-card glass-card">
@@ -238,7 +300,7 @@ const Home: React.FC = () => {
                 <Download size={32} />
               </div>
               <h3>Download Result</h3>
-              <p>Get your converted file instantly with professional quality.</p>
+              <p>Get your processed file instantly with professional quality.</p>
             </div>
           </div>
         </div>
@@ -277,8 +339,8 @@ const Home: React.FC = () => {
       <section className="cta-section">
         <div className="container">
           <div className="cta-content glass-card">
-            <h2>Ready to Transform Your Files?</h2>
-            <p>Join millions of users who trust ConvertFlix for their file conversion needs</p>
+            <h2>Ready to Optimize Your Files?</h2>
+            <p>Join millions of users who trust ConvertFlix for their file processing needs</p>
             <div className="cta-buttons">
               <Link to="/signup" className="btn-primary">
                 <CheckCircle size={20} />
