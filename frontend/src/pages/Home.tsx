@@ -95,8 +95,6 @@ const Home: React.FC = () => {
     }
   ];
 
-
-
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -212,74 +210,6 @@ const Home: React.FC = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-container">
-          <div className="hero-content">
-            <div className="hero-badge">
-              <div className="badge-icon">
-                <Sparkles size={14} />
-              </div>
-              <span>🚀 AI-Powered File Processing</span>
-            </div>
-            
-            <h1 className="hero-title">
-              Professional File
-              <span className="gradient-text"> Processing</span>
-              <br />
-              <span className="hero-subtitle">Made Simple</span>
-            </h1>
-            
-            <p className="hero-description">
-              Transform, compress, and convert your files with enterprise-grade technology. 
-              Lightning-fast processing with zero quality loss. Trusted by 100,000+ users worldwide.
-            </p>
-
-            <div className="hero-actions">
-              <Link to="/compress" className="btn-primary">
-                <Zap size={18} />
-                <span>Start Processing</span>
-                <ArrowRight size={18} />
-              </Link>
-              <Link to="/convert" className="btn-secondary">
-                <Settings size={18} />
-                <span>Convert Files</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="hero-visual">
-            <div className="hero-card main-card">
-              <div className="card-header">
-                <div className="card-icon">
-                  <FileImage size={20} />
-                </div>
-                <div className="card-title">Image Processing</div>
-              </div>
-              <div className="card-progress">
-                <div className="progress-bar">
-                  <div className="progress-fill"></div>
-                </div>
-                <span className="progress-text">Processing...</span>
-              </div>
-            </div>
-
-            <div className="hero-card secondary-card">
-              <div className="card-header">
-                <div className="card-icon">
-                  <FileVideo size={20} />
-                </div>
-                <div className="card-title">Video Conversion</div>
-              </div>
-              <div className="card-status">
-                <div className="status-dot"></div>
-                <span>Ready</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section className="features">
         <div className="container">
@@ -298,12 +228,12 @@ const Home: React.FC = () => {
                 style={{ '--feature-color': feature.color } as React.CSSProperties}
                 onMouseEnter={() => setActiveFeature(index)}
               >
+                <div className="feature-highlight"></div>
                 <div className="feature-icon-wrapper">
                   {feature.icon}
                 </div>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
-                <div className="feature-highlight"></div>
               </div>
             ))}
           </div>
@@ -314,23 +244,27 @@ const Home: React.FC = () => {
       <section className="file-types">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">Support for All File Types</h2>
+            <h2 className="section-title">Supported File Types</h2>
             <p className="section-subtitle">
-              From images to videos, we handle everything you need
+              Process any file format with our comprehensive conversion tools
             </p>
           </div>
 
           <div className="file-types-grid">
             {fileTypes.map((type, index) => (
-              <div key={index} className="file-type-card" style={{ '--type-color': type.color } as React.CSSProperties}>
+              <div 
+                key={index} 
+                className="file-type-card"
+                style={{ '--type-color': type.color } as React.CSSProperties}
+              >
                 <div className="file-type-header">
-                  <div className="file-type-icon">{type.icon}</div>
+                  {type.icon}
                   <h3>{type.name}</h3>
                 </div>
                 <p className="file-type-description">{type.description}</p>
                 <div className="file-formats">
-                  {type.formats.map((format, idx) => (
-                    <span key={idx} className="format-tag">{format}</span>
+                  {type.formats.map((format, formatIndex) => (
+                    <span key={formatIndex} className="format-tag">{format}</span>
                   ))}
                 </div>
               </div>
@@ -345,40 +279,35 @@ const Home: React.FC = () => {
           <div className="section-header">
             <h2 className="section-title">How It Works</h2>
             <p className="section-subtitle">
-              Get started in just three simple steps
+              Simple three-step process to transform your files
             </p>
           </div>
 
           <div className="steps-container">
+            <div className="step-connector"></div>
             <div className="step-card">
               <div className="step-number">1</div>
               <div className="step-icon">
                 <Upload size={32} />
               </div>
-              <h3>Upload Your File</h3>
-              <p>Drag and drop your file or click to browse. We support all major formats.</p>
+              <h3>Upload Files</h3>
+              <p>Drag and drop your files or click to browse. We support all major formats.</p>
             </div>
-
-            <div className="step-connector"></div>
-
             <div className="step-card">
               <div className="step-number">2</div>
               <div className="step-icon">
                 <Settings size={32} />
               </div>
               <h3>Choose Settings</h3>
-              <p>Select compression level or target format. Our AI suggests optimal settings.</p>
+              <p>Select your preferred compression level and output format.</p>
             </div>
-
-            <div className="step-connector"></div>
-
             <div className="step-card">
               <div className="step-number">3</div>
               <div className="step-icon">
                 <Download size={32} />
               </div>
-              <h3>Download Result</h3>
-              <p>Get your processed file instantly with professional quality.</p>
+              <h3>Download Results</h3>
+              <p>Get your processed files instantly with optimized quality.</p>
             </div>
           </div>
         </div>
@@ -390,7 +319,7 @@ const Home: React.FC = () => {
           <div className="section-header">
             <h2 className="section-title">What Our Users Say</h2>
             <p className="section-subtitle">
-              Join thousands of satisfied users worldwide
+              Trusted by thousands of professionals worldwide
             </p>
           </div>
 
@@ -407,7 +336,7 @@ const Home: React.FC = () => {
                   </div>
                   <div className="testimonial-rating">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} size={16} fill="#fbbf24" color="#fbbf24" />
+                      <Star key={i} size={16} fill="currentColor" />
                     ))}
                   </div>
                 </div>
@@ -422,37 +351,44 @@ const Home: React.FC = () => {
       <section className="pricing">
         <div className="container">
           <div className="section-header">
-            <h2 className="section-title">Choose Your Plan</h2>
+            <h2 className="section-title">Simple Pricing</h2>
             <p className="section-subtitle">
-              Start free, upgrade when you need more
+              Choose the plan that fits your needs
             </p>
           </div>
 
           <div className="pricing-grid">
             {pricingPlans.map((plan, index) => (
-              <div key={index} className={`pricing-card ${plan.popular ? 'popular' : ''}`}>
+              <div 
+                key={index} 
+                className={`pricing-card ${plan.popular ? 'popular' : ''}`}
+                style={{ '--plan-color': plan.color } as React.CSSProperties}
+              >
                 {plan.popular && (
                   <div className="popular-badge">
                     <Crown size={16} />
-                    Most Popular
+                    <span>Most Popular</span>
                   </div>
                 )}
                 <div className="pricing-header">
                   <h3>{plan.name}</h3>
-                  <div className="pricing-amount">
-                    <span className="price">{plan.price}</span>
-                    <span className="period">/{plan.period}</span>
-                  </div>
+                </div>
+                <div className="pricing-amount">
+                  <span className="price">{plan.price}</span>
+                  <span className="period">/{plan.period}</span>
                 </div>
                 <ul className="pricing-features">
-                  {plan.features.map((feature, idx) => (
-                    <li key={idx}>
+                  {plan.features.map((feature, featureIndex) => (
+                    <li key={featureIndex}>
                       <Check size={16} />
                       {feature}
                     </li>
                   ))}
                 </ul>
-                <Link to="/signup" className={`pricing-btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}>
+                <Link 
+                  to="/signup" 
+                  className={`pricing-btn ${plan.popular ? 'btn-primary' : 'btn-secondary'}`}
+                >
                   Get Started
                 </Link>
               </div>
@@ -466,15 +402,19 @@ const Home: React.FC = () => {
         <div className="container">
           <div className="cta-content">
             <h2>Ready to Transform Your Files?</h2>
-            <p>Join millions of users who trust ConvertFlix for their file processing needs</p>
+            <p>
+              Join thousands of users who trust ConvertFlix for their file processing needs. 
+              Start converting and compressing files today.
+            </p>
             <div className="cta-actions">
-              <Link to="/signup" className="btn-primary">
-                <Sparkles size={20} />
-                Get Started Free
+              <Link to="/compress" className="btn-primary">
+                <Zap size={18} />
+                <span>Start Processing</span>
+                <ArrowRight size={18} />
               </Link>
-              <Link to="/contact" className="btn-text">
-                Contact Support
-                <ArrowRight size={16} />
+              <Link to="/convert" className="btn-secondary">
+                <Settings size={18} />
+                <span>Convert Files</span>
               </Link>
             </div>
           </div>
@@ -489,43 +429,47 @@ const Home: React.FC = () => {
               <div className="brand-icon">
                 <Sparkles size={24} />
               </div>
-              <span className="brand-text">ConvertFlix</span>
-              <p>Professional file processing made simple</p>
+              <div className="brand-text">ConvertFlix</div>
+              <p>
+                Professional file processing tools for modern workflows. 
+                Fast, secure, and reliable conversion services.
+              </p>
             </div>
             
             <div className="footer-links">
               <div className="footer-section">
                 <h4>Product</h4>
-                <Link to="/compress">Compress</Link>
-                <Link to="/convert">Convert</Link>
-                <Link to="/about">About</Link>
+                <Link to="/compress">File Compression</Link>
+                <Link to="/convert">Format Conversion</Link>
+                <Link to="/about">About Us</Link>
+                <Link to="/contact">Contact</Link>
               </div>
               
               <div className="footer-section">
                 <h4>Support</h4>
-                <Link to="/contact">Contact</Link>
                 <Link to="/help">Help Center</Link>
                 <Link to="/docs">Documentation</Link>
+                <Link to="/api">API Reference</Link>
+                <Link to="/status">Service Status</Link>
               </div>
               
               <div className="footer-section">
                 <h4>Company</h4>
-                <Link to="/about">About Us</Link>
-                <Link to="/privacy">Privacy</Link>
-                <Link to="/terms">Terms</Link>
+                <Link to="/privacy">Privacy Policy</Link>
+                <Link to="/terms">Terms of Service</Link>
+                <Link to="/cookies">Cookie Policy</Link>
+                <Link to="/security">Security</Link>
               </div>
             </div>
           </div>
           
           <div className="footer-bottom">
-            <p>&copy; 2024 ConvertFlix. All rights reserved.</p>
+            <div className="footer-copyright">
+              © 2024 ConvertFlix. All rights reserved.
+            </div>
             <div className="footer-social">
-              <a href="#" aria-label="Twitter">
-                <Globe size={16} />
-              </a>
-              <a href="#" aria-label="GitHub">
-                <Heart size={16} />
-              </a>
+              <Link to="#"><Globe size={20} /></Link>
+              <Link to="#"><Heart size={20} /></Link>
             </div>
           </div>
         </div>
