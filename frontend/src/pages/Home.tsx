@@ -12,17 +12,16 @@ import {
   Users, 
   Star,
   ArrowRight,
-  Play,
   CheckCircle,
   Sparkles,
   ArrowDown,
   Clock,
   Globe,
   Award,
-  Compress,
   File,
   Settings,
-  BarChart3
+  BarChart3,
+  Minus
 } from 'lucide-react';
 import './Home.css';
 
@@ -56,7 +55,7 @@ const Home: React.FC = () => {
 
   const features = [
     {
-      icon: <Compress className="feature-icon" />,
+      icon: <Minus className="feature-icon" />,
       title: "Smart Compression",
       description: "Reduce file sizes by up to 80% while maintaining quality"
     },
@@ -188,7 +187,7 @@ const Home: React.FC = () => {
             <div className="hero-buttons">
               <Link to="/compress" className="btn-primary">
                 <div className="btn-content">
-                  <Compress size={20} />
+                  <Minus size={20} />
                   <span>Compress Files</span>
                   <ArrowRight size={20} />
                 </div>
