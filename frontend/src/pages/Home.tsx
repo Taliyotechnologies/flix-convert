@@ -95,24 +95,25 @@ const Home: React.FC = () => {
           <div className="hero-shape hero-shape-1"></div>
           <div className="hero-shape hero-shape-2"></div>
           <div className="hero-shape hero-shape-3"></div>
+          <div className="hero-shape hero-shape-4"></div>
         </div>
         
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
               <div className="hero-badge">
-                <span>✨ Free up to 10MB</span>
+                <span>🚀 Free up to 10MB • No Registration Required</span>
               </div>
               
               <h1 className="hero-title">
-                The Ultimate File
+                Professional File
                 <span className="hero-title-accent"> Conversion</span>
                 <br />
-                Platform
+                Made Simple
               </h1>
               
               <p className="hero-subtitle">
-                Transform your files with professional precision. Convert, compress, and optimize images, videos, PDFs, and audio files with enterprise-grade technology.
+                Transform your files with enterprise-grade technology. Convert, compress, and optimize images, videos, PDFs, and audio files instantly. Trusted by millions worldwide.
               </p>
               
               <div className="hero-buttons">
@@ -122,7 +123,7 @@ const Home: React.FC = () => {
                   </svg>
                   Start Converting Now
                 </Link>
-                <Link to="/company" className="btn btn-secondary hero-btn-secondary">
+                <Link to="/company/about" className="btn btn-secondary hero-btn-secondary">
                   Learn More
                 </Link>
               </div>
@@ -148,6 +149,7 @@ const Home: React.FC = () => {
                     <span></span>
                     <span></span>
                   </div>
+                  <div className="card-title">File Converter</div>
                 </div>
                 <div className="card-content">
                   <div className="file-icon">
@@ -163,7 +165,14 @@ const Home: React.FC = () => {
                     <div className="status-bar">
                       <div className="status-progress"></div>
                     </div>
-                    <div className="status-text">Converting...</div>
+                    <div className="status-text">Converting to Word...</div>
+                  </div>
+                  <div className="conversion-result">
+                    <div className="result-icon">✅</div>
+                    <div className="result-info">
+                      <div className="result-name">document.docx</div>
+                      <div className="result-size">1.8 MB</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -245,7 +254,7 @@ const Home: React.FC = () => {
               <Link to="/tools" className="btn btn-primary">
                 Get Started Free
               </Link>
-              <Link to="/company" className="btn btn-secondary">
+              <Link to="/company/about" className="btn btn-secondary">
                 View All Tools
               </Link>
             </div>
