@@ -6,7 +6,7 @@
 
 /* Hero Section */
 .hero {
-  padding: 6rem 0 4rem;
+  padding: 2rem 0 4rem;
   background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   position: relative;
   overflow: hidden;
@@ -90,7 +90,7 @@
   border-radius: 2rem;
   font-size: 0.875rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   border: 1px solid rgba(43, 112, 247, 0.2);
   backdrop-filter: blur(10px);
 }
@@ -138,6 +138,7 @@
   background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
   border: none;
   box-shadow: 0 10px 25px rgba(43, 112, 247, 0.3);
+  color: white;
 }
 
 .hero-btn-primary:hover {
@@ -150,9 +151,16 @@
   padding: 1rem 2rem;
   font-size: 1.125rem;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--bg-card);
   backdrop-filter: blur(10px);
   border: 2px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.hero-btn-secondary:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 .btn-icon {
@@ -183,7 +191,7 @@
 .trust-stat {
   text-align: center;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--bg-card);
   backdrop-filter: blur(10px);
   border-radius: 1rem;
   border: 1px solid var(--border-color);
@@ -216,12 +224,12 @@
 }
 
 .hero-card {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
   border-radius: 1.5rem;
   padding: 2rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-color);
   max-width: 400px;
   width: 100%;
   animation: slideInUp 0.8s ease-out;
@@ -568,8 +576,8 @@
 /* CTA Section */
 .cta-section {
   padding: 4rem 0;
-  background: var(--primary-color);
-  color: white;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   text-align: center;
 }
 
@@ -584,13 +592,14 @@
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
+  color: var(--text-primary);
 }
 
 .cta-subtitle {
   font-size: clamp(1rem, 2.5vw, 1.125rem);
   margin-bottom: 2rem;
   line-height: 1.6;
-  opacity: 0.9;
+  color: var(--text-secondary);
 }
 
 .cta-buttons {
@@ -603,6 +612,24 @@
 
 .cta-buttons .btn {
   min-width: 180px;
+}
+
+.cta-buttons .btn-primary {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.cta-buttons .btn-secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+}
+
+.cta-buttons .btn-secondary:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
 }
 
 /* Footer */
@@ -649,7 +676,7 @@
 /* Responsive Design */
 @media (min-width: 768px) {
   .hero {
-    padding: 8rem 0 6rem;
+    padding: 4rem 0 6rem;
   }
   
   .hero-content {
@@ -700,7 +727,7 @@
 
 @media (min-width: 1024px) {
   .hero {
-    padding: 10rem 0 8rem;
+    padding: 6rem 0 8rem;
   }
   
   .features-section {
