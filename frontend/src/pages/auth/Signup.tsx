@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Github, Chrome } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, User, ArrowRight, Github, Chrome, Sparkles, Shield, Zap, CheckCircle } from 'lucide-react';
 
 const Signup: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -75,149 +75,177 @@ const Signup: React.FC = () => {
     }
   };
 
+  const benefits = [
+    { icon: Shield, text: 'Secure file processing' },
+    { icon: Zap, text: 'Lightning fast conversion' },
+    { icon: Sparkles, text: 'Premium features access' }
+  ];
+
   return (
-    <div className="min-h-screen bg-bg-secondary flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <div className="mx-auto w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mb-6">
-            <span className="text-white font-bold text-2xl">F</span>
+    <div className="min-h-screen bg-gradient-secondary flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-24 h-24 bg-white/10 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-white/5 rounded-full animate-pulse"></div>
+      </div>
+
+      <div className="max-w-md w-full space-y-8 relative z-10">
+        <div className="text-center animate-fade-in">
+          <div className="mx-auto w-20 h-20 bg-gradient-accent rounded-2xl flex items-center justify-center mb-6 shadow-xl">
+            <span className="text-white font-bold text-3xl">F</span>
           </div>
-          <h2 className="text-3xl font-bold">Create your account</h2>
-          <p className="mt-2 text-text-secondary">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">Create your account</h2>
+          <p className="text-white/90 text-lg">
             Join thousands of users who trust FlixConvert
           </p>
         </div>
 
-        <div className="card">
+        <div className="card glass border-0 shadow-2xl animate-slide-in">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium mb-2">
+                <label htmlFor="firstName" className="block text-sm font-medium mb-3">
                   First name
                 </label>
                 <div className="relative">
-                  <User size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-muted" />
+                  <User size={20} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-muted" />
                   <input
                     id="firstName"
                     name="firstName"
                     type="text"
                     autoComplete="given-name"
                     required
-                    className={`input pl-10 ${errors.firstName ? 'border-error-color' : ''}`}
+                    className={`input pl-12 ${errors.firstName ? 'border-error-color' : ''}`}
                     placeholder="John"
                     value={formData.firstName}
                     onChange={handleInputChange}
                   />
                 </div>
                 {errors.firstName && (
-                  <p className="mt-1 text-sm text-error-color">{errors.firstName}</p>
+                  <p className="mt-2 text-sm text-error-color flex items-center gap-2">
+                    <div className="w-1 h-1 bg-error-color rounded-full"></div>
+                    {errors.firstName}
+                  </p>
                 )}
               </div>
 
               <div>
-                <label htmlFor="lastName" className="block text-sm font-medium mb-2">
+                <label htmlFor="lastName" className="block text-sm font-medium mb-3">
                   Last name
                 </label>
                 <div className="relative">
-                  <User size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-muted" />
+                  <User size={20} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-muted" />
                   <input
                     id="lastName"
                     name="lastName"
                     type="text"
                     autoComplete="family-name"
                     required
-                    className={`input pl-10 ${errors.lastName ? 'border-error-color' : ''}`}
+                    className={`input pl-12 ${errors.lastName ? 'border-error-color' : ''}`}
                     placeholder="Doe"
                     value={formData.lastName}
                     onChange={handleInputChange}
                   />
                 </div>
                 {errors.lastName && (
-                  <p className="mt-1 text-sm text-error-color">{errors.lastName}</p>
+                  <p className="mt-2 text-sm text-error-color flex items-center gap-2">
+                    <div className="w-1 h-1 bg-error-color rounded-full"></div>
+                    {errors.lastName}
+                  </p>
                 )}
               </div>
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-3">
                 Email address
               </label>
               <div className="relative">
-                <Mail size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-muted" />
+                <Mail size={20} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-muted" />
                 <input
                   id="email"
                   name="email"
                   type="email"
                   autoComplete="email"
                   required
-                  className={`input pl-10 ${errors.email ? 'border-error-color' : ''}`}
+                  className={`input pl-12 ${errors.email ? 'border-error-color' : ''}`}
                   placeholder="john@example.com"
                   value={formData.email}
                   onChange={handleInputChange}
                 />
               </div>
               {errors.email && (
-                <p className="mt-1 text-sm text-error-color">{errors.email}</p>
+                <p className="mt-2 text-sm text-error-color flex items-center gap-2">
+                  <div className="w-1 h-1 bg-error-color rounded-full"></div>
+                  {errors.email}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
+              <label htmlFor="password" className="block text-sm font-medium mb-3">
                 Password
               </label>
               <div className="relative">
-                <Lock size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-muted" />
+                <Lock size={20} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-muted" />
                 <input
                   id="password"
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className={`input pl-10 pr-10 ${errors.password ? 'border-error-color' : ''}`}
+                  className={`input pl-12 pr-12 ${errors.password ? 'border-error-color' : ''}`}
                   placeholder="Create a strong password"
                   value={formData.password}
                   onChange={handleInputChange}
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-muted hover:text-text-primary"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-error-color">{errors.password}</p>
+                <p className="mt-2 text-sm text-error-color flex items-center gap-2">
+                  <div className="w-1 h-1 bg-error-color rounded-full"></div>
+                  {errors.password}
+                </p>
               )}
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium mb-3">
                 Confirm password
               </label>
               <div className="relative">
-                <Lock size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-muted" />
+                <Lock size={20} className="absolute left-4 top-1/2 transform -translate-y-1/2 text-text-muted" />
                 <input
                   id="confirmPassword"
                   name="confirmPassword"
                   type={showConfirmPassword ? 'text' : 'password'}
                   autoComplete="new-password"
                   required
-                  className={`input pl-10 pr-10 ${errors.confirmPassword ? 'border-error-color' : ''}`}
+                  className={`input pl-12 pr-12 ${errors.confirmPassword ? 'border-error-color' : ''}`}
                   placeholder="Confirm your password"
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-text-muted hover:text-text-primary"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-text-muted hover:text-text-primary transition-colors"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
                   {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-error-color">{errors.confirmPassword}</p>
+                <p className="mt-2 text-sm text-error-color flex items-center gap-2">
+                  <div className="w-1 h-1 bg-error-color rounded-full"></div>
+                  {errors.confirmPassword}
+                </p>
               )}
             </div>
 
@@ -227,23 +255,26 @@ const Signup: React.FC = () => {
                   id="acceptTerms"
                   name="acceptTerms"
                   type="checkbox"
-                  className="h-4 w-4 text-primary-color focus:ring-primary-color border-border-color rounded mt-1"
+                  className="h-5 w-5 text-primary-color focus:ring-primary-color border-border-color rounded mt-1"
                   checked={formData.acceptTerms}
                   onChange={handleInputChange}
                 />
-                <label htmlFor="acceptTerms" className="ml-2 block text-sm text-text-secondary">
+                <label htmlFor="acceptTerms" className="ml-3 block text-sm text-text-secondary">
                   I agree to the{' '}
-                  <Link to="/terms" className="text-primary-color hover:text-primary-hover font-medium">
+                  <Link to="/terms" className="text-primary-color hover:text-primary-hover font-medium transition-colors">
                     Terms of Service
                   </Link>{' '}
                   and{' '}
-                  <Link to="/privacy" className="text-primary-color hover:text-primary-hover font-medium">
+                  <Link to="/privacy" className="text-primary-color hover:text-primary-hover font-medium transition-colors">
                     Privacy Policy
                   </Link>
                 </label>
               </div>
               {errors.acceptTerms && (
-                <p className="text-sm text-error-color">{errors.acceptTerms}</p>
+                <p className="text-sm text-error-color flex items-center gap-2">
+                  <div className="w-1 h-1 bg-error-color rounded-full"></div>
+                  {errors.acceptTerms}
+                </p>
               )}
 
               <div className="flex items-start">
@@ -251,11 +282,11 @@ const Signup: React.FC = () => {
                   id="acceptNewsletter"
                   name="acceptNewsletter"
                   type="checkbox"
-                  className="h-4 w-4 text-primary-color focus:ring-primary-color border-border-color rounded mt-1"
+                  className="h-5 w-5 text-primary-color focus:ring-primary-color border-border-color rounded mt-1"
                   checked={formData.acceptNewsletter}
                   onChange={handleInputChange}
                 />
-                <label htmlFor="acceptNewsletter" className="ml-2 block text-sm text-text-secondary">
+                <label htmlFor="acceptNewsletter" className="ml-3 block text-sm text-text-secondary">
                   I want to receive updates about new features and tools
                 </label>
               </div>
@@ -264,7 +295,7 @@ const Signup: React.FC = () => {
             <div>
               <button
                 type="submit"
-                className="btn btn-primary w-full flex items-center justify-center gap-2"
+                className="btn btn-primary w-full flex items-center justify-center gap-3 text-lg py-4 shadow-xl"
               >
                 Create account
                 <ArrowRight size={20} />
@@ -272,20 +303,20 @@ const Signup: React.FC = () => {
             </div>
           </form>
 
-          <div className="mt-6">
+          <div className="mt-8">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-border-color" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-bg-card text-text-secondary">Or continue with</span>
+                <span className="px-4 bg-bg-card text-text-secondary">Or continue with</span>
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
+            <div className="mt-6 grid grid-cols-2 gap-4">
               <button
                 type="button"
-                className="btn btn-secondary flex items-center justify-center gap-2"
+                className="btn btn-secondary flex items-center justify-center gap-3 py-3"
               >
                 <Github size={20} />
                 GitHub
@@ -293,7 +324,7 @@ const Signup: React.FC = () => {
 
               <button
                 type="button"
-                className="btn btn-secondary flex items-center justify-center gap-2"
+                className="btn btn-secondary flex items-center justify-center gap-3 py-3"
               >
                 <Chrome size={20} />
                 Google
@@ -301,17 +332,32 @@ const Signup: React.FC = () => {
             </div>
           </div>
 
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center">
             <p className="text-sm text-text-secondary">
               Already have an account?{' '}
               <Link
                 to="/login"
-                className="text-primary-color hover:text-primary-hover font-medium"
+                className="text-primary-color hover:text-primary-hover font-medium transition-colors"
               >
                 Sign in
               </Link>
             </p>
           </div>
+        </div>
+
+        {/* Benefits */}
+        <div className="grid grid-cols-3 gap-4 mt-8">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon;
+            return (
+              <div key={index} className="text-center animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-2">
+                  <Icon size={20} className="text-white" />
+                </div>
+                <p className="text-xs text-white/80">{benefit.text}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
