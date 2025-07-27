@@ -15,6 +15,8 @@ interface CompressFile {
 }
 
 const Compress: React.FC = () => {
+  console.log('Compress component is rendering'); // Debug log
+  
   const [files, setFiles] = useState<CompressFile[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const [compressionLevel, setCompressionLevel] = useState(80);
@@ -133,6 +135,10 @@ const Compress: React.FC = () => {
 
   return (
     <div className="compress-container">
+      <div style={{background: 'red', padding: '20px', color: 'white', fontSize: '24px'}}>
+        TEST: Compress Component is Loading
+      </div>
+      
       <div className="compress-hero">
         <h1>Professional Image Compression</h1>
         <p>Optimize your images with advanced compression algorithms while maintaining exceptional quality. Perfect for web, mobile, and print applications.</p>
