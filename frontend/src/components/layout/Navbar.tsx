@@ -3,108 +3,157 @@ import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleThemeMenu = () => {
-    setIsThemeMenuOpen(!isThemeMenuOpen);
+  const toggleDropdown = (dropdown: string) => {
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
   };
 
+  const closeDropdowns = () => {
+    setActiveDropdown(null);
+  };
+
+  const navItems = [
+    {
+      name: 'Resize',
+      href: '/resize',
+      dropdown: [
+        { name: 'Image Resizer', href: '/resize/image' },
+        { name: 'Bulk Resize', href: '/resize/bulk' },
+        { name: 'Resize by Percentage', href: '/resize/percentage' }
+      ]
+    },
+    {
+      name: 'Crop',
+      href: '/crop',
+      dropdown: [
+        { name: 'Image Cropper', href: '/crop/image' },
+        { name: 'Crop to Aspect Ratio', href: '/crop/aspect' },
+        { name: 'Free Crop', href: '/crop/free' }
+      ]
+    },
+    {
+      name: 'Compress',
+      href: '/compress',
+      dropdown: [
+        { name: 'Image Compressor', href: '/compress/image' },
+        { name: 'Bulk Compress', href: '/compress/bulk' },
+        { name: 'Quality Settings', href: '/compress/quality' }
+      ]
+    },
+    {
+      name: 'Convert',
+      href: '/convert',
+      dropdown: [
+        { name: 'Image Converter', href: '/convert/image' },
+        { name: 'Video Converter', href: '/convert/video' },
+        { name: 'Audio Converter', href: '/convert/audio' }
+      ]
+    },
+    {
+      name: 'More',
+      href: '/more',
+      dropdown: [
+        { name: 'Tools', href: '/tools' },
+        { name: 'API', href: '/api' },
+        { name: 'Documentation', href: '/docs' }
+      ]
+    },
+    {
+      name: 'Pricing',
+      href: '/pricing',
+      dropdown: [
+        { name: 'Free Plan', href: '/pricing/free' },
+        { name: 'Pro Plan', href: '/pricing/pro' },
+        { name: 'Enterprise', href: '/pricing/enterprise' }
+      ]
+    }
+  ];
+
   return (
-    <nav className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 sticky top-0 z-50">
+    <nav className="bg-gray-900 border-b border-gray-700 sticky top-0 z-50">
       <div className="container">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center">
+          {/* Logo and Brand */}
+          <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-1">
+              <div className="w-6 h-6 bg-green-500 rounded-sm relative">
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-blue-500 rounded-sm"></div>
+              </div>
+            </div>
             <Link 
               to="/" 
-              className="text-2xl font-bold gradient-text hover:scale-105 transition-transform"
+              className="text-xl font-bold text-white hover:text-gray-200 transition-colors"
             >
               FlixConvert
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-            >
-              Home
-            </Link>
-            <Link 
-              to="/tools" 
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-            >
-              Tools
-            </Link>
-            <Link 
-              to="/contact" 
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-            >
-              Contact
-            </Link>
-            <Link 
-              to="/company" 
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-            >
-              About
-            </Link>
+          <div className="hidden lg:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <div key={item.name} className="relative group">
+                <button
+                  onClick={() => toggleDropdown(item.name)}
+                  className="flex items-center space-x-1 text-white hover:text-gray-200 transition-colors py-2"
+                >
+                  <span>{item.name}</span>
+                  <svg 
+                    className={`w-4 h-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                {/* Dropdown Menu */}
+                {activeDropdown === item.name && (
+                  <div className="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50">
+                    {item.dropdown.map((dropdownItem) => (
+                      <Link
+                        key={dropdownItem.name}
+                        to={dropdownItem.href}
+                        className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                        onClick={closeDropdowns}
+                      >
+                        {dropdownItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Theme Toggle */}
-            <div className="relative">
-              <button
-                onClick={toggleThemeMenu}
-                className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              >
-                <svg className="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-              </button>
-              
-              {isThemeMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2">
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    Light Mode
-                  </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    Dark Mode
-                  </button>
-                  <button className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    Auto
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Auth Buttons */}
+          {/* Desktop Action Buttons */}
+          <div className="hidden lg:flex items-center space-x-4">
             <Link 
               to="/login" 
-              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+              className="text-white border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-900 transition-colors"
             >
               Login
             </Link>
             <Link 
               to="/signup" 
-              className="btn btn-primary"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              Sign Up
+              Signup
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={toggleMenu}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="text-white hover:text-gray-200 p-2"
             >
-              <svg className="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -117,62 +166,59 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 dark:border-gray-700 py-4">
-            <div className="flex flex-col space-y-4">
-              <Link 
-                to="/" 
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                to="/tools" 
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Tools
-              </Link>
-              <Link 
-                to="/contact" 
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
-              <Link 
-                to="/company" 
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500 dark:text-gray-400">Theme</span>
-                  <button className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                    <svg className="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          <div className="lg:hidden border-t border-gray-700 py-4">
+            <div className="space-y-4">
+              {navItems.map((item) => (
+                <div key={item.name}>
+                  <button
+                    onClick={() => toggleDropdown(item.name)}
+                    className="flex items-center justify-between w-full text-left text-white hover:text-gray-200 py-2"
+                  >
+                    <span>{item.name}</span>
+                    <svg 
+                      className={`w-4 h-4 transition-transform ${activeDropdown === item.name ? 'rotate-180' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
+                  
+                  {activeDropdown === item.name && (
+                    <div className="ml-4 mt-2 space-y-2">
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.name}
+                          to={dropdownItem.href}
+                          className="block text-sm text-gray-300 hover:text-white transition-colors"
+                          onClick={() => {
+                            setIsMenuOpen(false);
+                            setActiveDropdown(null);
+                          }}
+                        >
+                          {dropdownItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
+              ))}
               
-              <div className="flex flex-col space-y-2">
+              <div className="pt-4 border-t border-gray-700 space-y-2">
                 <Link 
                   to="/login" 
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors"
+                  className="block text-white border border-white px-4 py-2 rounded-lg text-center hover:bg-white hover:text-gray-900 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Login
                 </Link>
                 <Link 
                   to="/signup" 
-                  className="btn btn-primary w-full text-center"
+                  className="block bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Sign Up
+                  Signup
                 </Link>
               </div>
             </div>
