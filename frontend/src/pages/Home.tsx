@@ -18,7 +18,9 @@ import {
   Crown,
   Check,
   X,
-  Menu
+  Menu,
+  Globe,
+  Heart
 } from 'lucide-react';
 import './Home.css';
 
@@ -275,7 +277,6 @@ const Home: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
         </div>
       </section>
 
