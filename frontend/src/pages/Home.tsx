@@ -12,29 +12,18 @@ import {
   Users, 
   Star,
   ArrowRight,
-  CheckCircle,
   Sparkles,
-  ArrowDown,
   Clock,
   Globe,
-  Award,
   File,
   Settings,
-  BarChart3,
-  Minus,
-  Play,
-  TrendingUp,
-  Lock,
-  Eye,
   Heart,
   Target,
   Rocket,
   Crown,
-  Infinity,
   Check,
   X,
-  Menu,
-  X as Close
+  Menu
 } from 'lucide-react';
 import './Home.css';
 
@@ -225,7 +214,7 @@ const Home: React.FC = () => {
               className="menu-toggle"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <Close size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
