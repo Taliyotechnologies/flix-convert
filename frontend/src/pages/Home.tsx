@@ -14,7 +14,11 @@ import {
   ArrowRight,
   Play,
   CheckCircle,
-  Sparkles
+  Sparkles,
+  ArrowDown,
+  Clock,
+  Globe,
+  Award
 } from 'lucide-react';
 import './Home.css';
 
@@ -74,45 +78,103 @@ const Home: React.FC = () => {
     <div className="home">
       <div className="bg-pattern"></div>
       
-      {/* Hero Section */}
+      {/* Premium Hero Section */}
       <section className="hero-section">
+        <div className="hero-background">
+          <div className="hero-gradient-overlay"></div>
+          <div className="floating-shapes">
+            <div className="shape shape-1"></div>
+            <div className="shape shape-2"></div>
+            <div className="shape shape-3"></div>
+            <div className="shape shape-4"></div>
+          </div>
+        </div>
+        
         <div className="container">
           <div className="hero-content">
+            {/* Premium Badge */}
             <div className="hero-badge">
-              <Sparkles size={16} />
-              <span>Next-Gen File Conversion</span>
+              <div className="badge-icon">
+                <Sparkles size={16} />
+              </div>
+              <span>AI-Powered File Conversion</span>
+              <div className="badge-pulse"></div>
             </div>
             
+            {/* Main Heading */}
             <h1 className="hero-title">
-              Transform Your Files with
+              Transform Files with
               <span className="gradient-text"> Lightning Speed</span>
             </h1>
             
+            {/* Subtitle */}
             <p className="hero-description">
-              Convert videos, audio, images, and PDFs instantly with our advanced AI-powered platform. 
-              Professional quality, blazing fast speed, and secure processing.
+              Experience the future of file conversion with our advanced AI-powered platform. 
+              Convert videos, audio, images, and PDFs instantly with professional quality and blazing fast speed.
             </p>
             
+            {/* Premium Features */}
+            <div className="hero-features">
+              <div className="feature-item">
+                <CheckCircle size={18} />
+                <span>Zero Quality Loss</span>
+              </div>
+              <div className="feature-item">
+                <Clock size={18} />
+                <span>Instant Processing</span>
+              </div>
+              <div className="feature-item">
+                <Shield size={18} />
+                <span>100% Secure</span>
+              </div>
+            </div>
+            
+            {/* CTA Buttons */}
             <div className="hero-buttons">
               <Link to="/convert" className="btn-primary">
-                <Play size={20} />
-                Start Converting
-                <ArrowRight size={20} />
+                <div className="btn-content">
+                  <Play size={20} />
+                  <span>Start Converting Now</span>
+                  <ArrowRight size={20} />
+                </div>
+                <div className="btn-glow"></div>
               </Link>
               <Link to="/about" className="btn-secondary">
-                Learn More
+                <span>Learn More</span>
+                <ArrowDown size={16} />
               </Link>
             </div>
             
+            {/* Trust Indicators */}
+            <div className="trust-indicators">
+              <div className="trust-item">
+                <Globe size={16} />
+                <span>Trusted by 1M+ Users</span>
+              </div>
+              <div className="trust-item">
+                <Award size={16} />
+                <span>Industry Leading</span>
+              </div>
+            </div>
+            
+            {/* Stats Grid */}
             <div className="hero-stats">
               {stats.map((stat, index) => (
-                <div key={index} className="stat-item">
+                <div key={index} className="stat-item" style={{ animationDelay: `${index * 0.1}s` }}>
                   <div className="stat-icon">{stat.icon}</div>
                   <div className="stat-number">{stat.number}</div>
                   <div className="stat-label">{stat.label}</div>
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="scroll-indicator">
+          <div className="scroll-text">Scroll to explore</div>
+          <div className="scroll-arrow">
+            <ArrowDown size={20} />
           </div>
         </div>
       </section>
