@@ -12,10 +12,7 @@ import {
   Star,
   ArrowRight,
   Sparkles,
-  Clock,
-  Globe,
   Settings,
-  Heart,
   Target,
   Rocket,
   Crown,
@@ -247,42 +244,6 @@ const Home: React.FC = () => {
                 <span>Convert Files</span>
               </Link>
             </div>
-
-            <div className="hero-trust">
-              <div className="trust-item">
-                <div className="trust-icon">
-                  <Shield size={14} />
-                </div>
-                <span>🔒 Enterprise Security</span>
-              </div>
-              <div className="trust-item">
-                <div className="trust-icon">
-                  <Clock size={14} />
-                </div>
-                <span>⚡ Instant Results</span>
-              </div>
-              <div className="trust-item">
-                <div className="trust-icon">
-                  <Globe size={14} />
-                </div>
-                <span>🌍 Global Infrastructure</span>
-              </div>
-            </div>
-
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-number">100K+</span>
-                <span className="stat-label">Happy Users</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">50+</span>
-                <span className="stat-label">File Formats</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">99.9%</span>
-                <span className="stat-label">Uptime</span>
-              </div>
-            </div>
           </div>
 
           <div className="hero-visual">
@@ -313,62 +274,8 @@ const Home: React.FC = () => {
                 <span>Ready</span>
               </div>
             </div>
-
-            <div className="hero-card tertiary-card">
-              <div className="card-header">
-                <div className="card-icon">
-                  <FileAudio size={20} />
-                </div>
-                <div className="card-title">Audio Optimization</div>
-              </div>
-              <div className="card-metric">
-                <span className="metric-value">85%</span>
-                <span className="metric-label">Compressed</span>
-              </div>
-            </div>
-
-            <div className="hero-illustration">
-              <div className="processing-demo">
-                <div className="demo-upload">
-                  <Upload size={24} />
-                  <span>Upload</span>
-                </div>
-                <div className="demo-arrow">
-                  <ArrowRight size={20} />
-                </div>
-                <div className="demo-process">
-                  <div className="process-dots">
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                    <div className="dot"></div>
-                  </div>
-                  <span>Process</span>
-                </div>
-                <div className="demo-arrow">
-                  <ArrowRight size={20} />
-                </div>
-                <div className="demo-download">
-                  <Download size={24} />
-                  <span>Download</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="floating-elements">
-              <div className="floating-icon floating-1">
-                <FileImage size={16} />
-              </div>
-              <div className="floating-icon floating-2">
-                <FileVideo size={16} />
-              </div>
-              <div className="floating-icon floating-3">
-                <FileAudio size={16} />
-              </div>
-              <div className="floating-icon floating-4">
-                <FileText size={16} />
-              </div>
-            </div>
           </div>
+        </div>
         </div>
       </section>
 
