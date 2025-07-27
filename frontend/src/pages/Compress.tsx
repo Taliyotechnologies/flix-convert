@@ -135,7 +135,7 @@ const Compress: React.FC = () => {
 
   return (
     <div className="compress-container">
-      <div style={{background: 'red', padding: '20px', color: 'white', fontSize: '24px'}}>
+      <div style={{background: 'red', padding: '20px', color: 'white', fontSize: '24px', position: 'fixed', top: '0', left: '0', zIndex: 9999}}>
         TEST: Compress Component is Loading
       </div>
       
