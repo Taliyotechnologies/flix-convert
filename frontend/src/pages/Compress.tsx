@@ -133,17 +133,7 @@ const Compress: React.FC = () => {
 
   return (
     <div className="compress-container">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="compress-hero"
-      >
-        {/* Floating Elements */}
-        <div className="floating-element"></div>
-        <div className="floating-element"></div>
-        <div className="floating-element"></div>
-        
+      <div className="compress-hero">
         <h1>Professional Image Compression</h1>
         <p>Optimize your images with advanced compression algorithms while maintaining exceptional quality. Perfect for web, mobile, and print applications.</p>
         
@@ -180,7 +170,7 @@ const Compress: React.FC = () => {
             <div className="hero-stat-label">File Formats</div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       <div className="compress-content">
         <div className="compress-grid">
