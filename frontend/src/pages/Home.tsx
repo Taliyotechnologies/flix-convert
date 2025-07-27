@@ -9,13 +9,11 @@ import {
   Download, 
   Upload, 
   Shield, 
-  Users, 
   Star,
   ArrowRight,
   Sparkles,
   Clock,
   Globe,
-  File,
   Settings,
   Heart,
   Target,
@@ -98,12 +96,7 @@ const Home: React.FC = () => {
     }
   ];
 
-  const stats = [
-    { number: "50M+", label: "Files Processed", icon: <File />, color: "var(--accent-blue)" },
-    { number: "50+", label: "Supported Formats", icon: <FileVideo />, color: "var(--accent-purple)" },
-    { number: "99.9%", label: "Uptime", icon: <Shield />, color: "var(--accent-green)" },
-    { number: "24/7", label: "Support", icon: <Users />, color: "var(--accent-orange)" }
-  ];
+
 
   const testimonials = [
     {
