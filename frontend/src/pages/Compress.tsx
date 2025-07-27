@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Upload, Image, Download, X, FileDown } from 'lucide-react';
+import { Upload, Image, Download, X, FileDown, Zap, Shield, Clock, Users } from 'lucide-react';
 import './CompressImage.css';
 
 interface CompressFile {
@@ -139,8 +139,47 @@ const Compress: React.FC = () => {
         transition={{ duration: 0.6 }}
         className="compress-hero"
       >
-        <h1>Compress Images</h1>
-        <p>Reduce file size while maintaining quality</p>
+        {/* Floating Elements */}
+        <div className="floating-element"></div>
+        <div className="floating-element"></div>
+        <div className="floating-element"></div>
+        
+        <h1>Professional Image Compression</h1>
+        <p>Optimize your images with advanced compression algorithms while maintaining exceptional quality. Perfect for web, mobile, and print applications.</p>
+        
+        <div className="hero-features">
+          <div className="hero-feature">
+            <Zap />
+            <span>Lightning Fast</span>
+          </div>
+          <div className="hero-feature">
+            <Shield />
+            <span>Secure Processing</span>
+          </div>
+          <div className="hero-feature">
+            <Clock />
+            <span>Batch Processing</span>
+          </div>
+          <div className="hero-feature">
+            <Users />
+            <span>Free to Use</span>
+          </div>
+        </div>
+        
+        <div className="hero-stats">
+          <div className="hero-stat">
+            <div className="hero-stat-number">10M+</div>
+            <div className="hero-stat-label">Images Processed</div>
+          </div>
+          <div className="hero-stat">
+            <div className="hero-stat-number">95%</div>
+            <div className="hero-stat-label">Size Reduction</div>
+          </div>
+          <div className="hero-stat">
+            <div className="hero-stat-number">50+</div>
+            <div className="hero-stat-label">File Formats</div>
+          </div>
+        </div>
       </motion.div>
 
       <div className="compress-content">
