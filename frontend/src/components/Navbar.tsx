@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Zap, User, LogIn } from 'lucide-react';
+import { Menu, X, Zap, User, LogIn, Sun, Moon } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 import './Navbar.css';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   useEffect(() => {
@@ -47,6 +49,13 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="navbar-actions">
+          <button 
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          >
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           <Link to="/login" className="btn-login">
             <LogIn size={18} />
             <span>Login</span>
