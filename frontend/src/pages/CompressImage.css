@@ -1,3 +1,41 @@
+/* Global override for compress page - remove all animated elements */
+body .compress-container,
+body .compress-container *,
+body .compress-container *::before,
+body .compress-container *::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+body .compress-container::before,
+body .compress-container::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Hide any animated elements that might be inherited */
+body .compress-container .animated-background,
+body .compress-container .particles,
+body .compress-container .particle,
+body .compress-container .floating-elements,
+body .compress-container .floating-icon,
+body .compress-container .process-dots,
+body .compress-container .dot,
+body .compress-container .bg-pattern,
+body .compress-container .gradient-orb,
+body .compress-container .orb-1,
+body .compress-container .orb-2,
+body .compress-container .orb-3,
+body .compress-container [class*="float"],
+body .compress-container [class*="animate"],
+body .compress-container [class*="particle"],
+body .compress-container [class*="dot"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 .compress-container {
   min-height: 100vh;
   background: 
@@ -9,14 +47,36 @@
   overflow: hidden;
 }
 
-/* Ensure no animated elements */
-.compress-container * {
+/* Completely disable all animated elements */
+.compress-container *,
+.compress-container *::before,
+.compress-container *::after {
   animation: none !important;
+  transition: none !important;
 }
 
 .compress-container::before,
 .compress-container::after {
   display: none !important;
+  content: none !important;
+}
+
+/* Override any global animated elements */
+.compress-container .animated-background,
+.compress-container .particles,
+.compress-container .particle,
+.compress-container .floating-elements,
+.compress-container .floating-icon,
+.compress-container .process-dots,
+.compress-container .dot,
+.compress-container .bg-pattern,
+.compress-container .gradient-orb,
+.compress-container .orb-1,
+.compress-container .orb-2,
+.compress-container .orb-3 {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 /* Clean professional background */
