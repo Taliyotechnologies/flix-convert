@@ -1,276 +1,211 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X, ChevronDown } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
-  const navItems = [
-    {
-      name: 'Resize',
-      path: '/resize',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Image Resize', path: '/resize/image' },
-        { name: 'Batch Resize', path: '/resize/batch' },
-        { name: 'Smart Resize', path: '/resize/smart' }
-      ]
-    },
-    {
-      name: 'Crop',
-      path: '/crop',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Free Crop', path: '/crop/free' },
-        { name: 'Aspect Ratio', path: '/crop/aspect' },
-        { name: 'Auto Crop', path: '/crop/auto' }
-      ]
-    },
-    {
-      name: 'Compress',
-      path: '/compress',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Image Compression', path: '/compress/image' },
-        { name: 'Quality Settings', path: '/compress/quality' },
-        { name: 'Batch Compress', path: '/compress/batch' }
-      ]
-    },
-    {
-      name: 'Convert',
-      path: '/convert',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Format Converter', path: '/convert/format' },
-        { name: 'WebP Converter', path: '/convert/webp' },
-        { name: 'HEIC Converter', path: '/convert/heic' }
-      ]
-    },
-    {
-      name: 'More',
-      path: '/more',
-      hasDropdown: true,
-      dropdownItems: [
-        { name: 'Tools', path: '/tools' },
-        { name: 'Company', path: '/company' },
-        { name: 'Contact', path: '/contact' }
-      ]
-    },
-    {
-      name: 'Pricing',
-      path: '/pricing',
-      hasDropdown: false
-    }
-  ];
-
-  const isActive = (path: string) => location.pathname === path;
-
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleDropdownToggle = (itemName: string) => {
-    setActiveDropdown(activeDropdown === itemName ? null : itemName);
-  };
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
 
-  const closeDropdowns = () => {
-    setActiveDropdown(null);
-  };
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Tools', path: '/tools' },
+    { name: 'Contact', path: '/contact' },
+    { name: 'About', path: '/company' },
+  ];
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-800 border-b border-gray-600">
-      <div className="container">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              {/* Blue square (bottom-right) */}
-              <div className="w-8 h-8 border-2 border-blue-500 rounded-md"></div>
-              {/* Green square (top-left) */}
-              <div className="absolute -top-1 -left-1 w-6 h-6 border-2 border-green-500 rounded-md"></div>
-            </div>
-            <span className="text-xl lg:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors duration-300">
-              ImageResizer
-            </span>
+          <Link
+            to="/"
+            className="flex items-center space-x-2 text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+          >
+            <svg
+              className="w-8 h-8"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span>FlixConvert</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <div key={item.name} className="relative">
-                {item.hasDropdown ? (
-                  <div className="relative">
-                    <button
-                      onClick={() => handleDropdownToggle(item.name)}
-                      onMouseEnter={() => setActiveDropdown(item.name)}
-                      className={`flex items-center gap-1 px-4 py-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
-                        isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
-                      }`}
-                    >
-                      {item.name}
-                      <ChevronDown size={16} className={`transition-transform duration-200 ${
-                        activeDropdown === item.name ? 'rotate-180' : ''
-                      }`} />
-                    </button>
-                    
-                    {/* Dropdown Menu */}
-                    {activeDropdown === item.name && (
-                      <div 
-                        className="absolute top-full left-0 mt-1 w-48 bg-gray-800 rounded-lg shadow-xl border border-gray-600 py-2 z-50"
-                        onMouseLeave={() => setActiveDropdown(null)}
-                      >
-                        {item.dropdownItems?.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.name}
-                            to={dropdownItem.path}
-                            className="block px-4 py-2 text-sm text-white hover:text-blue-400 hover:bg-gray-700 transition-colors duration-200"
-                            onClick={closeDropdowns}
-                          >
-                            {dropdownItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <Link
-                    to={item.path}
-                    className={`px-4 py-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
-                      isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                )}
-              </div>
-            ))}
-          </div>
+          <div className="hidden md:flex items-center space-x-8">
+            {/* Navigation Links */}
+            <div className="flex items-center space-x-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                    isActive(link.path)
+                      ? 'text-blue-600 dark:text-blue-400'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
+                  }`}
+                >
+                  {link.name}
+                  {isActive(link.path) && (
+                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full"></span>
+                  )}
+                </Link>
+              ))}
+            </div>
 
-          {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-3">
+            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200"
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+              {theme === 'dark' ? (
+                <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fillRule="evenodd"
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                </svg>
+              )}
             </button>
-            
-            <Link
-              to="/login"
-              className="px-4 py-2 rounded-lg border border-gray-600 text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium"
-            >
-              Login
-            </Link>
-            
-            <Link
-              to="/signup"
-              className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              Signup
-            </Link>
+
+            {/* Auth Buttons */}
+            <div className="flex items-center space-x-3">
+              <Link
+                to="/login"
+                className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              >
+                Login
+              </Link>
+              <Link
+                to="/signup"
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 rounded-lg transition-colors"
+              >
+                Sign Up
+              </Link>
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200"
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className={`w-6 h-6 transition-transform ${isMenuOpen ? 'rotate-90' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-600 bg-gray-800 animate-fade-in">
-            <div className="px-4 py-6 space-y-2">
-              {navItems.map((item) => (
-                <div key={item.name}>
-                  {item.hasDropdown ? (
-                    <div>
-                      <button
-                        onClick={() => handleDropdownToggle(item.name)}
-                        className={`w-full flex items-center justify-between px-4 py-3 rounded-lg text-left text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
-                          isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
-                        }`}
-                      >
-                        {item.name}
-                        <ChevronDown size={16} className={`transition-transform duration-200 ${
-                          activeDropdown === item.name ? 'rotate-180' : ''
-                        }`} />
-                      </button>
-                      
-                      {activeDropdown === item.name && (
-                        <div className="ml-4 mt-2 space-y-1">
-                          {item.dropdownItems?.map((dropdownItem) => (
-                            <Link
-                              key={dropdownItem.name}
-                              to={dropdownItem.path}
-                              className="block px-4 py-2 text-sm text-gray-300 hover:text-blue-400 hover:bg-gray-700 rounded-lg transition-colors duration-200"
-                              onClick={() => {
-                                setIsMenuOpen(false);
-                                setActiveDropdown(null);
-                              }}
-                            >
-                              {dropdownItem.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <Link
-                      to={item.path}
-                      className={`block px-4 py-3 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium ${
-                        isActive(item.path) ? 'text-blue-400 bg-gray-700' : ''
-                      }`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {item.name}
-                    </Link>
-                  )}
-                </div>
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 rounded-lg shadow-lg mt-2">
+              {/* Mobile Navigation Links */}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                    isActive(link.path)
+                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                  }`}
+                >
+                  {link.name}
+                </Link>
               ))}
-              
-              <div className="pt-4 border-t border-gray-600">
-                <div className="flex items-center justify-between px-4 py-3">
-                  <span className="text-white font-medium">Theme</span>
-                  <button
-                    onClick={toggleTheme}
-                    className="p-2 rounded-lg text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200"
-                  >
-                    {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
-                  </button>
-                </div>
-                
-                <div className="flex flex-col gap-3 px-4 py-3">
-                  <Link
-                    to="/login"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-600 text-white hover:text-blue-400 hover:bg-gray-700 transition-all duration-200 font-medium text-center"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Login
-                  </Link>
-                  
-                  <Link
-                    to="/signup"
-                    className="w-full px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-200 shadow-md hover:shadow-lg text-center"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Signup
-                  </Link>
-                </div>
+
+              {/* Mobile Theme Toggle */}
+              <div className="px-3 py-2">
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center space-x-2 w-full px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                >
+                  {theme === 'dark' ? (
+                    <>
+                      <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                          fillRule="evenodd"
+                          d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      <span>Light Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                      </svg>
+                      <span>Dark Mode</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Mobile Auth Buttons */}
+              <div className="px-3 py-2 space-y-2">
+                <Link
+                  to="/login"
+                  className="block w-full px-3 py-2 text-center text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/signup"
+                  className="block w-full px-3 py-2 text-center text-base font-medium text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 rounded-md transition-colors"
+                >
+                  Sign Up
+                </Link>
               </div>
             </div>
           </div>

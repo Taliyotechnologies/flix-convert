@@ -1,347 +1,341 @@
-import React, { useState } from 'react';
-import { 
-  Image, 
-  Video, 
-  FileText, 
-  Music, 
-  Upload, 
-  Download,
-  Settings,
-  File,
-  RotateCcw,
-  Play,
-  Sparkles,
-  Zap,
-
-} from 'lucide-react';
+import React from 'react';
 
 const Tools: React.FC = () => {
-  const [selectedTool, setSelectedTool] = useState<string | null>(null);
-
-  const tools = [
-    {
-      id: 'image-compress',
-      name: 'Image Compression',
-      description: 'Compress images while maintaining quality',
-      icon: Image,
-      color: 'from-pink-500 to-rose-500',
-      gradient: 'linear-gradient(135deg, #ec4899 0%, #f43f5e 100%)',
-      formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP'],
-      features: ['Quality control', 'Batch processing', 'Size optimization'],
-      stats: { speed: 'Fast', quality: 'High', size: 'Up to 80% reduction' }
-    },
-    {
-      id: 'image-convert',
-      name: 'Image Converter',
-      description: 'Convert images between different formats',
-      icon: Image,
-      color: 'from-blue-500 to-cyan-500',
-      gradient: 'linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%)',
-      formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP', 'TIFF'],
-      features: ['Format conversion', 'Quality settings', 'Metadata preservation'],
-      stats: { speed: 'Fast', quality: 'High', size: 'Original size' }
-    },
-    {
-      id: 'video-convert',
-      name: 'Video Converter',
-      description: 'Convert videos between different formats',
-      icon: Video,
-      color: 'from-purple-500 to-pink-500',
-      gradient: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)',
-      formats: ['MP4', 'AVI', 'MOV', 'MKV', 'WMV', 'FLV'],
-      features: ['Codec selection', 'Quality control', 'Batch processing'],
-      stats: { speed: 'Medium', quality: 'High', size: 'Original size' }
-    },
-    {
-      id: 'video-compress',
-      name: 'Video Compression',
-      description: 'Compress videos to reduce file size',
-      icon: Video,
-      color: 'from-green-500 to-emerald-500',
-      gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-      formats: ['MP4', 'AVI', 'MOV', 'MKV'],
-      features: ['Size reduction', 'Quality preservation', 'Format options'],
-      stats: { speed: 'Medium', quality: 'High', size: 'Up to 70% reduction' }
-    },
-    {
-      id: 'pdf-compress',
-      name: 'PDF Compression',
-      description: 'Compress PDF files to reduce size',
-      icon: FileText,
-      color: 'from-red-500 to-pink-500',
-      gradient: 'linear-gradient(135deg, #ef4444 0%, #ec4899 100%)',
-      formats: ['PDF'],
-      features: ['Size optimization', 'Quality control', 'Batch processing'],
-      stats: { speed: 'Fast', quality: 'High', size: 'Up to 60% reduction' }
-    },
-    {
-      id: 'pdf-convert',
-      name: 'PDF Converter',
-      description: 'Convert PDFs to other formats',
-      icon: FileText,
-      color: 'from-orange-500 to-red-500',
-      gradient: 'linear-gradient(135deg, #f97316 0%, #ef4444 100%)',
-      formats: ['PDF to DOCX', 'PDF to TXT', 'PDF to HTML'],
-      features: ['Text extraction', 'Format conversion', 'Quality preservation'],
-      stats: { speed: 'Medium', quality: 'High', size: 'Original size' }
-    },
-    {
-      id: 'audio-convert',
-      name: 'Audio Converter',
-      description: 'Convert audio between different formats',
-      icon: Music,
-      color: 'from-indigo-500 to-purple-500',
-      gradient: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
-      formats: ['MP3', 'WAV', 'FLAC', 'AAC', 'OGG', 'M4A'],
-      features: ['Format conversion', 'Quality settings', 'Batch processing'],
-      stats: { speed: 'Fast', quality: 'High', size: 'Original size' }
-    },
-    {
-      id: 'audio-compress',
-      name: 'Audio Compression',
-      description: 'Compress audio files to reduce size',
-      icon: Music,
-      color: 'from-teal-500 to-cyan-500',
-      gradient: 'linear-gradient(135deg, #14b8a6 0%, #06b6d4 100%)',
-      formats: ['MP3', 'WAV', 'FLAC', 'AAC'],
-      features: ['Size reduction', 'Quality control', 'Format options'],
-      stats: { speed: 'Fast', quality: 'High', size: 'Up to 50% reduction' }
-    }
-  ];
-
-  const ToolCard: React.FC<{ tool: typeof tools[0] }> = ({ tool }) => {
-    const Icon = tool.icon;
-    return (
-      <div 
-        className={`card cursor-pointer transition-all duration-500 hover:shadow-xl hover:scale-105 group ${
-          selectedTool === tool.id ? 'ring-2 ring-primary-color shadow-xl' : ''
-        } animate-fade-in`}
-        onClick={() => setSelectedTool(tool.id)}
-      >
-        <div 
-          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300"
-          style={{ background: tool.gradient }}
-        >
-          <Icon size={32} className="text-white" />
-        </div>
-        <h3 className="text-xl font-semibold mb-3">{tool.name}</h3>
-        <p className="text-text-secondary mb-4 leading-relaxed">{tool.description}</p>
-        
-        <div className="mb-4">
-          <h4 className="font-semibold mb-3 text-text-primary flex items-center gap-2">
-            <Sparkles size={16} />
-            Supported Formats:
-          </h4>
-          <div className="flex flex-wrap gap-2">
-            {tool.formats.map((format, index) => (
-              <span 
-                key={index}
-                className="px-3 py-1 bg-bg-tertiary text-text-secondary text-sm rounded-lg font-medium"
-              >
-                {format}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <h4 className="font-semibold mb-3 text-text-primary flex items-center gap-2">
-            <Zap size={16} />
-            Features:
-          </h4>
-          <ul className="space-y-2">
-            {tool.features.map((feature, index) => (
-              <li key={index} className="text-sm text-text-secondary flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-primary-color rounded-full"></div>
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 text-xs">
-          <div className="text-center p-2 bg-bg-tertiary rounded-lg">
-            <div className="font-semibold text-primary-color">{tool.stats.speed}</div>
-            <div className="text-text-secondary">Speed</div>
-          </div>
-          <div className="text-center p-2 bg-bg-tertiary rounded-lg">
-            <div className="font-semibold text-success-color">{tool.stats.quality}</div>
-            <div className="text-text-secondary">Quality</div>
-          </div>
-          <div className="text-center p-2 bg-bg-tertiary rounded-lg">
-            <div className="font-semibold text-accent-color">{tool.stats.size}</div>
-            <div className="text-text-secondary">Size</div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const ToolInterface: React.FC = () => {
-    const selectedToolData = tools.find(tool => tool.id === selectedTool);
-    
-    if (!selectedToolData) {
-      return (
-        <div className="text-center py-20 animate-fade-in">
-          <div className="w-24 h-24 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <File size={48} className="text-white" />
-          </div>
-          <h3 className="text-2xl font-semibold mb-3 gradient-text">Select a Tool</h3>
-          <p className="text-text-secondary text-lg">Choose a tool from the left to get started</p>
-        </div>
-      );
-    }
-
-    return (
-      <div className="space-y-6 animate-fade-in">
-        <div className="flex items-center gap-4 mb-8">
-          <div 
-            className="w-16 h-16 rounded-2xl flex items-center justify-center"
-            style={{ background: selectedToolData.gradient }}
-          >
-            <selectedToolData.icon size={32} className="text-white" />
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold gradient-text">{selectedToolData.name}</h2>
-            <p className="text-text-secondary text-lg">{selectedToolData.description}</p>
-          </div>
-        </div>
-
-        <div className="card border-2 border-dashed border-border-color hover:border-primary-color transition-colors duration-300">
-          <div className="p-8 text-center">
-            <Upload size={64} className="mx-auto mb-6 text-text-muted animate-float" />
-            <h3 className="text-2xl font-semibold mb-3">Upload Your Files</h3>
-            <p className="text-text-secondary mb-8 text-lg leading-relaxed">
-              Drag and drop your files here or click to browse. We support multiple file formats.
-            </p>
-            <button className="btn btn-primary text-lg px-8 py-4 shadow-xl">
-              <Upload size={20} />
-              Choose Files
-            </button>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="card">
-            <h3 className="text-lg font-semibold mb-6 flex items-center gap-3">
-              <Settings size={24} />
-              Settings
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium mb-3">Quality</label>
-                <select className="input">
-                  <option>High Quality</option>
-                  <option>Medium Quality</option>
-                  <option>Low Quality</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-3">Format</label>
-                <select className="input">
-                  {selectedToolData.formats.map((format, index) => (
-                    <option key={index}>{format}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-3">Compression Level</label>
-                <input 
-                  type="range" 
-                  min="1" 
-                  max="10" 
-                  defaultValue="7"
-                  className="w-full h-2 bg-bg-tertiary rounded-lg appearance-none cursor-pointer"
-                />
-                <div className="flex justify-between text-xs text-text-secondary mt-1">
-                  <span>Low</span>
-                  <span>High</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="card">
-            <h3 className="text-lg font-semibold mb-6 flex items-center gap-3">
-              <Download size={24} />
-              Output
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium mb-3">Output Format</label>
-                <select className="input">
-                  {selectedToolData.formats.map((format, index) => (
-                    <option key={index}>{format}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-3">File Name</label>
-                <input 
-                  type="text" 
-                  className="input" 
-                  placeholder="Enter file name"
-                />
-              </div>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div className="p-3 bg-bg-tertiary rounded-lg">
-                  <div className="text-lg font-bold text-primary-color">Fast</div>
-                  <div className="text-xs text-text-secondary">Processing</div>
-                </div>
-                <div className="p-3 bg-bg-tertiary rounded-lg">
-                  <div className="text-lg font-bold text-success-color">Secure</div>
-                  <div className="text-xs text-text-secondary">Encryption</div>
-                </div>
-                <div className="p-3 bg-bg-tertiary rounded-lg">
-                  <div className="text-lg font-bold text-accent-color">Free</div>
-                  <div className="text-xs text-text-secondary">No Cost</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex gap-4">
-          <button className="btn btn-primary flex items-center gap-3 text-lg px-8 py-4 shadow-xl">
-            <Play size={24} />
-            Process Files
-          </button>
-          <button className="btn btn-secondary flex items-center gap-3 text-lg px-8 py-4">
-            <RotateCcw size={24} />
-            Reset
-          </button>
-        </div>
-      </div>
-    );
-  };
-
   return (
-    <div className="min-h-screen bg-bg-secondary py-8 lg:py-12">
-      <div className="container">
-        <div className="mb-12 animate-fade-in">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">File Tools</h1>
-          <p className="text-xl text-text-secondary leading-relaxed">
-            Convert and compress your files with professional quality
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-20">
+      {/* Header Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+            File Conversion
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+              {' '}Tools
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+            Professional tools to convert your files between different formats. 
+            Fast, secure, and easy to use.
           </p>
         </div>
+      </section>
 
-        <div className="grid lg:grid-cols-3 gap-8 lg:gap-12">
-          {/* Tools List */}
-          <div className="lg:col-span-1">
-            <h2 className="text-2xl font-bold mb-8 gradient-text">Available Tools</h2>
-            <div className="space-y-4">
-              {tools.map((tool) => (
-                <ToolCard key={tool.id} tool={tool} />
-              ))}
+      {/* Tools Grid */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Image Converter */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Image Converter
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Convert images between JPG, PNG, GIF, WebP, BMP, and more formats. 
+                Maintain quality while reducing file size.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Supports 20+ formats
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Batch processing
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Quality preservation
+                </div>
+              </div>
+              <button className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Convert Images
+              </button>
+            </div>
+
+            {/* Video Converter */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Video Converter
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Convert videos between MP4, AVI, MOV, MKV, WMV, and more formats. 
+                High quality output with multiple resolution options.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Supports 15+ formats
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Multiple resolutions
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Fast processing
+                </div>
+              </div>
+              <button className="w-full bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Convert Videos
+              </button>
+            </div>
+
+            {/* Audio Converter */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Audio Converter
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Convert audio files between MP3, WAV, FLAC, AAC, OGG, and more formats. 
+                Lossless conversion with metadata preservation.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Supports 10+ formats
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Lossless conversion
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Metadata preserved
+                </div>
+              </div>
+              <button className="w-full bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Convert Audio
+              </button>
+            </div>
+
+            {/* Document Converter */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Document Converter
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Convert documents between PDF, DOC, DOCX, TXT, and more formats. 
+                OCR support for scanned documents.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  OCR support
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Multiple formats
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Format preservation
+                </div>
+              </div>
+              <button className="w-full bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Convert Documents
+              </button>
+            </div>
+
+            {/* File Compressor */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                File Compressor
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Compress files to reduce size while maintaining quality. 
+                Support for images, videos, and documents.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Smart compression
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Quality control
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Batch processing
+                </div>
+              </div>
+              <button className="w-full bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Compress Files
+              </button>
+            </div>
+
+            {/* Batch Converter */}
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+              <div className="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-xl flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Batch Converter
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Convert multiple files at once. Save time with our batch processing tool. 
+                Support for all file types.
+              </p>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Multiple files
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  Progress tracking
+                </div>
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <svg className="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  All formats
+                </div>
+              </div>
+              <button className="w-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                Batch Convert
+              </button>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Tool Interface */}
-          <div className="lg:col-span-2">
-            <ToolInterface />
+      {/* Features Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+              Why Choose Our Tools?
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              Professional-grade tools with enterprise features
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {/* Feature 1 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Fast Processing
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Convert files in seconds with our optimized algorithms
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                High Quality
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Maintain quality while converting between formats
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Secure & Private
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Your files are processed securely and deleted automatically
+              </p>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                Free to Use
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300">
+                Basic features are completely free with no registration required
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
