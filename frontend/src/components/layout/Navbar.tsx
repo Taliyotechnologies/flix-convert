@@ -1,72 +1,82 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../../contexts/ThemeContext';
+import './Navbar.css';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const navItems = [
-    { name: 'Resize', href: '/resize' },
-    { name: 'Crop', href: '/crop' },
-    { name: 'Compress', href: '/compress' },
-    { name: 'Convert', href: '/convert' },
-    { name: 'More', href: '/more' },
-    { name: 'Pricing', href: '/pricing' }
+    { name: 'Home', href: '/' },
+    { name: 'Tools', href: '/tools' },
+    { name: 'Company', href: '/company' }
   ];
 
   return (
-    <nav className="bg-gray-900 border-b border-gray-700 sticky top-0 z-50">
+    <nav className="navbar">
       <div className="container">
-        <div className="flex items-center justify-between h-16">
+        <div className="navbar-content">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link 
-              to="/" 
-              className="text-xl font-bold text-purple-400 underline hover:text-purple-300 transition-colors"
-            >
+          <div className="navbar-logo">
+            <Link to="/" className="logo">
               FlixConvert
             </Link>
           </div>
 
-          {/* Center Navigation Buttons */}
-          <div className="hidden lg:flex items-center space-x-2">
+          {/* Desktop Navigation */}
+          <div className="navbar-nav desktop-nav">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className="bg-white text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+                className="nav-link"
               >
                 {item.name}
               </Link>
             ))}
           </div>
 
-          {/* Right Side Action Buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <Link 
-              to="/login" 
-              className="text-purple-400 border border-purple-400 px-4 py-2 rounded-lg hover:bg-purple-400 hover:text-white transition-colors"
+          {/* Right Side Actions */}
+          <div className="navbar-actions">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="theme-toggle"
+              aria-label="Toggle theme"
             >
-              Login
-            </Link>
-            <Link 
-              to="/signup" 
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Signup
-            </Link>
-          </div>
+              {theme === 'light' ? (
+                <svg className="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              ) : (
+                <svg className="theme-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
+            </button>
 
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden">
+            {/* Auth Buttons */}
+            <div className="auth-buttons">
+              <Link to="/signup" className="btn btn-secondary">
+                Sign Up
+              </Link>
+              <Link to="/login" className="btn btn-primary">
+                Login
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
             <button
               onClick={toggleMenu}
-              className="text-white hover:text-gray-200 p-2"
+              className="mobile-menu-btn"
+              aria-label="Toggle menu"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 ) : (
@@ -79,39 +89,35 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-gray-700 py-4">
-            <div className="space-y-4">
-              {/* Mobile Navigation Buttons */}
-              <div className="grid grid-cols-2 gap-2">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="bg-white text-gray-900 px-4 py-2 rounded-lg font-medium text-center hover:bg-gray-100 transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-              
-              {/* Mobile Action Buttons */}
-              <div className="space-y-2 pt-4 border-t border-gray-700">
-                <Link 
-                  to="/login" 
-                  className="block text-purple-400 border border-purple-400 px-4 py-2 rounded-lg text-center hover:bg-purple-400 hover:text-white transition-colors"
+          <div className="mobile-menu">
+            <div className="mobile-nav">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="mobile-nav-link"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Login
+                  {item.name}
                 </Link>
-                <Link 
-                  to="/signup" 
-                  className="block bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Signup
-                </Link>
-              </div>
+              ))}
+            </div>
+            
+            <div className="mobile-auth">
+              <Link 
+                to="/signup" 
+                className="btn btn-secondary mobile-btn"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Sign Up
+              </Link>
+              <Link 
+                to="/login" 
+                className="btn btn-primary mobile-btn"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Login
+              </Link>
             </div>
           </div>
         )}
