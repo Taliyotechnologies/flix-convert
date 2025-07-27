@@ -225,84 +225,123 @@ const Home: React.FC = () => {
         <div className="hero-container">
           <div className="hero-content">
             <div className="hero-badge">
-              <Crown size={16} />
-              <span>Premium File Processing</span>
+              <div className="badge-icon">
+                <Sparkles size={14} />
+              </div>
+              <span>AI-Powered File Processing</span>
             </div>
             
             <h1 className="hero-title">
-              Transform Your Files
-              <span className="gradient-text"> Like Magic</span>
+              Professional File
+              <span className="gradient-text"> Processing</span>
+              <br />
+              <span className="hero-subtitle">Made Simple</span>
             </h1>
             
             <p className="hero-description">
-              Experience the future of file processing with our AI-powered compression and conversion engine. 
-              Professional results in seconds, not minutes.
+              Transform, compress, and convert your files with enterprise-grade technology. 
+              Lightning-fast processing with zero quality loss.
             </p>
-
-            <div className="hero-stats">
-              {stats.map((stat, index) => (
-                <div key={index} className="stat-item" style={{ '--stat-color': stat.color } as React.CSSProperties}>
-                  <div className="stat-icon">{stat.icon}</div>
-                  <div className="stat-number">{stat.number}</div>
-                  <div className="stat-label">{stat.label}</div>
-                </div>
-              ))}
-            </div>
 
             <div className="hero-actions">
               <Link to="/compress" className="btn-primary">
-                <Zap size={20} />
-                Start Compressing
-                <ArrowRight size={20} />
+                <Zap size={18} />
+                <span>Start Processing</span>
+                <ArrowRight size={18} />
               </Link>
               <Link to="/convert" className="btn-secondary">
-                <Settings size={20} />
-                Convert Files
-                <ArrowRight size={20} />
+                <Settings size={18} />
+                <span>Convert Files</span>
               </Link>
             </div>
 
             <div className="hero-trust">
               <div className="trust-item">
-                <Shield size={16} />
-                <span>100% Secure</span>
+                <div className="trust-icon">
+                  <Shield size={14} />
+                </div>
+                <span>Enterprise Security</span>
               </div>
               <div className="trust-item">
-                <Clock size={16} />
-                <span>Instant Processing</span>
+                <div className="trust-icon">
+                  <Clock size={14} />
+                </div>
+                <span>Instant Results</span>
               </div>
               <div className="trust-item">
-                <Globe size={16} />
-                <span>Global CDN</span>
+                <div className="trust-icon">
+                  <Globe size={14} />
+                </div>
+                <span>Global Infrastructure</span>
               </div>
             </div>
           </div>
 
           <div className="hero-visual">
-            <div className="floating-card card-1">
-              <FileImage size={24} />
-              <span>Image Processing</span>
+            <div className="hero-card main-card">
+              <div className="card-header">
+                <div className="card-icon">
+                  <FileImage size={20} />
+                </div>
+                <div className="card-title">Image Processing</div>
+              </div>
+              <div className="card-progress">
+                <div className="progress-bar">
+                  <div className="progress-fill"></div>
+                </div>
+                <span className="progress-text">Processing...</span>
+              </div>
             </div>
-            <div className="floating-card card-2">
-              <FileVideo size={24} />
-              <span>Video Conversion</span>
+
+            <div className="hero-card secondary-card">
+              <div className="card-header">
+                <div className="card-icon">
+                  <FileVideo size={20} />
+                </div>
+                <div className="card-title">Video Conversion</div>
+              </div>
+              <div className="card-status">
+                <div className="status-dot"></div>
+                <span>Ready</span>
+              </div>
             </div>
-            <div className="floating-card card-3">
-              <FileAudio size={24} />
-              <span>Audio Optimization</span>
+
+            <div className="hero-card tertiary-card">
+              <div className="card-header">
+                <div className="card-icon">
+                  <FileAudio size={20} />
+                </div>
+                <div className="card-title">Audio Optimization</div>
+              </div>
+              <div className="card-metric">
+                <span className="metric-value">85%</span>
+                <span className="metric-label">Compressed</span>
+              </div>
             </div>
+
             <div className="hero-illustration">
-              <div className="processing-animation">
-                <div className="file-upload">
-                  <Upload size={32} />
+              <div className="processing-demo">
+                <div className="demo-upload">
+                  <Upload size={24} />
+                  <span>Upload</span>
                 </div>
-                <div className="processing-dots">
-                  <div className="dot"></div>
-                  <div className="dot"></div>
-                  <div className="dot"></div>
+                <div className="demo-arrow">
+                  <ArrowRight size={20} />
                 </div>
-                <div className="file-download">
-                  <Download size={32} />
+                <div className="demo-process">
+                  <div className="process-dots">
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                    <div className="dot"></div>
+                  </div>
+                  <span>Process</span>
+                </div>
+                <div className="demo-arrow">
+                  <ArrowRight size={20} />
+                </div>
+                <div className="demo-download">
+                  <Download size={24} />
+                  <span>Download</span>
                 </div>
               </div>
             </div>
