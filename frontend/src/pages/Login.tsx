@@ -1,29 +1,30 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Mail, Lock, Eye, EyeOff, ArrowRight } from 'lucide-react';
 import './Login.css';
 
 const Login: React.FC = () => {
   const [formData, setFormData] = useState({
     email: '',
-    password: '',
-    rememberMe: false
+    password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: value
     }));
-    
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
     }
   };
 
@@ -33,7 +34,7 @@ const Login: React.FC = () => {
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = 'Please enter a valid email address';
     }
 
     if (!formData.password) {
@@ -49,56 +50,83 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      return;
+    }
 
     setIsLoading(true);
     
     // Simulate API call
-    setTimeout(() => {
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setIsSuccess(true);
+      // In a real app, you would handle the login response here
+      console.log('Login successful:', formData);
+    } catch (error) {
+      setErrors({ general: 'Login failed. Please try again.' });
+    } finally {
       setIsLoading(false);
-      // For demo purposes, just navigate to home
-      navigate('/');
-    }, 1500);
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-container">
-        <div className="auth-card">
-          <div className="auth-header">
-            <Link to="/" className="back-link">
-              <ArrowLeft size={20} />
-              Back to Home
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-card">
+          <div className="login-header">
+            <Link to="/" className="login-logo">
+              <div className="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14,2 14,8 20,8" />
+                  <line x1="16" y1="13" x2="8" y2="13" />
+                  <line x1="16" y1="17" x2="8" y2="17" />
+                  <polyline points="10,9 9,9 8,9" />
+                </svg>
+              </div>
+              <span>FlixConvert</span>
             </Link>
-            <h1>Welcome Back</h1>
+            <h1>Welcome back</h1>
             <p>Sign in to your account to continue</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="auth-form">
+          <form onSubmit={handleSubmit} className="login-form">
+            {errors.general && (
+              <div className="error-message">
+                {errors.general}
+              </div>
+            )}
+
             <div className="form-group">
               <label htmlFor="email" className="form-label">
-                <Mail size={16} />
                 Email Address
               </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                className={`form-input ${errors.email ? 'error' : ''}`}
-                placeholder="Enter your email"
-                disabled={isLoading}
-              />
-              {errors.email && <span className="error-message">{errors.email}</span>}
+              <div className="input-wrapper">
+                <Mail size={18} className="input-icon" />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className={`form-input ${errors.email ? 'error' : ''}`}
+                  placeholder="Enter your email"
+                  disabled={isLoading}
+                />
+              </div>
+              {errors.email && <span className="field-error">{errors.email}</span>}
             </div>
 
             <div className="form-group">
               <label htmlFor="password" className="form-label">
-                <Lock size={16} />
                 Password
               </label>
-              <div className="password-input-wrapper">
+              <div className="input-wrapper">
+                <Lock size={18} className="input-icon" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
@@ -112,24 +140,18 @@ const Login: React.FC = () => {
                 <button
                   type="button"
                   className="password-toggle"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={togglePasswordVisibility}
                   disabled={isLoading}
                 >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
-              {errors.password && <span className="error-message">{errors.password}</span>}
+              {errors.password && <span className="field-error">{errors.password}</span>}
             </div>
 
             <div className="form-options">
-              <label className="checkbox-label">
-                <input
-                  type="checkbox"
-                  name="rememberMe"
-                  checked={formData.rememberMe}
-                  onChange={handleInputChange}
-                  disabled={isLoading}
-                />
+              <label className="checkbox-wrapper">
+                <input type="checkbox" className="checkbox" />
                 <span className="checkmark"></span>
                 Remember me
               </label>
@@ -140,27 +162,34 @@ const Login: React.FC = () => {
 
             <button
               type="submit"
-              className={`btn btn-primary btn-large ${isLoading ? 'loading' : ''}`}
+              className={`btn btn-primary btn-large login-btn ${isLoading ? 'loading' : ''}`}
               disabled={isLoading}
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? (
+                <>
+                  <div className="spinner"></div>
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  Sign In
+                  <ArrowRight size={18} />
+                </>
+              )}
             </button>
           </form>
 
-          <div className="auth-divider">
-            <span>or</span>
-          </div>
+          {isSuccess && (
+            <div className="success-message">
+              <div className="success-icon">✓</div>
+              <div className="success-content">
+                <h3>Login Successful!</h3>
+                <p>Welcome back to FlixConvert</p>
+              </div>
+            </div>
+          )}
 
-          <div className="social-auth">
-            <button className="btn btn-ghost btn-large social-btn">
-              Continue with Google
-            </button>
-            <button className="btn btn-ghost btn-large social-btn">
-              Continue with GitHub
-            </button>
-          </div>
-
-          <div className="auth-footer">
+          <div className="login-footer">
             <p>
               Don't have an account?{' '}
               <Link to="/signup" className="link-primary">
