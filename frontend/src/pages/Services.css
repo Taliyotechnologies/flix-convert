@@ -1,54 +1,76 @@
+/* Services Page Styles */
+
 .services {
-  padding-top: 80px;
+  min-height: 100vh;
 }
 
-/* Services Hero Section */
+/* Hero Section */
 .services-hero {
+  padding: 120px 0 80px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 100px 0;
   text-align: center;
 }
 
 .services-title {
   font-size: 3.5rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
 .services-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
   opacity: 0.9;
 }
 
-/* Services Grid Section */
-.services-grid {
-  background: white;
+/* Tools Section */
+.tools-section {
+  background: #f8fafc;
+  padding: 100px 0;
 }
 
-.service-card {
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 60px;
+}
+
+.tool-card {
   text-align: center;
-  border: none;
-  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-  border: 1px solid rgba(102, 126, 234, 0.1);
+  padding: 40px 32px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-.service-card::before {
+.tool-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--service-color);
+  background: var(--card-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
 }
 
-.service-icon {
+.tool-card:hover::before,
+.tool-card.active::before {
+  transform: scaleX(1);
+}
+
+.tool-card.active {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.tool-icon {
   width: 80px;
   height: 80px;
   background: rgba(102, 126, 234, 0.1);
@@ -56,73 +78,253 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.5rem;
-  transition: transform 0.3s ease;
+  margin: 0 auto 24px;
+  transition: all 0.3s ease;
 }
 
-.service-card:hover .service-icon {
+.tool-card:hover .tool-icon {
   transform: scale(1.1);
 }
 
-.service-title {
-  font-size: 1.5rem;
+.tool-title {
+  font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
   color: #333;
 }
 
-.service-description {
+.tool-description {
   color: #666;
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
 }
 
-.service-features {
-  list-style: none;
-  margin-bottom: 2rem;
-  text-align: left;
+.supported-formats {
+  margin-bottom: 24px;
 }
 
-.service-feature {
+.supported-formats h4 {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.format-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.format-tag {
+  background: rgba(102, 126, 234, 0.1);
+  color: #667eea;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.tool-btn {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* Active Tool Section */
+.active-tool-section {
+  background: white;
+  padding: 80px 0;
+}
+
+.tool-interface {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tool-header {
   display: flex;
   align-items: center;
-  margin-bottom: 0.5rem;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #667eea;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.tool-header .tool-title {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.tool-workspace {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.upload-zone {
+  border: 3px dashed #667eea;
+  border-radius: 16px;
+  padding: 60px 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.upload-zone:hover {
+  border-color: #764ba2;
+  background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+  transform: scale(1.02);
+}
+
+.upload-zone h3 {
+  font-size: 1.5rem;
+  margin: 16px 0 8px;
+  color: #333;
+}
+
+.upload-zone p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+/* File Workspace */
+.file-workspace {
+  padding: 20px;
+}
+
+.file-info {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.file-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.file-text h3 {
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.file-text p {
   color: #666;
   font-size: 0.9rem;
 }
 
-.feature-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--service-color);
-  border-radius: 50%;
-  margin-right: 0.75rem;
-  flex-shrink: 0;
+/* Compression Settings */
+.compression-settings {
+  margin-bottom: 32px;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.service-btn {
-  width: 100%;
-  margin-top: auto;
+.compression-settings h4 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.setting-group label {
+  font-weight: 600;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.setting-group select {
+  padding: 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  transition: border-color 0.3s ease;
+}
+
+.setting-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.success-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Spinning Animation */
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Features Section */
 .features-section {
-  background: #f8f9ff;
+  background: #f8fafc;
 }
 
 .feature-item {
   display: flex;
   align-items: flex-start;
-  gap: 1.5rem;
-  padding: 2rem;
+  gap: 24px;
+  padding: 32px;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.feature-item:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .feature-icon-wrapper {
@@ -142,9 +344,9 @@
 }
 
 .feature-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   color: #333;
 }
 
@@ -157,23 +359,20 @@
 .services-cta {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  text-align: center;
   padding: 100px 0;
+  text-align: center;
 }
 
 .cta-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .cta-subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
   opacity: 0.9;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Responsive Design */
@@ -182,30 +381,51 @@
     font-size: 2.5rem;
   }
 
-  .services-subtitle {
-    font-size: 1.1rem;
+  .tools-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .cta-title {
-    font-size: 2rem;
+  .tool-card {
+    padding: 32px 24px;
+  }
+
+  .tool-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .tool-header .tool-title {
+    font-size: 1.5rem;
+  }
+
+  .tool-workspace {
+    padding: 20px;
+  }
+
+  .upload-zone {
+    padding: 40px 20px;
+  }
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons,
+  .success-actions {
+    flex-direction: column;
+    align-items: center;
   }
 
   .feature-item {
     flex-direction: column;
     text-align: center;
-    gap: 1rem;
+    gap: 16px;
   }
 
-  .feature-icon-wrapper {
-    margin: 0 auto;
-  }
-
-  .service-features {
-    text-align: center;
-  }
-
-  .service-feature {
-    justify-content: center;
+  .cta-title {
+    font-size: 2rem;
   }
 }
 
@@ -214,16 +434,24 @@
     font-size: 2rem;
   }
 
-  .service-card {
-    padding: 1.5rem;
+  .services-subtitle {
+    font-size: 1.1rem;
   }
 
-  .service-icon {
-    width: 60px;
-    height: 60px;
+  .tool-card {
+    padding: 24px 16px;
   }
 
-  .feature-item {
-    padding: 1.5rem;
+  .upload-zone {
+    padding: 30px 15px;
+  }
+
+  .file-details {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .format-tags {
+    justify-content: center;
   }
 } 
