@@ -1,3 +1,6 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 /* Global CSS Variables for Theme Support */
 :root {
   /* Light Theme Colors */
@@ -53,6 +56,8 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Typography */

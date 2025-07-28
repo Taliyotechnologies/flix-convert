@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Image, X, Settings, Info } from 'lucide-react';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import './ToolPage.css';
 
 const CompressImage: React.FC = () => {
@@ -261,7 +262,7 @@ const CompressImage: React.FC = () => {
                         >
                           {isProcessing ? (
                             <>
-                              <div className="spinner"></div>
+                              <LoadingSpinner size="small" />
                               Processing...
                             </>
                           ) : (
