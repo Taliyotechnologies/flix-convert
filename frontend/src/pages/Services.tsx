@@ -14,7 +14,7 @@ import {
   CheckCircle,
   AlertCircle,
   Settings,
-  Compress
+  FileDown
 } from 'lucide-react';
 import './Services.css';
 
@@ -325,7 +325,7 @@ const Services: React.FC = () => {
                               </>
                             ) : (
                               <>
-                                <Compress size={20} />
+                                <FileDown size={20} />
                                 Process File
                               </>
                             )}
