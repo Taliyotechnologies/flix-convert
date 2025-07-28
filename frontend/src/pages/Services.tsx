@@ -9,11 +9,7 @@ import {
   Upload, 
   Zap, 
   Shield,
-  Play,
   RotateCcw,
-  CheckCircle,
-  AlertCircle,
-  Settings,
   FileDown
 } from 'lucide-react';
 import './Services.css';

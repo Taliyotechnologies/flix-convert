@@ -9,10 +9,7 @@ import {
   FileText, 
   Zap, 
   Shield, 
-  CheckCircle, 
-  AlertCircle,
   Play,
-  Pause,
   RotateCcw
 } from 'lucide-react';
 import './Home.css';
