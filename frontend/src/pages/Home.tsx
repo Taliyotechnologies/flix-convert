@@ -91,13 +91,6 @@ const Home: React.FC = () => {
     <div className="home">
       {/* Hero Section */}
       <section className="hero">
-        <div className="hero-background">
-          <div className="hero-shape hero-shape-1"></div>
-          <div className="hero-shape hero-shape-2"></div>
-          <div className="hero-shape hero-shape-3"></div>
-          <div className="hero-shape hero-shape-4"></div>
-        </div>
-        
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
