@@ -187,39 +187,49 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
+  border-radius: 0.5rem;
   border: none;
   cursor: pointer;
   transition: all var(--transition-normal);
-  font-size: 0.875rem;
-  line-height: 1;
+  white-space: nowrap;
+}
+
+.btn:focus {
+  outline: none;
 }
 
 .btn-primary {
   background: var(--primary-color);
   color: white;
-  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
   background: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:focus {
+  outline: none;
 }
 
 .btn-secondary {
-  background: var(--bg-card);
+  background: transparent;
   color: var(--text-primary);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
 .btn-secondary:hover {
-  background: var(--bg-tertiary);
+  background: var(--bg-secondary);
   border-color: var(--primary-color);
   color: var(--primary-color);
+}
+
+.btn-secondary:focus {
+  outline: none;
 }
 
 /* Card Styles */
@@ -325,8 +335,7 @@ a:hover {
 
 /* Focus Styles */
 *:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+  outline: none;
 }
 
 /* Selection */

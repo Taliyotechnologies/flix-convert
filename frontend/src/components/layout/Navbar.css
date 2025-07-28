@@ -34,6 +34,10 @@
   color: var(--primary-hover);
 }
 
+.logo:focus {
+  outline: none;
+}
+
 /* Desktop Navigation */
 .desktop-nav {
   display: none;
@@ -59,6 +63,10 @@
 
 .nav-link:hover {
   color: var(--primary-color);
+}
+
+.nav-link:focus {
+  outline: none;
 }
 
 .nav-link::after {
@@ -88,6 +96,10 @@
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
+}
+
+.dropdown-toggle:focus {
+  outline: none;
 }
 
 .dropdown-arrow {
