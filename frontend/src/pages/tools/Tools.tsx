@@ -7,7 +7,11 @@ const Tools: React.FC = () => {
     {
       title: 'Convert Image',
       description: 'Convert images between JPG, PNG, WebP, GIF, and more formats',
-      icon: '🖼️',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
       features: ['JPG to PNG', 'PNG to WebP', 'GIF to MP4', 'BMP to JPG'],
       href: '/convert/image',
       color: 'blue'
@@ -15,7 +19,11 @@ const Tools: React.FC = () => {
     {
       title: 'Convert Video',
       description: 'Convert videos between MP4, AVI, MOV, MKV, and more formats',
-      icon: '🎥',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      ),
       features: ['MP4 to AVI', 'MOV to MP4', 'MKV to MP4', 'WebM to MP4'],
       href: '/convert/video',
       color: 'purple'
@@ -23,7 +31,11 @@ const Tools: React.FC = () => {
     {
       title: 'Convert PDF',
       description: 'Convert PDFs to Word, Excel, PowerPoint, and image formats',
-      icon: '📄',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      ),
       features: ['PDF to Word', 'PDF to Excel', 'PDF to Images', 'PDF to HTML'],
       href: '/convert/pdf',
       color: 'red'
@@ -31,7 +43,11 @@ const Tools: React.FC = () => {
     {
       title: 'Convert Audio',
       description: 'Convert audio files between MP3, WAV, FLAC, AAC, and more',
-      icon: '🎵',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+      ),
       features: ['MP3 to WAV', 'WAV to MP3', 'FLAC to MP3', 'AAC to MP3'],
       href: '/convert/audio',
       color: 'green'
@@ -42,7 +58,11 @@ const Tools: React.FC = () => {
     {
       title: 'Compress Image',
       description: 'Reduce image file size while maintaining quality',
-      icon: '🖼️',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
       features: ['Up to 80% reduction', 'Quality preservation', 'Batch processing'],
       href: '/compress/image',
       color: 'blue'
@@ -50,7 +70,11 @@ const Tools: React.FC = () => {
     {
       title: 'Compress Video',
       description: 'Reduce video file size with minimal quality loss',
-      icon: '🎥',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      ),
       features: ['Multiple formats', 'Quality control', 'Fast processing'],
       href: '/compress/video',
       color: 'purple'
@@ -58,7 +82,11 @@ const Tools: React.FC = () => {
     {
       title: 'Compress PDF',
       description: 'Reduce PDF file size for easier sharing and storage',
-      icon: '📄',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      ),
       features: ['Smart compression', 'Text optimization', 'Image compression'],
       href: '/compress/pdf',
       color: 'red'
@@ -66,7 +94,11 @@ const Tools: React.FC = () => {
     {
       title: 'Compress Audio',
       description: 'Reduce audio file size while maintaining quality',
-      icon: '🎵',
+      icon: (
+        <svg className="tool-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+      ),
       features: ['Multiple formats', 'Quality settings', 'Batch processing'],
       href: '/compress/audio',
       color: 'green'
@@ -78,13 +110,21 @@ const Tools: React.FC = () => {
       title: 'Convert Files',
       description: 'Transform your files between different formats',
       tools: convertTools,
-      icon: '🔄'
+      icon: (
+        <svg className="category-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      )
     },
     {
       title: 'Compress Files',
       description: 'Reduce file sizes for easier sharing and storage',
       tools: compressTools,
-      icon: '🗜️'
+      icon: (
+        <svg className="category-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      )
     }
   ];
 

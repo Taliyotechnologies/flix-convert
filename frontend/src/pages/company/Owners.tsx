@@ -8,7 +8,11 @@ const Owners: React.FC = () => {
       name: 'Alex Johnson',
       role: 'CEO & Co-Founder',
       bio: 'Alex is a serial entrepreneur with over 15 years of experience in the tech industry. He founded FlixConvert with a vision to make file conversion accessible to everyone.',
-      avatar: '👨‍💼',
+      avatar: (
+        <svg className="founder-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       experience: '15+ years in tech',
       expertise: ['Product Strategy', 'Business Development', 'Team Leadership'],
       linkedin: '#',
@@ -18,7 +22,11 @@ const Owners: React.FC = () => {
       name: 'Sarah Chen',
       role: 'CTO & Co-Founder',
       bio: 'Sarah is a technology expert with deep knowledge in cloud infrastructure and file processing. She leads our technical team and ensures our platform remains cutting-edge.',
-      avatar: '👩‍💻',
+      avatar: (
+        <svg className="founder-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       experience: '12+ years in engineering',
       expertise: ['Cloud Architecture', 'File Processing', 'System Design'],
       linkedin: '#',
@@ -31,7 +39,11 @@ const Owners: React.FC = () => {
       name: 'Mike Rodriguez',
       role: 'Head of Product',
       bio: 'Mike focuses on creating intuitive and powerful user experiences. He ensures our tools are both powerful and easy to use.',
-      avatar: '👨‍🎨',
+      avatar: (
+        <svg className="leader-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       experience: '10+ years in product',
       expertise: ['UX Design', 'Product Strategy', 'User Research'],
       linkedin: '#',
@@ -41,7 +53,11 @@ const Owners: React.FC = () => {
       name: 'Emily Watson',
       role: 'Head of Marketing',
       bio: 'Emily leads our marketing efforts and ensures FlixConvert reaches users worldwide who need our file conversion tools.',
-      avatar: '👩‍💼',
+      avatar: (
+        <svg className="leader-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       experience: '8+ years in marketing',
       expertise: ['Digital Marketing', 'Brand Strategy', 'Growth'],
       linkedin: '#',
@@ -51,7 +67,11 @@ const Owners: React.FC = () => {
       name: 'David Kim',
       role: 'Head of Engineering',
       bio: 'David leads our engineering team and ensures our platform remains fast, secure, and reliable for millions of users.',
-      avatar: '👨‍🔧',
+      avatar: (
+        <svg className="leader-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       experience: '13+ years in engineering',
       expertise: ['Backend Development', 'DevOps', 'Security'],
       linkedin: '#',
@@ -61,7 +81,11 @@ const Owners: React.FC = () => {
       name: 'Lisa Thompson',
       role: 'Head of Customer Success',
       bio: 'Lisa ensures our users have the best experience possible and leads our customer support and success initiatives.',
-      avatar: '👩‍🎓',
+      avatar: (
+        <svg className="leader-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       experience: '9+ years in customer success',
       expertise: ['Customer Support', 'User Onboarding', 'Success Metrics'],
       linkedin: '#',
@@ -74,14 +98,22 @@ const Owners: React.FC = () => {
       name: 'Dr. Robert Wilson',
       role: 'Technical Advisor',
       bio: 'Former CTO at major tech companies with expertise in scalable systems and file processing technologies.',
-      avatar: '👨‍🏫',
+      avatar: (
+        <svg className="advisor-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       company: 'Tech Innovation Labs'
     },
     {
       name: 'Jennifer Park',
       role: 'Business Advisor',
       bio: 'Serial entrepreneur and investor with experience in building successful SaaS companies.',
-      avatar: '👩‍💼',
+      avatar: (
+        <svg className="advisor-avatar" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
       company: 'Venture Capital Partners'
     }
   ];
@@ -232,28 +264,44 @@ const Owners: React.FC = () => {
 
           <div className="values-grid">
             <div className="value-card">
-              <div className="value-icon">🎯</div>
+              <div className="value-icon">
+                <svg className="value-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
               <h3 className="value-title">Customer Focus</h3>
               <p className="value-description">
                 Every decision we make is centered around providing the best experience for our users.
               </p>
             </div>
             <div className="value-card">
-              <div className="value-icon">🚀</div>
+              <div className="value-icon">
+                <svg className="value-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
               <h3 className="value-title">Innovation</h3>
               <p className="value-description">
                 We continuously push boundaries to deliver cutting-edge file processing solutions.
               </p>
             </div>
             <div className="value-card">
-              <div className="value-icon">🤝</div>
+              <div className="value-icon">
+                <svg className="value-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                </svg>
+              </div>
               <h3 className="value-title">Collaboration</h3>
               <p className="value-description">
                 We believe in the power of teamwork and diverse perspectives to solve complex challenges.
               </p>
             </div>
             <div className="value-card">
-              <div className="value-icon">🔒</div>
+              <div className="value-icon">
+                <svg className="value-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
               <h3 className="value-title">Integrity</h3>
               <p className="value-description">
                 We operate with transparency, honesty, and the highest ethical standards.
