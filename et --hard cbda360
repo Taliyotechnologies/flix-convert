@@ -1,0 +1,5 @@
+[33mb325f8b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Improve website spacing, margins, padding, icon sizes, and hover effects throughout all components
+[33mcbda360[m Update all icons to solid blue background with white icons - matching lightning bolt design style
+[33mfac3fdb[m Fix routing issues and remove all remaining emojis - added missing routes and replaced emojis with SVG icons
+[33m881255a[m Fix unwanted borders on click and add professional footer - removed focus outlines and created clean footer component
+[33mbad4e61[m Replace all emojis with professional SVG icons throughout the website for clean premium design
