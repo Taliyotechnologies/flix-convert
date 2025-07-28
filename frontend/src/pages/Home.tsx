@@ -95,7 +95,7 @@ const Home: React.FC = () => {
           <div className="hero-content">
             <div className="hero-text">
               <div className="hero-badge">
-                <span>🚀 Free up to 10MB • No Registration Required</span>
+                <span>Free up to 10MB • No Registration Required</span>
               </div>
               
               <h1 className="hero-title">
@@ -130,43 +130,6 @@ const Home: React.FC = () => {
                       <div className="trust-label">{stat.label}</div>
                     </div>
                   ))}
-                </div>
-              </div>
-            </div>
-            
-            <div className="hero-visual">
-              <div className="hero-card">
-                <div className="card-header">
-                  <div className="card-dots">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <div className="card-title">File Converter</div>
-                </div>
-                <div className="card-content">
-                  <div className="file-icon">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  <div className="file-info">
-                    <div className="file-name">document.pdf</div>
-                    <div className="file-size">2.4 MB</div>
-                  </div>
-                  <div className="conversion-status">
-                    <div className="status-bar">
-                      <div className="status-progress"></div>
-                    </div>
-                    <div className="status-text">Converting to Word...</div>
-                  </div>
-                  <div className="conversion-result">
-                    <div className="result-icon">✅</div>
-                    <div className="result-info">
-                      <div className="result-name">document.docx</div>
-                      <div className="result-size">1.8 MB</div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

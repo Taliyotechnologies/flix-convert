@@ -1,7 +1,7 @@
 /* Auth Pages Styles */
 .auth-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: var(--bg-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,13 +10,11 @@
 
 .auth-container {
   background: var(--bg-card);
-  border-radius: 1.5rem;
-  padding: 3rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  padding: 2.5rem;
   border: 1px solid var(--border-color);
   max-width: 480px;
   width: 100%;
-  backdrop-filter: blur(20px);
 }
 
 .auth-header {
@@ -78,7 +76,7 @@
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   background: var(--bg-primary);
   color: var(--text-primary);
@@ -89,7 +87,6 @@
 .form-input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(43, 112, 247, 0.1);
 }
 
 .form-input::placeholder {

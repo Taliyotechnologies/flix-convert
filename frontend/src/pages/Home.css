@@ -7,9 +7,8 @@
 /* Hero Section */
 .hero {
   padding: 2rem 0 4rem;
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  background: var(--bg-secondary);
   position: relative;
-  overflow: hidden;
 }
 
 .hero-content {
@@ -31,7 +30,7 @@
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(43, 112, 247, 0.1) 0%, rgba(43, 112, 247, 0.05) 100%);
+  background: rgba(43, 112, 247, 0.1);
   color: var(--primary-color);
   padding: 0.75rem 1.5rem;
   border-radius: 2rem;
@@ -39,8 +38,6 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   border: 1px solid rgba(43, 112, 247, 0.2);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 12px rgba(43, 112, 247, 0.1);
 }
 
 .hero-title {
@@ -53,10 +50,7 @@
 }
 
 .hero-title-accent {
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-color);
 }
 
 .hero-subtitle {
@@ -83,16 +77,15 @@
   padding: 1rem 2rem;
   font-size: 1.125rem;
   font-weight: 600;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
+  background: var(--primary-color);
   border: none;
-  box-shadow: 0 10px 25px rgba(43, 112, 247, 0.3);
   color: white;
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color var(--transition-normal);
 }
 
 .hero-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(43, 112, 247, 0.4);
+  background: var(--primary-hover);
 }
 
 .hero-btn-secondary {
@@ -101,10 +94,10 @@
   font-size: 1.125rem;
   font-weight: 600;
   background: var(--bg-card);
-  backdrop-filter: blur(10px);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   color: var(--text-primary);
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all var(--transition-normal);
 }
 
 .hero-btn-secondary:hover {
@@ -142,16 +135,13 @@
   text-align: center;
   padding: 1rem;
   background: var(--bg-card);
-  backdrop-filter: blur(10px);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   border: 1px solid var(--border-color);
   transition: all var(--transition-normal);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .trust-stat:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
 }
 
 .trust-number {
@@ -176,10 +166,8 @@
 
 .hero-card {
   background: var(--bg-card);
-  backdrop-filter: blur(20px);
-  border-radius: 1.5rem;
+  border-radius: 0.75rem;
   padding: 2rem;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-color);
   max-width: 400px;
   width: 100%;
@@ -187,8 +175,7 @@
 }
 
 .hero-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  border-color: var(--primary-color);
 }
 
 .card-header {
@@ -229,13 +216,12 @@
 .file-icon {
   width: 3rem;
   height: 3rem;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
-  border-radius: 0.75rem;
+  background: var(--primary-color);
+  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  box-shadow: 0 4px 12px rgba(43, 112, 247, 0.3);
 }
 
 .file-icon svg {
@@ -249,7 +235,7 @@
   align-items: center;
   padding: 1rem;
   background: var(--bg-secondary);
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
   border: 1px solid var(--border-color);
 }
 
@@ -271,17 +257,17 @@
 
 .status-bar {
   width: 100%;
-  height: 8px;
+  height: 6px;
   background: var(--bg-tertiary);
-  border-radius: 4px;
+  border-radius: 3px;
   overflow: hidden;
 }
 
 .status-progress {
   width: 60%;
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-color) 0%, #1d4ed8 100%);
-  border-radius: 4px;
+  background: var(--primary-color);
+  border-radius: 3px;
 }
 
 .status-text {
@@ -297,7 +283,7 @@
   padding: 1rem;
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.2);
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
 }
 
 .result-icon {
@@ -359,34 +345,30 @@
 .feature-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   padding: 2rem;
   text-align: center;
   transition: all var(--transition-normal);
-  box-shadow: var(--shadow-md);
 }
 
 .feature-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
   border-color: var(--primary-color);
 }
 
 .feature-icon-wrapper {
   width: 4rem;
   height: 4rem;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
-  border-radius: 1rem;
+  background: var(--primary-color);
+  border-radius: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
   transition: all var(--transition-normal);
-  box-shadow: 0 4px 12px rgba(43, 112, 247, 0.3);
 }
 
 .feature-card:hover .feature-icon-wrapper {
-  transform: scale(1.1);
+  background: var(--primary-hover);
 }
 
 .feature-icon {
@@ -425,34 +407,30 @@
 .tool-card {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   padding: 2rem;
   text-align: center;
   transition: all var(--transition-normal);
-  box-shadow: var(--shadow-md);
 }
 
 .tool-card:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
   border-color: var(--primary-color);
 }
 
 .tool-icon-wrapper {
   width: 4rem;
   height: 4rem;
-  background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
-  border-radius: 1rem;
+  background: var(--primary-color);
+  border-radius: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
   transition: all var(--transition-normal);
-  box-shadow: 0 4px 12px rgba(43, 112, 247, 0.3);
 }
 
 .tool-card:hover .tool-icon-wrapper {
-  transform: scale(1.1);
+  background: var(--primary-hover);
 }
 
 .tool-icon {
@@ -553,7 +531,7 @@
 .cta-buttons .btn-secondary {
   background: var(--bg-card);
   color: var(--text-primary);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
 .cta-buttons .btn-secondary:hover {
