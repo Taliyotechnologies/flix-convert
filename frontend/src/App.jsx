@@ -17,6 +17,12 @@ import CompressAudio from './pages/CompressAudio';
 import CompressPDF from './pages/CompressPDF';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
+import Company from './pages/Company';
+import Settings from './pages/Settings';
+import ConvertImage from './pages/ConvertImage';
+import ConvertVideo from './pages/ConvertVideo';
+import ConvertAudio from './pages/ConvertAudio';
+import ConvertPDF from './pages/ConvertPDF';
 import NotFound from './pages/NotFound';
 import './styles/global.css';
 
@@ -39,6 +45,10 @@ function App() {
                   <Route path="/compress-video" element={<CompressVideo />} />
                   <Route path="/compress-audio" element={<CompressAudio />} />
                   <Route path="/compress-pdf" element={<CompressPDF />} />
+                  <Route path="/convert-image" element={<ConvertImage />} />
+                  <Route path="/convert-video" element={<ConvertVideo />} />
+                  <Route path="/convert-audio" element={<ConvertAudio />} />
+                  <Route path="/convert-pdf" element={<ConvertPDF />} />
                   <Route 
                     path="/admin" 
                     element={
@@ -48,6 +58,15 @@ function App() {
                     } 
                   />
                   <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route path="/company" element={<Company />} />
+                  <Route 
+                    path="/settings" 
+                    element={
+                      <PrivateRoute>
+                        <Settings />
+                      </PrivateRoute>
+                    } 
+                  />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
