@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiZap, FiAlertCircle, FiCheckCircle, FiShield, FiClock, FiStar } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiZap, FiAlertCircle, FiCheckCircle, FiShield, FiStar } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Login = () => {
@@ -13,7 +13,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const [isValidating, setIsValidating] = useState(false);
   const [touched, setTouched] = useState({});
   
   const { login, loginWithGoogle } = useAuth();
@@ -21,7 +20,6 @@ const Login = () => {
   const [searchParams] = useSearchParams();
   const emailRef = useRef(null);
 
-  // Check for error from URL params (e.g., from Google OAuth failure)
   useEffect(() => {
     const error = searchParams.get('error');
     if (error) {
@@ -32,7 +30,6 @@ const Login = () => {
     }
   }, [searchParams]);
 
-  // Focus on email input on mount
   useEffect(() => {
     if (emailRef.current) {
       emailRef.current.focus();
@@ -46,21 +43,11 @@ const Login = () => {
       [name]: value
     }));
     
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
         [name]: ''
       }));
-    }
-
-    // Real-time validation for email
-    if (name === 'email' && value && !isValidating) {
-      setIsValidating(true);
-      setTimeout(() => {
-        validateField(name, value);
-        setIsValidating(false);
-      }, 500);
     }
   };
 
@@ -126,7 +113,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Mark all fields as touched
     setTouched({
       email: true,
       password: true
@@ -148,7 +134,6 @@ const Login = () => {
           message: result.message
         });
         
-        // Redirect to dashboard or tools page
         setTimeout(() => {
           navigate('/tools');
         }, 1000);
@@ -350,4 +335,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login; 

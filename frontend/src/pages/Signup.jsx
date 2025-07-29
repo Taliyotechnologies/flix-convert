@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap, FiCheckCircle, FiAlertCircle, FiStar, FiClock } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap, FiCheckCircle, FiAlertCircle, FiStar } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Signup = () => {
@@ -16,7 +16,6 @@ const Signup = () => {
   const [alert, setAlert] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isValidating, setIsValidating] = useState(false);
   const [touched, setTouched] = useState({});
   
   const { signup, loginWithGoogle } = useAuth();
@@ -24,7 +23,6 @@ const Signup = () => {
   const [searchParams] = useSearchParams();
   const nameRef = useRef(null);
 
-  // Check for error from URL params (e.g., from Google OAuth failure)
   useEffect(() => {
     const error = searchParams.get('error');
     if (error) {
@@ -35,7 +33,6 @@ const Signup = () => {
     }
   }, [searchParams]);
 
-  // Focus on name input on mount
   useEffect(() => {
     if (nameRef.current) {
       nameRef.current.focus();
@@ -49,7 +46,6 @@ const Signup = () => {
       [name]: value
     }));
     
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -57,16 +53,6 @@ const Signup = () => {
       }));
     }
 
-    // Real-time validation for email
-    if (name === 'email' && value && !isValidating) {
-      setIsValidating(true);
-      setTimeout(() => {
-        validateField(name, value);
-        setIsValidating(false);
-      }, 500);
-    }
-
-    // Real-time validation for password confirmation
     if (name === 'confirmPassword' && value && formData.password) {
       validateField(name, value);
     }
@@ -168,7 +154,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Mark all fields as touched
     setTouched({
       name: true,
       email: true,
@@ -192,7 +177,6 @@ const Signup = () => {
           message: result.message
         });
         
-        // Redirect to login page after successful signup
         setTimeout(() => {
           navigate('/login');
         }, 2000);
@@ -488,4 +472,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signup; 
