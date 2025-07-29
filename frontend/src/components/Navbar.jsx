@@ -9,10 +9,13 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
+  const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
   const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false);
+  const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   
   const toolsDropdownRef = useRef(null);
+  const companyDropdownRef = useRef(null);
   const userDropdownRef = useRef(null);
 
   // Close dropdowns when clicking outside
@@ -20,6 +23,9 @@ const Navbar = () => {
     const handleClickOutside = (event) => {
       if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(event.target)) {
         setIsToolsDropdownOpen(false);
+      }
+      if (companyDropdownRef.current && !companyDropdownRef.current.contains(event.target)) {
+        setIsCompanyDropdownOpen(false);
       }
       if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
         setIsUserDropdownOpen(false);
@@ -36,6 +42,7 @@ const Navbar = () => {
       if (isMobileMenuOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.mobile-menu-btn')) {
         setIsMobileMenuOpen(false);
         setIsMobileToolsOpen(false);
+        setIsMobileCompanyOpen(false);
       }
     };
 
@@ -59,6 +66,14 @@ const Navbar = () => {
     { name: 'Convert Audio', path: '/convert-audio' },
     { name: 'Convert PDF', path: '/convert-pdf' },
     { name: 'Compress PDF', path: '/compress-pdf' }
+  ];
+
+  const companyMenuItems = [
+    { name: 'About Us', path: '/about' },
+    { name: 'Contact', path: '/contact' },
+    { name: 'Privacy Policy', path: '/privacy' },
+    { name: 'Terms of Service', path: '/terms' },
+    { name: 'Support', path: '/support' }
   ];
 
   return (
@@ -101,7 +116,33 @@ const Navbar = () => {
             )}
           </div>
 
-          <Link to="/company" className="nav-link">Company</Link>
+          {/* Company Dropdown */}
+          <div className="nav-dropdown" ref={companyDropdownRef}>
+            <button 
+              className="nav-dropdown-toggle"
+              onClick={() => setIsCompanyDropdownOpen(!isCompanyDropdownOpen)}
+            >
+              Company
+              <svg className="dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </button>
+            
+            {isCompanyDropdownOpen && (
+              <div className="dropdown-menu company-dropdown">
+                {companyMenuItems.map((item) => (
+                  <Link 
+                    key={item.path} 
+                    to={item.path} 
+                    className="dropdown-item"
+                    onClick={() => setIsCompanyDropdownOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Right Side Actions */}
@@ -243,13 +284,42 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link 
-              to="/company" 
-              className="mobile-nav-link"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Company
-            </Link>
+            <div className="mobile-dropdown">
+              <button 
+                className="mobile-dropdown-toggle"
+                onClick={() => setIsMobileCompanyOpen(!isMobileCompanyOpen)}
+              >
+                Company
+                <svg 
+                  className="dropdown-icon" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
+                  style={{ 
+                    transform: isMobileCompanyOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.3s ease'
+                  }}
+                >
+                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
+              {isMobileCompanyOpen && (
+                <div className="mobile-dropdown-menu">
+                  {companyMenuItems.map((item) => (
+                    <Link 
+                      key={item.path} 
+                      to={item.path} 
+                      className="mobile-dropdown-item"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setIsMobileCompanyOpen(false);
+                      }}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {!user && (
               <div className="mobile-auth-buttons">

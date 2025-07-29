@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiZap, FiAlertCircle, FiCheckCircle, FiShield, FiClock, FiStar } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Login = () => {
@@ -336,10 +336,10 @@ const Login = () => {
                 </div>
               </div>
               <div className="sidebar-feature">
-                <FiMail className="feature-icon" />
+                <FiStar className="feature-icon" />
                 <div className="feature-content">
-                  <h3>Free Forever</h3>
-                  <p>No hidden costs, no premium tiers, completely free</p>
+                  <h3>Premium Quality</h3>
+                  <p>Get the best compression without losing quality</p>
                 </div>
               </div>
             </div>

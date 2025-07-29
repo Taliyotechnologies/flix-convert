@@ -1818,12 +1818,20 @@ body.dark .logout-item:hover {
 }
 
 .auth-card {
-  padding: 3rem 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 3.5rem;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    0 8px 32px rgba(0, 0, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
 }
 
 .auth-card::before {
@@ -1834,7 +1842,7 @@ body.dark .logout-item:hover {
   right: 0;
   height: 4px;
   background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
-  border-radius: var(--border-radius-xl) var(--border-radius-xl) 0 0;
+  border-radius: 24px 24px 0 0;
 }
 
 .auth-card::after {
@@ -2095,14 +2103,17 @@ body.dark .logout-item:hover {
 
 /* Enhanced Auth Sidebar */
 .auth-sidebar {
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
-  color: white;
-  padding: 3rem 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 24px;
+  padding: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
 }
 
 .auth-sidebar::before {
@@ -2112,9 +2123,11 @@ body.dark .logout-item:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  opacity: 0.3;
+  background: 
+    radial-gradient(circle at 30% 70%, rgba(120, 119, 198, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(255, 119, 198, 0.08) 0%, transparent 50%);
   animation: float 15s ease-in-out infinite reverse;
+  z-index: -1;
 }
 
 .sidebar-content {
@@ -2128,7 +2141,7 @@ body.dark .logout-item:hover {
   font-size: 1.75rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  color: white;
+  color: var(--accent-primary);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -2143,10 +2156,11 @@ body.dark .logout-item:hover {
   align-items: flex-start;
   gap: 1rem;
   text-align: left;
-  padding: 1rem;
-  border-radius: var(--border-radius-lg);
-  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
   animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both;
 }
@@ -2160,29 +2174,30 @@ body.dark .logout-item:hover {
 }
 
 .sidebar-feature:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .feature-icon {
   width: 2rem;
   height: 2rem;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--accent-primary);
   flex-shrink: 0;
   margin-top: 0.125rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 .feature-content h3 {
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: white;
+  color: var(--text-primary);
 }
 
 .feature-content p {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--text-secondary);
   line-height: 1.5;
 }
 
@@ -2242,8 +2257,8 @@ body.dark .logout-item:hover {
   width: 100%;
   padding: 1rem 1.25rem 1rem 3rem;
   border: 2px solid var(--border-color);
-  border-radius: var(--border-radius-lg);
-  background: var(--bg-primary);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
   color: var(--text-primary);
   font-size: 1rem;
   font-weight: 500;
@@ -2257,7 +2272,7 @@ body.dark .logout-item:hover {
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
   transform: translateY(-1px);
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .form-input.error {
