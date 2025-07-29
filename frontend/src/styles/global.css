@@ -1,6 +1,8 @@
-/* CSS Variables for Theme */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables for theming */
 :root {
-  /* Light Theme */
+  /* Light theme colors */
   --bg-primary: #ffffff;
   --bg-secondary: #f8fafc;
   --bg-tertiary: #f1f5f9;
@@ -10,52 +12,49 @@
   --border-color: #e2e8f0;
   --border-hover: #cbd5e1;
   --accent-primary: #3b82f6;
-  --accent-secondary: #1d4ed8;
   --accent-hover: #2563eb;
+  --accent-secondary: #6366f1;
   --success: #10b981;
-  --warning: #f59e0b;
   --error: #ef4444;
+  --warning: #f59e0b;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
 }
 
-/* Dark Theme */
-[data-theme="dark"] {
-  --bg-primary: #121212;
-  --bg-secondary: #1e1e1e;
-  --bg-tertiary: #2d2d2d;
+/* Dark theme colors */
+body.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
-  --text-muted: #94a3b8;
-  --border-color: #374151;
-  --border-hover: #4b5563;
-  --accent-primary: #60a5fa;
-  --accent-secondary: #3b82f6;
-  --accent-hover: #2563eb;
-  --success: #34d399;
-  --warning: #fbbf24;
-  --error: #f87171;
+  --text-muted: #64748b;
+  --border-color: #334155;
+  --border-hover: #475569;
+  --accent-primary: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-secondary: #6366f1;
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
 }
 
-/* Reset and Base Styles */
+/* Base styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -64,10 +63,9 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 h1 { font-size: 2.5rem; }
@@ -100,12 +98,12 @@ a:hover {
   justify-content: center;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 0.5rem;
-  font-weight: 500;
+  border-radius: var(--radius-md);
   font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-decoration: none;
   gap: 0.5rem;
 }
 
@@ -134,52 +132,75 @@ a:hover {
 .btn-ghost {
   background-color: transparent;
   color: var(--text-primary);
+  border: 1px solid transparent;
 }
 
 .btn-ghost:hover {
   background-color: var(--bg-secondary);
+  border-color: var(--border-color);
 }
 
-.btn-danger {
-  background-color: var(--error);
-  color: white;
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
 }
 
-.btn-danger:hover {
-  background-color: #dc2626;
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1rem;
 }
 
-/* Form Elements */
-input, textarea, select {
+/* Forms */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.form-input {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   border: 1px solid var(--border-color);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-md);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   font-size: 0.875rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-input:focus, textarea:focus, select:focus {
+.form-input:focus {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-error {
+  color: var(--error);
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
 }
 
 /* Cards */
 .card {
   background-color: var(--bg-primary);
   border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-lg);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .card:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 /* Container */
@@ -200,83 +221,73 @@ input:focus, textarea:focus, select:focus {
 .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
 
-/* Flexbox */
+/* Flexbox utilities */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
+.gap-1 { gap: 0.25rem; }
 .gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
 .gap-4 { gap: 1rem; }
-.gap-6 { gap: 1.5rem; }
 
 /* Spacing */
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 0.75rem; }
 .mt-4 { margin-top: 1rem; }
 .mt-6 { margin-top: 1.5rem; }
 .mt-8 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.25rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-3 { margin-bottom: 0.75rem; }
 .mb-4 { margin-bottom: 1rem; }
 .mb-6 { margin-bottom: 1.5rem; }
 .mb-8 { margin-bottom: 2rem; }
+
+.p-1 { padding: 0.25rem; }
+.p-2 { padding: 0.5rem; }
+.p-3 { padding: 0.75rem; }
 .p-4 { padding: 1rem; }
 .p-6 { padding: 1.5rem; }
 .p-8 { padding: 2rem; }
 
-/* Text Utilities */
+/* Text utilities */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
+
+.text-sm { font-size: 0.875rem; }
+.text-base { font-size: 1rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+
+.font-light { font-weight: 300; }
+.font-normal { font-weight: 400; }
 .font-medium { font-weight: 500; }
 .font-semibold { font-weight: 600; }
 .font-bold { font-weight: 700; }
 
-/* Responsive Design */
+/* Responsive utilities */
 @media (max-width: 768px) {
   .container {
     padding: 0 0.75rem;
   }
-  
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.75rem; }
-  h3 { font-size: 1.5rem; }
   
   .grid-cols-2,
   .grid-cols-3,
   .grid-cols-4 {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 480px) {
-  .btn {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.8rem;
-  }
   
-  .card {
-    padding: 1rem;
-  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
-
-.fade-in {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.slide-in {
-  animation: slideIn 0.3s ease-out;
-}
-
-/* Loading Spinner */
+/* Loading spinner */
 .spinner {
   width: 20px;
   height: 20px;
@@ -291,20 +302,25 @@ input:focus, textarea:focus, select:focus {
   100% { transform: rotate(360deg); }
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
+/* Dropdown animations */
+.dropdown-enter {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
-::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+.dropdown-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 4px;
+.dropdown-exit {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
+.dropdown-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
