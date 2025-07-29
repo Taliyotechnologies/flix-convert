@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap, FiCheckCircle } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Signup = () => {
@@ -16,10 +16,13 @@ const Signup = () => {
   const [alert, setAlert] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isValidating, setIsValidating] = useState(false);
+  const [touched, setTouched] = useState({});
   
   const { signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const nameRef = useRef(null);
 
   // Check for error from URL params (e.g., from Google OAuth failure)
   useEffect(() => {
@@ -31,6 +34,13 @@ const Signup = () => {
       });
     }
   }, [searchParams]);
+
+  // Focus on name input on mount
+  useEffect(() => {
+    if (nameRef.current) {
+      nameRef.current.focus();
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,6 +56,78 @@ const Signup = () => {
         [name]: ''
       }));
     }
+
+    // Real-time validation for email
+    if (name === 'email' && value && !isValidating) {
+      setIsValidating(true);
+      setTimeout(() => {
+        validateField(name, value);
+        setIsValidating(false);
+      }, 500);
+    }
+
+    // Real-time validation for password confirmation
+    if (name === 'confirmPassword' && value && formData.password) {
+      validateField(name, value);
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({
+      ...prev,
+      [name]: true
+    }));
+    
+    if (value) {
+      validateField(name, value);
+    }
+  };
+
+  const validateField = (name, value) => {
+    let error = '';
+    
+    switch (name) {
+      case 'name':
+        if (!value) {
+          error = 'Name is required';
+        } else if (value.length < 2) {
+          error = 'Name must be at least 2 characters';
+        } else if (value.length > 50) {
+          error = 'Name must be less than 50 characters';
+        }
+        break;
+      case 'email':
+        if (!value) {
+          error = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+          error = 'Please enter a valid email address';
+        }
+        break;
+      case 'password':
+        if (!value) {
+          error = 'Password is required';
+        } else if (value.length < 6) {
+          error = 'Password must be at least 6 characters';
+        } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(value)) {
+          error = 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
+        }
+        break;
+      case 'confirmPassword':
+        if (!value) {
+          error = 'Please confirm your password';
+        } else if (formData.password !== value) {
+          error = 'Passwords do not match';
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }));
   };
 
   const validateForm = () => {
@@ -62,13 +144,15 @@ const Signup = () => {
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = 'Please enter a valid email address';
     }
 
     if (!formData.password) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
+      newErrors.password = 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
     }
 
     if (!formData.confirmPassword) {
@@ -83,6 +167,14 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Mark all fields as touched
+    setTouched({
+      name: true,
+      email: true,
+      password: true,
+      confirmPassword: true
+    });
     
     if (!validateForm()) {
       return;
@@ -125,6 +217,23 @@ const Signup = () => {
     loginWithGoogle();
   };
 
+  const isFormValid = () => {
+    return formData.name && formData.email && formData.password && formData.confirmPassword &&
+           !errors.name && !errors.email && !errors.password && !errors.confirmPassword;
+  };
+
+  const getPasswordStrength = () => {
+    if (!formData.password) return 0;
+    let strength = 0;
+    if (formData.password.length >= 6) strength++;
+    if (/(?=.*[a-z])/.test(formData.password)) strength++;
+    if (/(?=.*[A-Z])/.test(formData.password)) strength++;
+    if (/(?=.*\d)/.test(formData.password)) strength++;
+    return strength;
+  };
+
+  const passwordStrength = getPasswordStrength();
+
   return (
     <div className="auth-page">
       <div className="auth-container">
@@ -143,7 +252,7 @@ const Signup = () => {
           {alert && (
             <div className={`auth-alert auth-alert-${alert.type}`}>
               <div className="alert-icon">
-                {alert.type === 'success' ? <FiCheckCircle /> : <FiMail />}
+                {alert.type === 'success' ? <FiCheckCircle /> : <FiAlertCircle />}
               </div>
               <div className="alert-content">
                 <div className="alert-title">
@@ -162,17 +271,23 @@ const Signup = () => {
               <div className="input-group">
                 <FiUser className="input-icon" />
                 <input
+                  ref={nameRef}
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`form-input ${errors.name ? 'error' : ''}`}
+                  onBlur={handleBlur}
+                  className={`form-input ${errors.name && touched.name ? 'error' : ''} ${formData.name && !errors.name ? 'valid' : ''}`}
                   placeholder="Enter your full name"
                   disabled={isLoading}
+                  autoComplete="name"
                 />
+                {formData.name && !errors.name && (
+                  <FiCheckCircle className="input-icon valid-icon" style={{ right: '1rem', left: 'auto', color: 'var(--success-color)' }} />
+                )}
               </div>
-              {errors.name && (
+              {errors.name && touched.name && (
                 <div className="form-error">{errors.name}</div>
               )}
             </div>
@@ -189,12 +304,17 @@ const Signup = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`form-input ${errors.email ? 'error' : ''}`}
+                  onBlur={handleBlur}
+                  className={`form-input ${errors.email && touched.email ? 'error' : ''} ${formData.email && !errors.email ? 'valid' : ''}`}
                   placeholder="Enter your email address"
                   disabled={isLoading}
+                  autoComplete="email"
                 />
+                {formData.email && !errors.email && (
+                  <FiCheckCircle className="input-icon valid-icon" style={{ right: '1rem', left: 'auto', color: 'var(--success-color)' }} />
+                )}
               </div>
-              {errors.email && (
+              {errors.email && touched.email && (
                 <div className="form-error">{errors.email}</div>
               )}
             </div>
@@ -211,9 +331,11 @@ const Signup = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`form-input ${errors.password ? 'error' : ''}`}
+                  onBlur={handleBlur}
+                  className={`form-input ${errors.password && touched.password ? 'error' : ''} ${formData.password && !errors.password ? 'valid' : ''}`}
                   placeholder="Create a strong password"
                   disabled={isLoading}
+                  autoComplete="new-password"
                 />
                 <button
                   type="button"
@@ -225,7 +347,26 @@ const Signup = () => {
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </div>
-              {errors.password && (
+              {formData.password && (
+                <div className="password-strength">
+                  <div className="strength-bars">
+                    {[1, 2, 3, 4].map((level) => (
+                      <div
+                        key={level}
+                        className={`strength-bar ${passwordStrength >= level ? 'active' : ''}`}
+                      />
+                    ))}
+                  </div>
+                  <span className="strength-text">
+                    {passwordStrength === 0 && 'Enter password'}
+                    {passwordStrength === 1 && 'Weak'}
+                    {passwordStrength === 2 && 'Fair'}
+                    {passwordStrength === 3 && 'Good'}
+                    {passwordStrength === 4 && 'Strong'}
+                  </span>
+                </div>
+              )}
+              {errors.password && touched.password && (
                 <div className="form-error">{errors.password}</div>
               )}
             </div>
@@ -242,9 +383,11 @@ const Signup = () => {
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
+                  onBlur={handleBlur}
+                  className={`form-input ${errors.confirmPassword && touched.confirmPassword ? 'error' : ''} ${formData.confirmPassword && !errors.confirmPassword ? 'valid' : ''}`}
                   placeholder="Confirm your password"
                   disabled={isLoading}
+                  autoComplete="new-password"
                 />
                 <button
                   type="button"
@@ -255,8 +398,11 @@ const Signup = () => {
                 >
                   {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
+                {formData.confirmPassword && !errors.confirmPassword && (
+                  <FiCheckCircle className="input-icon valid-icon" style={{ right: '3rem', left: 'auto', color: 'var(--success-color)' }} />
+                )}
               </div>
-              {errors.confirmPassword && (
+              {errors.confirmPassword && touched.confirmPassword && (
                 <div className="form-error">{errors.confirmPassword}</div>
               )}
             </div>
@@ -264,7 +410,7 @@ const Signup = () => {
             <button
               type="submit"
               className="btn btn-primary btn-auth"
-              disabled={isLoading}
+              disabled={isLoading || !isFormValid()}
             >
               {isLoading ? (
                 <>

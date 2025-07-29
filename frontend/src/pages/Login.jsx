@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Login = () => {
@@ -13,10 +13,13 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [isValidating, setIsValidating] = useState(false);
+  const [touched, setTouched] = useState({});
   
   const { login, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const emailRef = useRef(null);
 
   // Check for error from URL params (e.g., from Google OAuth failure)
   useEffect(() => {
@@ -28,6 +31,13 @@ const Login = () => {
       });
     }
   }, [searchParams]);
+
+  // Focus on email input on mount
+  useEffect(() => {
+    if (emailRef.current) {
+      emailRef.current.focus();
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,6 +53,55 @@ const Login = () => {
         [name]: ''
       }));
     }
+
+    // Real-time validation for email
+    if (name === 'email' && value && !isValidating) {
+      setIsValidating(true);
+      setTimeout(() => {
+        validateField(name, value);
+        setIsValidating(false);
+      }, 500);
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({
+      ...prev,
+      [name]: true
+    }));
+    
+    if (value) {
+      validateField(name, value);
+    }
+  };
+
+  const validateField = (name, value) => {
+    let error = '';
+    
+    switch (name) {
+      case 'email':
+        if (!value) {
+          error = 'Email is required';
+        } else if (!/\S+@\S+\.\S+/.test(value)) {
+          error = 'Please enter a valid email address';
+        }
+        break;
+      case 'password':
+        if (!value) {
+          error = 'Password is required';
+        } else if (value.length < 6) {
+          error = 'Password must be at least 6 characters';
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrors(prev => ({
+      ...prev,
+      [name]: error
+    }));
   };
 
   const validateForm = () => {
@@ -51,7 +110,7 @@ const Login = () => {
     if (!formData.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = 'Please enter a valid email address';
     }
 
     if (!formData.password) {
@@ -66,6 +125,12 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Mark all fields as touched
+    setTouched({
+      email: true,
+      password: true
+    });
     
     if (!validateForm()) {
       return;
@@ -108,6 +173,11 @@ const Login = () => {
     loginWithGoogle();
   };
 
+  const isFormValid = () => {
+    return formData.email && formData.password && 
+           !errors.email && !errors.password;
+  };
+
   return (
     <div className="auth-page">
       <div className="auth-container">
@@ -126,7 +196,7 @@ const Login = () => {
           {alert && (
             <div className={`auth-alert auth-alert-${alert.type}`}>
               <div className="alert-icon">
-                {alert.type === 'success' ? <FiShield /> : <FiMail />}
+                {alert.type === 'success' ? <FiCheckCircle /> : <FiAlertCircle />}
               </div>
               <div className="alert-content">
                 <div className="alert-title">
@@ -145,17 +215,23 @@ const Login = () => {
               <div className="input-group">
                 <FiMail className="input-icon" />
                 <input
+                  ref={emailRef}
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`form-input ${errors.email ? 'error' : ''}`}
+                  onBlur={handleBlur}
+                  className={`form-input ${errors.email && touched.email ? 'error' : ''} ${formData.email && !errors.email ? 'valid' : ''}`}
                   placeholder="Enter your email address"
                   disabled={isLoading}
+                  autoComplete="email"
                 />
+                {formData.email && !errors.email && (
+                  <FiCheckCircle className="input-icon valid-icon" style={{ right: '1rem', left: 'auto', color: 'var(--success-color)' }} />
+                )}
               </div>
-              {errors.email && (
+              {errors.email && touched.email && (
                 <div className="form-error">{errors.email}</div>
               )}
             </div>
@@ -172,9 +248,11 @@ const Login = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`form-input ${errors.password ? 'error' : ''}`}
+                  onBlur={handleBlur}
+                  className={`form-input ${errors.password && touched.password ? 'error' : ''} ${formData.password && !errors.password ? 'valid' : ''}`}
                   placeholder="Enter your password"
                   disabled={isLoading}
+                  autoComplete="current-password"
                 />
                 <button
                   type="button"
@@ -186,7 +264,7 @@ const Login = () => {
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
               </div>
-              {errors.password && (
+              {errors.password && touched.password && (
                 <div className="form-error">{errors.password}</div>
               )}
             </div>
@@ -194,7 +272,7 @@ const Login = () => {
             <button
               type="submit"
               className="btn btn-primary btn-auth"
-              disabled={isLoading}
+              disabled={isLoading || !isFormValid()}
             >
               {isLoading ? (
                 <>
