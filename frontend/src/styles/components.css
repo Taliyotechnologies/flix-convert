@@ -488,6 +488,11 @@ body.dark .logout-item:hover {
   height: 18px;
   color: var(--accent-primary);
   flex-shrink: 0;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
 }
 
 .hero-stats .stat-item span {
