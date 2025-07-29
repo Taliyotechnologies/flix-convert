@@ -1888,11 +1888,7 @@ body.dark .logout-item:hover {
 .logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 1px 2px rgba(59, 130, 246, 0.2));
+  color: var(--accent-primary);
 }
 
 .auth-title {
@@ -1901,10 +1897,6 @@ body.dark .logout-item:hover {
   color: var(--text-primary);
   margin-bottom: 1rem;
   line-height: 1.2;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .auth-subtitle {
@@ -2989,10 +2981,7 @@ body.dark .logout-item:hover {
 .stat-number {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary);
   margin-bottom: 0.75rem;
   line-height: 1;
   transition: all 0.3s ease;
@@ -3287,10 +3276,6 @@ body.dark .logout-item:hover {
   color: var(--text-primary);
   margin-bottom: 2rem;
   line-height: 1.1;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .hero p {
@@ -3322,10 +3307,6 @@ body.dark .logout-item:hover {
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .section-header p {
@@ -3456,10 +3437,6 @@ body.dark .logout-item:hover {
   font-weight: 800;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .cta-content p {
