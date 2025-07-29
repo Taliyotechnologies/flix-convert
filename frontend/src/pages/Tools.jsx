@@ -78,7 +78,7 @@ const Tools = () => {
               
               <Link to={tool.path} className="btn btn-primary">
                 Start Compressing
-                <FiArrowRight />
+                <FiArrowRight className="btn-icon" />
               </Link>
             </div>
           ))}
@@ -88,19 +88,31 @@ const Tools = () => {
           <div className="info-section">
             <h2>Why Choose Our Tools?</h2>
             <div className="features-grid">
-              <div className="feature-item">
+              <div className="feature-card">
+                <div className="feature-icon">
+                  <FiImage />
+                </div>
                 <h3>🚀 Instant Processing</h3>
                 <p>Get compressed files instantly with our optimized algorithms.</p>
               </div>
-              <div className="feature-item">
+              <div className="feature-card">
+                <div className="feature-icon">
+                  <FiVideo />
+                </div>
                 <h3>🔒 Secure & Private</h3>
                 <p>Your files are automatically deleted after 24 hours for your privacy.</p>
               </div>
-              <div className="feature-item">
+              <div className="feature-card">
+                <div className="feature-icon">
+                  <FiMusic />
+                </div>
                 <h3>📉 40% Size Reduction</h3>
                 <p>Achieve up to 40% file size reduction while maintaining quality.</p>
               </div>
-              <div className="feature-item">
+              <div className="feature-card">
+                <div className="feature-icon">
+                  <FiFileText />
+                </div>
                 <h3>💯 Free Forever</h3>
                 <p>All tools are completely free to use with no registration required.</p>
               </div>
@@ -108,91 +120,6 @@ const Tools = () => {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .page-header {
-          text-align: center;
-          margin-bottom: 3rem;
-        }
-
-        .page-header h1 {
-          margin-bottom: 1rem;
-        }
-
-        .page-header p {
-          color: var(--text-secondary);
-          font-size: 1.125rem;
-          max-width: 600px;
-          margin: 0 auto;
-        }
-
-        .tool-features {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-          margin: 1.5rem 0;
-        }
-
-        .feature-tag {
-          background-color: var(--bg-secondary);
-          color: var(--text-secondary);
-          padding: 0.25rem 0.75rem;
-          border-radius: 1rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-        }
-
-        .tools-info {
-          margin-top: 4rem;
-        }
-
-        .info-section {
-          text-align: center;
-        }
-
-        .info-section h2 {
-          margin-bottom: 3rem;
-        }
-
-        .features-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-          gap: 2rem;
-        }
-
-        .feature-item {
-          text-align: center;
-          padding: 2rem;
-          background-color: var(--bg-primary);
-          border: 1px solid var(--border-color);
-          border-radius: 1rem;
-          transition: all 0.3s ease;
-        }
-
-        .feature-item:hover {
-          transform: translateY(-4px);
-          box-shadow: var(--shadow-lg);
-        }
-
-        .feature-item h3 {
-          margin-bottom: 1rem;
-          color: var(--text-primary);
-        }
-
-        .feature-item p {
-          color: var(--text-secondary);
-        }
-
-        @media (max-width: 768px) {
-          .features-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .tool-features {
-            justify-content: center;
-          }
-        }
-      `}</style>
     </>
   )
 }
