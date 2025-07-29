@@ -63,13 +63,6 @@ const FileUploader = ({ onFileUpload, fileType, maxSize = 10 * 1024 * 1024 }) =>
     }
   }, [onFileUpload])
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: getAcceptTypes(fileType),
-    maxSize,
-    multiple: false
-  })
-
   const getAcceptTypes = (type) => {
     switch (type) {
       case 'image':
@@ -92,6 +85,13 @@ const FileUploader = ({ onFileUpload, fileType, maxSize = 10 * 1024 * 1024 }) =>
         return {}
     }
   }
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: getAcceptTypes(fileType),
+    maxSize,
+    multiple: false
+  })
 
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes'
