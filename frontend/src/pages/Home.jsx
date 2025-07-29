@@ -16,7 +16,10 @@ import {
   FiUpload,
   FiStar,
   FiUsers,
-  FiClock
+  FiClock,
+  FiActivity,
+  FiLock,
+  FiGlobe
 } from 'react-icons/fi'
 
 const Home = () => {
@@ -51,15 +54,15 @@ const Home = () => {
           </div>
           <div className="hero-stats">
             <div className="stat-item">
-              <FiZap className="stat-icon" />
+              <FiActivity className="stat-icon" />
               <span>Lightning Fast</span>
             </div>
             <div className="stat-item">
-              <FiShield className="stat-icon" />
+              <FiLock className="stat-icon" />
               <span>100% Secure</span>
             </div>
             <div className="stat-item">
-              <FiClock className="stat-icon" />
+              <FiGlobe className="stat-icon" />
               <span>24/7 Available</span>
             </div>
           </div>
