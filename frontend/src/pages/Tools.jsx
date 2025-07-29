@@ -9,7 +9,7 @@ const Tools = () => {
       icon: <FiImage />,
       title: 'Compress Images',
       description: 'Reduce image file size while maintaining quality. Support for JPG, PNG, GIF, WebP and more.',
-      path: '/compress/image',
+      path: '/compress-image',
       color: '#3b82f6',
       features: ['JPG, PNG, GIF, WebP', 'Up to 40% reduction', 'Instant processing', 'Quality preservation']
     },
@@ -17,7 +17,7 @@ const Tools = () => {
       icon: <FiVideo />,
       title: 'Compress Videos',
       description: 'Compress video files with advanced algorithms. Support for MP4, AVI, MOV, WebM and more.',
-      path: '/compress/video',
+      path: '/compress-video',
       color: '#ef4444',
       features: ['MP4, AVI, MOV, WebM', 'H.264/H.265 codec', 'Fast compression', 'Quality maintained']
     },
@@ -25,7 +25,7 @@ const Tools = () => {
       icon: <FiMusic />,
       title: 'Compress Audio',
       description: 'Reduce audio file size without losing quality. Support for MP3, WAV, AAC, FLAC and more.',
-      path: '/compress/audio',
+      path: '/compress-audio',
       color: '#10b981',
       features: ['MP3, WAV, AAC, FLAC', 'AAC optimization', 'Instant results', 'High quality output']
     },
@@ -33,7 +33,7 @@ const Tools = () => {
       icon: <FiFileText />,
       title: 'Compress PDFs',
       description: 'Compress PDF documents while preserving text quality and readability.',
-      path: '/compress/pdf',
+      path: '/compress-pdf',
       color: '#f59e0b',
       features: ['All PDF formats', 'Text preservation', 'Image optimization', 'Fast processing']
     }
