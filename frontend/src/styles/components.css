@@ -1078,15 +1078,22 @@ body.dark .logout-item:hover {
   }
   
   .stat-item {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   
   .stat-number {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
   
   .stat-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+  }
+  
+  .stat-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
   }
   
   .cta-section {
@@ -1808,7 +1815,7 @@ body.dark .alert-error {
 
 .stat-item {
   text-align: center;
-  padding: 2rem;
+  padding: 1.5rem;
   background: var(--bg-primary);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border-color);
@@ -1823,21 +1830,21 @@ body.dark .alert-error {
 }
 
 .stat-icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 1rem;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 0.75rem;
   background: var(--accent-primary);
   border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   box-shadow: var(--shadow-md);
 }
 
 .stat-number {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: var(--accent-primary);
   margin-bottom: 0.5rem;
@@ -1846,7 +1853,7 @@ body.dark .alert-error {
 
 .stat-label {
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1983,7 +1990,22 @@ body.dark .alert-error {
   }
   
   .stat-item {
-    padding: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.65rem;
+  }
+  
+  .stat-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   .cta-section {
