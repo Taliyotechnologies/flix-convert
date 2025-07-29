@@ -54,15 +54,15 @@ const Home = () => {
           </div>
           <div className="hero-stats">
             <div className="stat-item">
-              <FiActivity className="stat-icon" />
+              <FiZap className="stat-icon" />
               <span>Lightning Fast</span>
             </div>
             <div className="stat-item">
-              <FiLock className="stat-icon" />
+              <FiShield className="stat-icon" />
               <span>100% Secure</span>
             </div>
             <div className="stat-item">
-              <FiGlobe className="stat-icon" />
+              <FiClock className="stat-icon" />
               <span>24/7 Available</span>
             </div>
           </div>
