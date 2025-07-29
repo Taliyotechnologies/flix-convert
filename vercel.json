@@ -1,6 +1,6 @@
 {
-  "buildCommand": "chmod +x build.sh && ./build.sh",
-  "outputDirectory": "dist",
+  "buildCommand": "cd frontend && npm install --production=false && npm run build",
+  "outputDirectory": "frontend/dist",
   "framework": "vite",
   "rewrites": [
     {
