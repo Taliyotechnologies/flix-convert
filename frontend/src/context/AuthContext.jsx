@@ -14,34 +14,53 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState('light');
+  const [error, setError] = useState(null);
 
   // Theme management
   useEffect(() => {
-    // Check for saved theme preference or default to system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      // Detect system theme
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      setTheme(systemTheme);
+    try {
+      // Check for saved theme preference or default to system preference
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        // Detect system theme
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        setTheme(systemTheme);
+      }
+    } catch (err) {
+      console.error('Theme error:', err);
+      setTheme('light'); // fallback
     }
   }, []);
 
   useEffect(() => {
-    // Apply theme to body
-    document.body.className = theme;
-    localStorage.setItem('theme', theme);
+    try {
+      // Apply theme to body
+      document.body.className = theme;
+      localStorage.setItem('theme', theme);
+    } catch (err) {
+      console.error('Theme application error:', err);
+    }
   }, [theme]);
 
   // Check for existing token on app load
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      fetchUser(token);
-    } else {
-      setLoading(false);
-    }
+    const initializeAuth = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (token) {
+          await fetchUser(token);
+        } else {
+          setLoading(false);
+        }
+      } catch (err) {
+        console.error('Auth initialization error:', err);
+        setLoading(false);
+      }
+    };
+
+    initializeAuth();
   }, []);
 
   const fetchUser = async (token) => {
@@ -146,11 +165,26 @@ export const AuthProvider = ({ children }) => {
     user,
     loading,
     theme,
+    error,
     login,
     signup,
     logout,
     toggleTheme
   };
+
+  // Error boundary for AuthContext
+  if (error) {
+    return (
+      <div className="page-container">
+        <div className="container">
+          <div className="text-center">
+            <h2>Something went wrong</h2>
+            <p>Please refresh the page to try again.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <AuthContext.Provider value={value}>

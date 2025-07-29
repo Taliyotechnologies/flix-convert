@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext';
+import ErrorBoundary from './components/ErrorBoundary';
 import PrivateRoute from './components/PrivateRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -19,36 +21,40 @@ import './styles/global.css';
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <div className="app">
-          <Navbar />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/tools" element={<Tools />} />
-              <Route path="/compress-image" element={<CompressImage />} />
-              <Route path="/compress-video" element={<CompressVideo />} />
-              <Route path="/compress-audio" element={<CompressAudio />} />
-              <Route path="/compress-pdf" element={<CompressPDF />} />
-              <Route 
-                path="/admin" 
-                element={
-                  <PrivateRoute requireAdmin={true}>
-                    <AdminDashboard />
-                  </PrivateRoute>
-                } 
-              />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
-    </AuthProvider>
+    <ErrorBoundary>
+      <HelmetProvider>
+        <AuthProvider>
+          <Router>
+            <div className="app">
+              <Navbar />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/signup" element={<Signup />} />
+                  <Route path="/tools" element={<Tools />} />
+                  <Route path="/compress-image" element={<CompressImage />} />
+                  <Route path="/compress-video" element={<CompressVideo />} />
+                  <Route path="/compress-audio" element={<CompressAudio />} />
+                  <Route path="/compress-pdf" element={<CompressPDF />} />
+                  <Route 
+                    path="/admin" 
+                    element={
+                      <PrivateRoute requireAdmin={true}>
+                        <AdminDashboard />
+                      </PrivateRoute>
+                    } 
+                  />
+                  <Route path="/admin/login" element={<AdminLogin />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </main>
+              <Footer />
+            </div>
+          </Router>
+        </AuthProvider>
+      </HelmetProvider>
+    </ErrorBoundary>
   );
 }
 
