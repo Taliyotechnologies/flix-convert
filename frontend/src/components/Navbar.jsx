@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Navbar = () => {
@@ -9,6 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
+  const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   
   const toolsDropdownRef = useRef(null);
@@ -29,10 +30,24 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMobileMenuOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.mobile-menu-btn')) {
+        setIsMobileMenuOpen(false);
+        setIsMobileToolsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
   const handleLogout = async () => {
     await logout();
     navigate('/');
     setIsUserDropdownOpen(false);
+    setIsMobileMenuOpen(false);
   };
 
   const toolsMenuItems = [
@@ -170,9 +185,11 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
-            <svg viewBox="0 0 24 24" fill="currentColor" className="hamburger-icon">
-              <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-            </svg>
+            {isMobileMenuOpen ? (
+              <FiX className="hamburger-icon" />
+            ) : (
+              <FiMenu className="hamburger-icon" />
+            )}
           </button>
         </div>
       </div>
@@ -190,24 +207,40 @@ const Navbar = () => {
             </Link>
             
             <div className="mobile-dropdown">
-              <button className="mobile-dropdown-toggle">
+              <button 
+                className="mobile-dropdown-toggle"
+                onClick={() => setIsMobileToolsOpen(!isMobileToolsOpen)}
+              >
                 Tools
-                <svg className="dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
+                <svg 
+                  className="dropdown-icon" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
+                  style={{ 
+                    transform: isMobileToolsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                    transition: 'transform 0.3s ease'
+                  }}
+                >
                   <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </button>
-              <div className="mobile-dropdown-menu">
-                {toolsMenuItems.map((item) => (
-                  <Link 
-                    key={item.path} 
-                    to={item.path} 
-                    className="mobile-dropdown-item"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+              {isMobileToolsOpen && (
+                <div className="mobile-dropdown-menu">
+                  {toolsMenuItems.map((item) => (
+                    <Link 
+                      key={item.path} 
+                      to={item.path} 
+                      className="mobile-dropdown-item"
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setIsMobileToolsOpen(false);
+                      }}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
             <Link 
