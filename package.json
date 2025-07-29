@@ -15,6 +15,7 @@
   "keywords": ["file-compression", "conversion", "react", "nodejs", "mongodb"],
   "author": "ConvertFlix Team",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "concurrently": "^8.2.2"
   }
