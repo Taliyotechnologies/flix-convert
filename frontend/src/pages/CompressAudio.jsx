@@ -143,7 +143,7 @@ const CompressAudio = () => {
           width: 80px;
           height: 80px;
           margin: 0 auto 1.5rem;
-          background: linear-gradient(135deg, #10b981, #059669);
+          background: #10b981;
           border-radius: 1rem;
           display: flex;
           align-items: center;

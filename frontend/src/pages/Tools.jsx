@@ -62,7 +62,7 @@ const Tools = () => {
         <div className="tools-grid">
           {tools.map((tool, index) => (
             <div key={index} className="tool-card">
-              <div className="tool-icon" style={{ background: tool.color }}>
+              <div className="tool-icon" style={{ background: tool.color, color: 'white' }}>
                 {tool.icon}
               </div>
               <h3>{tool.title}</h3>

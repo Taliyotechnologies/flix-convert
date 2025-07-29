@@ -143,7 +143,7 @@ const CompressPDF = () => {
           width: 80px;
           height: 80px;
           margin: 0 auto 1.5rem;
-          background: linear-gradient(135deg, #f59e0b, #d97706);
+          background: #f59e0b;
           border-radius: 1rem;
           display: flex;
           align-items: center;

@@ -117,6 +117,21 @@ const FileUploader = ({ onFileUpload, fileType, maxSize = 10 * 1024 * 1024 }) =>
         <div
           {...getRootProps()}
           className={`upload-area ${isDragActive ? 'drag-active' : ''}`}
+          style={{
+            border: '2px dashed var(--border-color)',
+            borderRadius: '1rem',
+            padding: '3rem 2rem',
+            textAlign: 'center',
+            transition: 'all 0.3s ease',
+            cursor: 'pointer',
+            backgroundColor: 'var(--bg-secondary)',
+            ':hover': {
+              borderColor: 'var(--accent-primary)',
+              backgroundColor: 'var(--bg-tertiary)',
+              transform: 'translateY(-2px)',
+              boxShadow: 'var(--shadow-md)'
+            }
+          }}
         >
           <input {...getInputProps()} />
           <div className="upload-icon">

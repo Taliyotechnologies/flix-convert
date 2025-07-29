@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { FiBarChart3, FiFile, FiDownload, FiTrash2, FiLogOut, FiRefreshCw, FiUsers, FiHardDrive } from 'react-icons/fi'
+import { FiBarChart, FiFile, FiDownload, FiTrash2, FiLogOut, FiRefreshCw, FiUsers, FiHardDrive } from 'react-icons/fi'
+import '../styles/admin.css'
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null)

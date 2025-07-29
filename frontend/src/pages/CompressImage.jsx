@@ -143,7 +143,7 @@ const CompressImage = () => {
           width: 80px;
           height: 80px;
           margin: 0 auto 1.5rem;
-          background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+          background: var(--accent-primary);
           border-radius: 1rem;
           display: flex;
           align-items: center;

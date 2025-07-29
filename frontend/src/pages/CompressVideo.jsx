@@ -143,7 +143,7 @@ const CompressVideo = () => {
           width: 80px;
           height: 80px;
           margin: 0 auto 1.5rem;
-          background: linear-gradient(135deg, #ef4444, #dc2626);
+          background: #ef4444;
           border-radius: 1rem;
           display: flex;
           align-items: center;

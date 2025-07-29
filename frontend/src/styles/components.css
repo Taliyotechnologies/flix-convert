@@ -53,10 +53,7 @@ body.dark .navbar {
 .logo-text {
   font-size: 1.75rem;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary);
   letter-spacing: -0.5px;
 }
 
@@ -81,7 +78,7 @@ body.dark .navbar {
 
 .nav-link:hover {
   color: var(--accent-primary);
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%);
+  background: rgba(37, 99, 235, 0.1);
   transform: translateY(-1px);
 }
 
@@ -91,8 +88,8 @@ body.dark .navbar {
   bottom: -2px;
   left: 50%;
   width: 0;
-  height: 3px;
-  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
+  height: 2px;
+  background: var(--accent-primary);
   transition: all 0.3s ease;
   transform: translateX(-50%);
   border-radius: 2px;
