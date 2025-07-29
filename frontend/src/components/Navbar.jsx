@@ -1,349 +1,242 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
-import '../styles/components.css';
+import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
+import { useTheme } from '../contexts/ThemeContext'
+import { 
+  FiSun, 
+  FiMoon, 
+  FiMenu, 
+  FiX, 
+  FiUser, 
+  FiLogOut, 
+  FiSettings,
+  FiChevronDown,
+  FiGrid
+} from 'react-icons/fi'
+import './Navbar.css'
 
 const Navbar = () => {
-  const { user, logout, toggleTheme, theme } = useAuth();
-  const navigate = useNavigate();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
-  const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
-  const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false);
-  const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-  
-  const toolsDropdownRef = useRef(null);
-  const companyDropdownRef = useRef(null);
-  const userDropdownRef = useRef(null);
+  const { user, isAuthenticated, logout } = useAuth()
+  const { theme, toggleTheme } = useTheme()
+  const location = useLocation()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
-  // Close dropdowns when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(event.target)) {
-        setIsToolsDropdownOpen(false);
-      }
-      if (companyDropdownRef.current && !companyDropdownRef.current.contains(event.target)) {
-        setIsCompanyDropdownOpen(false);
-      }
-      if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
-        setIsUserDropdownOpen(false);
-      }
-    };
+  const navItems = [
+    { path: '/', label: 'Home' },
+    { 
+      path: '/tools', 
+      label: 'Tools',
+      dropdown: [
+        { path: '/tools?type=compress', label: 'Compress Image' },
+        { path: '/tools?type=compress', label: 'Convert Video' },
+        { path: '/tools?type=compress', label: 'Compress PDF' },
+        { path: '/tools?type=compress', label: 'Convert Audio' }
+      ]
+    },
+    { path: '/company', label: 'Company' }
+  ]
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const handleLogout = () => {
+    logout()
+    setIsDropdownOpen(false)
+  }
 
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (isMobileMenuOpen && !event.target.closest('.mobile-menu') && !event.target.closest('.mobile-menu-btn')) {
-        setIsMobileMenuOpen(false);
-        setIsMobileToolsOpen(false);
-        setIsMobileCompanyOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isMobileMenuOpen]);
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/');
-    setIsUserDropdownOpen(false);
-    setIsMobileMenuOpen(false);
-  };
-
-  const toolsMenuItems = [
-    { name: 'Compress Image', path: '/compress-image' },
-    { name: 'Convert Image', path: '/convert-image' },
-    { name: 'Compress Video', path: '/compress-video' },
-    { name: 'Convert Video', path: '/convert-video' },
-    { name: 'Compress Audio', path: '/compress-audio' },
-    { name: 'Convert Audio', path: '/convert-audio' },
-    { name: 'Convert PDF', path: '/convert-pdf' },
-    { name: 'Compress PDF', path: '/compress-pdf' }
-  ];
-
-  const companyMenuItems = [
-    { name: 'About Us', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-    { name: 'Privacy Policy', path: '/privacy' },
-    { name: 'Terms of Service', path: '/terms' },
-    { name: 'Support', path: '/support' }
-  ];
+  const isActive = (path) => {
+    if (path === '/') {
+      return location.pathname === '/'
+    }
+    return location.pathname.startsWith(path)
+  }
 
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        {/* Logo */}
-        <Link to="/" className="navbar-logo">
-          <span className="logo-text">FlixConvert</span>
-        </Link>
+      <div className="container">
+        <div className="navbar-content">
+          {/* Logo */}
+          <Link to="/" className="navbar-logo">
+            <span className="logo-text">FlixConvert</span>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <div className="navbar-nav desktop-nav">
-          <Link to="/" className="nav-link">Home</Link>
-          
-          {/* Tools Dropdown */}
-          <div className="nav-dropdown" ref={toolsDropdownRef}>
-            <button 
-              className="nav-dropdown-toggle"
-              onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
-            >
-              Tools
-              <svg className="dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </button>
-            
-            {isToolsDropdownOpen && (
-              <div className="dropdown-menu tools-dropdown">
-                {toolsMenuItems.map((item) => (
+          {/* Desktop Navigation */}
+          <div className="navbar-nav desktop-nav">
+            {navItems.map((item) => (
+              <div key={item.path} className="nav-item">
+                {item.dropdown ? (
+                  <div className="dropdown">
+                    <button 
+                      className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                      {item.label}
+                      <FiChevronDown className="dropdown-icon" />
+                    </button>
+                    {isDropdownOpen && (
+                      <div className="dropdown-menu">
+                        {item.dropdown.map((dropdownItem) => (
+                          <Link
+                            key={dropdownItem.path}
+                            to={dropdownItem.path}
+                            className="dropdown-item"
+                            onClick={() => setIsDropdownOpen(false)}
+                          >
+                            {dropdownItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
                   <Link 
-                    key={item.path} 
                     to={item.path} 
-                    className="dropdown-item"
-                    onClick={() => setIsToolsDropdownOpen(false)}
+                    className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
                   >
-                    {item.name}
+                    {item.label}
                   </Link>
-                ))}
+                )}
               </div>
-            )}
+            ))}
           </div>
 
-          {/* Company Dropdown */}
-          <div className="nav-dropdown" ref={companyDropdownRef}>
+          {/* Right Side */}
+          <div className="navbar-right">
+            {/* Theme Toggle */}
             <button 
-              className="nav-dropdown-toggle"
-              onClick={() => setIsCompanyDropdownOpen(!isCompanyDropdownOpen)}
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
-              Company
-              <svg className="dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
+              {theme === 'light' ? <FiMoon /> : <FiSun />}
             </button>
-            
-            {isCompanyDropdownOpen && (
-              <div className="dropdown-menu company-dropdown">
-                {companyMenuItems.map((item) => (
-                  <Link 
-                    key={item.path} 
-                    to={item.path} 
-                    className="dropdown-item"
-                    onClick={() => setIsCompanyDropdownOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+
+            {/* Auth Buttons */}
+            {isAuthenticated ? (
+              <div className="user-menu">
+                <button 
+                  className="user-button"
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
+                  <div className="user-avatar">
+                    {user?.avatar ? (
+                      <img src={user.avatar} alt={user.name} />
+                    ) : (
+                      <FiUser />
+                    )}
+                  </div>
+                  <span className="user-name">{user?.name}</span>
+                  <FiChevronDown className="dropdown-icon" />
+                </button>
+
+                {isDropdownOpen && (
+                  <div className="user-dropdown">
+                    <Link 
+                      to="/dashboard" 
+                      className="dropdown-item"
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <FiGrid />
+                      Dashboard
+                    </Link>
+                    {user?.role === 'admin' && (
+                      <Link 
+                        to="/admin" 
+                        className="dropdown-item"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        <FiSettings />
+                        Admin Dashboard
+                      </Link>
+                    )}
+                    <button 
+                      className="dropdown-item"
+                      onClick={handleLogout}
+                    >
+                      <FiLogOut />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="auth-buttons">
+                <Link to="/login" className="btn btn-ghost">
+                  Login
+                </Link>
+                <Link to="/signup" className="btn btn-primary">
+                  Sign Up
+                </Link>
               </div>
             )}
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="mobile-menu-btn"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle mobile menu"
+            >
+              {isMenuOpen ? <FiX /> : <FiMenu />}
+            </button>
           </div>
         </div>
 
-        {/* Right Side Actions */}
-        <div className="navbar-actions">
-          {/* Theme Toggle */}
-          <button 
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? (
-              <FiMoon className="theme-icon" />
-            ) : (
-              <FiSun className="theme-icon" />
-            )}
-          </button>
-
-          {/* User Menu */}
-          {user ? (
-            <div className="user-dropdown" ref={userDropdownRef}>
-              <button 
-                className="user-avatar"
-                onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-              >
-                <div className="avatar-circle">
-                  {user.name.charAt(0).toUpperCase()}
-                </div>
-                <span className="user-name">{user.name}</span>
-                <svg className="dropdown-icon" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </button>
-              
-              {isUserDropdownOpen && (
-                <div className="dropdown-menu user-dropdown-menu">
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="mobile-nav">
+            {navItems.map((item) => (
+              <div key={item.path} className="mobile-nav-item">
+                {item.dropdown ? (
+                  <div className="mobile-dropdown">
+                    <div className="mobile-dropdown-header">
+                      {item.label}
+                    </div>
+                    <div className="mobile-dropdown-items">
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.path}
+                          to={dropdownItem.path}
+                          className="mobile-dropdown-item"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {dropdownItem.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
                   <Link 
-                    to="/admin" 
-                    className="dropdown-item"
-                    onClick={() => setIsUserDropdownOpen(false)}
+                    to={item.path} 
+                    className={`mobile-nav-link ${isActive(item.path) ? 'active' : ''}`}
+                    onClick={() => setIsMenuOpen(false)}
                   >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="dropdown-item-icon">
-                      <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-                    </svg>
-                    Dashboard
+                    {item.label}
                   </Link>
-                  <Link 
-                    to="/settings" 
-                    className="dropdown-item"
-                    onClick={() => setIsUserDropdownOpen(false)}
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="dropdown-item-icon">
-                      <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                    </svg>
-                    Settings
-                  </Link>
-                  <button 
-                    className="dropdown-item logout-item"
-                    onClick={handleLogout}
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="dropdown-item-icon">
-                      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                      <polyline points="16,17 21,12 16,7"/>
-                      <line x1="21" y1="12" x2="9" y2="12"/>
-                    </svg>
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="auth-buttons">
-              <Link to="/login" className="btn btn-ghost">Login</Link>
-              <Link to="/signup" className="btn btn-primary">Sign Up</Link>
-            </div>
-          )}
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="mobile-menu-btn"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle mobile menu"
-          >
-            {isMobileMenuOpen ? (
-              <FiX className="hamburger-icon" />
-            ) : (
-              <FiMenu className="hamburger-icon" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="mobile-menu">
-          <div className="mobile-menu-content">
-            <Link 
-              to="/" 
-              className="mobile-nav-link"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
+                )}
+              </div>
+            ))}
             
-            <div className="mobile-dropdown">
-              <button 
-                className="mobile-dropdown-toggle"
-                onClick={() => setIsMobileToolsOpen(!isMobileToolsOpen)}
-              >
-                Tools
-                <svg 
-                  className="dropdown-icon" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor"
-                  style={{ 
-                    transform: isMobileToolsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    transition: 'transform 0.3s ease'
-                  }}
-                >
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </button>
-              {isMobileToolsOpen && (
-                <div className="mobile-dropdown-menu">
-                  {toolsMenuItems.map((item) => (
-                    <Link 
-                      key={item.path} 
-                      to={item.path} 
-                      className="mobile-dropdown-item"
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        setIsMobileToolsOpen(false);
-                      }}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="mobile-dropdown">
-              <button 
-                className="mobile-dropdown-toggle"
-                onClick={() => setIsMobileCompanyOpen(!isMobileCompanyOpen)}
-              >
-                Company
-                <svg 
-                  className="dropdown-icon" 
-                  viewBox="0 0 20 20" 
-                  fill="currentColor"
-                  style={{ 
-                    transform: isMobileCompanyOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    transition: 'transform 0.3s ease'
-                  }}
-                >
-                  <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </button>
-              {isMobileCompanyOpen && (
-                <div className="mobile-dropdown-menu">
-                  {companyMenuItems.map((item) => (
-                    <Link 
-                      key={item.path} 
-                      to={item.path} 
-                      className="mobile-dropdown-item"
-                      onClick={() => {
-                        setIsMobileMenuOpen(false);
-                        setIsMobileCompanyOpen(false);
-                      }}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {!user && (
-              <div className="mobile-auth-buttons">
+            {!isAuthenticated && (
+              <div className="mobile-auth">
                 <Link 
                   to="/login" 
-                  className="btn btn-ghost btn-block"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="btn btn-ghost w-full"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Login
                 </Link>
                 <Link 
                   to="/signup" 
-                  className="btn btn-primary btn-block"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="btn btn-primary w-full"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Sign Up
                 </Link>
               </div>
             )}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar 

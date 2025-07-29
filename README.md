@@ -1,268 +1,204 @@
-# 🎬 ConvertFlix - File Compression & Conversion Tool
+# ConvertFlix - File Compression & Conversion Platform
 
-A complete full-stack file compression and conversion service built with React, Node.js, and MongoDB.
+A modern, full-stack web application for compressing and converting various file types with a beautiful, responsive UI.
 
-## 🌟 Features
+## 🚀 Features
 
-- **Multi-format Support**: Compress images, videos, audio files, and PDFs
-- **Instant Compression**: Get results in seconds with optimized algorithms
-- **40% Size Reduction**: Achieve significant file size reduction while maintaining quality
-- **Auto-cleanup**: Files are automatically deleted after 24 hours
-- **Admin Dashboard**: Complete file management system with statistics
-- **Responsive Design**: Works perfectly on mobile, tablet, and desktop
-- **Dark/Light Theme**: Toggle between themes for better user experience
+### Core Functionality
+- **File Compression**: Compress images, videos, audio files, and PDFs
+- **File Conversion**: Convert between different file formats
+- **User Authentication**: Secure login/signup system with JWT
+- **User Dashboard**: Personal file management and statistics
+- **Real-time Progress**: Live progress tracking for file operations
+- **Admin Panel**: Comprehensive admin dashboard for user management
 
-## 🛠 Tech Stack
+### File Support
+- **Images**: JPEG, PNG, WebP, GIF, BMP
+- **Videos**: MP4, AVI, MOV, MKV, WebM
+- **Audio**: MP3, WAV, FLAC, AAC, OGG
+- **Documents**: PDF compression and optimization
+
+### User Experience
+- **Modern UI**: Clean, responsive design with dark/light theme
+- **Drag & Drop**: Intuitive file upload interface
+- **Progress Tracking**: Real-time operation status
+- **File Management**: Download, delete, and organize files
+- **Statistics**: User dashboard with file analytics
+
+## 🛠️ Tech Stack
 
 ### Frontend
-- **React 18** with Vite for fast development
+- **React 18** with Vite
 - **React Router** for navigation
-- **React Helmet** for SEO optimization
-- **React Dropzone** for file uploads
+- **Axios** for API communication
 - **React Icons** for beautiful icons
-- **Custom CSS** with CSS variables for theming
+- **Framer Motion** for animations
+- **React Hot Toast** for notifications
+- **React Helmet** for SEO
 
 ### Backend
-- **Node.js** with Express.js
-- **MongoDB Atlas** for database
-- **Sharp** for image compression
-- **FFmpeg** for video/audio compression
-- **PDF-lib** for PDF compression
+- **Node.js** with Express
+- **MongoDB** with Mongoose
 - **JWT** for authentication
 - **Multer** for file uploads
-- **Node-cron** for automated cleanup
+- **Sharp** for image processing
+- **FFmpeg** for video/audio processing
+- **PDF-lib** for PDF operations
 
-## 🚀 Live Demo
+### Security & Performance
+- **Helmet** for security headers
+- **Rate limiting** to prevent abuse
+- **CORS** configuration
+- **File validation** and sanitization
+- **Automatic cleanup** of temporary files
 
-- **Frontend**: https://flixconvert.taliyotechnologies.com
-- **Backend API**: https://flix-convert.onrender.com
+## 📦 Installation
 
-## 📁 Project Structure
-
-```
-flixconvert/
-├── backend/
-│   ├── controllers/
-│   │   ├── compressionController.js
-│   │   └── adminController.js
-│   ├── middlewares/
-│   │   ├── fileUpload.js
-│   │   └── auth.js
-│   ├── models/
-│   │   └── FileLog.js
-│   ├── routes/
-│   │   ├── fileRoutes.js
-│   │   └── adminRoutes.js
-│   ├── utils/
-│   │   ├── sharpHelper.js
-│   │   ├── ffmpegHelper.js
-│   │   ├── pdfHelper.js
-│   │   └── cleanupCron.js
-│   ├── config.env
-│   ├── package.json
-│   └── server.js
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── Navbar.jsx
-│   │   │   ├── Footer.jsx
-│   │   │   └── FileUploader.jsx
-│   │   ├── pages/
-│   │   │   ├── Home.jsx
-│   │   │   ├── Tools.jsx
-│   │   │   ├── CompressImage.jsx
-│   │   │   ├── CompressVideo.jsx
-│   │   │   ├── CompressAudio.jsx
-│   │   │   ├── CompressPDF.jsx
-│   │   │   ├── AdminLogin.jsx
-│   │   │   ├── AdminDashboard.jsx
-│   │   │   └── NotFound.jsx
-│   │   ├── styles/
-│   │   │   ├── global.css
-│   │   │   └── components.css
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── index.html
-│   ├── package.json
-│   └── vite.config.js
-└── README.md
-```
-
-## 🚀 Quick Start
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (local or cloud)
+- FFmpeg (for video/audio processing)
 
 ### Backend Setup
-
-1. **Navigate to backend directory**:
-   ```bash
-   cd backend
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment**:
-   - Copy `config.env.example` to `config.env`
-   - Update MongoDB URI and other variables
-
-4. **Start development server**:
-   ```bash
-   npm run dev
-   ```
-
-5. **Start production server**:
-   ```bash
-   npm start
-   ```
+```bash
+cd backend
+npm install
+cp env.example .env
+# Edit .env with your configuration
+npm run dev
+```
 
 ### Frontend Setup
-
-1. **Navigate to frontend directory**:
-   ```bash
-   cd frontend
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Start development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Build for production**:
-   ```bash
-   npm run build
-   ```
-
-## 📊 API Endpoints
-
-### File Compression
-- `POST /api/files/compress` - Compress any file type
-- `GET /api/files/download/:fileId` - Download compressed file
-- `GET /api/files/info/:fileId` - Get file information
-- `DELETE /api/files/delete/:fileId` - Delete file
-
-### Admin Routes
-- `POST /api/admin/login` - Admin login
-- `GET /api/admin/dashboard/stats` - Get dashboard statistics
-- `GET /api/admin/files` - Get all files with pagination
-- `DELETE /api/admin/files` - Delete multiple files
-- `POST /api/admin/cleanup` - Run manual cleanup
-- `GET /api/admin/storage/stats` - Get storage statistics
-
-## 🔧 Configuration
+```bash
+cd frontend
+npm install
+# Create .env file with VITE_API_URL=http://localhost:5000
+npm run dev
+```
 
 ### Environment Variables
 
-**Backend (`config.env`)**:
+#### Backend (.env)
 ```env
 PORT=5000
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/database
-JWT_SECRET=your_jwt_secret_key
-NODE_ENV=production
+NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/convertflix
+JWT_SECRET=your-super-secret-jwt-key
+JWT_EXPIRES_IN=7d
 MAX_FILE_SIZE=10485760
 UPLOAD_PATH=./uploads
+TEMP_PATH=./temp
+CORS_ORIGIN=http://localhost:3000
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
 ```
 
-### Database Schema
-
-**FileLog Model**:
-```javascript
-{
-  originalName: String,
-  fileName: String,
-  fileType: String, // 'image', 'video', 'audio', 'pdf'
-  originalSize: Number,
-  compressedSize: Number,
-  compressionRatio: Number,
-  uploadTime: Date,
-  downloadCount: Number,
-  status: String, // 'processing', 'completed', 'failed'
-  error: String
-}
+#### Frontend (.env)
+```env
+VITE_API_URL=http://localhost:5000
 ```
 
-## 🎯 Features in Detail
+## 🎯 Usage
 
-### File Compression
-- **Images**: JPG, PNG, GIF, WebP, BMP, TIFF
-- **Videos**: MP4, AVI, MOV, WMV, FLV, WebM, MKV, M4V
-- **Audio**: MP3, WAV, AAC, FLAC, OGG, WMA, M4A
-- **PDFs**: All PDF formats
+### For Users
+1. **Upload Files**: Drag and drop or click to upload files
+2. **Choose Operation**: Select compression or conversion options
+3. **Track Progress**: Monitor real-time progress
+4. **Download Results**: Get optimized files instantly
+5. **Manage Files**: Use dashboard to organize your files
 
-### Compression Algorithms
-- **Images**: Sharp library with quality optimization
-- **Videos**: FFmpeg with H.264/H.265 codecs
-- **Audio**: FFmpeg with AAC optimization
-- **PDFs**: PDF-lib with object stream compression
+### For Administrators
+1. **User Management**: View and manage user accounts
+2. **File Analytics**: Monitor platform usage statistics
+3. **System Health**: Check server status and performance
+4. **Content Moderation**: Review and manage uploaded files
+
+## 📊 Dashboard Features
+
+### User Dashboard
+- **File Statistics**: Total files, sizes, and operations
+- **Recent Files**: Latest uploads with status indicators
+- **File Management**: Download and delete files
+- **Progress Tracking**: Real-time operation status
+- **Quick Actions**: Direct access to tools
 
 ### Admin Dashboard
-- **Statistics**: Total files, recent uploads, downloads, storage usage
-- **File Management**: View, download, delete files
-- **Bulk Operations**: Select and delete multiple files
-- **Real-time Updates**: Auto-refresh data
+- **User Analytics**: User registration and activity metrics
+- **File Analytics**: Platform usage statistics
+- **System Monitoring**: Server health and performance
+- **Content Management**: File review and moderation tools
 
-### Security Features
+## 🔧 API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+
+### File Operations
+- `POST /api/compress/image` - Compress images
+- `POST /api/compress/video` - Compress videos
+- `POST /api/compress/audio` - Compress audio
+- `POST /api/compress/pdf` - Compress PDFs
+- `POST /api/convert/*` - Convert file formats
+
+### Dashboard
+- `GET /api/compress/user-files` - Get user's files
+- `GET /api/compress/user-stats` - Get user statistics
+- `GET /api/compress/download/:fileId` - Download file
+- `DELETE /api/compress/delete/:fileId` - Delete file
+
+### Admin
+- `GET /api/admin/users` - Get all users
+- `GET /api/admin/stats` - Get platform statistics
+- `PUT /api/admin/users/:id` - Update user
+- `DELETE /api/admin/users/:id` - Delete user
+
+## 🎨 UI Components
+
+### Progress Tracker
+- Real-time progress visualization
+- Status indicators (processing, completed, failed)
+- Smooth animations and transitions
+- Responsive design for all devices
+
+### File Cards
+- File information display
+- Action buttons (download, delete)
+- Status indicators
+- Hover effects and animations
+
+### Statistics Cards
+- User activity metrics
+- File operation statistics
+- Visual data representation
+- Interactive elements
+
+## 🔒 Security Features
+
+- **JWT Authentication**: Secure token-based auth
 - **File Validation**: Type and size validation
-- **Rate Limiting**: Prevent abuse
-- **Auto-cleanup**: Files deleted after 24 hours
-- **JWT Authentication**: Secure admin access
-
-## 🎨 UI/UX Features
-
-### Design System
-- **Light/Dark Theme**: Toggle between themes
-- **Responsive Design**: Mobile-first approach
-- **Custom CSS**: No external UI libraries
-- **Smooth Animations**: CSS transitions and transforms
-
-### Components
-- **FileUploader**: Drag & drop with progress tracking
-- **Navbar**: Responsive navigation with theme toggle
-- **Footer**: Links and social media
-- **Admin Dashboard**: Complete file management interface
-
-## 📈 Performance Optimizations
-
-### Frontend
-- **Vite**: Fast development and build times
-- **Code Splitting**: Lazy-loaded components
-- **Image Optimization**: WebP format support
-- **SEO**: Meta tags and structured data
-
-### Backend
-- **Compression**: Gzip middleware
-- **Caching**: Static file caching
-- **Database Indexing**: Optimized queries
-- **Error Handling**: Comprehensive error management
-
-## 🔒 Security
-
-- **CORS**: Configured for production domains
-- **Helmet**: Security headers
-- **Rate Limiting**: Prevent abuse
-- **File Validation**: Type and size checks
-- **JWT**: Secure authentication
+- **Rate Limiting**: Prevent API abuse
+- **CORS Protection**: Cross-origin security
+- **Input Sanitization**: Prevent injection attacks
+- **File Cleanup**: Automatic temporary file removal
 
 ## 🚀 Deployment
 
-### Backend (Render)
-1. Connect GitHub repository
-2. Set environment variables
-3. Deploy automatically
+### Backend Deployment
+```bash
+# Set production environment variables
+NODE_ENV=production
+# Configure MongoDB connection
+# Set up file storage (local or cloud)
+npm start
+```
 
-### Frontend (Vercel)
-1. Connect GitHub repository
-2. Configure build settings
-3. Deploy automatically
-
-## 📝 License
-
-MIT License - see LICENSE file for details
+### Frontend Deployment
+```bash
+npm run build
+# Deploy dist folder to your hosting service
+```
 
 ## 🤝 Contributing
 
@@ -272,20 +208,14 @@ MIT License - see LICENSE file for details
 4. Add tests if applicable
 5. Submit a pull request
 
-## 📞 Support
+## 📝 License
 
-- **Email**: support@flixconvert.com
-- **Documentation**: [API Docs](https://flixconvert.taliyotechnologies.com/api)
-- **Issues**: [GitHub Issues](https://github.com/your-repo/issues)
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments
+## 🆘 Support
 
-- **Sharp** for image processing
-- **FFmpeg** for media compression
-- **PDF-lib** for PDF manipulation
-- **React Team** for the amazing framework
-- **Vite** for the fast build tool
+For support, email support@convertflix.com or create an issue in the repository.
 
 ---
 
-**Built with ❤️ by Taliyo Technologies**
+**ConvertFlix** - Making file compression and conversion accessible to everyone! 🚀 

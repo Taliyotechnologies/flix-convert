@@ -1,180 +1,159 @@
-import React from 'react';
-import { FiMail, FiPhone, FiMapPin, FiClock, FiUsers, FiAward, FiHeart } from 'react-icons/fi';
-import '../styles/components.css';
+import { Helmet } from 'react-helmet-async';
+import { FiUsers, FiTarget, FiAward, FiHeart } from 'react-icons/fi';
+import './Company.css';
 
 const Company = () => {
   return (
-    <div className="page-container">
-      <div className="container">
-        {/* Hero Section */}
-        <div className="page-header">
-          <h1 className="page-title">About FlixConvert</h1>
-          <p className="page-subtitle">
-            Empowering creators with powerful, easy-to-use media conversion tools
-          </p>
+    <>
+      <Helmet>
+        <title>About Us - ConvertFlix</title>
+        <meta name="description" content="Learn about ConvertFlix, our mission to provide free file compression and conversion tools, and our commitment to user privacy and security." />
+      </Helmet>
+
+      <div className="company">
+        <div className="hero-section">
+          <div className="container">
+            <h1>About ConvertFlix</h1>
+            <p className="hero-subtitle">
+              Empowering users with free, secure, and efficient file compression tools
+            </p>
+          </div>
         </div>
 
-        {/* Mission Section */}
-        <section className="mb-8">
-          <div className="card">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                At FlixConvert, we believe that content creation should be accessible to everyone. 
-                Our mission is to provide professional-grade media conversion tools that are both 
-                powerful and easy to use, helping creators bring their vision to life.
-              </p>
+        <div className="container">
+          <div className="mission-section">
+            <div className="section-header">
+              <FiTarget className="section-icon" />
+              <h2>Our Mission</h2>
             </div>
+            <p>
+              At ConvertFlix, we believe that file compression and conversion should be accessible to everyone. 
+              Our mission is to provide high-quality, free tools that help users optimize their digital files 
+              without compromising on quality or security.
+            </p>
+            <p>
+              Whether you're a student, professional, or casual user, our platform offers the tools you need 
+              to compress images, videos, audio files, and PDFs with ease. We're committed to maintaining 
+              the highest standards of privacy and security while delivering exceptional user experiences.
+            </p>
           </div>
-        </section>
 
-        {/* Values Section */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-center mb-6">Our Values</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="card text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FiUsers className="w-8 h-8 text-blue-600" />
+          <div className="values-section">
+            <h2>Our Values</h2>
+            <div className="values-grid">
+              <div className="value-card">
+                <div className="value-icon">
+                  <FiHeart />
+                </div>
+                <h3>User-First</h3>
+                <p>
+                  Every feature we build is designed with our users in mind. We prioritize simplicity, 
+                  efficiency, and accessibility in everything we do.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Community First</h3>
-              <p className="text-gray-600">
-                We prioritize our users' needs and build tools that serve the creative community.
-              </p>
-            </div>
-            <div className="card text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FiAward className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Quality</h3>
-              <p className="text-gray-600">
-                We maintain the highest standards in our tools and user experience.
-              </p>
-            </div>
-            <div className="card text-center">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FiHeart className="w-8 h-8 text-red-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Passion</h3>
-              <p className="text-gray-600">
-                We're passionate about helping creators achieve their goals.
-              </p>
-            </div>
-          </div>
-        </section>
 
-        {/* Team Section */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-center mb-6">Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="card text-center">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-semibold mb-1">John Doe</h3>
-              <p className="text-blue-600 mb-2">Founder & CEO</p>
-              <p className="text-gray-600 text-sm">
-                Passionate about making media tools accessible to everyone.
-              </p>
-            </div>
-            <div className="card text-center">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-semibold mb-1">Jane Smith</h3>
-              <p className="text-blue-600 mb-2">Lead Developer</p>
-              <p className="text-gray-600 text-sm">
-                Expert in building scalable and user-friendly applications.
-              </p>
-            </div>
-            <div className="card text-center">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
-              <h3 className="text-xl font-semibold mb-1">Mike Johnson</h3>
-              <p className="text-blue-600 mb-2">UX Designer</p>
-              <p className="text-gray-600 text-sm">
-                Creating beautiful and intuitive user experiences.
-              </p>
-            </div>
-          </div>
-        </section>
+              <div className="value-card">
+                <div className="value-icon">
+                  <FiAward />
+                </div>
+                <h3>Quality</h3>
+                <p>
+                  We maintain the highest standards of quality in our compression algorithms, ensuring 
+                  that your files retain their integrity while achieving optimal file sizes.
+                </p>
+              </div>
 
-        {/* Contact Section */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold text-center mb-6">Get in Touch</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="card">
-              <h3 className="text-xl font-semibold mb-4">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <FiMail className="w-5 h-5 text-blue-600" />
-                  <span>hello@flixconvert.com</span>
+              <div className="value-card">
+                <div className="value-icon">
+                  <FiUsers />
                 </div>
-                <div className="flex items-center gap-3">
-                  <FiPhone className="w-5 h-5 text-blue-600" />
-                  <span>+1 (555) 123-4567</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FiMapPin className="w-5 h-5 text-blue-600" />
-                  <span>123 Innovation Drive, Tech City, TC 12345</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FiClock className="w-5 h-5 text-blue-600" />
-                  <span>Mon-Fri: 9AM-6PM EST</span>
-                </div>
+                <h3>Community</h3>
+                <p>
+                  We believe in building a community of users who can rely on our tools for their 
+                  file management needs, with continuous feedback and improvement.
+                </p>
               </div>
             </div>
-            <div className="card">
-              <h3 className="text-xl font-semibold mb-4">Send us a Message</h3>
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">Name</label>
-                  <input 
-                    type="text" 
-                    className="form-input w-full"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Email</label>
-                  <input 
-                    type="email" 
-                    className="form-input w-full"
-                    placeholder="your@email.com"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Message</label>
-                  <textarea 
-                    className="form-input w-full h-32"
-                    placeholder="Your message..."
-                  ></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary w-full">
-                  Send Message
-                </button>
-              </form>
-            </div>
           </div>
-        </section>
 
-        {/* Stats Section */}
-        <section className="mb-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="card text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">10K+</div>
-              <div className="text-gray-600">Happy Users</div>
-            </div>
-            <div className="card text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">50K+</div>
-              <div className="text-gray-600">Files Converted</div>
-            </div>
-            <div className="card text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">99.9%</div>
-              <div className="text-gray-600">Uptime</div>
-            </div>
-            <div className="card text-center">
-              <div className="text-3xl font-bold text-blue-600 mb-2">24/7</div>
-              <div className="text-gray-600">Support</div>
+          <div className="features-section">
+            <h2>Why Choose ConvertFlix?</h2>
+            <div className="features-grid">
+              <div className="feature-item">
+                <h3>🆓 Completely Free</h3>
+                <p>All our tools are free to use with no hidden costs or premium tiers.</p>
+              </div>
+
+              <div className="feature-item">
+                <h3>🔒 Privacy Focused</h3>
+                <p>Your files are processed securely and automatically deleted after 24 hours.</p>
+              </div>
+
+              <div className="feature-item">
+                <h3>⚡ Fast Processing</h3>
+                <p>Advanced algorithms ensure quick compression without quality loss.</p>
+              </div>
+
+              <div className="feature-item">
+                <h3>📱 User Friendly</h3>
+                <p>Intuitive interface designed for users of all technical levels.</p>
+              </div>
+
+              <div className="feature-item">
+                <h3>🔄 Multiple Formats</h3>
+                <p>Support for images, videos, audio files, and PDFs in various formats.</p>
+              </div>
+
+              <div className="feature-item">
+                <h3>🌐 No Registration</h3>
+                <p>Start using our tools immediately without creating an account.</p>
+              </div>
             </div>
           </div>
-        </section>
+
+          <div className="stats-section">
+            <h2>Our Impact</h2>
+            <div className="stats-grid">
+              <div className="stat-item">
+                <div className="stat-number">10MB+</div>
+                <div className="stat-label">Files Processed</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">50%+</div>
+                <div className="stat-label">Average Compression</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">24/7</div>
+                <div className="stat-label">Service Availability</div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-number">100%</div>
+                <div className="stat-label">Free Service</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="contact-section">
+            <h2>Get in Touch</h2>
+            <p>
+              Have questions, suggestions, or feedback? We'd love to hear from you! 
+              Our team is committed to continuously improving our platform based on user needs.
+            </p>
+            <div className="contact-info">
+              <div className="contact-item">
+                <strong>Email:</strong> support@convertflix.com
+              </div>
+              <div className="contact-item">
+                <strong>Response Time:</strong> Within 24 hours
+              </div>
+              <div className="contact-item">
+                <strong>Support:</strong> Available for all users
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
