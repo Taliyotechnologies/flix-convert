@@ -96,11 +96,7 @@ const Navbar = () => {
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {theme === 'light' ? (
-              <svg viewBox="0 0 24 24" fill="currentColor" className="theme-icon">
-                <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
-              </svg>
-            ) : (
+            {theme === 'dark' ? (
               <svg viewBox="0 0 24 24" fill="currentColor" className="theme-icon">
                 <circle cx="12" cy="12" r="4"/>
                 <path d="M12 2v2"/>
@@ -111,6 +107,10 @@ const Navbar = () => {
                 <path d="M20 12h2"/>
                 <path d="m6.34 17.66-1.41 1.41"/>
                 <path d="m19.07 4.93-1.41 1.41"/>
+              </svg>
+            ) : (
+              <svg viewBox="0 0 24 24" fill="currentColor" className="theme-icon">
+                <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
               </svg>
             )}
           </button>

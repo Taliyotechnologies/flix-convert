@@ -474,6 +474,7 @@ body.dark .logout-item:hover {
   font-weight: 500;
   box-shadow: var(--shadow-sm);
   transition: all 0.3s ease;
+  height: 48px;
 }
 
 .hero-stats .stat-item:hover {
@@ -492,6 +493,7 @@ body.dark .logout-item:hover {
 .hero-stats .stat-item span {
   color: var(--text-secondary);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 /* Features Section */
