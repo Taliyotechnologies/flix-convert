@@ -1439,6 +1439,11 @@ body.dark .logout-item:hover {
     font-size: 0.8rem;
   }
   
+  .cta-actions {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
   .cta-actions .btn {
     min-width: 90px;
     font-size: 0.7rem;
