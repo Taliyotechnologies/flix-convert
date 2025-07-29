@@ -13,7 +13,10 @@ import {
   FiArrowRight,
   FiCheckCircle,
   FiDownload,
-  FiUpload
+  FiUpload,
+  FiStar,
+  FiUsers,
+  FiClock
 } from 'react-icons/fi'
 
 const Home = () => {
@@ -28,23 +31,37 @@ const Home = () => {
       <section className="hero">
         <div className="hero-content">
           <div className="hero-badge">
-            <FiZap className="hero-badge-icon" />
-            <span>Fast & Secure Compression</span>
+            <FiStar className="hero-badge-icon" />
+            <span>Trusted by 10M+ Users</span>
           </div>
-          <h1>Transform Your Files with FlixConvert</h1>
+          <h1>Compress Files Instantly</h1>
           <p>
-            Professional-grade compression tools that reduce file sizes by up to 80% while maintaining quality. 
-            Fast, secure, and completely free.
+            Professional file compression tools that reduce your file sizes by up to 80% 
+            while maintaining quality. Fast, secure, and completely free.
           </p>
           <div className="hero-actions">
             <Link to="/tools" className="btn btn-primary btn-lg">
               <FiUpload className="btn-icon" />
               Start Compressing
             </Link>
-            <Link to="/signup" className="btn btn-secondary btn-lg">
-              <FiCheckCircle className="btn-icon" />
+            <Link to="/signup" className="btn btn-outline btn-lg">
+              <FiUsers className="btn-icon" />
               Create Account
             </Link>
+          </div>
+          <div className="hero-stats">
+            <div className="stat-item">
+              <FiZap className="stat-icon" />
+              <span>Lightning Fast</span>
+            </div>
+            <div className="stat-item">
+              <FiShield className="stat-icon" />
+              <span>100% Secure</span>
+            </div>
+            <div className="stat-item">
+              <FiClock className="stat-icon" />
+              <span>24/7 Available</span>
+            </div>
           </div>
         </div>
       </section>
@@ -54,7 +71,7 @@ const Home = () => {
         <div className="container">
           <div className="section-header">
             <h2>Why Choose FlixConvert?</h2>
-            <p>Advanced compression algorithms designed for the modern web</p>
+            <p>Advanced compression technology designed for modern needs</p>
           </div>
           
           <div className="features-grid">
@@ -108,11 +125,11 @@ const Home = () => {
               </div>
               <h3>Image Compression</h3>
               <p>Optimize JPEG, PNG, WebP, and more. Reduce file size by up to 70% while maintaining visual quality.</p>
-              <ul className="tool-features">
-                <li>Batch processing</li>
-                <li>Quality control</li>
-                <li>Format conversion</li>
-              </ul>
+              <div className="tool-features">
+                <span className="feature-tag">Batch processing</span>
+                <span className="feature-tag">Quality control</span>
+                <span className="feature-tag">Format conversion</span>
+              </div>
               <Link to="/compress-image" className="btn btn-primary">
                 Compress Images
                 <FiArrowRight className="btn-icon" />
@@ -125,11 +142,11 @@ const Home = () => {
               </div>
               <h3>Video Compression</h3>
               <p>Compress MP4, AVI, MOV, and other video formats. Reduce size by up to 80% with advanced codecs.</p>
-              <ul className="tool-features">
-                <li>Multiple codecs</li>
-                <li>Resolution scaling</li>
-                <li>Bitrate optimization</li>
-              </ul>
+              <div className="tool-features">
+                <span className="feature-tag">Multiple codecs</span>
+                <span className="feature-tag">Resolution scaling</span>
+                <span className="feature-tag">Bitrate optimization</span>
+              </div>
               <Link to="/compress-video" className="btn btn-primary">
                 Compress Videos
                 <FiArrowRight className="btn-icon" />
@@ -142,11 +159,11 @@ const Home = () => {
               </div>
               <h3>Audio Compression</h3>
               <p>Optimize MP3, WAV, FLAC, and more. Reduce audio file size without losing quality.</p>
-              <ul className="tool-features">
-                <li>Multiple formats</li>
-                <li>Bitrate control</li>
-                <li>Quality preservation</li>
-              </ul>
+              <div className="tool-features">
+                <span className="feature-tag">Multiple formats</span>
+                <span className="feature-tag">Bitrate control</span>
+                <span className="feature-tag">Quality preservation</span>
+              </div>
               <Link to="/compress-audio" className="btn btn-primary">
                 Compress Audio
                 <FiArrowRight className="btn-icon" />
@@ -159,11 +176,11 @@ const Home = () => {
               </div>
               <h3>PDF Compression</h3>
               <p>Compress PDF documents while preserving text quality and image resolution.</p>
-              <ul className="tool-features">
-                <li>Text optimization</li>
-                <li>Image compression</li>
-                <li>Metadata removal</li>
-              </ul>
+              <div className="tool-features">
+                <span className="feature-tag">Text optimization</span>
+                <span className="feature-tag">Image compression</span>
+                <span className="feature-tag">Metadata removal</span>
+              </div>
               <Link to="/compress-pdf" className="btn btn-primary">
                 Compress PDFs
                 <FiArrowRight className="btn-icon" />
@@ -220,7 +237,7 @@ const Home = () => {
                 <FiUpload className="btn-icon" />
                 Try It Free
               </Link>
-              <Link to="/signup" className="btn btn-ghost btn-lg">
+              <Link to="/signup" className="btn btn-outline btn-lg">
                 <FiCheckCircle className="btn-icon" />
                 Create Account
               </Link>
