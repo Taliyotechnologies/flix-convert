@@ -4,10 +4,14 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoose = require('mongoose');
+const passport = require('passport');
 
 const authRoutes = require('./routes/authRoutes');
 const fileRoutes = require('./routes/fileRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+
+// Import passport configuration
+require('./config/passport');
 
 const app = express();
 
@@ -28,10 +32,13 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // CORS
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://yourdomain.com'] 
+    ? ['https://flix-convert.onrender.com'] 
     : ['http://localhost:3000', 'http://localhost:5173'],
   credentials: true
 }));
+
+// Passport middleware
+app.use(passport.initialize());
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)

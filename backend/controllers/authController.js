@@ -127,6 +127,62 @@ const login = async (req, res) => {
   }
 };
 
+// @desc    Google OAuth callback
+// @route   GET /api/auth/google/callback
+// @access  Public
+const googleCallback = async (req, res) => {
+  try {
+    const { profile } = req.user;
+    
+    // Check if user exists
+    let user = await User.findOne({ googleId: profile.id });
+    
+    if (!user) {
+      // Check if user exists with same email
+      user = await User.findOne({ email: profile.emails[0].value });
+      
+      if (user) {
+        // Update existing user with Google ID
+        user.googleId = profile.id;
+        user.googleEmail = profile.emails[0].value;
+        if (profile.photos && profile.photos[0]) {
+          user.avatar = profile.photos[0].value;
+        }
+        await user.save();
+      } else {
+        // Create new user
+        user = await User.create({
+          name: profile.displayName,
+          email: profile.emails[0].value,
+          googleId: profile.id,
+          googleEmail: profile.emails[0].value,
+          avatar: profile.photos && profile.photos[0] ? profile.photos[0].value : null
+        });
+      }
+    }
+
+    // Update last login
+    user.lastLogin = new Date();
+    await user.save();
+
+    // Generate token
+    const token = generateToken(user._id);
+
+    // Redirect to frontend with token
+    const frontendUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://flix-convert.onrender.com' 
+      : 'http://localhost:5173';
+    
+    res.redirect(`${frontendUrl}/auth/callback?token=${token}&success=true`);
+  } catch (error) {
+    console.error('Google callback error:', error);
+    const frontendUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://flix-convert.onrender.com' 
+      : 'http://localhost:5173';
+    res.redirect(`${frontendUrl}/auth/callback?success=false&error=Authentication failed`);
+  }
+};
+
 // @desc    Get current user
 // @route   GET /api/auth/me
 // @access  Private
@@ -141,7 +197,8 @@ const getMe = async (req, res) => {
           id: user._id,
           name: user.name,
           email: user.email,
-          role: user.role
+          role: user.role,
+          avatar: user.avatar
         }
       }
     });
@@ -175,6 +232,7 @@ const logout = async (req, res) => {
 module.exports = {
   signup,
   login,
+  googleCallback,
   getMe,
   logout
 };

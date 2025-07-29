@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import AuthCallback from './pages/AuthCallback';
 import Tools from './pages/Tools';
 import CompressImage from './pages/CompressImage';
 import CompressVideo from './pages/CompressVideo';
@@ -32,6 +33,7 @@ function App() {
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/signup" element={<Signup />} />
+                  <Route path="/auth/callback" element={<AuthCallback />} />
                   <Route path="/tools" element={<Tools />} />
                   <Route path="/compress-image" element={<CompressImage />} />
                   <Route path="/compress-video" element={<CompressVideo />} />

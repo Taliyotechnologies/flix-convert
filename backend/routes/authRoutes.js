@@ -1,9 +1,11 @@
 const express = require('express');
 const { body } = require('express-validator');
+const passport = require('passport');
 const { protect } = require('../middlewares/auth');
 const {
   signup,
   login,
+  googleCallback,
   getMe,
   logout
 } = require('../controllers/authController');
@@ -35,10 +37,14 @@ const loginValidation = [
     .withMessage('Password is required')
 ];
 
-// Routes
+// Regular auth routes
 router.post('/signup', signupValidation, signup);
 router.post('/login', loginValidation, login);
 router.get('/me', protect, getMe);
 router.post('/logout', protect, logout);
+
+// Google OAuth routes
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google/callback', passport.authenticate('google', { session: false }), googleCallback);
 
 module.exports = router;

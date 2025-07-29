@@ -137,6 +137,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const loginWithGoogle = () => {
+    const backendUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://flix-convert.onrender.com' 
+      : 'http://localhost:5000';
+    
+    window.location.href = `${backendUrl}/api/auth/google`;
+  };
+
   const logout = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -163,11 +171,13 @@ export const AuthProvider = ({ children }) => {
 
   const value = {
     user,
+    setUser,
     loading,
     theme,
     error,
     login,
     signup,
+    loginWithGoogle,
     logout,
     toggleTheme
   };
