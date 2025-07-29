@@ -24,7 +24,7 @@ const Dashboard = () => {
   const fetchUserFiles = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/compress/user-files`, {
+      const response = await axios.get('/api/compress/user-files', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setFiles(response.data.files || []);
@@ -38,7 +38,7 @@ const Dashboard = () => {
   const fetchUserStats = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/compress/user-stats`, {
+      const response = await axios.get('/api/compress/user-stats', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setStats(response.data.stats || {});
@@ -50,7 +50,7 @@ const Dashboard = () => {
   const handleDownload = async (fileId, originalName) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/compress/download/${fileId}`, {
+      const response = await axios.get(`/api/compress/download/${fileId}`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: 'blob'
       });
@@ -73,7 +73,7 @@ const Dashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${import.meta.env.VITE_API_URL}/api/compress/delete/${fileId}`, {
+      await axios.delete(`/api/compress/delete/${fileId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchUserFiles();
