@@ -2,6 +2,7 @@
   "buildCommand": "npm install --production=false && npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
+  "rootDirectory": ".",
   "rewrites": [
     {
       "source": "/(.*)",
