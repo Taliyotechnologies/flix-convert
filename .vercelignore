@@ -4,5 +4,4 @@ node_modules/
 .env
 .env.local
 .env.production
-README.md
-build.sh 
+README.md 
