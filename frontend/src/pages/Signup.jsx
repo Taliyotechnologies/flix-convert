@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap, FiCheckCircle, FiAlertCircle, FiStar } from 'react-icons/fi';
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Signup = () => {
@@ -223,14 +223,7 @@ const Signup = () => {
       <div className="auth-container">
         <div className="auth-card">
           <div className="auth-header">
-            <div className="auth-logo">
-              <FiZap className="logo-icon" />
-              <span className="logo-text">FlixConvert</span>
-            </div>
-            <h1 className="auth-title">Create Account</h1>
-            <p className="auth-subtitle">
-              Join FlixConvert to start compressing and converting your files with ease
-            </p>
+            <h1 className="auth-title">Signup</h1>
           </div>
 
           {alert && (
@@ -239,9 +232,6 @@ const Signup = () => {
                 {alert.type === 'success' ? <FiCheckCircle /> : <FiAlertCircle />}
               </div>
               <div className="alert-content">
-                <div className="alert-title">
-                  {alert.type === 'success' ? 'Account Created!' : 'Error'}
-                </div>
                 <div className="alert-message">{alert.message}</div>
               </div>
             </div>
@@ -436,35 +426,6 @@ const Signup = () => {
                 Sign in here
               </Link>
             </p>
-          </div>
-        </div>
-
-        <div className="auth-sidebar">
-          <div className="sidebar-content">
-            <h2 className="sidebar-title">Join Our Community</h2>
-            <div className="sidebar-features">
-              <div className="sidebar-feature">
-                <FiZap className="feature-icon" />
-                <div className="feature-content">
-                  <h3>Lightning Fast</h3>
-                  <p>Process files in seconds with our optimized algorithms</p>
-                </div>
-              </div>
-              <div className="sidebar-feature">
-                <FiShield className="feature-icon" />
-                <div className="feature-content">
-                  <h3>100% Secure</h3>
-                  <p>Your files are processed locally and automatically deleted</p>
-                </div>
-              </div>
-              <div className="sidebar-feature">
-                <FiStar className="feature-icon" />
-                <div className="feature-content">
-                  <h3>Premium Quality</h3>
-                  <p>Get the best compression without losing quality</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
