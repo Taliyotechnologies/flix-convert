@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight, FiShield, FiZap } from 'react-icons/fi';
 import '../styles/components.css';
 
 const Login = () => {
@@ -109,23 +109,35 @@ const Login = () => {
   };
 
   return (
-    <div className="page-container">
-      <div className="container">
-        <div className="form-container">
-          <div className="form-header">
-            <h1 className="form-title">Welcome Back</h1>
-            <p className="form-subtitle">
-              Sign in to your account to continue using FlixConvert
+    <div className="auth-page">
+      <div className="auth-container">
+        <div className="auth-card">
+          <div className="auth-header">
+            <div className="auth-logo">
+              <FiZap className="logo-icon" />
+              <span className="logo-text">FlixConvert</span>
+            </div>
+            <h1 className="auth-title">Welcome Back</h1>
+            <p className="auth-subtitle">
+              Sign in to your account to continue using our powerful file compression tools
             </p>
           </div>
 
           {alert && (
-            <div className={`alert alert-${alert.type}`}>
-              {alert.message}
+            <div className={`auth-alert auth-alert-${alert.type}`}>
+              <div className="alert-icon">
+                {alert.type === 'success' ? <FiShield /> : <FiMail />}
+              </div>
+              <div className="alert-content">
+                <div className="alert-title">
+                  {alert.type === 'success' ? 'Success!' : 'Error'}
+                </div>
+                <div className="alert-message">{alert.message}</div>
+              </div>
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="form">
+          <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
               <label htmlFor="email" className="form-label">
                 Email Address
@@ -139,7 +151,7 @@ const Login = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className={`form-input ${errors.email ? 'error' : ''}`}
-                  placeholder="Enter your email"
+                  placeholder="Enter your email address"
                   disabled={isLoading}
                 />
               </div>
@@ -169,6 +181,7 @@ const Login = () => {
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
                   disabled={isLoading}
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
@@ -180,27 +193,30 @@ const Login = () => {
 
             <button
               type="submit"
-              className="btn btn-primary btn-lg"
+              className="btn btn-primary btn-auth"
               disabled={isLoading}
             >
               {isLoading ? (
                 <>
                   <div className="spinner"></div>
-                  Signing In...
+                  <span>Signing In...</span>
                 </>
               ) : (
-                'Sign In'
+                <>
+                  <span>Sign In</span>
+                  <FiArrowRight className="btn-icon" />
+                </>
               )}
             </button>
           </form>
 
-          <div className="divider">
-            <span>or</span>
+          <div className="auth-divider">
+            <span>or continue with</span>
           </div>
 
           <button
             type="button"
-            className="btn btn-google"
+            className="btn btn-google btn-auth"
             onClick={handleGoogleLogin}
             disabled={isLoading}
           >
@@ -210,14 +226,45 @@ const Login = () => {
               <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
               <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
             </svg>
-            Continue with Google
+            <span>Continue with Google</span>
           </button>
 
-          <div className="form-footer">
-            <p>
+          <div className="auth-footer">
+            <p className="auth-footer-text">
               Don't have an account?{' '}
-              <Link to="/signup">Create one here</Link>
+              <Link to="/signup" className="auth-link">
+                Create one here
+              </Link>
             </p>
+          </div>
+        </div>
+
+        <div className="auth-sidebar">
+          <div className="sidebar-content">
+            <h2 className="sidebar-title">Why Choose FlixConvert?</h2>
+            <div className="sidebar-features">
+              <div className="sidebar-feature">
+                <FiZap className="feature-icon" />
+                <div className="feature-content">
+                  <h3>Lightning Fast</h3>
+                  <p>Process files in seconds with our optimized algorithms</p>
+                </div>
+              </div>
+              <div className="sidebar-feature">
+                <FiShield className="feature-icon" />
+                <div className="feature-content">
+                  <h3>100% Secure</h3>
+                  <p>Your files are processed locally and automatically deleted</p>
+                </div>
+              </div>
+              <div className="sidebar-feature">
+                <FiMail className="feature-icon" />
+                <div className="feature-content">
+                  <h3>Free Forever</h3>
+                  <p>No hidden costs, no premium tiers, completely free</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
