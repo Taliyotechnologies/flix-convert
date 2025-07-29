@@ -1,7 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { FiGithub, FiTwitter, FiLinkedin, FiMail } from 'react-icons/fi'
+import { 
+  FiGithub, 
+  FiTwitter, 
+  FiLinkedin, 
+  FiMail, 
+  FiImage, 
+  FiVideo, 
+  FiMusic, 
+  FiFileText,
+  FiHeart,
+  FiZap
+} from 'react-icons/fi'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -9,94 +20,95 @@ const Footer = () => {
   return (
     <>
       <Helmet>
-        <title>ConvertFlix - About Us & Contact</title>
+        <title>FlixConvert - About Us & Contact</title>
       </Helmet>
       
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-grid">
             <div className="footer-section">
-              <h4>🎬 ConvertFlix</h4>
+              <div className="footer-brand">
+                <FiZap className="footer-logo" />
+                <h4>FlixConvert</h4>
+              </div>
               <p>
-                The ultimate file compression and conversion tool. Compress images, videos, 
-                audio files, and PDFs with instant results and 40% size reduction.
+                Professional file compression and conversion tools. Compress images, videos, 
+                audio files, and PDFs with instant results and up to 80% size reduction.
               </p>
               <div className="social-links">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                  <FiGithub size={20} />
+                  <FiGithub />
                 </a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-                  <FiTwitter size={20} />
+                  <FiTwitter />
                 </a>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  <FiLinkedin size={20} />
+                  <FiLinkedin />
                 </a>
                 <a href="mailto:contact@flixconvert.com" aria-label="Email">
-                  <FiMail size={20} />
+                  <FiMail />
                 </a>
               </div>
             </div>
 
             <div className="footer-section">
-              <h4>Tools</h4>
-              <Link to="/compress/image">Compress Images</Link>
-              <Link to="/compress/video">Compress Videos</Link>
-              <Link to="/compress/audio">Compress Audio</Link>
-              <Link to="/compress/pdf">Compress PDFs</Link>
-              <Link to="/tools">All Tools</Link>
+              <h4>Compression Tools</h4>
+              <div className="footer-links">
+                <Link to="/compress-image">
+                  <FiImage className="link-icon" />
+                  Compress Images
+                </Link>
+                <Link to="/compress-video">
+                  <FiVideo className="link-icon" />
+                  Compress Videos
+                </Link>
+                <Link to="/compress-audio">
+                  <FiMusic className="link-icon" />
+                  Compress Audio
+                </Link>
+                <Link to="/compress-pdf">
+                  <FiFileText className="link-icon" />
+                  Compress PDFs
+                </Link>
+                <Link to="/tools">All Tools</Link>
+              </div>
             </div>
 
             <div className="footer-section">
               <h4>Company</h4>
-              <Link to="/about">About Us</Link>
-              <Link to="/privacy">Privacy Policy</Link>
-              <Link to="/terms">Terms of Service</Link>
-              <Link to="/contact">Contact</Link>
+              <div className="footer-links">
+                <Link to="/about">About Us</Link>
+                <Link to="/privacy">Privacy Policy</Link>
+                <Link to="/terms">Terms of Service</Link>
+                <Link to="/contact">Contact</Link>
+                <Link to="/careers">Careers</Link>
+              </div>
             </div>
 
             <div className="footer-section">
               <h4>Support</h4>
-              <Link to="/help">Help Center</Link>
-              <Link to="/faq">FAQ</Link>
-              <Link to="/api">API Documentation</Link>
-              <a href="mailto:support@flixconvert.com">Email Support</a>
+              <div className="footer-links">
+                <Link to="/help">Help Center</Link>
+                <Link to="/faq">FAQ</Link>
+                <Link to="/api">API Documentation</Link>
+                <a href="mailto:support@flixconvert.com">Email Support</a>
+                <Link to="/status">Service Status</Link>
+              </div>
             </div>
           </div>
 
           <div className="footer-bottom">
-            <p>
-              © {currentYear} ConvertFlix. All rights reserved. 
-              Built with ❤️ by Taliyo Technologies.
-            </p>
+            <div className="footer-bottom-content">
+              <p>
+                © {currentYear} FlixConvert. All rights reserved.
+              </p>
+              <p className="footer-built">
+                Built with <FiHeart className="heart-icon" /> by Taliyo Technologies
+              </p>
+            </div>
           </div>
         </div>
       </footer>
-
-      <style jsx>{`
-        .social-links {
-          display: flex;
-          gap: 1rem;
-          margin-top: 1rem;
-        }
-
-        .social-links a {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background-color: var(--bg-tertiary);
-          color: var(--text-secondary);
-          transition: all 0.2s ease;
-        }
-
-        .social-links a:hover {
-          background-color: var(--accent-primary);
-          color: white;
-          transform: translateY(-2px);
-        }
-      `}</style>
     </>
   )
 }
