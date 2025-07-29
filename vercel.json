@@ -1,5 +1,5 @@
 {
-  "buildCommand": "bash build-frontend.sh",
+  "buildCommand": "bash build.sh",
   "outputDirectory": "frontend/dist",
   "framework": "vite",
   "rewrites": [

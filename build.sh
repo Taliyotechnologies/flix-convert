@@ -6,6 +6,12 @@ echo "Current directory: $(pwd)"
 echo "Listing files:"
 ls -la
 
+echo "Navigating to frontend directory..."
+cd frontend
+echo "Current directory after cd: $(pwd)"
+echo "Files in frontend directory:"
+ls -la
+
 echo "Installing dependencies..."
 npm install --production=false
 
