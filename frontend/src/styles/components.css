@@ -408,10 +408,11 @@ body.dark .logout-item:hover {
   background: var(--accent-primary);
   color: white;
   border-radius: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.5rem;
   margin-bottom: 2rem;
   font-size: 0.875rem;
   font-weight: 500;
+  box-shadow: var(--shadow-sm);
 }
 
 .hero-badge-icon {
@@ -432,6 +433,9 @@ body.dark .logout-item:hover {
   margin-bottom: 2.5rem;
   color: var(--text-secondary);
   line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-actions {
@@ -447,21 +451,40 @@ body.dark .logout-item:hover {
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 .hero-stats .stat-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--text-secondary);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
   font-size: 0.875rem;
   font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.hero-stats .stat-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-primary);
 }
 
 .hero-stats .stat-icon {
   width: 16px;
   height: 16px;
   color: var(--accent-primary);
+  flex-shrink: 0;
+}
+
+.hero-stats .stat-item span {
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
 /* Features Section */
@@ -1254,4 +1277,108 @@ body.dark .alert-error {
 .btn-lg .btn-icon {
   width: 18px;
   height: 18px;
+}
+
+/* Responsive Design for new sections */
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 0;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .hero-stats .stat-item {
+    min-width: 200px;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .cta-section {
+    padding: 3rem 0;
+  }
+  
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+  
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3rem 0;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+  
+  .features-section,
+  .tools-section {
+    padding: 3rem 0;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-item {
+    padding: 1.5rem;
+  }
+  
+  .cta-section {
+    padding: 3rem 0;
+  }
+  
+  .cta-content h2 {
+    font-size: 1.75rem;
+  }
+  
+  .tool-features {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .feature-tag {
+    text-align: center;
+  }
 }
