@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { FiUser, FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import './Auth.css';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,214 +12,149 @@ const Signup = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  
-  const { register } = useAuth();
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-    setError('');
-  };
-
-  const validateForm = () => {
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return false;
-    }
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
-      return false;
-    }
-    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!validateForm()) return;
-    
-    setLoading(true);
-    setError('');
-
-    const result = await register(formData.name, formData.email, formData.password);
-    
-    if (result.success) {
-      navigate('/');
-    } else {
-      setError(result.error);
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords do not match');
+      return;
     }
     
-    setLoading(false);
+    setIsLoading(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      // Handle signup logic here
+    }, 1000);
   };
 
   return (
-    <div className="min-h-screen bg-bg-secondary flex items-center justify-center py-12">
-      <div className="container max-w-md">
-        <div className="card">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-text-primary mb-2">
-              Create Account
-            </h1>
-            <p className="text-text-secondary">
-              Join ConvertFlix and start converting files instantly
-            </p>
+    <div className="auth-page">
+      <div className="container">
+        <div className="auth-container">
+          <div className="auth-header">
+            <h1>Create Account</h1>
+            <p>Join ConvertFlix and start converting files</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <div className="p-4 bg-error-color bg-opacity-10 border border-error-color rounded-lg">
-                <p className="text-error-color text-sm">{error}</p>
-              </div>
-            )}
-
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-text-primary mb-2">
-                Full Name
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FiUser size={20} className="text-text-muted" />
-                </div>
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name">Full Name</label>
+              <div className="input-wrapper">
+                <User size={20} />
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  required
-                  className="pl-10 w-full"
                   placeholder="Enter your full name"
+                  required
                 />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FiMail size={20} className="text-text-muted" />
-                </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <div className="input-wrapper">
+                <Mail size={20} />
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
-                  className="pl-10 w-full"
                   placeholder="Enter your email"
+                  required
                 />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-text-primary mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FiLock size={20} className="text-text-muted" />
-                </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="input-wrapper">
+                <Lock size={20} />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  required
-                  className="pl-10 pr-10 w-full"
                   placeholder="Create a password"
+                  required
                 />
                 <button
                   type="button"
+                  className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
-                  {showPassword ? (
-                    <FiEyeOff size={20} className="text-text-muted" />
-                  ) : (
-                    <FiEye size={20} className="text-text-muted" />
-                  )}
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              <p className="text-xs text-text-muted mt-1">
-                Must be at least 6 characters long
-              </p>
             </div>
 
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-text-primary mb-2">
-                Confirm Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FiLock size={20} className="text-text-muted" />
-                </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="input-wrapper">
+                <Lock size={20} />
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
                   id="confirmPassword"
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  required
-                  className="pl-10 pr-10 w-full"
                   placeholder="Confirm your password"
+                  required
                 />
                 <button
                   type="button"
+                  className="password-toggle"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
-                  {showConfirmPassword ? (
-                    <FiEyeOff size={20} className="text-text-muted" />
-                  ) : (
-                    <FiEye size={20} className="text-text-muted" />
-                  )}
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn btn-primary w-full"
+            <div className="form-options">
+              <label className="checkbox-wrapper">
+                <input type="checkbox" required />
+                <span className="checkmark"></span>
+                I agree to the{' '}
+                <Link to="/terms" className="auth-link">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link to="/privacy" className="auth-link">
+                  Privacy Policy
+                </Link>
+              </label>
+            </div>
+
+            <button 
+              type="submit" 
+              className="btn btn-primary btn-large"
+              disabled={isLoading}
             >
-              {loading ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  Creating Account...
-                </>
-              ) : (
-                'Create Account'
-              )}
+              {isLoading ? 'Creating account...' : 'Create Account'}
             </button>
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-text-secondary">
+          <div className="auth-footer">
+            <p>
               Already have an account?{' '}
-              <Link to="/login" className="text-primary-color hover:text-primary-hover font-medium">
+              <Link to="/login" className="auth-link">
                 Sign in
-              </Link>
-            </p>
-          </div>
-
-          <div className="mt-8 pt-6 border-t border-border-color">
-            <p className="text-xs text-text-muted text-center">
-              By creating an account, you agree to our{' '}
-              <Link to="/company" className="text-primary-color hover:text-primary-hover">
-                Terms of Service
-              </Link>{' '}
-              and{' '}
-              <Link to="/company" className="text-primary-color hover:text-primary-hover">
-                Privacy Policy
               </Link>
             </p>
           </div>

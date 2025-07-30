@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import './Auth.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,143 +9,100 @@ const Login = () => {
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
-  
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
-    setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-
-    const result = await login(formData.email, formData.password);
+    setIsLoading(true);
     
-    if (result.success) {
-      navigate('/');
-    } else {
-      setError(result.error);
-    }
-    
-    setLoading(false);
+    // Simulate API call
+    setTimeout(() => {
+      setIsLoading(false);
+      // Handle login logic here
+    }, 1000);
   };
 
   return (
-    <div className="min-h-screen bg-bg-secondary flex items-center justify-center py-12">
-      <div className="container max-w-md">
-        <div className="card">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-text-primary mb-2">
-              Welcome Back
-            </h1>
-            <p className="text-text-secondary">
-              Sign in to your ConvertFlix account
-            </p>
+    <div className="auth-page">
+      <div className="container">
+        <div className="auth-container">
+          <div className="auth-header">
+            <h1>Welcome Back</h1>
+            <p>Sign in to your ConvertFlix account</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {error && (
-              <div className="p-4 bg-error-color bg-opacity-10 border border-error-color rounded-lg">
-                <p className="text-error-color text-sm">{error}</p>
-              </div>
-            )}
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-text-primary mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FiMail size={20} className="text-text-muted" />
-                </div>
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <div className="input-wrapper">
+                <Mail size={20} />
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
-                  className="pl-10 w-full"
                   placeholder="Enter your email"
+                  required
                 />
               </div>
             </div>
 
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-text-primary mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FiLock size={20} className="text-text-muted" />
-                </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <div className="input-wrapper">
+                <Lock size={20} />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  required
-                  className="pl-10 pr-10 w-full"
                   placeholder="Enter your password"
+                  required
                 />
                 <button
                   type="button"
+                  className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
-                  {showPassword ? (
-                    <FiEyeOff size={20} className="text-text-muted" />
-                  ) : (
-                    <FiEye size={20} className="text-text-muted" />
-                  )}
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn btn-primary w-full"
+            <div className="form-options">
+              <label className="checkbox-wrapper">
+                <input type="checkbox" />
+                <span className="checkmark"></span>
+                Remember me
+              </label>
+              <Link to="/forgot-password" className="forgot-link">
+                Forgot password?
+              </Link>
+            </div>
+
+            <button 
+              type="submit" 
+              className="btn btn-primary btn-large"
+              disabled={isLoading}
             >
-              {loading ? (
-                <>
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                  Signing In...
-                </>
-              ) : (
-                'Sign In'
-              )}
+              {isLoading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-text-secondary">
+          <div className="auth-footer">
+            <p>
               Don't have an account?{' '}
-              <Link to="/signup" className="text-primary-color hover:text-primary-hover font-medium">
+              <Link to="/signup" className="auth-link">
                 Sign up
-              </Link>
-            </p>
-          </div>
-
-          <div className="mt-8 pt-6 border-t border-border-color">
-            <p className="text-xs text-text-muted text-center">
-              By signing in, you agree to our{' '}
-              <Link to="/company" className="text-primary-color hover:text-primary-hover">
-                Terms of Service
-              </Link>{' '}
-              and{' '}
-              <Link to="/company" className="text-primary-color hover:text-primary-hover">
-                Privacy Policy
               </Link>
             </p>
           </div>

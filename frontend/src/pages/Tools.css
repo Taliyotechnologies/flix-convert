@@ -1,0 +1,172 @@
+.tools-page {
+  padding: 2rem 0;
+}
+
+.tools-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.tools-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.tools-header p {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.tools-section {
+  margin-bottom: 4rem;
+}
+
+.tools-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tools-section > p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.tool-card {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.tool-icon {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.tool-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.tool-card p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+}
+
+.tool-details {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.tool-formats,
+.tool-size {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.tool-formats strong,
+.tool-size strong {
+  color: var(--text-primary);
+}
+
+.tools-features {
+  margin-top: 6rem;
+  padding: 4rem 0;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 2rem;
+}
+
+.feature-item svg {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-item p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tools-header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .tools-header p {
+    font-size: 1.125rem;
+  }
+  
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .tools-features {
+    margin-top: 4rem;
+    padding: 2rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .tools-header h1 {
+    font-size: 2rem;
+  }
+  
+  .tools-header p {
+    font-size: 1rem;
+  }
+  
+  .tools-section h2 {
+    font-size: 1.75rem;
+  }
+} 
