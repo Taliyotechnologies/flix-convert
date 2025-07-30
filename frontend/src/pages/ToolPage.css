@@ -1,5 +1,5 @@
 .tool-page {
-  padding: 2rem 4rem;
+  padding: 2rem 0;
   width: 100%;
   max-width: 100%;
 }
@@ -9,10 +9,12 @@
   align-items: center;
   gap: 2rem;
   margin-bottom: 3rem;
-  padding: 2rem;
+  padding: 2rem 4rem;
   background: var(--bg-secondary);
   border-radius: 12px;
   box-shadow: var(--shadow);
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 .tool-icon {
@@ -67,6 +69,8 @@
 
 .upload-section {
   margin-bottom: 3rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 .upload-area {
@@ -219,6 +223,8 @@
   margin-bottom: 3rem;
   width: 100%;
   max-width: 100%;
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 .results-header {
@@ -325,6 +331,8 @@
   box-shadow: var(--shadow);
   width: 100%;
   max-width: 100%;
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 .settings-header {
@@ -439,8 +447,25 @@
 }
 
 @media (max-width: 768px) {
-  .tool-page {
-    padding: 2rem 2rem;
+  .tool-header {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: 1.5rem 2rem;
+  }
+  
+  .upload-section {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  
+  .results-section {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  
+  .settings-section {
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
   
   .tool-header {
@@ -501,8 +526,25 @@
 }
 
 @media (max-width: 480px) {
-  .tool-page {
-    padding: 1rem 1rem;
+  .tool-header {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem;
+  }
+  
+  .upload-section {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .results-section {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  
+  .settings-section {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   
   .tool-header {
