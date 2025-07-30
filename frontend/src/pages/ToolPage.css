@@ -5,6 +5,13 @@
   margin: 0;
 }
 
+/* Override main padding for tool pages */
+main .tool-page {
+  margin-top: -2rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .tool-header {
   display: flex;
   align-items: center;

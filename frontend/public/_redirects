@@ -1,1 +1,7 @@
-/*    /index.html   200 
+/*    /index.html   200
+/     /index.html   200
+/tools     /index.html   200
+/tool/*    /index.html   200
+/login     /index.html   200
+/signup    /index.html   200
+/dashboard /index.html   200 
