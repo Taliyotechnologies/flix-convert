@@ -11,7 +11,8 @@ import {
   FiMenu, 
   FiX,
   FiChevronDown,
-  FiChevronRight
+  FiChevronRight,
+  FiZap
 } from 'react-icons/fi';
 
 const Navbar = () => {
@@ -69,45 +70,49 @@ const Navbar = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <nav className="bg-bg-card border-b border-border-color sticky top-0 z-50">
+    <nav className="bg-bg-card border-b border-border-color sticky top-0 z-50 backdrop-blur-md bg-opacity-80">
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary-color rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">F</span>
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary-color to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <FiZap className="text-white text-lg" />
             </div>
-            <span className="font-bold text-lg md:text-xl text-text-primary">FlixConvert</span>
+            <span className="font-bold text-xl text-text-primary group-hover:text-primary-color transition-colors">
+              FlixConvert
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-8">
             {navItems.map((item) => (
               <div key={item.name} className="relative group">
                 <Link
                   to={item.path}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center gap-1 ${
+                  className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 flex items-center gap-2 ${
                     isActive(item.path)
-                      ? 'text-primary-color bg-primary-color bg-opacity-10'
-                      : 'text-text-secondary hover:text-text-primary'
+                      ? 'text-primary-color bg-primary-light shadow-md'
+                      : 'text-text-secondary hover:text-text-primary hover:bg-bg-secondary'
                   }`}
                 >
                   {item.name}
-                  {item.dropdown && <FiChevronDown className="text-xs" />}
+                  {item.dropdown && <FiChevronDown className="text-xs transition-transform group-hover:rotate-180" />}
                 </Link>
                 
                 {/* Desktop Dropdown */}
                 {item.dropdown && (
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-bg-card border border-border-color rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    {item.dropdown.map((dropdownItem) => (
-                      <Link
-                        key={dropdownItem.name}
-                        to={dropdownItem.path}
-                        className="block px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
-                      >
-                        {dropdownItem.name}
-                      </Link>
-                    ))}
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-bg-card border border-border-color rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 backdrop-blur-md">
+                    <div className="p-2">
+                      {item.dropdown.map((dropdownItem) => (
+                        <Link
+                          key={dropdownItem.name}
+                          to={dropdownItem.path}
+                          className="block px-4 py-3 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-xl transition-all duration-200"
+                        >
+                          {dropdownItem.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
@@ -115,14 +120,18 @@ const Navbar = () => {
           </div>
 
           {/* Right side */}
-          <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-md text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
+              className="p-3 rounded-xl text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-all duration-300 group"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? <FiMoon size={18} /> : <FiSun size={18} />}
+              {theme === 'light' ? (
+                <FiMoon size={20} className="group-hover:scale-110 transition-transform" />
+              ) : (
+                <FiSun size={20} className="group-hover:scale-110 transition-transform" />
+              )}
             </button>
 
             {/* Auth Buttons / User Menu */}
@@ -130,28 +139,28 @@ const Navbar = () => {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="flex items-center gap-2 p-2 rounded-md text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
+                  className="flex items-center gap-3 p-2 rounded-xl text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-all duration-300 group"
                 >
-                  <div className="w-7 h-7 md:w-8 md:h-8 bg-primary-color rounded-full flex items-center justify-center">
-                    <span className="text-white text-xs md:text-sm font-medium">
+                  <div className="w-8 h-8 bg-gradient-to-br from-primary-color to-purple-600 rounded-xl flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                    <span className="text-white text-sm font-semibold">
                       {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                     </span>
                   </div>
-                  <FiChevronDown size={14} className="hidden md:block" />
+                  <FiChevronDown size={16} className="hidden md:block transition-transform group-hover:rotate-180" />
                 </button>
 
                 {/* User Dropdown */}
                 {isDropdownOpen && (
-                  <div className="absolute right-0 top-full mt-1 w-48 bg-bg-card border border-border-color rounded-lg shadow-lg z-50">
-                    <div className="px-4 py-3 border-b border-border-color">
-                      <p className="text-sm font-medium text-text-primary">{user?.name}</p>
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-bg-card border border-border-color rounded-2xl shadow-xl z-50 backdrop-blur-md">
+                    <div className="p-4 border-b border-border-color">
+                      <p className="text-sm font-semibold text-text-primary">{user?.name}</p>
                       <p className="text-xs text-text-muted">{user?.email}</p>
                     </div>
-                    <div className="py-1">
+                    <div className="p-2">
                       {user?.role === 'admin' && (
                         <Link
                           to="/admin"
-                          className="flex items-center gap-2 px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
+                          className="flex items-center gap-3 px-4 py-3 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-xl transition-all duration-200"
                           onClick={() => setIsDropdownOpen(false)}
                         >
                           <FiSettings size={16} />
@@ -160,7 +169,7 @@ const Navbar = () => {
                       )}
                       <button
                         onClick={handleLogout}
-                        className="flex items-center gap-2 w-full px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
+                        className="flex items-center gap-3 w-full px-4 py-3 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-xl transition-all duration-200"
                       >
                         <FiLogOut size={16} />
                         Logout
@@ -170,16 +179,16 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden md:flex items-center gap-3">
                 <Link
                   to="/login"
-                  className="px-3 py-2 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+                  className="px-4 py-2 text-sm font-semibold text-text-secondary hover:text-text-primary transition-colors"
                 >
                   Login
                 </Link>
                 <Link
                   to="/signup"
-                  className="px-3 py-2 text-sm font-medium bg-primary-color text-white rounded-md hover:bg-primary-hover transition-colors"
+                  className="px-6 py-2 text-sm font-semibold bg-gradient-to-r from-primary-color to-purple-600 text-white rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300"
                 >
                   Sign Up
                 </Link>
@@ -189,45 +198,49 @@ const Navbar = () => {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
+              className="lg:hidden p-3 rounded-xl text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-all duration-300"
               aria-label="Toggle mobile menu"
             >
-              {isMenuOpen ? <FiX size={20} /> : <FiMenu size={20} />}
+              {isMenuOpen ? (
+                <FiX size={20} className="transition-transform rotate-90" />
+              ) : (
+                <FiMenu size={20} />
+              )}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-border-color bg-bg-card" ref={menuRef}>
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="lg:hidden border-t border-border-color bg-bg-card backdrop-blur-md" ref={menuRef}>
+            <div className="px-4 pt-4 pb-6 space-y-2">
               {navItems.map((item) => (
                 <div key={item.name}>
                   {item.dropdown ? (
                     <div>
                       <button
                         onClick={() => toggleDropdown(item.name)}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                        className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${
                           isActive(item.path)
-                            ? 'text-primary-color bg-primary-color bg-opacity-10'
-                            : 'text-text-secondary hover:text-text-primary'
+                            ? 'text-primary-color bg-primary-light'
+                            : 'text-text-secondary hover:text-text-primary hover:bg-bg-secondary'
                         }`}
                       >
                         {item.name}
                         <FiChevronRight 
                           size={16} 
-                          className={`transition-transform ${activeDropdown === item.name ? 'rotate-90' : ''}`}
+                          className={`transition-transform duration-300 ${activeDropdown === item.name ? 'rotate-90' : ''}`}
                         />
                       </button>
                       
                       {/* Mobile Dropdown */}
                       {activeDropdown === item.name && (
-                        <div className="ml-4 mt-1 space-y-1">
+                        <div className="ml-4 mt-2 space-y-1">
                           {item.dropdown.map((dropdownItem) => (
                             <Link
                               key={dropdownItem.name}
                               to={dropdownItem.path}
-                              className="block px-3 py-2 rounded-md text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary transition-colors"
+                              className="block px-4 py-3 text-sm text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-xl transition-all duration-200"
                               onClick={() => setIsMenuOpen(false)}
                             >
                               {dropdownItem.name}
@@ -239,10 +252,10 @@ const Navbar = () => {
                   ) : (
                     <Link
                       to={item.path}
-                      className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                      className={`block px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 ${
                         isActive(item.path)
-                          ? 'text-primary-color bg-primary-color bg-opacity-10'
-                          : 'text-text-secondary hover:text-text-primary'
+                          ? 'text-primary-color bg-primary-light'
+                          : 'text-text-secondary hover:text-text-primary hover:bg-bg-secondary'
                       }`}
                       onClick={() => setIsMenuOpen(false)}
                     >
@@ -253,17 +266,17 @@ const Navbar = () => {
               ))}
               
               {!isAuthenticated && (
-                <div className="pt-4 border-t border-border-color space-y-2">
+                <div className="pt-4 border-t border-border-color space-y-3">
                   <Link
                     to="/login"
-                    className="block px-3 py-2 text-base font-medium text-text-secondary hover:text-text-primary transition-colors"
+                    className="block px-4 py-3 text-base font-semibold text-text-secondary hover:text-text-primary hover:bg-bg-secondary rounded-xl transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Login
                   </Link>
                   <Link
                     to="/signup"
-                    className="block px-3 py-2 text-base font-medium bg-primary-color text-white rounded-md hover:bg-primary-hover transition-colors"
+                    className="block px-4 py-3 text-base font-semibold bg-gradient-to-r from-primary-color to-purple-600 text-white rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Sign Up

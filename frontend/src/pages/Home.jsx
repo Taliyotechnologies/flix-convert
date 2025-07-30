@@ -6,92 +6,139 @@ import {
   FiSmartphone, 
   FiCheckCircle, 
   FiFileText,
-  FiArrowRight
+  FiArrowRight,
+  FiDownload,
+  FiUpload,
+  FiClock,
+  FiUsers
 } from 'react-icons/fi';
 
 const Home = () => {
   const features = [
     {
-      icon: <FiZap size={24} />,
+      icon: <FiZap size={28} />,
       title: 'Lightning Fast',
-      description: 'Compress and convert files in seconds with our optimized processing engine.'
+      description: 'Compress and convert files in seconds with our optimized processing engine.',
+      gradient: 'from-yellow-400 to-orange-500'
     },
     {
-      icon: <FiShield size={24} />,
+      icon: <FiShield size={28} />,
       title: 'Secure & Private',
-      description: 'Your files are automatically deleted after 24 hours. We never store your data permanently.'
+      description: 'Your files are automatically deleted after 24 hours. We never store your data permanently.',
+      gradient: 'from-green-400 to-blue-500'
     },
     {
-      icon: <FiSmartphone size={24} />,
+      icon: <FiSmartphone size={28} />,
       title: 'Cross Platform',
-      description: 'Works seamlessly on all devices - desktop, tablet, and mobile browsers.'
+      description: 'Works seamlessly on all devices - desktop, tablet, and mobile browsers.',
+      gradient: 'from-purple-400 to-pink-500'
     },
     {
-      icon: <FiCheckCircle size={24} />,
+      icon: <FiCheckCircle size={28} />,
       title: 'Quality Preserved',
-      description: 'Advanced algorithms ensure no quality loss while achieving maximum compression.'
+      description: 'Advanced algorithms ensure no quality loss while achieving maximum compression.',
+      gradient: 'from-blue-400 to-cyan-500'
     },
     {
-      icon: <FiFileText size={24} />,
+      icon: <FiFileText size={28} />,
       title: 'Multi-Format',
-      description: 'Support for Images, Videos, Audio, and PDF files with multiple format options.'
+      description: 'Support for Images, Videos, Audio, and PDF files with multiple format options.',
+      gradient: 'from-indigo-400 to-purple-500'
     }
   ];
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-primary-color to-primary-hover text-white">
-        <div className="container">
+      {/* Hero Section - Enhanced */}
+      <section className="relative py-12 md:py-16 lg:py-20 overflow-hidden">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-color via-purple-600 to-pink-600 opacity-90"></div>
+        
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-white opacity-10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-white opacity-10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '1s'}}></div>
+        </div>
+
+        <div className="container relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="space-y-4 md:space-y-6 text-center lg:text-left">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
-                Compress & Convert Any File — Instantly. Free Up to 10MB.
+            <div className="space-y-6 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6">
+                <FiZap className="animate-pulse" />
+                <span>Free up to 10MB • No Registration Required</span>
+              </div>
+              
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+                Compress & Convert Any File —{' '}
+                <span className="gradient-text bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                  Instantly
+                </span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl text-blue-100 leading-relaxed">
+              
+              <p className="text-lg md:text-xl text-white text-opacity-90 leading-relaxed max-w-2xl">
                 Transform your files with our powerful compression and conversion tools. 
                 No registration required, no quality loss, and files are automatically deleted for your privacy.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link
                   to="/tools"
-                  className="btn btn-lg bg-white text-primary-color hover:bg-gray-100 inline-flex items-center justify-center"
+                  className="btn btn-lg bg-white text-primary-color hover:bg-gray-100 inline-flex items-center justify-center shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
                 >
+                  <FiUpload className="mr-2" />
                   Try Tools Now
                   <FiArrowRight size={18} />
                 </Link>
                 <Link
                   to="/company"
-                  className="btn btn-lg btn-outline border-white text-white hover:bg-white hover:text-primary-color"
+                  className="btn btn-lg btn-outline border-white text-white hover:bg-white hover:text-primary-color backdrop-blur-sm"
                 >
                   Learn More
                 </Link>
               </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-4 pt-8">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">10MB</div>
+                  <div className="text-sm text-white text-opacity-80">Free Limit</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">24h</div>
+                  <div className="text-sm text-white text-opacity-80">Auto Delete</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white">100%</div>
+                  <div className="text-sm text-white text-opacity-80">Secure</div>
+                </div>
+              </div>
             </div>
+            
             <div className="hidden lg:block">
               <div className="relative">
-                <div className="w-full h-80 lg:h-96 bg-white bg-opacity-10 rounded-2xl backdrop-blur-sm border border-white border-opacity-20 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto">
-                      <FiFileText size={32} className="text-white lg:w-10 lg:h-10" />
+                <div className="w-full h-96 bg-white bg-opacity-10 backdrop-blur-md rounded-3xl border border-white border-opacity-20 flex items-center justify-center shadow-2xl">
+                  <div className="text-center space-y-6">
+                    <div className="w-24 h-24 bg-gradient-to-br from-white to-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+                      <FiFileText size={48} className="text-white" />
                     </div>
-                    <div className="space-y-2">
-                      <div className="w-28 lg:w-32 h-3 lg:h-4 bg-white bg-opacity-20 rounded mx-auto"></div>
-                      <div className="w-20 lg:w-24 h-3 lg:h-4 bg-white bg-opacity-20 rounded mx-auto"></div>
+                    <div className="space-y-3">
+                      <div className="w-40 h-4 bg-white bg-opacity-20 rounded-lg mx-auto animate-pulse"></div>
+                      <div className="w-32 h-4 bg-white bg-opacity-20 rounded-lg mx-auto animate-pulse" style={{animationDelay: '0.5s'}}></div>
                     </div>
                     <div className="flex justify-center space-x-2">
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white bg-opacity-40 rounded-full"></div>
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white bg-opacity-20 rounded-full"></div>
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white bg-opacity-20 rounded-full"></div>
+                      <div className="w-3 h-3 bg-white bg-opacity-40 rounded-full animate-bounce"></div>
+                      <div className="w-3 h-3 bg-white bg-opacity-20 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                      <div className="w-3 h-3 bg-white bg-opacity-20 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></div>
                     </div>
                   </div>
                 </div>
+                
                 {/* Floating elements */}
-                <div className="absolute -top-2 -right-2 lg:-top-4 lg:-right-4 w-12 h-12 lg:w-16 lg:h-16 bg-accent-color rounded-full flex items-center justify-center">
-                  <FiZap size={18} className="text-white lg:w-6 lg:h-6" />
+                <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg animate-bounce">
+                  <FiZap size={24} className="text-white" />
                 </div>
-                <div className="absolute -bottom-2 -left-2 lg:-bottom-4 lg:-left-4 w-10 h-10 lg:w-12 lg:h-12 bg-success-color rounded-full flex items-center justify-center">
-                  <FiCheckCircle size={16} className="text-white lg:w-5 lg:h-5" />
+                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-lg animate-bounce" style={{animationDelay: '0.5s'}}>
+                  <FiCheckCircle size={20} className="text-white" />
                 </div>
               </div>
             </div>
@@ -99,28 +146,31 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-bg-secondary">
+      {/* Features Section - Enhanced */}
+      <section className="py-16 md:py-20 lg:py-24 bg-bg-secondary relative">
         <div className="container">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-4">
-              Why Choose ConvertFlix?
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+              Why Choose{' '}
+              <span className="gradient-text">ConvertFlix</span>?
             </h2>
-            <p className="text-base md:text-lg text-text-secondary max-w-2xl mx-auto px-4">
+            <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
               Our platform combines cutting-edge technology with user-friendly design to deliver the best file processing experience.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="card text-center group">
-                <div className="w-14 h-14 md:w-16 md:h-16 bg-primary-color bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:bg-primary-color group-hover:text-white transition-colors">
-                  {feature.icon}
+              <div key={index} className="card group hover:scale-105 transition-all duration-300">
+                <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
+                  <div className="text-white">
+                    {feature.icon}
+                  </div>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-text-primary mb-3">
+                <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4 text-center">
                   {feature.title}
                 </h3>
-                <p className="text-sm md:text-base text-text-secondary leading-relaxed">
+                <p className="text-text-secondary leading-relaxed text-center">
                   {feature.description}
                 </p>
               </div>
@@ -129,29 +179,32 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-12 md:py-16 lg:py-20 bg-bg-primary">
-        <div className="container">
-          <div className="text-center max-w-3xl mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-4 md:mb-6">
+      {/* CTA Section - Enhanced */}
+      <section className="py-16 md:py-20 lg:py-24 bg-gradient-to-br from-primary-color to-purple-600 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
+        <div className="container relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-base md:text-lg text-text-secondary mb-6 md:mb-8">
+            <p className="text-xl text-white text-opacity-90 mb-8 leading-relaxed">
               Join thousands of users who trust ConvertFlix for their file compression and conversion needs. 
               Start processing your files in seconds.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/tools"
-                className="btn btn-lg btn-primary inline-flex items-center justify-center"
+                className="btn btn-lg bg-white text-primary-color hover:bg-gray-100 inline-flex items-center justify-center shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all"
               >
+                <FiDownload className="mr-2" />
                 Start Converting Now
                 <FiArrowRight size={18} />
               </Link>
               <Link
                 to="/signup"
-                className="btn btn-lg btn-outline"
+                className="btn btn-lg btn-outline border-white text-white hover:bg-white hover:text-primary-color backdrop-blur-sm"
               >
+                <FiUsers className="mr-2" />
                 Create Free Account
               </Link>
             </div>
@@ -159,25 +212,25 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 md:py-16 bg-bg-tertiary">
+      {/* Stats Section - Enhanced */}
+      <section className="py-16 md:py-20 bg-bg-tertiary">
         <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
-            <div>
-              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">10MB</div>
-              <div className="text-sm md:text-base text-text-secondary">Free File Size Limit</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="card bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+              <div className="text-3xl md:text-4xl font-bold mb-2">10MB</div>
+              <div className="text-sm opacity-90">Free File Size Limit</div>
             </div>
-            <div>
-              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">24h</div>
-              <div className="text-sm md:text-base text-text-secondary">Auto-Delete Time</div>
+            <div className="card bg-gradient-to-br from-green-500 to-blue-600 text-white">
+              <div className="text-3xl md:text-4xl font-bold mb-2">24h</div>
+              <div className="text-sm opacity-90">Auto-Delete Time</div>
             </div>
-            <div>
-              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">100%</div>
-              <div className="text-sm md:text-base text-text-secondary">Privacy Guaranteed</div>
+            <div className="card bg-gradient-to-br from-purple-500 to-pink-600 text-white">
+              <div className="text-3xl md:text-4xl font-bold mb-2">100%</div>
+              <div className="text-sm opacity-90">Privacy Guaranteed</div>
             </div>
-            <div>
-              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">0</div>
-              <div className="text-sm md:text-base text-text-secondary">Registration Required</div>
+            <div className="card bg-gradient-to-br from-orange-500 to-red-600 text-white">
+              <div className="text-3xl md:text-4xl font-bold mb-2">0</div>
+              <div className="text-sm opacity-90">Registration Required</div>
             </div>
           </div>
         </div>
