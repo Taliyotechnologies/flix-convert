@@ -175,9 +175,8 @@ const ToolPage = () => {
 
   return (
     <div className="tool-page">
-      <div className="container">
-        {/* Header */}
-        <div className="tool-header">
+      {/* Header */}
+      <div className="tool-header">
           <div className="tool-icon">
             {config.icon}
           </div>
@@ -369,7 +368,6 @@ const ToolPage = () => {
             </div>
           )}
         </div>
-      </div>
     </div>
   );
 };
