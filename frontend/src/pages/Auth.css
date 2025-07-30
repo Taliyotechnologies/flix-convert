@@ -1,78 +1,189 @@
+/* Auth Pages Styling */
 .auth-page {
-  min-height: calc(100vh - 70px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
 }
 
 .auth-container {
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  padding: 3rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2.5rem;
   width: 100%;
-  max-width: 400px;
-  box-shadow: var(--shadow);
+  max-width: 420px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .auth-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .auth-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .auth-header p {
-  color: var(--text-secondary);
+  color: #6b7280;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Error Message Styles */
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #dc2626;
+  font-size: 0.9rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-text {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.75rem;
 }
 
 .form-group label {
-  font-weight: 500;
-  color: var(--text-primary);
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.95rem;
+  margin-left: 0.25rem;
 }
 
 .input-wrapper {
   position: relative;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+  transform: translateY(-2px);
 }
 
 .input-wrapper svg {
   position: absolute;
   left: 1rem;
-  color: var(--text-secondary);
+  color: #9ca3af;
   z-index: 1;
+  transition: color 0.3s ease;
+}
+
+.input-wrapper:focus-within svg {
+  color: #667eea;
 }
 
 .input-wrapper input {
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #374151;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .input-wrapper input:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.input-wrapper input.error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.input-wrapper input.error:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.input-wrapper input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
 }
 
 .password-toggle {
@@ -80,30 +191,82 @@
   right: 1rem;
   background: none;
   border: none;
-  color: var(--text-secondary);
+  color: #9ca3af;
   cursor: pointer;
-  padding: 0.25rem;
-  border-radius: 4px;
-  transition: color 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .password-toggle:hover {
-  color: var(--text-primary);
+  color: #667eea;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+/* Password Strength Indicator */
+.password-strength {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.strength-bar {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.strength-segment {
+  height: 4px;
+  flex: 1;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.strength-segment.active {
+  animation: strengthGrow 0.3s ease-out;
+}
+
+@keyframes strengthGrow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.strength-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: right;
 }
 
 .form-options {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
 }
 
 .checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: #6b7280;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.checkbox-wrapper:hover {
+  color: #374151;
 }
 
 .checkbox-wrapper input[type="checkbox"] {
@@ -111,72 +274,313 @@
 }
 
 .checkmark {
-  width: 16px;
-  height: 16px;
-  border: 1px solid var(--border-color);
-  border-radius: 3px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
   position: relative;
-  background: var(--bg-primary);
+  background: #ffffff;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-wrapper:hover .checkmark {
+  border-color: #667eea;
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked + .checkmark {
+  background: #667eea;
+  border-color: #667eea;
 }
 
 .checkbox-wrapper input[type="checkbox"]:checked + .checkmark::after {
   content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--primary-color);
+  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
 }
 
 .forgot-link {
-  color: var(--primary-color);
+  color: #667eea;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .forgot-link:hover {
-  color: var(--primary-hover);
+  color: #5a67d8;
+  text-decoration: underline;
+}
+
+.btn {
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-large {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  font-size: 1.1rem;
 }
 
 .auth-footer {
   text-align: center;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid #e5e7eb;
 }
 
 .auth-footer p {
-  color: var(--text-secondary);
+  color: #6b7280;
   margin: 0;
+  font-size: 1rem;
 }
 
 .auth-link {
-  color: var(--primary-color);
+  color: #667eea;
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .auth-link:hover {
-  color: var(--primary-hover);
+  color: #5a67d8;
+  text-decoration: underline;
+}
+
+/* Loading animation */
+.btn-primary:disabled::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Responsive Design */
 @media (max-width: 480px) {
+  .auth-page {
+    padding: 0.5rem;
+  }
+  
   .auth-container {
     padding: 2rem 1.5rem;
-    margin: 0 1rem;
+    border-radius: 16px;
+    margin: 0;
   }
   
   .auth-header h1 {
-    font-size: 1.75rem;
+    font-size: 1.875rem;
+  }
+  
+  .auth-header p {
+    font-size: 1rem;
   }
   
   .form-options {
     flex-direction: column;
     gap: 1rem;
     align-items: flex-start;
+  }
+  
+  .input-wrapper input {
+    padding: 0.875rem 1rem 0.875rem 2.75rem;
+    font-size: 1rem;
+  }
+  
+  .btn-large {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .password-strength {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .strength-text {
+    text-align: left;
+    min-width: auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .auth-container {
+    padding: 1.5rem 1rem;
+  }
+  
+  .auth-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .form-group {
+    gap: 0.5rem;
+  }
+  
+  .input-wrapper input {
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .auth-container {
+    background: rgba(17, 24, 39, 0.95);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .auth-header h1 {
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .auth-header p {
+    color: #9ca3af;
+  }
+  
+  .form-group label {
+    color: #e5e7eb;
+  }
+  
+  .input-wrapper input {
+    background: #1f2937;
+    border-color: #374151;
+    color: #e5e7eb;
+  }
+  
+  .input-wrapper input:focus {
+    border-color: #8b5cf6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+  }
+  
+  .input-wrapper input.error {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  }
+  
+  .input-wrapper svg {
+    color: #6b7280;
+  }
+  
+  .input-wrapper:focus-within svg {
+    color: #8b5cf6;
+  }
+  
+  .password-toggle {
+    color: #6b7280;
+  }
+  
+  .password-toggle:hover {
+    color: #8b5cf6;
+    background: rgba(139, 92, 246, 0.1);
+  }
+  
+  .checkbox-wrapper {
+    color: #9ca3af;
+  }
+  
+  .checkbox-wrapper:hover {
+    color: #e5e7eb;
+  }
+  
+  .checkmark {
+    background: #1f2937;
+    border-color: #4b5563;
+  }
+  
+  .checkbox-wrapper:hover .checkmark {
+    border-color: #8b5cf6;
+  }
+  
+  .checkbox-wrapper input[type="checkbox"]:checked + .checkmark {
+    background: #8b5cf6;
+    border-color: #8b5cf6;
+  }
+  
+  .forgot-link {
+    color: #8b5cf6;
+  }
+  
+  .forgot-link:hover {
+    color: #a855f7;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+  }
+  
+  .auth-footer {
+    border-top-color: #374151;
+  }
+  
+  .auth-footer p {
+    color: #9ca3af;
+  }
+  
+  .auth-link {
+    color: #8b5cf6;
+  }
+  
+  .auth-link:hover {
+    color: #a855f7;
+  }
+  
+  .error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+  }
+  
+  .error-text {
+    color: #fca5a5;
   }
 } 

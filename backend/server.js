@@ -8,6 +8,7 @@ const fs = require('fs-extra');
 require('dotenv').config();
 
 // Import routes
+const authRoutes = require('./routes/auth');
 const compressRoutes = require('./routes/compress');
 const convertRoutes = require('./routes/convert');
 const adminRoutes = require('./routes/admin');
@@ -75,6 +76,7 @@ app.get('/health', (req, res) => {
 });
 
 // API Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/compress', compressRoutes);
 app.use('/api/convert', convertRoutes);
 app.use('/api/admin', adminRoutes);
