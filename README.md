@@ -1,277 +1,233 @@
-# 🎯 ConvertFlix - File Compression & Conversion Platform
+# ConvertFlix - File Compression & Conversion Platform
 
-A full-stack file compression and conversion platform built with React, Node.js, and MongoDB. ConvertFlix allows users to upload and compress/convert image, video, audio, and PDF files up to 10MB for free with instant results and no quality loss.
+A full-stack file compression and conversion platform built with React, Node.js, and MongoDB. ConvertFlix allows users to compress and convert image, video, audio, and PDF files up to 10MB for free with instant results and no quality loss.
 
-## ✨ Features
+## 🚀 Features
 
-### 🎨 Frontend (React + Vite)
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile
-- **Dark/Light Theme**: Auto-detects system preference with manual toggle
-- **Modern UI**: Clean, premium design with smooth animations
-- **File Upload**: Drag & drop interface with progress tracking
-- **Real-time Processing**: Live status updates during file processing
-- **Admin Dashboard**: Protected admin panel with analytics and file management
+### Core Features
+- **File Compression**: Compress images, videos, audio, and PDFs
+- **Format Conversion**: Convert between different file formats
+- **Auto-Delete System**: Files are automatically deleted after 24 hours
+- **No Registration Required**: Use tools without creating an account
+- **Quality Preservation**: Advanced algorithms ensure no quality loss
+- **Cross-Platform**: Works on desktop, tablet, and mobile
 
-### 🔧 Backend (Node.js + Express)
-- **File Processing**: Support for images, videos, audio, and PDFs
-- **Compression**: Optimized algorithms for each file type
-- **Conversion**: Convert between different formats
-- **Auto-cleanup**: Files automatically deleted after 24 hours
-- **Rate Limiting**: Protection against abuse
-- **Security**: JWT authentication, input validation, CORS
+### Supported Formats
+- **Images**: JPEG, PNG, GIF, WebP, AVIF, TIFF
+- **Videos**: MP4, AVI, MOV, WMV, FLV, WebM
+- **Audio**: MP3, WAV, AAC, OGG, FLAC
+- **Documents**: PDF
 
-### 📊 Database (MongoDB)
-- **File Tracking**: Complete audit trail of all processed files
-- **User Management**: Registration, login, and profile management
-- **Analytics**: Detailed statistics and usage metrics
-- **Auto-expiry**: Database cleanup for expired files
+### Admin Features
+- **Dashboard Analytics**: Real-time statistics and charts
+- **File Management**: View, download, and delete files
+- **User Management**: Manage user accounts and roles
+- **System Monitoring**: Server health and performance metrics
 
-## 🚀 Quick Start
+## 🛠️ Tech Stack
+
+### Frontend
+- **React 18** with Vite
+- **React Router** for navigation
+- **Custom CSS** with CSS variables for theming
+- **React Icons** for icons
+- **React Dropzone** for file uploads
+- **Chart.js** for analytics
+- **Axios** for API calls
+
+### Backend
+- **Node.js** with Express
+- **MongoDB** with Mongoose
+- **JWT** for authentication
+- **Multer** for file uploads
+- **Sharp** for image processing
+- **FFmpeg** for video/audio processing
+- **PDF-lib** for PDF compression
+- **bcryptjs** for password hashing
+
+## 📦 Installation
 
 ### Prerequisites
 - Node.js (v16 or higher)
 - MongoDB (local or cloud)
 - FFmpeg (for video/audio processing)
 
-### Installation
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/flixconvert.git
+cd flixconvert
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd convertflix
-   ```
+### 2. Install Dependencies
+```bash
+# Install root dependencies
+npm install
 
-2. **Install dependencies**
-   ```bash
-   # Install backend dependencies
-   npm install
-   
-   # Install frontend dependencies
-   cd client
-   npm install
-   cd ..
-   ```
+# Install backend dependencies
+cd backend
+npm install
 
-3. **Environment Setup**
-   ```bash
-   # Copy environment example
-   cp env.example .env
-   
-   # Edit .env with your configuration
-   nano .env
-   ```
+# Install frontend dependencies
+cd ../frontend
+npm install
+```
 
-4. **Start the application**
-   ```bash
-   # Development mode (both frontend and backend)
-   npm run dev
-   
-   # Or start separately
-   npm run server    # Backend only
-   npm run client    # Frontend only
-   ```
+### 3. Environment Setup
 
-5. **Access the application**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:5000
-   - Admin Dashboard: http://localhost:5173/admin
+#### Backend Configuration
+Copy the example environment file and configure it:
+```bash
+cd backend
+cp env.example .env
+```
+
+Edit `.env` with your configuration:
+```env
+PORT=5000
+NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/flixconvert
+JWT_SECRET=your-super-secret-jwt-key
+FRONTEND_URL=http://localhost:5173
+```
+
+#### Frontend Configuration
+The frontend is configured to proxy API calls to the backend automatically.
+
+### 4. Start the Application
+
+#### Development Mode
+```bash
+# From the root directory
+npm run dev
+```
+
+This will start both the backend (port 5000) and frontend (port 5173) concurrently.
+
+#### Production Mode
+```bash
+# Build the frontend
+cd frontend
+npm run build
+
+# Start the backend
+cd ../backend
+npm start
+```
+
+## 🗄️ Database Setup
+
+### MongoDB Connection
+The application will automatically create the necessary collections when it starts. Make sure MongoDB is running and accessible.
+
+### Initial Admin User
+To create an admin user, you can either:
+
+1. **Register normally** and then manually update the user role in the database:
+```javascript
+// In MongoDB shell or MongoDB Compass
+db.users.updateOne(
+  { email: "your-email@example.com" },
+  { $set: { role: "admin" } }
+)
+```
+
+2. **Use the API** to create an admin user programmatically.
+
+## 🔧 Configuration
+
+### File Size Limits
+- Maximum file size: 10MB (configurable in backend)
+- Supported file types are validated on both frontend and backend
+
+### Auto-Delete System
+- Files are automatically deleted after 24 hours
+- MongoDB TTL index handles automatic cleanup
+- Manual cleanup endpoint available for admins
+
+### Security Features
+- Rate limiting on API endpoints
+- CORS protection
+- Helmet.js security headers
+- JWT token authentication
+- Password hashing with bcrypt
 
 ## 📁 Project Structure
 
 ```
-convertflix/
-├── client/                 # React frontend
+flixconvert/
+├── backend/                 # Node.js backend
+│   ├── models/             # MongoDB schemas
+│   ├── routes/             # API routes
+│   ├── middleware/         # Custom middleware
+│   ├── utils/              # Utility functions
+│   └── uploads/            # File storage
+├── frontend/               # React frontend
 │   ├── src/
-│   │   ├── components/    # Reusable components
-│   │   ├── contexts/      # React contexts
-│   │   ├── pages/         # Page components
-│   │   └── ...
-│   └── ...
-├── server/                 # Node.js backend
-│   ├── models/            # MongoDB models
-│   ├── routes/            # API routes
-│   ├── middleware/        # Custom middleware
-│   ├── utils/             # Utility functions
-│   └── uploads/           # File storage
-├── package.json           # Root package.json
-└── README.md
+│   │   ├── components/     # React components
+│   │   ├── pages/          # Page components
+│   │   ├── contexts/       # React contexts
+│   │   └── index.css       # Global styles
+│   └── public/             # Static assets
+└── package.json            # Root package.json
 ```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-# Server Configuration
-PORT=5000
-NODE_ENV=development
-
-# MongoDB Configuration
-MONGODB_URI=mongodb://localhost:27017/convertflix
-
-# JWT Configuration
-JWT_SECRET=your-super-secret-jwt-key-change-in-production
-
-# File Upload Configuration
-MAX_FILE_SIZE=10485760
-UPLOAD_PATH=./server/uploads
-
-# Security Configuration
-CORS_ORIGIN=http://localhost:5173,http://localhost:3000
-
-# Admin Configuration
-ADMIN_EMAIL=admin@convertflix.com
-ADMIN_PASSWORD=admin123
-
-# Cleanup Configuration
-CLEANUP_INTERVAL=3600000
-FILE_EXPIRY_HOURS=24
-```
-
-### FFmpeg Installation
-
-For video and audio processing, install FFmpeg:
-
-**Windows:**
-```bash
-# Using chocolatey
-choco install ffmpeg
-
-# Or download from https://ffmpeg.org/download.html
-```
-
-**macOS:**
-```bash
-# Using homebrew
-brew install ffmpeg
-```
-
-**Linux:**
-```bash
-# Ubuntu/Debian
-sudo apt update
-sudo apt install ffmpeg
-
-# CentOS/RHEL
-sudo yum install ffmpeg
-```
-
-## 🛠️ API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/profile` - Get user profile
-- `PUT /api/auth/profile` - Update profile
-- `PUT /api/auth/change-password` - Change password
-
-### File Compression
-- `POST /api/compress/image` - Compress images
-- `POST /api/compress/video` - Compress videos
-- `POST /api/compress/audio` - Compress audio
-- `POST /api/compress/pdf` - Compress PDFs
-
-### File Conversion
-- `POST /api/convert/image` - Convert image formats
-- `POST /api/convert/video` - Convert video formats
-- `POST /api/convert/audio` - Convert audio formats
-
-### Admin (Protected)
-- `GET /api/admin/dashboard` - Dashboard statistics
-- `GET /api/admin/files` - List all files
-- `DELETE /api/admin/files/:id` - Delete file
-- `GET /api/admin/analytics` - Analytics data
-- `GET /api/admin/users` - User management
-
-## 🎨 Features in Detail
-
-### File Processing
-- **Image Compression**: JPEG, PNG, WebP, GIF support
-- **Video Compression**: MP4, AVI, MOV, WMV, FLV, MKV, WebM
-- **Audio Compression**: MP3, WAV, AAC, OGG, FLAC, M4A
-- **PDF Compression**: Optimize PDF file size
-- **Format Conversion**: Convert between supported formats
-
-### Security Features
-- **JWT Authentication**: Secure token-based auth
-- **Rate Limiting**: Prevent API abuse
-- **Input Validation**: Sanitize all inputs
-- **File Type Validation**: Secure file uploads
-- **Auto-cleanup**: Automatic file deletion
-
-### Admin Features
-- **Dashboard**: Real-time statistics and charts
-- **File Management**: View, search, and delete files
-- **User Management**: Manage user accounts and roles
-- **Analytics**: Detailed usage metrics and trends
-- **System Monitoring**: Storage and performance stats
 
 ## 🚀 Deployment
 
-### Production Build
-```bash
-# Build frontend
-cd client
-npm run build
+### Backend Deployment
+1. Set up a MongoDB database (MongoDB Atlas recommended)
+2. Configure environment variables for production
+3. Deploy to your preferred platform (Heroku, Vercel, AWS, etc.)
 
-# Start production server
-npm start
-```
+### Frontend Deployment
+1. Build the application: `npm run build`
+2. Deploy the `dist` folder to your hosting platform
+3. Configure the API URL in the frontend
 
 ### Environment Variables for Production
 ```env
 NODE_ENV=production
 MONGODB_URI=your-production-mongodb-uri
 JWT_SECRET=your-production-jwt-secret
-CORS_ORIGIN=https://yourdomain.com
+FRONTEND_URL=https://your-domain.com
 ```
 
-### Docker Deployment
-```dockerfile
-# Dockerfile example
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-RUN npm run build
-EXPOSE 5000
-CMD ["npm", "start"]
-```
+## 🔒 Security Considerations
+
+- All files are automatically deleted after 24 hours
+- No permanent storage of user files
+- JWT tokens for authentication
+- Rate limiting to prevent abuse
+- Input validation and sanitization
+- CORS protection
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -am 'Add feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
 
-## 📝 License
+## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🆘 Support
 
 If you encounter any issues or have questions:
 
-1. Check the [Issues](https://github.com/yourusername/convertflix/issues) page
+1. Check the [Issues](https://github.com/yourusername/flixconvert/issues) page
 2. Create a new issue with detailed information
-3. Contact the development team
+3. Contact us at support@flixconvert.com
 
-## 🎯 Roadmap
+## 🙏 Acknowledgments
 
-- [ ] Cloud storage integration (AWS S3, Google Cloud)
-- [ ] Batch file processing
-- [ ] Advanced compression options
-- [ ] API rate limiting tiers
-- [ ] Webhook notifications
-- [ ] Mobile app development
-- [ ] Advanced analytics dashboard
-- [ ] Multi-language support
+- [Sharp](https://sharp.pixelplumbing.com/) for image processing
+- [FFmpeg](https://ffmpeg.org/) for video/audio processing
+- [PDF-lib](https://pdf-lib.js.org/) for PDF manipulation
+- [React Icons](https://react-icons.github.io/react-icons/) for icons
+- [Chart.js](https://www.chartjs.org/) for analytics
 
 ---
 
-**Built with ❤️ by the ConvertFlix Team** 
+**ConvertFlix** - Making file compression and conversion accessible to everyone. 
