@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Zap, Shield, Globe, Award, FileText, Download, ArrowRight, CheckCircle, Star } from 'lucide-react';
+import { Zap, Shield, Globe, Award, FileText, Download, ArrowRight, CheckCircle, Star, File, FileCheck, FileX } from 'lucide-react';
 import './Home.css';
 
 const Home = () => {
@@ -74,7 +74,7 @@ const Home = () => {
                   Start Converting
                   <ArrowRight size={20} />
                 </Link>
-                <Link to="/learn-more" className="btn btn-secondary btn-large">
+                <Link to="/about" className="btn btn-secondary btn-large">
                   Learn More
                 </Link>
               </div>
@@ -83,17 +83,23 @@ const Home = () => {
               <div className="hero-visual">
                 <div className="file-stack">
                   <div className="file file-1">
-                    <div className="file-icon">📄</div>
+                    <div className="file-icon">
+                      <File size={24} />
+                    </div>
                     <div className="file-label">Original</div>
                     <div className="file-size">2.5MB</div>
                   </div>
                   <div className="file file-2">
-                    <div className="file-icon">⚡</div>
+                    <div className="file-icon">
+                      <Zap size={24} />
+                    </div>
                     <div className="file-label">Processing</div>
                     <div className="file-size">Compressing...</div>
                   </div>
                   <div className="file file-3">
-                    <div className="file-icon">📦</div>
+                    <div className="file-icon">
+                      <FileCheck size={24} />
+                    </div>
                     <div className="file-label">Compressed</div>
                     <div className="file-size">0.8MB</div>
                   </div>
@@ -117,9 +123,9 @@ const Home = () => {
             <h2>Why Choose ConvertFlix?</h2>
             <p>Professional-grade tools with enterprise-level security</p>
           </div>
-          <div className="grid grid-3">
+          <div className="features-grid">
             {features.map((feature, index) => (
-              <div key={index} className="feature-card card fade-in">
+              <div key={index} className="feature-card">
                 <div className="feature-icon">
                   {feature.icon}
                 </div>
