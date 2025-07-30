@@ -46,9 +46,18 @@ const Navbar = () => {
             </div>
           </div>
           
-          <Link to="/company" className="nav-link">
-            Company
-          </Link>
+          <div className="dropdown">
+            <button className="nav-link dropdown-toggle">
+              Company
+            </button>
+            <div className="dropdown-menu">
+              <Link to="/owner" className="dropdown-item">Owner</Link>
+              <Link to="/contact" className="dropdown-item">Contact</Link>
+              <Link to="/about" className="dropdown-item">About Us</Link>
+              <Link to="/privacy" className="dropdown-item">Privacy Policy</Link>
+              <Link to="/terms" className="dropdown-item">Terms of Service</Link>
+            </div>
+          </div>
         </div>
 
         {/* Right Side */}
