@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
-import { Upload, Download, File, Image, Music, Video, FileText, X, Settings } from 'lucide-react';
+import { Upload, Download, File, Image, Music, Video, FileText, X, Settings, CheckCircle, AlertCircle, Info, Zap, Shield, Clock } from 'lucide-react';
 import './ToolPage.css';
 
 const ToolPage = () => {
@@ -9,6 +9,10 @@ const ToolPage = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [processedFile, setProcessedFile] = useState(null);
   const [dragActive, setDragActive] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [quality, setQuality] = useState('high');
+  const [format, setFormat] = useState('auto');
+  const [showSettings, setShowSettings] = useState(false);
   const fileInputRef = useRef(null);
 
   const toolConfig = {
@@ -18,7 +22,8 @@ const ToolPage = () => {
       icon: <Image size={48} />,
       acceptedTypes: 'image/*',
       maxSize: 10 * 1024 * 1024, // 10MB
-      formats: ['JPG', 'PNG', 'WebP', 'GIF']
+      formats: ['JPG', 'PNG', 'WebP', 'GIF'],
+      features: ['Quality Preservation', 'Fast Processing', 'Multiple Formats']
     },
     'compress-video': {
       title: 'Compress Video',
@@ -26,7 +31,8 @@ const ToolPage = () => {
       icon: <Video size={48} />,
       acceptedTypes: 'video/*',
       maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV']
+      formats: ['MP4', 'AVI', 'MOV', 'MKV'],
+      features: ['Quality Preservation', 'Fast Processing', 'Multiple Formats']
     },
     'compress-pdf': {
       title: 'Compress PDF',
@@ -34,7 +40,8 @@ const ToolPage = () => {
       icon: <FileText size={48} />,
       acceptedTypes: '.pdf',
       maxSize: 10 * 1024 * 1024,
-      formats: ['PDF']
+      formats: ['PDF'],
+      features: ['Text Preservation', 'Fast Processing', 'Secure']
     },
     'convert-audio': {
       title: 'Convert Audio',
@@ -42,7 +49,8 @@ const ToolPage = () => {
       icon: <Music size={48} />,
       acceptedTypes: 'audio/*',
       maxSize: 10 * 1024 * 1024,
-      formats: ['MP3', 'WAV', 'AAC', 'OGG', 'FLAC']
+      formats: ['MP3', 'WAV', 'AAC', 'OGG', 'FLAC'],
+      features: ['High Quality', 'Fast Conversion', 'Multiple Formats']
     },
     'convert-video': {
       title: 'Convert Video',
@@ -50,7 +58,8 @@ const ToolPage = () => {
       icon: <Video size={48} />,
       acceptedTypes: 'video/*',
       maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV', 'WebM']
+      formats: ['MP4', 'AVI', 'MOV', 'MKV', 'WebM'],
+      features: ['High Quality', 'Fast Conversion', 'Multiple Formats']
     },
     'convert-image': {
       title: 'Convert Image',
@@ -58,7 +67,8 @@ const ToolPage = () => {
       icon: <Image size={48} />,
       acceptedTypes: 'image/*',
       maxSize: 10 * 1024 * 1024,
-      formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP']
+      formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP'],
+      features: ['Quality Preservation', 'Fast Conversion', 'Multiple Formats']
     }
   };
 
@@ -91,6 +101,7 @@ const ToolPage = () => {
     }
     setFile(selectedFile);
     setProcessedFile(null);
+    setProgress(0);
   };
 
   const handleFileInput = (e) => {
@@ -103,19 +114,33 @@ const ToolPage = () => {
     if (!file) return;
     
     setIsProcessing(true);
+    setProgress(0);
     
-    // Simulate processing
+    // Simulate processing with progress updates
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 200);
+
+    // Simulate processing completion
     setTimeout(() => {
       const originalSize = file.size;
-      const compressedSize = Math.round(originalSize * 0.7); // Simulate 30% compression
+      const compressionRatio = quality === 'low' ? 0.5 : quality === 'medium' ? 0.7 : 0.8;
+      const compressedSize = Math.round(originalSize * compressionRatio);
       
       setProcessedFile({
-        name: file.name.replace(/\.[^/.]+$/, '') + '_compressed.' + file.name.split('.').pop(),
+        name: file.name.replace(/\.[^/.]+$/, '') + '_processed.' + file.name.split('.').pop(),
         size: compressedSize,
         originalSize: originalSize,
         compressionRatio: ((originalSize - compressedSize) / originalSize * 100).toFixed(1)
       });
       setIsProcessing(false);
+      setProgress(100);
     }, 2000);
   };
 
@@ -134,6 +159,7 @@ const ToolPage = () => {
   const removeFile = () => {
     setFile(null);
     setProcessedFile(null);
+    setProgress(0);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -158,6 +184,14 @@ const ToolPage = () => {
           <div className="tool-info">
             <h1>{config.title}</h1>
             <p>{config.description}</p>
+            <div className="tool-features">
+              {config.features.map((feature, index) => (
+                <span key={index} className="feature-tag">
+                  <CheckCircle size={16} />
+                  {feature}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -171,7 +205,9 @@ const ToolPage = () => {
               onDragOver={handleDrag}
               onDrop={handleDrop}
             >
-              <Upload size={48} />
+              <div className="upload-icon">
+                <Upload size={48} />
+              </div>
               <h3>Drop your file here or click to browse</h3>
               <p>Maximum file size: {config.maxSize / (1024 * 1024)}MB</p>
               <p>Supported formats: {config.formats.join(', ')}</p>
@@ -192,7 +228,9 @@ const ToolPage = () => {
           ) : (
             <div className="file-preview">
               <div className="file-info">
-                <File size={32} />
+                <div className="file-icon">
+                  <File size={32} />
+                </div>
                 <div className="file-details">
                   <h3>{file.name}</h3>
                   <p>{formatFileSize(file.size)}</p>
@@ -203,13 +241,31 @@ const ToolPage = () => {
               </div>
               
               {!processedFile && (
-                <button 
-                  className="btn btn-primary btn-large"
-                  onClick={processFile}
-                  disabled={isProcessing}
-                >
-                  {isProcessing ? 'Processing...' : 'Process File'}
-                </button>
+                <div className="process-section">
+                  <button 
+                    className="btn btn-primary btn-large"
+                    onClick={processFile}
+                    disabled={isProcessing}
+                  >
+                    {isProcessing ? (
+                      <>
+                        <div className="spinner"></div>
+                        Processing... {progress}%
+                      </>
+                    ) : (
+                      <>
+                        <Zap size={20} />
+                        Process File
+                      </>
+                    )}
+                  </button>
+                  
+                  {isProcessing && (
+                    <div className="progress-bar">
+                      <div className="progress-fill" style={{ width: `${progress}%` }}></div>
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           )}
@@ -218,17 +274,33 @@ const ToolPage = () => {
         {/* Results */}
         {processedFile && (
           <div className="results-section">
-            <h2>Results</h2>
+            <div className="results-header">
+              <h2>Results</h2>
+              <div className="success-badge">
+                <CheckCircle size={20} />
+                Processing Complete
+              </div>
+            </div>
+            
             <div className="results-grid">
               <div className="result-card">
+                <div className="result-icon">
+                  <File size={24} />
+                </div>
                 <h3>Original Size</h3>
                 <div className="result-value">{formatFileSize(processedFile.originalSize)}</div>
               </div>
               <div className="result-card">
-                <h3>Compressed Size</h3>
+                <div className="result-icon">
+                  <Zap size={24} />
+                </div>
+                <h3>Processed Size</h3>
                 <div className="result-value">{formatFileSize(processedFile.size)}</div>
               </div>
               <div className="result-card">
+                <div className="result-icon">
+                  <Shield size={24} />
+                </div>
                 <h3>Space Saved</h3>
                 <div className="result-value">{processedFile.compressionRatio}%</div>
               </div>
@@ -241,34 +313,61 @@ const ToolPage = () => {
               </button>
             </div>
             
-            <div className="expiry-notice">
-              <p>⚠️ Files are automatically deleted after 24 hours for security</p>
+            <div className="info-cards">
+              <div className="info-card">
+                <Clock size={20} />
+                <div>
+                  <h4>Auto Delete</h4>
+                  <p>Files are automatically deleted after 24 hours for security</p>
+                </div>
+              </div>
+              <div className="info-card">
+                <Shield size={20} />
+                <div>
+                  <h4>Secure Processing</h4>
+                  <p>Your files are encrypted and never stored permanently</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {/* Settings */}
         <div className="settings-section">
-          <h2>Advanced Settings</h2>
-          <div className="settings-grid">
-            <div className="setting-item">
-              <label>Quality</label>
-              <select defaultValue="high">
-                <option value="low">Low (Smaller file)</option>
-                <option value="medium">Medium (Balanced)</option>
-                <option value="high">High (Better quality)</option>
-              </select>
-            </div>
-            <div className="setting-item">
-              <label>Format</label>
-              <select defaultValue="auto">
-                <option value="auto">Auto (Best)</option>
-                {config.formats.map(format => (
-                  <option key={format} value={format.toLowerCase()}>{format}</option>
-                ))}
-              </select>
-            </div>
+          <div className="settings-header">
+            <h2>Advanced Settings</h2>
+            <button 
+              className="settings-toggle"
+              onClick={() => setShowSettings(!showSettings)}
+            >
+              <Settings size={20} />
+              {showSettings ? 'Hide' : 'Show'} Settings
+            </button>
           </div>
+          
+          {showSettings && (
+            <div className="settings-content">
+              <div className="settings-grid">
+                <div className="setting-item">
+                  <label>Quality</label>
+                  <select value={quality} onChange={(e) => setQuality(e.target.value)}>
+                    <option value="low">Low (Smaller file)</option>
+                    <option value="medium">Medium (Balanced)</option>
+                    <option value="high">High (Better quality)</option>
+                  </select>
+                </div>
+                <div className="setting-item">
+                  <label>Format</label>
+                  <select value={format} onChange={(e) => setFormat(e.target.value)}>
+                    <option value="auto">Auto (Best)</option>
+                    {config.formats.map(format => (
+                      <option key={format} value={format.toLowerCase()}>{format}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
