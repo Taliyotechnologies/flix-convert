@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Zap, Shield, Globe, Award, FileText, Download } from 'lucide-react';
+import { Zap, Shield, Globe, Award, FileText, Download, ArrowRight, CheckCircle, Star } from 'lucide-react';
 import './Home.css';
 
 const Home = () => {
@@ -43,17 +43,36 @@ const Home = () => {
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
+              <div className="hero-badge">
+                <Star size={16} />
+                <span>Trusted by 1M+ users worldwide</span>
+              </div>
               <h1 className="hero-title">
-                Compress & Convert Files Instantly — Free Up to 10MB
+                Compress & Convert Files
+                <span className="hero-highlight"> Instantly</span>
               </h1>
               <p className="hero-subtitle">
-                Fast, secure & cross-platform compression and conversion tools. 
-                Reduce file sizes without losing quality, convert between formats, 
-                and optimize your digital content.
+                Professional-grade compression and conversion tools. Reduce file sizes by up to 80% 
+                without losing quality. Support for 50+ formats, secure processing, and instant downloads.
               </p>
+              <div className="hero-features">
+                <div className="hero-feature">
+                  <CheckCircle size={20} />
+                  <span>Free up to 10MB files</span>
+                </div>
+                <div className="hero-feature">
+                  <CheckCircle size={20} />
+                  <span>50+ file formats supported</span>
+                </div>
+                <div className="hero-feature">
+                  <CheckCircle size={20} />
+                  <span>Zero quality loss</span>
+                </div>
+              </div>
               <div className="hero-buttons">
                 <Link to="/tools" className="btn btn-primary btn-large">
-                  Try Tools
+                  Start Converting
+                  <ArrowRight size={20} />
                 </Link>
                 <Link to="/learn-more" className="btn btn-secondary btn-large">
                   Learn More
@@ -61,18 +80,29 @@ const Home = () => {
               </div>
             </div>
             <div className="hero-illustration">
-              <div className="file-stack">
-                <div className="file file-1">
-                  <div className="file-icon">📄</div>
-                  <div className="file-label">Original</div>
+              <div className="hero-visual">
+                <div className="file-stack">
+                  <div className="file file-1">
+                    <div className="file-icon">📄</div>
+                    <div className="file-label">Original</div>
+                    <div className="file-size">2.5MB</div>
+                  </div>
+                  <div className="file file-2">
+                    <div className="file-icon">⚡</div>
+                    <div className="file-label">Processing</div>
+                    <div className="file-size">Compressing...</div>
+                  </div>
+                  <div className="file file-3">
+                    <div className="file-icon">📦</div>
+                    <div className="file-label">Compressed</div>
+                    <div className="file-size">0.8MB</div>
+                  </div>
                 </div>
-                <div className="file file-2">
-                  <div className="file-icon">⚡</div>
-                  <div className="file-label">Processing</div>
-                </div>
-                <div className="file file-3">
-                  <div className="file-icon">📦</div>
-                  <div className="file-label">Compressed</div>
+                <div className="compression-indicator">
+                  <div className="compression-bar">
+                    <div className="compression-fill" style={{ width: '68%' }}></div>
+                  </div>
+                  <span className="compression-text">68% smaller</span>
                 </div>
               </div>
             </div>

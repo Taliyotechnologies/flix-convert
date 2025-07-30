@@ -1,7 +1,21 @@
 /* Hero Section */
 .hero {
-  padding: 4rem 0;
+  padding: 6rem 0;
   background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(66, 133, 244, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(66, 133, 244, 0.05) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .hero-content {
@@ -9,14 +23,38 @@
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.hero-badge svg {
+  color: var(--primary-color);
 }
 
 .hero-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+  color: var(--text-primary);
+}
+
+.hero-highlight {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -27,6 +65,27 @@
   color: var(--text-secondary);
   margin-bottom: 2rem;
   line-height: 1.6;
+  max-width: 600px;
+}
+
+.hero-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.hero-feature svg {
+  color: var(--primary-color);
+  flex-shrink: 0;
 }
 
 .hero-buttons {
@@ -35,27 +94,46 @@
   flex-wrap: wrap;
 }
 
+.hero-buttons .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .hero-illustration {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+.hero-visual {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
 .file-stack {
   position: relative;
-  width: 300px;
-  height: 200px;
+  width: 100%;
+  height: 280px;
+  margin-bottom: 2rem;
 }
 
 .file {
   position: absolute;
   background: var(--bg-secondary);
   border: 2px solid var(--border-color);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
   transition: all 0.3s ease;
   box-shadow: var(--shadow);
+  width: 140px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .file:hover {
@@ -67,20 +145,27 @@
   top: 0;
   left: 0;
   transform: rotate(-5deg);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-hover) 100%);
 }
 
 .file-2 {
-  top: 20px;
-  left: 20px;
+  top: 40px;
+  left: 40px;
   transform: rotate(2deg);
   z-index: 1;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  color: white;
+  border-color: var(--primary-color);
 }
 
 .file-3 {
-  top: 40px;
-  left: 40px;
+  top: 80px;
+  left: 80px;
   transform: rotate(-3deg);
   z-index: 2;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-color: #10b981;
 }
 
 .file-icon {
@@ -89,8 +174,41 @@
 }
 
 .file-label {
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.file-size {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.compression-indicator {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.compression-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-hover);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.compression-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.compression-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary-color);
 }
 
 /* Features Section */
@@ -234,30 +352,60 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 3rem 0;
+    padding: 4rem 0;
   }
   
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
     text-align: center;
   }
   
+  .hero-badge {
+    margin: 0 auto 1.5rem;
+  }
+  
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
   .hero-subtitle {
     font-size: 1.125rem;
+    margin: 0 auto 2rem;
+  }
+  
+  .hero-features {
+    align-items: center;
+    margin-bottom: 2rem;
   }
   
   .hero-buttons {
     justify-content: center;
   }
   
+  .hero-visual {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
   .file-stack {
-    width: 250px;
-    height: 150px;
+    height: 220px;
+  }
+  
+  .file {
+    width: 120px;
+    height: 100px;
+    padding: 1rem;
+  }
+  
+  .file-2 {
+    top: 30px;
+    left: 30px;
+  }
+  
+  .file-3 {
+    top: 60px;
+    left: 60px;
   }
   
   .features {
@@ -279,11 +427,19 @@
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
   
   .hero-subtitle {
     font-size: 1rem;
+  }
+  
+  .hero-features {
+    gap: 0.5rem;
+  }
+  
+  .hero-feature {
+    font-size: 0.875rem;
   }
   
   .hero-buttons {
@@ -291,17 +447,40 @@
     align-items: center;
   }
   
+  .hero-visual {
+    max-width: 250px;
+  }
+  
   .file-stack {
-    width: 200px;
-    height: 120px;
+    height: 180px;
   }
   
   .file {
-    padding: 1rem;
+    width: 100px;
+    height: 80px;
+    padding: 0.75rem;
+  }
+  
+  .file-2 {
+    top: 20px;
+    left: 20px;
+  }
+  
+  .file-3 {
+    top: 40px;
+    left: 40px;
   }
   
   .file-icon {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+  
+  .file-label {
+    font-size: 0.75rem;
+  }
+  
+  .file-size {
+    font-size: 0.625rem;
   }
   
   .stats-grid {
