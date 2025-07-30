@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -22,14 +22,14 @@
 }
 
 .auth-container {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-primary);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 2.5rem;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-hover);
+  border: 1px solid var(--border-color);
   position: relative;
   z-index: 1;
   animation: slideUp 0.6s ease-out;
@@ -56,14 +56,14 @@
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .auth-header p {
-  color: #6b7280;
+  color: var(--text-secondary);
   font-size: 1.1rem;
   margin: 0;
 }
@@ -125,7 +125,7 @@
 
 .form-group label {
   font-weight: 600;
-  color: #374151;
+  color: var(--text-primary);
   font-size: 0.95rem;
   margin-left: 0.25rem;
 }
@@ -144,32 +144,32 @@
 .input-wrapper svg {
   position: absolute;
   left: 1rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
   z-index: 1;
   transition: color 0.3s ease;
 }
 
 .input-wrapper:focus-within svg {
-  color: #667eea;
+  color: var(--primary-color);
 }
 
 .input-wrapper input {
   width: 100%;
   padding: 1rem 1rem 1rem 3rem;
-  border: 2px solid #e5e7eb;
+  border: 2px solid var(--border-color);
   border-radius: 12px;
-  background: #ffffff;
-  color: #374151;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   font-size: 1rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow);
 }
 
 .input-wrapper input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
 }
 
 .input-wrapper input.error {
@@ -188,7 +188,7 @@
 }
 
 .input-wrapper input::placeholder {
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-weight: 400;
 }
 
@@ -197,7 +197,7 @@
   right: 1rem;
   background: none;
   border: none;
-  color: #9ca3af;
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 8px;
@@ -208,8 +208,8 @@
 }
 
 .password-toggle:hover:not(:disabled) {
-  color: #667eea;
-  background: rgba(102, 126, 234, 0.1);
+  color: var(--primary-color);
+  background: var(--bg-hover);
 }
 
 .password-toggle:disabled {
@@ -236,6 +236,7 @@
   flex: 1;
   border-radius: 2px;
   transition: all 0.3s ease;
+  background: var(--border-color);
 }
 
 .strength-segment.active {
@@ -271,13 +272,13 @@
   align-items: center;
   gap: 0.75rem;
   cursor: pointer;
-  color: #6b7280;
+  color: var(--text-secondary);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .checkbox-wrapper:hover {
-  color: #374151;
+  color: var(--text-primary);
 }
 
 .checkbox-wrapper input[type="checkbox"] {
@@ -287,10 +288,10 @@
 .checkmark {
   width: 18px;
   height: 18px;
-  border: 2px solid #d1d5db;
+  border: 2px solid var(--border-color);
   border-radius: 4px;
   position: relative;
-  background: #ffffff;
+  background: var(--bg-secondary);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -298,30 +299,30 @@
 }
 
 .checkbox-wrapper:hover .checkmark {
-  border-color: #667eea;
+  border-color: var(--primary-color);
 }
 
 .checkbox-wrapper input[type="checkbox"]:checked + .checkmark {
-  background: #667eea;
-  border-color: #667eea;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .checkbox-wrapper input[type="checkbox"]:checked + .checkmark::after {
   content: '✓';
-  color: #ffffff;
+  color: white;
   font-size: 12px;
   font-weight: bold;
 }
 
 .forgot-link {
-  color: #667eea;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .forgot-link:hover {
-  color: #5a67d8;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -341,15 +342,15 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  color: white;
   padding: 1rem 2rem;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  box-shadow: var(--shadow);
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: var(--shadow-hover);
 }
 
 .btn-primary:active {
@@ -372,24 +373,24 @@
   text-align: center;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border-color);
 }
 
 .auth-footer p {
-  color: #6b7280;
+  color: var(--text-secondary);
   margin: 0;
   font-size: 1rem;
 }
 
 .auth-link {
-  color: #667eea;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .auth-link:hover {
-  color: #5a67d8;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -475,123 +476,31 @@
   }
 }
 
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .auth-container {
-    background: rgba(17, 24, 39, 0.95);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .auth-header h1 {
-    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  .auth-header p {
-    color: #9ca3af;
-  }
-  
-  .form-group label {
-    color: #e5e7eb;
-  }
-  
-  .input-wrapper input {
-    background: #1f2937;
-    border-color: #374151;
-    color: #e5e7eb;
-  }
-  
-  .input-wrapper input:focus {
-    border-color: #8b5cf6;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-  }
-  
-  .input-wrapper input.error {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-  }
-  
-  .input-wrapper svg {
-    color: #6b7280;
-  }
-  
-  .input-wrapper:focus-within svg {
-    color: #8b5cf6;
-  }
-  
-  .password-toggle {
-    color: #6b7280;
-  }
-  
-  .password-toggle:hover:not(:disabled) {
-    color: #8b5cf6;
-    background: rgba(139, 92, 246, 0.1);
-  }
-  
-  .checkbox-wrapper {
-    color: #9ca3af;
-  }
-  
-  .checkbox-wrapper:hover {
-    color: #e5e7eb;
-  }
-  
-  .checkmark {
-    background: #1f2937;
-    border-color: #4b5563;
-  }
-  
-  .checkbox-wrapper:hover .checkmark {
-    border-color: #8b5cf6;
-  }
-  
-  .checkbox-wrapper input[type="checkbox"]:checked + .checkmark {
-    background: #8b5cf6;
-    border-color: #8b5cf6;
-  }
-  
-  .forgot-link {
-    color: #8b5cf6;
-  }
-  
-  .forgot-link:hover {
-    color: #a855f7;
-  }
-  
-  .btn-primary {
-    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-  }
-  
-  .btn-primary:hover:not(:disabled) {
-    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-  }
-  
-  .auth-footer {
-    border-top-color: #374151;
-  }
-  
-  .auth-footer p {
-    color: #9ca3af;
-  }
-  
-  .auth-link {
-    color: #8b5cf6;
-  }
-  
-  .auth-link:hover {
-    color: #a855f7;
-  }
-  
-  .error-message {
-    background: rgba(239, 68, 68, 0.1);
-    border-color: rgba(239, 68, 68, 0.3);
-    color: #fca5a5;
-  }
-  
-  .error-text {
-    color: #fca5a5;
-  }
+/* Dark theme specific overrides */
+body.dark .auth-page {
+  background: linear-gradient(135deg, #8ab4f8 0%, #aecbfa 100%);
+}
+
+body.dark .error-message {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+body.dark .error-text {
+  color: #fca5a5;
+}
+
+body.dark .input-wrapper input:focus {
+  box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.1);
+}
+
+body.dark .input-wrapper input.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+body.dark .input-wrapper input.error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 } 
