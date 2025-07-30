@@ -7,13 +7,15 @@
 }
 
 .dashboard-header h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 4vw, 2.5rem);
   margin-bottom: 0.5rem;
+  color: var(--text-primary);
 }
 
 .dashboard-header p {
   color: var(--text-secondary);
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  line-height: 1.6;
 }
 
 /* Stats Section */
@@ -35,11 +37,13 @@
   align-items: center;
   gap: 1.5rem;
   box-shadow: var(--shadow);
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
+  border: 1px solid var(--border-color);
 }
 
 .stat-card:hover {
   transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
 .stat-icon {
@@ -51,6 +55,7 @@
   height: 60px;
   background: var(--bg-primary);
   border-radius: 12px;
+  border: 1px solid var(--border-color);
 }
 
 .stat-content {
@@ -58,7 +63,7 @@
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.25rem;
@@ -75,15 +80,18 @@
   background: var(--bg-secondary);
   border-radius: 12px;
   padding: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
 }
 
 .chart-section h2 {
   margin-bottom: 2rem;
+  color: var(--text-primary);
 }
 
 .chart-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2rem;
   height: 200px;
   align-items: end;
@@ -98,7 +106,7 @@
 
 .chart-bar {
   width: 100%;
-  background: linear-gradient(to top, var(--primary-color), var(--primary-hover));
+  background: var(--primary-color);
   border-radius: 8px 8px 0 0;
   position: relative;
   min-height: 20px;
@@ -107,6 +115,14 @@
   justify-content: flex-end;
   align-items: center;
   padding: 0.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
+}
+
+.chart-bar:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
 }
 
 .chart-label {
@@ -127,6 +143,8 @@
   background: var(--bg-secondary);
   border-radius: 12px;
   padding: 2rem;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
 }
 
 .logs-header {
@@ -140,6 +158,7 @@
 
 .logs-header h2 {
   margin: 0;
+  color: var(--text-primary);
 }
 
 .logs-controls {
@@ -168,6 +187,7 @@
   color: var(--text-primary);
   font-size: 0.875rem;
   min-width: 200px;
+  transition: border-color 0.2s ease;
 }
 
 .search-box input:focus {
@@ -182,6 +202,7 @@
   background: var(--bg-primary);
   color: var(--text-primary);
   font-size: 0.875rem;
+  transition: border-color 0.2s ease;
 }
 
 .filter-select:focus {
@@ -194,6 +215,7 @@
   overflow-x: auto;
   border-radius: 8px;
   border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
 }
 
 .logs-table {
@@ -252,7 +274,7 @@
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 4px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .action-btn:hover {
@@ -273,6 +295,7 @@
   padding: 1rem;
   background: var(--bg-hover);
   border-radius: 8px;
+  border: 1px solid var(--border-color);
 }
 
 .bulk-actions span {
@@ -306,7 +329,7 @@
 
 @media (max-width: 768px) {
   .dashboard-header h1 {
-    font-size: 2rem;
+    font-size: clamp(1.75rem, 4vw, 2rem);
   }
   
   .stats-grid {

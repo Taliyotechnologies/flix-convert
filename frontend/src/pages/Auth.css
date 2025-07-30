@@ -5,30 +5,18 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: var(--bg-primary);
   position: relative;
   overflow: hidden;
 }
 
-.auth-page::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  opacity: 0.3;
-}
-
 .auth-container {
-  background: var(--bg-primary);
-  backdrop-filter: blur(10px);
+  background: var(--bg-secondary);
   border-radius: 20px;
   padding: 2.5rem;
   width: 100%;
   max-width: 420px;
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--shadow-lg);
   border: 1px solid var(--border-color);
   position: relative;
   z-index: 1;
@@ -53,19 +41,17 @@
 }
 
 .auth-header h1 {
-  font-size: 2.25rem;
+  font-size: clamp(2rem, 4vw, 2.25rem);
   font-weight: 700;
   margin-bottom: 0.75rem;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-color);
 }
 
 .auth-header p {
   color: var(--text-secondary);
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
   margin: 0;
+  line-height: 1.6;
 }
 
 /* Error Message Styles */
@@ -134,7 +120,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .input-wrapper:focus-within {
@@ -146,7 +132,7 @@
   left: 1rem;
   color: var(--text-secondary);
   z-index: 2;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
   pointer-events: none;
 }
 
@@ -159,11 +145,11 @@
   padding: 1rem 1rem 1rem 3rem;
   border: 2px solid var(--border-color);
   border-radius: 12px;
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   color: var(--text-primary);
   font-size: 1rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   box-shadow: var(--shadow);
   outline: none;
   -webkit-appearance: none;
@@ -173,7 +159,7 @@
 
 .input-wrapper input:focus {
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .input-wrapper input.error {
@@ -207,7 +193,7 @@
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -242,7 +228,7 @@
   height: 4px;
   flex: 1;
   border-radius: 2px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   background: var(--border-color);
 }
 
@@ -281,7 +267,7 @@
   cursor: pointer;
   color: var(--text-secondary);
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 .checkbox-wrapper:hover {
@@ -299,7 +285,7 @@
   border-radius: 4px;
   position: relative;
   background: var(--bg-secondary);
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -326,7 +312,7 @@
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .forgot-link:hover {
@@ -340,7 +326,7 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -350,13 +336,14 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: var(--primary-color);
   color: white;
   padding: 1rem 2rem;
   box-shadow: var(--shadow);
 }
 
 .btn-primary:hover:not(:disabled) {
+  background: var(--primary-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
 }
@@ -394,7 +381,7 @@
   color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .auth-link:hover {
@@ -432,11 +419,11 @@
   }
   
   .auth-header h1 {
-    font-size: 1.875rem;
+    font-size: clamp(1.75rem, 4vw, 1.875rem);
   }
   
   .auth-header p {
-    font-size: 1rem;
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
   }
   
   .form-options {
@@ -472,7 +459,7 @@
   }
   
   .auth-header h1 {
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
   }
   
   .form-group {
@@ -485,10 +472,6 @@
 }
 
 /* Dark theme specific overrides */
-body.dark .auth-page {
-  background: linear-gradient(135deg, #8ab4f8 0%, #aecbfa 100%);
-}
-
 body.dark .error-message {
   background: rgba(239, 68, 68, 0.1);
   border-color: rgba(239, 68, 68, 0.3);
@@ -500,7 +483,7 @@ body.dark .error-text {
 }
 
 body.dark .input-wrapper input:focus {
-  box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.1);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
 }
 
 body.dark .input-wrapper input.error {
