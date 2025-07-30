@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Mail, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import './Auth.css';
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,124 +16,64 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
-
-  const validateForm = () => {
-    const newErrors = {};
-
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
-    }
-
-    // Password validation
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
-    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
-      newErrors.password = 'Password must contain uppercase, lowercase, and number';
-    }
-
-    // Confirm password validation
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [e.target.name]: e.target.value
     });
-    
     // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: ''
-      });
-    }
+    if (error) setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!validateForm()) {
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters long');
       return;
     }
     
     setIsLoading(true);
+    setError('');
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setSuccess(true);
-      setTimeout(() => {
-        navigate('/login');
-      }, 1500);
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Use the login function from AuthContext
+        login(data.data.user, data.data.token);
+        
+        // Redirect to dashboard
+        navigate('/dashboard');
+      } else {
+        setError(data.message || 'Registration failed');
+      }
     } catch (error) {
-      setErrors({ general: 'Something went wrong. Please try again.' });
+      console.error('Registration error:', error);
+      setError('Network error. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
-
-  const getPasswordStrength = (password) => {
-    if (!password) return { strength: 0, color: '#e5e7eb', text: '' };
-    
-    let strength = 0;
-    if (password.length >= 8) strength++;
-    if (/[a-z]/.test(password)) strength++;
-    if (/[A-Z]/.test(password)) strength++;
-    if (/\d/.test(password)) strength++;
-    if (/[^A-Za-z0-9]/.test(password)) strength++;
-    
-    const colors = ['#ef4444', '#f97316', '#eab308', '#22c55e', '#16a34a'];
-    const texts = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
-    
-    return {
-      strength: Math.min(strength, 5),
-      color: colors[strength - 1] || '#e5e7eb',
-      text: texts[strength - 1] || ''
-    };
-  };
-
-  const passwordStrength = getPasswordStrength(formData.password);
-
-  if (success) {
-    return (
-      <div className="auth-page">
-        <div className="container">
-          <div className="auth-container">
-            <div className="auth-header">
-              <CheckCircle size={64} color="#22c55e" />
-              <h1>Account Created!</h1>
-              <p>Your account has been successfully created. Redirecting to login...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="auth-page">
@@ -142,10 +84,9 @@ const Signup = () => {
             <p>Join ConvertFlix and start converting files</p>
           </div>
 
-          {errors.general && (
+          {error && (
             <div className="error-message">
-              <AlertCircle size={20} />
-              <span>{errors.general}</span>
+              {error}
             </div>
           )}
 
@@ -161,11 +102,10 @@ const Signup = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter your full name"
-                  className={errors.name ? 'error' : ''}
                   required
+                  disabled={isLoading}
                 />
               </div>
-              {errors.name && <span className="error-text">{errors.name}</span>}
             </div>
 
             <div className="form-group">
@@ -179,11 +119,10 @@ const Signup = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
-                  className={errors.email ? 'error' : ''}
                   required
+                  disabled={isLoading}
                 />
               </div>
-              {errors.email && <span className="error-text">{errors.email}</span>}
             </div>
 
             <div className="form-group">
@@ -197,38 +136,18 @@ const Signup = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Create a password"
-                  className={errors.password ? 'error' : ''}
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
+                  disabled={isLoading}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              {formData.password && (
-                <div className="password-strength">
-                  <div className="strength-bar">
-                    {[1, 2, 3, 4, 5].map((level) => (
-                      <div
-                        key={level}
-                        className={`strength-segment ${
-                          level <= passwordStrength.strength ? 'active' : ''
-                        }`}
-                        style={{
-                          backgroundColor: level <= passwordStrength.strength ? passwordStrength.color : '#e5e7eb'
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <span className="strength-text" style={{ color: passwordStrength.color }}>
-                    {passwordStrength.text}
-                  </span>
-                </div>
-              )}
-              {errors.password && <span className="error-text">{errors.password}</span>}
             </div>
 
             <div className="form-group">
@@ -242,18 +161,18 @@ const Signup = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm your password"
-                  className={errors.confirmPassword ? 'error' : ''}
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   className="password-toggle"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  disabled={isLoading}
                 >
                   {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
-              {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
             </div>
 
             <div className="form-options">

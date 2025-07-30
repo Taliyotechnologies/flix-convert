@@ -2,19 +2,18 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sun, Moon, User, LogOut, Settings } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
+  const { user, isAuthenticated, logout } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
   const location = useLocation();
-  
-  // Mock authentication state - replace with real auth
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+    logout();
     setIsDropdownOpen(false);
   };
 

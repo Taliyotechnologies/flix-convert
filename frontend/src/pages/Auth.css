@@ -33,6 +33,7 @@
   position: relative;
   z-index: 1;
   animation: slideUp 0.6s ease-out;
+  margin: 0 auto;
 }
 
 @keyframes slideUp {
@@ -181,6 +182,11 @@
   box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
 }
 
+.input-wrapper input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .input-wrapper input::placeholder {
   color: #9ca3af;
   font-weight: 400;
@@ -201,9 +207,14 @@
   justify-content: center;
 }
 
-.password-toggle:hover {
+.password-toggle:hover:not(:disabled) {
   color: #667eea;
   background: rgba(102, 126, 234, 0.1);
+}
+
+.password-toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Password Strength Indicator */
@@ -336,7 +347,7 @@
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
@@ -514,7 +525,7 @@
     color: #6b7280;
   }
   
-  .password-toggle:hover {
+  .password-toggle:hover:not(:disabled) {
     color: #8b5cf6;
     background: rgba(139, 92, 246, 0.1);
   }
@@ -554,7 +565,7 @@
     box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
   }
   
-  .btn-primary:hover {
+  .btn-primary:hover:not(:disabled) {
     box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
   }
   

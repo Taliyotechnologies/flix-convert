@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import './Auth.css';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -58,19 +60,34 @@ const Login = () => {
     }
     
     setIsLoading(true);
+    setErrors({});
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Simulate successful login
-      if (rememberMe) {
-        localStorage.setItem('rememberMe', 'true');
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Use the login function from AuthContext
+        login(data.data.user, data.data.token);
+        
+        if (rememberMe) {
+          localStorage.setItem('rememberMe', 'true');
+        }
+        
+        navigate('/dashboard');
+      } else {
+        setErrors({ general: data.message || 'Invalid email or password' });
       }
-      
-      navigate('/dashboard');
     } catch (error) {
-      setErrors({ general: 'Invalid email or password. Please try again.' });
+      console.error('Login error:', error);
+      setErrors({ general: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);
     }
@@ -106,6 +123,7 @@ const Login = () => {
                   placeholder="Enter your email"
                   className={errors.email ? 'error' : ''}
                   required
+                  disabled={isLoading}
                 />
               </div>
               {errors.email && <span className="error-text">{errors.email}</span>}
@@ -124,11 +142,13 @@ const Login = () => {
                   placeholder="Enter your password"
                   className={errors.password ? 'error' : ''}
                   required
+                  disabled={isLoading}
                 />
                 <button
                   type="button"
                   className="password-toggle"
                   onClick={() => setShowPassword(!showPassword)}
+                  disabled={isLoading}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
