@@ -41,24 +41,24 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-color to-primary-hover text-white">
+      <section className="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-primary-color to-primary-hover text-white">
         <div className="container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-4 md:space-y-6 text-center lg:text-left">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                 Compress & Convert Any File — Instantly. Free Up to 10MB.
               </h1>
-              <p className="text-xl text-blue-100 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-blue-100 leading-relaxed">
                 Transform your files with our powerful compression and conversion tools. 
                 No registration required, no quality loss, and files are automatically deleted for your privacy.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <Link
                   to="/tools"
-                  className="btn btn-lg bg-white text-primary-color hover:bg-gray-100 inline-flex items-center"
+                  className="btn btn-lg bg-white text-primary-color hover:bg-gray-100 inline-flex items-center justify-center"
                 >
                   Try Tools Now
-                  <FiArrowRight size={20} />
+                  <FiArrowRight size={18} />
                 </Link>
                 <Link
                   to="/company"
@@ -70,28 +70,28 @@ const Home = () => {
             </div>
             <div className="hidden lg:block">
               <div className="relative">
-                <div className="w-full h-96 bg-white bg-opacity-10 rounded-2xl backdrop-blur-sm border border-white border-opacity-20 flex items-center justify-center">
+                <div className="w-full h-80 lg:h-96 bg-white bg-opacity-10 rounded-2xl backdrop-blur-sm border border-white border-opacity-20 flex items-center justify-center">
                   <div className="text-center space-y-4">
-                    <div className="w-24 h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto">
-                      <FiFileText size={40} className="text-white" />
+                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto">
+                      <FiFileText size={32} className="text-white lg:w-10 lg:h-10" />
                     </div>
                     <div className="space-y-2">
-                      <div className="w-32 h-4 bg-white bg-opacity-20 rounded mx-auto"></div>
-                      <div className="w-24 h-4 bg-white bg-opacity-20 rounded mx-auto"></div>
+                      <div className="w-28 lg:w-32 h-3 lg:h-4 bg-white bg-opacity-20 rounded mx-auto"></div>
+                      <div className="w-20 lg:w-24 h-3 lg:h-4 bg-white bg-opacity-20 rounded mx-auto"></div>
                     </div>
                     <div className="flex justify-center space-x-2">
-                      <div className="w-3 h-3 bg-white bg-opacity-40 rounded-full"></div>
-                      <div className="w-3 h-3 bg-white bg-opacity-20 rounded-full"></div>
-                      <div className="w-3 h-3 bg-white bg-opacity-20 rounded-full"></div>
+                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white bg-opacity-40 rounded-full"></div>
+                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white bg-opacity-20 rounded-full"></div>
+                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white bg-opacity-20 rounded-full"></div>
                     </div>
                   </div>
                 </div>
                 {/* Floating elements */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-accent-color rounded-full flex items-center justify-center">
-                  <FiZap size={24} className="text-white" />
+                <div className="absolute -top-2 -right-2 lg:-top-4 lg:-right-4 w-12 h-12 lg:w-16 lg:h-16 bg-accent-color rounded-full flex items-center justify-center">
+                  <FiZap size={18} className="text-white lg:w-6 lg:h-6" />
                 </div>
-                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-success-color rounded-full flex items-center justify-center">
-                  <FiCheckCircle size={20} className="text-white" />
+                <div className="absolute -bottom-2 -left-2 lg:-bottom-4 lg:-left-4 w-10 h-10 lg:w-12 lg:h-12 bg-success-color rounded-full flex items-center justify-center">
+                  <FiCheckCircle size={16} className="text-white lg:w-5 lg:h-5" />
                 </div>
               </div>
             </div>
@@ -100,27 +100,27 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-bg-secondary">
+      <section className="py-12 md:py-16 lg:py-20 bg-bg-secondary">
         <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-4">
               Why Choose ConvertFlix?
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-text-secondary max-w-2xl mx-auto px-4">
               Our platform combines cutting-edge technology with user-friendly design to deliver the best file processing experience.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {features.map((feature, index) => (
               <div key={index} className="card text-center group">
-                <div className="w-16 h-16 bg-primary-color bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-primary-color group-hover:text-white transition-colors">
+                <div className="w-14 h-14 md:w-16 md:h-16 bg-primary-color bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6 group-hover:bg-primary-color group-hover:text-white transition-colors">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-text-primary mb-3">
+                <h3 className="text-lg md:text-xl font-semibold text-text-primary mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-text-secondary leading-relaxed">
+                <p className="text-sm md:text-base text-text-secondary leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -130,23 +130,23 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-bg-primary">
+      <section className="py-12 md:py-16 lg:py-20 bg-bg-primary">
         <div className="container">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
+          <div className="text-center max-w-3xl mx-auto px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text-primary mb-4 md:mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-lg text-text-secondary mb-8">
+            <p className="text-base md:text-lg text-text-secondary mb-6 md:mb-8">
               Join thousands of users who trust ConvertFlix for their file compression and conversion needs. 
               Start processing your files in seconds.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link
                 to="/tools"
-                className="btn btn-lg btn-primary inline-flex items-center"
+                className="btn btn-lg btn-primary inline-flex items-center justify-center"
               >
                 Start Converting Now
-                <FiArrowRight size={20} />
+                <FiArrowRight size={18} />
               </Link>
               <Link
                 to="/signup"
@@ -160,24 +160,24 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-bg-tertiary">
+      <section className="py-12 md:py-16 bg-bg-tertiary">
         <div className="container">
-          <div className="grid md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-primary-color mb-2">10MB</div>
-              <div className="text-text-secondary">Free File Size Limit</div>
+              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">10MB</div>
+              <div className="text-sm md:text-base text-text-secondary">Free File Size Limit</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary-color mb-2">24h</div>
-              <div className="text-text-secondary">Auto-Delete Time</div>
+              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">24h</div>
+              <div className="text-sm md:text-base text-text-secondary">Auto-Delete Time</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary-color mb-2">100%</div>
-              <div className="text-text-secondary">Privacy Guaranteed</div>
+              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">100%</div>
+              <div className="text-sm md:text-base text-text-secondary">Privacy Guaranteed</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary-color mb-2">0</div>
-              <div className="text-text-secondary">Registration Required</div>
+              <div className="text-2xl md:text-3xl font-bold text-primary-color mb-2">0</div>
+              <div className="text-sm md:text-base text-text-secondary">Registration Required</div>
             </div>
           </div>
         </div>
