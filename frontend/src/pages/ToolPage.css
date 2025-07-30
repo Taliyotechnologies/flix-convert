@@ -1,9 +1,6 @@
 .tool-page {
-  padding: 2rem 1rem;
+  padding: 2rem 0;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  box-sizing: border-box;
 }
 
 .tool-header {
@@ -461,8 +458,7 @@
 
 @media (max-width: 768px) {
   .tool-page {
-    max-width: 100%;
-    padding: 1rem 0.5rem;
+    padding: 1rem 0;
   }
   
   .tool-header {
@@ -514,7 +510,7 @@
 
 @media (max-width: 480px) {
   .tool-page {
-    padding: 0.5rem;
+    padding: 0.5rem 0;
   }
   
   .tool-header {

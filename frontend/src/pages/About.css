@@ -298,6 +298,10 @@
 }
 
 @media (max-width: 768px) {
+  .about-page {
+    padding: 1rem 0;
+  }
+  
   .about-hero-content h1 {
     font-size: 2.5rem;
   }
