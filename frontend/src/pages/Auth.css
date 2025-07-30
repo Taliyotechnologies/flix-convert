@@ -145,8 +145,9 @@
   position: absolute;
   left: 1rem;
   color: var(--text-secondary);
-  z-index: 1;
+  z-index: 2;
   transition: color 0.3s ease;
+  pointer-events: none;
 }
 
 .input-wrapper:focus-within svg {
@@ -164,10 +165,13 @@
   font-weight: 500;
   transition: all 0.3s ease;
   box-shadow: var(--shadow);
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .input-wrapper input:focus {
-  outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
 }
@@ -185,11 +189,13 @@
 .input-wrapper input:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  background: var(--bg-hover);
 }
 
 .input-wrapper input::placeholder {
   color: var(--text-secondary);
   font-weight: 400;
+  opacity: 0.7;
 }
 
 .password-toggle {
@@ -205,6 +211,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 .password-toggle:hover:not(:disabled) {
@@ -296,6 +303,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .checkbox-wrapper:hover .checkmark {

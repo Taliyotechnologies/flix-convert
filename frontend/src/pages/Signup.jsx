@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { User, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import './Auth.css';
 
@@ -16,32 +16,69 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    // Password validation
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    // Confirm password validation
+    if (!formData.confirmPassword) {
+      newErrors.confirmPassword = 'Please confirm your password';
+    } else if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+    
     // Clear error when user starts typing
-    if (error) setError('');
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters long');
+    if (!validateForm()) {
       return;
     }
     
     setIsLoading(true);
-    setError('');
+    setErrors({});
     
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/register`, {
@@ -65,11 +102,11 @@ const Signup = () => {
         // Redirect to dashboard
         navigate('/dashboard');
       } else {
-        setError(data.message || 'Registration failed');
+        setErrors({ general: data.message || 'Registration failed' });
       }
     } catch (error) {
       console.error('Registration error:', error);
-      setError('Network error. Please try again.');
+      setErrors({ general: 'Network error. Please try again.' });
     } finally {
       setIsLoading(false);
     }
@@ -84,9 +121,10 @@ const Signup = () => {
             <p>Join ConvertFlix and start converting files</p>
           </div>
 
-          {error && (
+          {errors.general && (
             <div className="error-message">
-              {error}
+              <AlertCircle size={20} />
+              <span>{errors.general}</span>
             </div>
           )}
 
@@ -102,10 +140,12 @@ const Signup = () => {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Enter your full name"
+                  className={errors.name ? 'error' : ''}
                   required
                   disabled={isLoading}
                 />
               </div>
+              {errors.name && <span className="error-text">{errors.name}</span>}
             </div>
 
             <div className="form-group">
@@ -119,10 +159,12 @@ const Signup = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
+                  className={errors.email ? 'error' : ''}
                   required
                   disabled={isLoading}
                 />
               </div>
+              {errors.email && <span className="error-text">{errors.email}</span>}
             </div>
 
             <div className="form-group">
@@ -136,6 +178,7 @@ const Signup = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Create a password"
+                  className={errors.password ? 'error' : ''}
                   required
                   disabled={isLoading}
                 />
@@ -148,6 +191,7 @@ const Signup = () => {
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
+              {errors.password && <span className="error-text">{errors.password}</span>}
             </div>
 
             <div className="form-group">
@@ -161,6 +205,7 @@ const Signup = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   placeholder="Confirm your password"
+                  className={errors.confirmPassword ? 'error' : ''}
                   required
                   disabled={isLoading}
                 />
@@ -173,6 +218,7 @@ const Signup = () => {
                   {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                 </button>
               </div>
+              {errors.confirmPassword && <span className="error-text">{errors.confirmPassword}</span>}
             </div>
 
             <div className="form-options">
