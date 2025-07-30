@@ -1,10 +1,16 @@
 .tools-page {
-  padding: 2rem 0;
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .tools-header {
   text-align: center;
   margin-bottom: 4rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tools-header h1 {
@@ -21,6 +27,8 @@
 
 .tools-section {
   margin-bottom: 4rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tools-section h2 {
@@ -37,6 +45,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tool-card {
@@ -92,15 +102,19 @@
 
 .tools-features {
   margin-top: 6rem;
-  padding: 4rem 0;
+  padding: 4rem 2rem;
   background: var(--bg-secondary);
   border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .feature-item {
@@ -125,28 +139,52 @@
 
 /* Responsive Design */
 @media (max-width: 1400px) {
+  .tools-page {
+    max-width: 1000px;
+  }
+  
   .tools-grid {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 }
 
 @media (max-width: 1200px) {
+  .tools-page {
+    max-width: 900px;
+  }
+  
   .tools-grid {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
 }
 
 @media (max-width: 1024px) {
+  .tools-page {
+    max-width: 800px;
+    padding: 1.5rem 1rem;
+  }
+  
   .tools-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .tools-features {
+    padding: 3rem 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
+  .tools-page {
+    max-width: 100%;
+    padding: 1rem 0.5rem;
+  }
+  
   .tools-header h1 {
     font-size: 2.5rem;
   }
@@ -157,19 +195,29 @@
   
   .tools-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .features-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .tools-features {
     margin-top: 4rem;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
+  }
+  
+  .feature-item {
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
+  .tools-page {
+    padding: 0.5rem;
+  }
+  
   .tools-header h1 {
     font-size: 2rem;
   }
@@ -180,5 +228,21 @@
   
   .tools-section h2 {
     font-size: 1.75rem;
+  }
+  
+  .tools-grid {
+    gap: 0.75rem;
+  }
+  
+  .features-grid {
+    gap: 0.75rem;
+  }
+  
+  .tools-features {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .feature-item {
+    padding: 1rem;
   }
 } 

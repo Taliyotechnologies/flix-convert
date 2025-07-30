@@ -1,8 +1,9 @@
 .tool-page {
-  padding: 2rem 0;
+  padding: 2rem 1rem;
   width: 100%;
-  max-width: 100%;
-  margin: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .tool-header {
@@ -10,12 +11,12 @@
   align-items: center;
   gap: 2rem;
   margin-bottom: 3rem;
-  padding: 2rem 4rem;
+  padding: 2rem;
   background: var(--bg-secondary);
   border-radius: 12px;
   box-shadow: var(--shadow);
-  margin-left: 4rem;
-  margin-right: 4rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .tool-icon {
@@ -70,8 +71,8 @@
 
 .upload-section {
   margin-bottom: 3rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .upload-area {
@@ -84,7 +85,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .upload-area::before {
@@ -133,7 +134,7 @@
   padding: 2rem;
   box-shadow: var(--shadow);
   width: 100%;
-  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .file-info {
@@ -223,9 +224,7 @@
 .results-section {
   margin-bottom: 3rem;
   width: 100%;
-  max-width: 100%;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  box-sizing: border-box;
 }
 
 .results-header {
@@ -331,9 +330,7 @@
   padding: 2rem;
   box-shadow: var(--shadow);
   width: 100%;
-  max-width: 100%;
-  margin-left: 4rem;
-  margin-right: 4rem;
+  box-sizing: border-box;
 }
 
 .settings-header {
@@ -378,8 +375,10 @@
 
 .settings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .setting-item {
@@ -410,20 +409,28 @@
 
 /* Responsive Design */
 @media (max-width: 1400px) {
+  .tool-page {
+    max-width: 1000px;
+  }
+  
   .results-grid {
     grid-template-columns: repeat(3, 1fr);
   }
   
   .tool-header {
-    padding: 2.5rem;
+    padding: 2rem;
   }
   
   .upload-area {
-    padding: 4rem 3rem;
+    padding: 3rem 2rem;
   }
 }
 
 @media (max-width: 1200px) {
+  .tool-page {
+    max-width: 900px;
+  }
+  
   .results-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -434,6 +441,11 @@
 }
 
 @media (max-width: 1024px) {
+  .tool-page {
+    max-width: 800px;
+    padding: 1.5rem 1rem;
+  }
+  
   .results-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -443,30 +455,19 @@
   }
   
   .upload-area {
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 1.5rem;
+  }
+  
+  .settings-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .tool-header {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    padding: 1.5rem 2rem;
-  }
-  
-  .upload-section {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-  
-  .results-section {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
-  
-  .settings-section {
-    margin-left: 2rem;
-    margin-right: 2rem;
+  .tool-page {
+    max-width: 100%;
+    padding: 1rem 0.5rem;
   }
   
   .tool-header {
@@ -518,39 +519,27 @@
   
   .settings-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .info-cards {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
+  
+  .settings-section {
+    padding: 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
-  .tool-header {
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding: 1rem;
-  }
-  
-  .upload-section {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-  
-  .results-section {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-  
-  .settings-section {
-    margin-left: 1rem;
-    margin-right: 1rem;
+  .tool-page {
+    padding: 0.5rem;
   }
   
   .tool-header {
     padding: 1rem;
-    margin: 0;
+    margin-bottom: 2rem;
   }
   
   .tool-info h1 {
@@ -604,5 +593,18 @@
   
   .result-value {
     font-size: 1.25rem;
+  }
+  
+  .settings-section {
+    padding: 1rem;
+  }
+  
+  .settings-grid {
+    gap: 0.75rem;
+  }
+  
+  .setting-item select {
+    font-size: 0.875rem;
+    padding: 0.5rem;
   }
 } 
