@@ -10,9 +10,10 @@
 }
 
 .navbar-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -195,7 +196,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .navbar-container {
-    padding: 0 0.5rem;
+    padding: 0 1rem;
   }
   
   .navbar-center {
