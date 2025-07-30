@@ -35,19 +35,15 @@ const Navbar = () => {
           <div className="dropdown">
             <button 
               className={`nav-link dropdown-toggle ${location.pathname.startsWith('/tools') ? 'active' : ''}`}
-              onMouseEnter={() => setIsToolsDropdownOpen(true)}
-              onMouseLeave={() => setIsToolsDropdownOpen(false)}
             >
               Tools
             </button>
-            {isToolsDropdownOpen && (
-              <div className="dropdown-menu">
-                <Link to="/tools" className="dropdown-item">All Tools</Link>
-                <Link to="/tool/compress-image" className="dropdown-item">Compress Image</Link>
-                <Link to="/tool/convert-audio" className="dropdown-item">Convert Audio</Link>
-                <Link to="/tool/convert-video" className="dropdown-item">Convert Video</Link>
-              </div>
-            )}
+            <div className="dropdown-menu">
+              <Link to="/tools" className="dropdown-item">All Tools</Link>
+              <Link to="/tool/compress-image" className="dropdown-item">Compress Image</Link>
+              <Link to="/tool/convert-audio" className="dropdown-item">Convert Audio</Link>
+              <Link to="/tool/convert-video" className="dropdown-item">Convert Video</Link>
+            </div>
           </div>
           
           <Link to="/company" className="nav-link">
@@ -69,25 +65,20 @@ const Navbar = () => {
               <Link to="/signup" className="btn btn-primary">Sign Up</Link>
             </div>
           ) : (
-            <div className="user-menu">
-              <button 
-                className="user-avatar"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              >
+            <div className="user-menu dropdown">
+              <button className="user-avatar">
                 <User size={20} />
               </button>
-              {isDropdownOpen && (
-                <div className="user-dropdown">
-                  <Link to="/dashboard" className="dropdown-item">
-                    <Settings size={16} />
-                    Dashboard
-                  </Link>
-                  <button onClick={handleLogout} className="dropdown-item">
-                    <LogOut size={16} />
-                    Logout
-                  </button>
-                </div>
-              )}
+              <div className="user-dropdown">
+                <Link to="/dashboard" className="dropdown-item">
+                  <Settings size={16} />
+                  Dashboard
+                </Link>
+                <button onClick={handleLogout} className="dropdown-item">
+                  <LogOut size={16} />
+                  Logout
+                </button>
+              </div>
             </div>
           )}
         </div>

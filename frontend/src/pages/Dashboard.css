@@ -281,10 +281,26 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1400px) {
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
 @media (max-width: 1024px) {
   .chart-grid {
     grid-template-columns: repeat(2, 1fr);
     height: 300px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 }
 

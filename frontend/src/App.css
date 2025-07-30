@@ -63,7 +63,7 @@ main {
   width: 100%;
   max-width: 100%;
   margin: 0;
-  padding: 0 2rem;
+  padding: 0 4rem;
 }
 
 /* Typography */
@@ -169,6 +169,14 @@ p {
   grid-template-columns: repeat(4, 1fr);
 }
 
+.grid-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.grid-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
 /* Flexbox Utilities */
 .flex {
   display: flex;
@@ -229,15 +237,39 @@ p {
 .font-medium { font-weight: 500; }
 
 /* Responsive Design */
+@media (max-width: 1400px) {
+  .grid-6 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .grid-5 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .grid-6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 1024px) {
   .grid-4 {
     grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .grid-6 {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
   
   h1 {
@@ -262,6 +294,10 @@ p {
 @media (max-width: 480px) {
   main {
     padding: 1rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
   }
   
   .grid-2,
