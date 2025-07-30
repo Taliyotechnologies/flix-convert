@@ -1,6 +1,6 @@
 /* Hero Section */
 .hero {
-  padding: 4rem 0;
+  padding: 5rem 0 4rem;
   background: var(--bg-primary);
   position: relative;
 }
@@ -8,7 +8,7 @@
 .hero-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 4rem;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -18,15 +18,15 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.75rem 1.25rem;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
+  border-radius: 25px;
   font-size: 0.875rem;
   color: var(--text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   font-weight: 500;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .hero-badge svg {
@@ -34,30 +34,33 @@
 }
 
 .hero-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
 .hero-highlight {
   color: var(--primary-color);
+  position: relative;
 }
 
 .hero-subtitle {
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
   color: var(--text-secondary);
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   line-height: 1.6;
-  max-width: 500px;
+  max-width: 550px;
+  font-weight: 400;
 }
 
 .hero-features {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
 }
 
 .hero-feature {
@@ -66,6 +69,7 @@
   gap: 0.75rem;
   font-size: 0.95rem;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .hero-feature svg {
@@ -83,6 +87,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  font-weight: 600;
 }
 
 .hero-illustration {
@@ -94,27 +99,27 @@
 .hero-visual {
   position: relative;
   width: 100%;
-  max-width: 350px;
+  max-width: 380px;
 }
 
 .file-stack {
   position: relative;
   width: 100%;
-  height: 240px;
-  margin-bottom: 1.5rem;
+  height: 260px;
+  margin-bottom: 2rem;
 }
 
 .file {
   position: absolute;
   background: var(--bg-secondary);
   border: 2px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.25rem;
+  border-radius: 16px;
+  padding: 1.5rem;
   text-align: center;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 120px;
-  height: 100px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 130px;
+  height: 110px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,23 +128,23 @@
 }
 
 .file:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
   z-index: 10;
 }
 
 .file-1 {
   top: 0;
   left: 0;
-  transform: rotate(-3deg);
+  transform: rotate(-4deg);
   background: var(--bg-secondary);
   z-index: 1;
 }
 
 .file-2 {
-  top: 25px;
-  left: 25px;
-  transform: rotate(1deg);
+  top: 30px;
+  left: 30px;
+  transform: rotate(2deg);
   z-index: 2;
   background: var(--primary-color);
   color: white;
@@ -147,9 +152,9 @@
 }
 
 .file-3 {
-  top: 50px;
-  left: 50px;
-  transform: rotate(-2deg);
+  top: 60px;
+  left: 60px;
+  transform: rotate(-3deg);
   z-index: 3;
   background: #10b981;
   color: white;
@@ -164,40 +169,41 @@
 }
 
 .file-label {
-  font-weight: 600;
-  font-size: 0.8rem;
+  font-weight: 700;
+  font-size: 0.85rem;
   margin-bottom: 0.25rem;
 }
 
 .file-size {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   opacity: 0.8;
+  font-weight: 500;
 }
 
 .compression-indicator {
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .compression-bar {
   width: 100%;
-  height: 6px;
+  height: 8px;
   background: var(--bg-hover);
-  border-radius: 3px;
+  border-radius: 4px;
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   border: 1px solid var(--border-color);
 }
 
 .compression-fill {
   height: 100%;
   background: var(--primary-color);
-  border-radius: 3px;
+  border-radius: 4px;
   transition: width 0.3s ease;
 }
 
 .compression-text {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--primary-color);
 }
@@ -378,12 +384,12 @@
 
 @media (max-width: 768px) {
   .hero {
-    padding: 3rem 0;
+    padding: 3.5rem 0;
   }
   
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    gap: 3rem;
     text-align: center;
   }
   
@@ -400,8 +406,9 @@
   }
   
   .hero-features {
-    align-items: center;
-    margin-bottom: 1.5rem;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
   }
   
   .hero-buttons {
@@ -409,28 +416,28 @@
   }
   
   .hero-visual {
-    max-width: 280px;
+    max-width: 300px;
     margin: 0 auto;
   }
   
   .file-stack {
-    height: 200px;
+    height: 220px;
   }
   
   .file {
-    width: 100px;
-    height: 80px;
-    padding: 1rem;
+    width: 110px;
+    height: 90px;
+    padding: 1.25rem;
   }
   
   .file-2 {
-    top: 20px;
-    left: 20px;
+    top: 25px;
+    left: 25px;
   }
   
   .file-3 {
-    top: 40px;
-    left: 40px;
+    top: 50px;
+    left: 50px;
   }
   
   .features {
@@ -453,19 +460,21 @@
 
 @media (max-width: 480px) {
   .hero {
-    padding: 2.5rem 0;
+    padding: 3rem 0;
   }
   
   .hero-content {
-    gap: 2rem;
+    gap: 2.5rem;
   }
   
   .hero-features {
-    gap: 0.5rem;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
   
   .hero-feature {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    justify-content: center;
   }
   
   .hero-buttons {
@@ -475,40 +484,40 @@
   }
   
   .hero-visual {
-    max-width: 240px;
+    max-width: 260px;
   }
   
   .file-stack {
-    height: 160px;
+    height: 180px;
   }
   
   .file {
-    width: 80px;
-    height: 70px;
-    padding: 0.75rem;
+    width: 90px;
+    height: 80px;
+    padding: 1rem;
   }
   
   .file-2 {
-    top: 15px;
-    left: 15px;
+    top: 20px;
+    left: 20px;
   }
   
   .file-3 {
-    top: 30px;
-    left: 30px;
+    top: 40px;
+    left: 40px;
   }
   
   .file-icon svg {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
   }
   
   .file-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
   
   .file-size {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
   }
   
   .features {

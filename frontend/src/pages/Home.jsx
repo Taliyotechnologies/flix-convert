@@ -48,31 +48,35 @@ const Home = () => {
                 <span>Trusted by 1M+ users worldwide</span>
               </div>
               <h1 className="hero-title">
-                Compress & Convert Files
-                <span className="hero-highlight"> Instantly</span>
+                Convert & Compress Files
+                <span className="hero-highlight"> in Seconds</span>
               </h1>
               <p className="hero-subtitle">
-                Professional-grade compression and conversion tools. Reduce file sizes by up to 80% 
-                without losing quality. Support for 50+ formats, secure processing, and instant downloads.
+                Professional file conversion and compression tools. Reduce file sizes by up to 80% 
+                while maintaining quality. Support for 50+ formats with secure, instant processing.
               </p>
               <div className="hero-features">
                 <div className="hero-feature">
-                  <CheckCircle size={20} />
-                  <span>Free up to 10MB files</span>
+                  <CheckCircle size={18} />
+                  <span>Free processing up to 10MB</span>
                 </div>
                 <div className="hero-feature">
-                  <CheckCircle size={20} />
+                  <CheckCircle size={18} />
                   <span>50+ file formats supported</span>
                 </div>
                 <div className="hero-feature">
-                  <CheckCircle size={20} />
-                  <span>Zero quality loss</span>
+                  <CheckCircle size={18} />
+                  <span>Zero quality loss guarantee</span>
+                </div>
+                <div className="hero-feature">
+                  <CheckCircle size={18} />
+                  <span>Instant download after processing</span>
                 </div>
               </div>
               <div className="hero-buttons">
                 <Link to="/tools" className="btn btn-primary btn-large">
-                  Start Converting
-                  <ArrowRight size={20} />
+                  Start Converting Now
+                  <ArrowRight size={18} />
                 </Link>
                 <Link to="/about" className="btn btn-secondary btn-large">
                   Learn More
@@ -84,21 +88,21 @@ const Home = () => {
                 <div className="file-stack">
                   <div className="file file-1">
                     <div className="file-icon">
-                      <File size={24} />
+                      <File size={20} />
                     </div>
                     <div className="file-label">Original</div>
                     <div className="file-size">2.5MB</div>
                   </div>
                   <div className="file file-2">
                     <div className="file-icon">
-                      <Zap size={24} />
+                      <Zap size={20} />
                     </div>
                     <div className="file-label">Processing</div>
                     <div className="file-size">Compressing...</div>
                   </div>
                   <div className="file file-3">
                     <div className="file-icon">
-                      <FileCheck size={24} />
+                      <FileCheck size={20} />
                     </div>
                     <div className="file-label">Compressed</div>
                     <div className="file-size">0.8MB</div>
@@ -108,7 +112,7 @@ const Home = () => {
                   <div className="compression-bar">
                     <div className="compression-fill" style={{ width: '68%' }}></div>
                   </div>
-                  <span className="compression-text">68% smaller</span>
+                  <span className="compression-text">68% smaller file size</span>
                 </div>
               </div>
             </div>
