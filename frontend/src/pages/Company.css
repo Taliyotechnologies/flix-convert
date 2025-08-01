@@ -1,0 +1,229 @@
+.company-page {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  min-height: 100vh;
+}
+
+.company-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.company-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.company-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.company-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.company-section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.company-section:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.company-section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.company-section p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.company-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.company-section li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.company-section li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.services-list li,
+.taliyo-services li {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--bg-primary);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color);
+  transition: all 0.3s ease;
+}
+
+.services-list li:hover,
+.taliyo-services li:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-sm);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.value-item {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.value-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-color);
+}
+
+.value-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.value-item h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.value-item p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.contact-info {
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-top: 1rem;
+}
+
+.contact-info p {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.contact-info a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: var(--accent-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .company-page {
+    padding: 2rem 0;
+  }
+  
+  .company-title {
+    font-size: 2.25rem;
+  }
+  
+  .company-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .company-section {
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .company-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .value-item {
+    padding: 1.25rem;
+  }
+  
+  .value-icon {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .company-title {
+    font-size: 1.875rem;
+  }
+  
+  .company-subtitle {
+    font-size: 1rem;
+  }
+  
+  .company-section {
+    padding: 1.25rem;
+  }
+  
+  .company-section h2 {
+    font-size: 1.25rem;
+  }
+  
+  .services-list li,
+  .taliyo-services li {
+    padding: 0.5rem;
+  }
+} 

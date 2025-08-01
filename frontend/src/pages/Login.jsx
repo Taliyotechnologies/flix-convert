@@ -76,38 +76,53 @@ const Login = () => {
           <div className="auth-container">
             <div className="auth-card">
               <div className="auth-header">
+                <div className="auth-icon">
+                  <span className="icon">🔐</span>
+                </div>
                 <h1 className="auth-title">Welcome Back</h1>
-                <p className="auth-subtitle">Sign in to your account</p>
+                <p className="auth-subtitle">Sign in to your ConvertFlix account</p>
               </div>
 
               <form onSubmit={handleSubmit} className="auth-form">
                 <div className="form-group">
-                  <label htmlFor="email" className="form-label">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`form-input ${errors.email ? 'error' : ''}`}
-                    placeholder="Enter your email"
-                    autoComplete="email"
-                  />
+                  <label htmlFor="email" className="form-label">
+                    <span className="label-icon">📧</span>
+                    Email Address
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`form-input ${errors.email ? 'error' : ''}`}
+                      placeholder="Enter your email address"
+                      autoComplete="email"
+                    />
+                    <span className="input-icon">📧</span>
+                  </div>
                   {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className={`form-input ${errors.password ? 'error' : ''}`}
-                    placeholder="Enter your password"
-                    autoComplete="current-password"
-                  />
+                  <label htmlFor="password" className="form-label">
+                    <span className="label-icon">🔒</span>
+                    Password
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className={`form-input ${errors.password ? 'error' : ''}`}
+                      placeholder="Enter your password"
+                      autoComplete="current-password"
+                    />
+                    <span className="input-icon">🔒</span>
+                  </div>
                   {errors.password && <span className="error-message">{errors.password}</span>}
                 </div>
 
@@ -120,9 +135,11 @@ const Login = () => {
                       onChange={handleChange}
                       className="checkbox-input"
                     />
+                    <span className="checkbox-custom"></span>
                     <span className="checkbox-text">Remember me</span>
                   </label>
                   <Link to="/forgot-password" className="forgot-link">
+                    <span className="forgot-icon">❓</span>
                     Forgot password?
                   </Link>
                 </div>
@@ -135,26 +152,31 @@ const Login = () => {
                   {isLoading ? (
                     <>
                       <div className="spinner"></div>
-                      Signing in...
+                      <span className="loading-text">Signing in...</span>
                     </>
                   ) : (
-                    'Sign In'
+                    <>
+                      <span className="btn-icon">🚀</span>
+                      Sign In
+                    </>
                   )}
                 </button>
               </form>
 
               <div className="auth-divider">
+                <span className="divider-line"></span>
                 <span className="divider-text">or continue with</span>
+                <span className="divider-line"></span>
               </div>
 
               <div className="social-auth">
                 <button className="btn btn-social google">
                   <span className="social-icon">🔍</span>
-                  Continue with Google
+                  <span className="social-text">Continue with Google</span>
                 </button>
                 <button className="btn btn-social github">
                   <span className="social-icon">🐙</span>
-                  Continue with GitHub
+                  <span className="social-text">Continue with GitHub</span>
                 </button>
               </div>
 
@@ -162,7 +184,8 @@ const Login = () => {
                 <p className="auth-footer-text">
                   Don't have an account?{' '}
                   <Link to="/signup" className="auth-link">
-                    Sign up
+                    <span className="link-icon">✨</span>
+                    Sign up now
                   </Link>
                 </p>
               </div>

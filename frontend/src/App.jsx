@@ -3,10 +3,11 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Tools from './pages/Tools';
 import Login from './pages/Login';
-import SignUp from './pages/SignUp';
+import SignUp from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import ToolPage from './pages/ToolPage';
 import Company from './pages/Company';
@@ -15,6 +16,7 @@ import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import './App.css';
+import './components/Footer.css';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
                 <Route path="/terms" element={<Terms />} />
               </Routes>
             </main>
+            <Footer />
           </div>
         </Router>
       </ThemeProvider>
