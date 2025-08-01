@@ -1,0 +1,311 @@
+.tool-page {
+  padding: 80px 0;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+}
+
+.tool-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.tool-icon {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.tool-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.tool-description {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tool-formats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.875rem;
+}
+
+.formats-label {
+  color: var(--text-secondary);
+}
+
+.formats-list {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Upload Section */
+.upload-section {
+  max-width: 800px;
+  margin: 0 auto 60px;
+}
+
+.upload-area {
+  border: 3px dashed var(--border-color);
+  border-radius: 16px;
+  padding: 80px 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--bg-secondary);
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+  border-color: var(--accent-color);
+  background-color: var(--bg-primary);
+  transform: translateY(-2px);
+}
+
+.upload-icon {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.upload-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.upload-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.upload-limit {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* File Section */
+.file-section {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.file-preview {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.preview-image,
+.preview-video {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.file-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.file-info {
+  text-align: center;
+}
+
+.file-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.file-size {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.file-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Results Section */
+.results-section {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px;
+}
+
+.results-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: var(--text-primary);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.result-card {
+  text-align: center;
+  padding: 24px;
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.result-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.result-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.result-value.saved {
+  color: #10b981;
+}
+
+.download-section {
+  text-align: center;
+}
+
+.expiry-note {
+  margin-top: 16px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+}
+
+/* Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tool-page {
+    padding: 60px 0;
+  }
+  
+  .tool-title {
+    font-size: 2rem;
+  }
+  
+  .tool-description {
+    font-size: 1rem;
+  }
+  
+  .tool-header {
+    margin-bottom: 40px;
+  }
+  
+  .upload-area {
+    padding: 60px 24px;
+  }
+  
+  .upload-icon {
+    font-size: 3rem;
+  }
+  
+  .upload-title {
+    font-size: 1.25rem;
+  }
+  
+  .file-section {
+    padding: 24px;
+  }
+  
+  .file-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .results-section {
+    padding: 24px;
+  }
+  
+  .results-title {
+    font-size: 1.75rem;
+  }
+  
+  .results-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .result-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tool-title {
+    font-size: 1.75rem;
+  }
+  
+  .tool-icon {
+    font-size: 3rem;
+  }
+  
+  .upload-area {
+    padding: 40px 16px;
+  }
+  
+  .upload-icon {
+    font-size: 2.5rem;
+  }
+  
+  .upload-title {
+    font-size: 1.125rem;
+  }
+  
+  .results-title {
+    font-size: 1.5rem;
+  }
+  
+  .result-value {
+    font-size: 1.25rem;
+  }
+} 

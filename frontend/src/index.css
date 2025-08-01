@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Basic page styles for simple pages */
+.company-page,
+.about-page,
+.contact-page,
+.privacy-page,
+.terms-page {
+  padding: 80px 0;
+  background-color: var(--bg-primary);
+  min-height: 100vh;
+}
+
+.company-header,
+.about-header,
+.contact-header,
+.privacy-header,
+.terms-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.company-title,
+.about-title,
+.contact-title,
+.privacy-title,
+.terms-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.company-subtitle,
+.about-subtitle,
+.contact-subtitle,
+.privacy-subtitle,
+.terms-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+.company-content,
+.about-content,
+.contact-content,
+.privacy-content,
+.terms-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.company-section,
+.privacy-section,
+.terms-section {
+  margin-bottom: 40px;
+}
+
+.company-section h2,
+.privacy-section h2,
+.terms-section h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.company-section p,
+.privacy-section p,
+.terms-section p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.company-section ul {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding-left: 20px;
+}
+
+.company-section li {
+  margin-bottom: 8px;
+}
+
+.contact-info {
+  margin-top: 24px;
+  padding: 20px;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.contact-info p {
+  margin-bottom: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .company-title,
+  .about-title,
+  .contact-title,
+  .privacy-title,
+  .terms-title {
+    font-size: 2rem;
+  }
+  
+  .company-subtitle,
+  .about-subtitle,
+  .contact-subtitle,
+  .privacy-subtitle,
+  .terms-subtitle {
+    font-size: 1rem;
+  }
+  
+  .company-header,
+  .about-header,
+  .contact-header,
+  .privacy-header,
+  .terms-header {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .company-title,
+  .about-title,
+  .contact-title,
+  .privacy-title,
+  .terms-title {
+    font-size: 1.75rem;
+  }
+} 
