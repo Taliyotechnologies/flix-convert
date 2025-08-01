@@ -7,9 +7,7 @@ import './Navbar.css';
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
-  const { user, isAuthenticated, logout } = useAuth();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileToolsOpen, setIsMobileToolsOpen] = useState(false);
   const [isMobileCompanyOpen, setIsMobileCompanyOpen] = useState(false);
@@ -17,7 +15,6 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    setIsDropdownOpen(false);
     setIsMobileMenuOpen(false);
   };
 
