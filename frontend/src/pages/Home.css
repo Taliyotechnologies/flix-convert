@@ -3,6 +3,10 @@
   padding: 5rem 0 4rem;
   background: var(--bg-primary);
   position: relative;
+  width: 100%;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
 }
 
 .hero-content {
@@ -12,6 +16,15 @@
   align-items: center;
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.hero-text {
+  width: 100%;
+  max-width: 600px;
 }
 
 .hero-badge {
@@ -94,12 +107,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .hero-visual {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: 500px;
 }
 
 .file-stack {
@@ -212,11 +226,17 @@
 .features {
   padding: 4rem 0;
   background: var(--bg-primary);
+  width: 100%;
 }
 
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
 }
 
 .section-header h2 {
@@ -237,6 +257,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .feature-card {
@@ -282,12 +306,17 @@
 .stats {
   padding: 3rem 0;
   background: var(--bg-secondary);
+  width: 100%;
 }
 
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .stat-item {
@@ -306,14 +335,15 @@
 }
 
 .stat-number {
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
   color: var(--primary-color);
   margin-bottom: 0.5rem;
+  display: block;
 }
 
 .stat-label {
-  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-size: 0.9rem;
   color: var(--text-secondary);
   font-weight: 500;
 }
@@ -321,123 +351,128 @@
 /* CTA Section */
 .cta {
   padding: 4rem 0;
-  background: var(--primary-color);
-  color: white;
+  background: var(--bg-primary);
+  width: 100%;
 }
 
 .cta-content {
   text-align: center;
   max-width: 600px;
   margin: 0 auto;
+  padding: 0 2rem;
 }
 
 .cta-content h2 {
   font-size: clamp(1.75rem, 3.5vw, 2.25rem);
   margin-bottom: 1rem;
-  color: white;
+  color: var(--text-primary);
 }
 
 .cta-content p {
   font-size: clamp(0.95rem, 2vw, 1rem);
+  color: var(--text-secondary);
   margin-bottom: 2rem;
-  opacity: 0.9;
   line-height: 1.6;
 }
 
 .cta .btn-primary {
-  background: white;
-  color: var(--primary-color);
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
   font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .cta .btn-primary:hover {
-  background: var(--bg-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 /* Responsive Design */
 @media (max-width: 1200px) {
   .hero-content {
-    gap: 2.5rem;
+    gap: 3rem;
+    padding: 0 1.5rem;
   }
   
   .hero-visual {
-    max-width: 320px;
+    max-width: 450px;
+  }
+  
+  .features-grid,
+  .stats-grid {
+    padding: 0 1.5rem;
   }
 }
 
 @media (max-width: 1024px) {
   .hero-content {
+    grid-template-columns: 1fr;
     gap: 2rem;
+    text-align: center;
   }
   
   .hero-visual {
-    max-width: 300px;
+    max-width: 400px;
+    margin: 0 auto;
   }
   
   .features-grid {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 0 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .hero {
-    padding: 3.5rem 0;
+    padding: 3rem 0 2rem;
+    min-height: auto;
   }
   
   .hero-content {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
+    gap: 1.5rem;
+    padding: 0 1rem;
   }
   
   .hero-text {
-    order: 2;
+    max-width: 100%;
   }
   
   .hero-illustration {
-    order: 1;
+    order: -1;
   }
   
   .hero-badge {
-    margin: 0 auto 1.5rem;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
   }
   
   .hero-features {
     grid-template-columns: 1fr;
     gap: 0.75rem;
-    margin-bottom: 2rem;
   }
   
   .hero-buttons {
     justify-content: center;
+    gap: 0.75rem;
   }
   
   .hero-visual {
     max-width: 300px;
-    margin: 0 auto;
   }
   
   .file-stack {
-    height: 220px;
+    transform: scale(0.9);
   }
   
   .file {
-    width: 110px;
-    height: 90px;
-    padding: 1.25rem;
+    padding: 0.75rem;
   }
   
   .file-2 {
-    top: 25px;
-    left: 25px;
+    transform: translateX(-10px) translateY(-5px);
   }
   
   .file-3 {
-    top: 50px;
-    left: 50px;
+    transform: translateX(-20px) translateY(-10px);
   }
   
   .features {
@@ -445,71 +480,72 @@
   }
   
   .stats {
-    padding: 2.5rem 0;
+    padding: 2rem 0;
   }
   
   .features-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 0 1rem;
   }
   
   .stats-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 0 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    padding: 3rem 0;
+    padding: 2rem 0 1.5rem;
   }
   
   .hero-content {
-    gap: 2.5rem;
+    padding: 0 0.75rem;
   }
   
   .hero-features {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
   
   .hero-feature {
-    font-size: 0.9rem;
-    justify-content: center;
+    font-size: 0.85rem;
   }
   
   .hero-buttons {
     flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
+    width: 100%;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    justify-content: center;
   }
   
   .hero-visual {
-    max-width: 260px;
+    max-width: 250px;
   }
   
   .file-stack {
-    height: 180px;
+    transform: scale(0.8);
   }
   
   .file {
-    width: 90px;
-    height: 80px;
-    padding: 1rem;
+    padding: 0.5rem;
   }
   
   .file-2 {
-    top: 20px;
-    left: 20px;
+    transform: translateX(-8px) translateY(-4px);
   }
   
   .file-3 {
-    top: 40px;
-    left: 40px;
+    transform: translateX(-16px) translateY(-8px);
   }
   
   .file-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
   
   .file-label {
@@ -517,23 +553,25 @@
   }
   
   .file-size {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
   }
   
   .features {
-    padding: 2.5rem 0;
-  }
-  
-  .stats {
     padding: 2rem 0;
   }
   
+  .stats {
+    padding: 1.5rem 0;
+  }
+  
   .cta {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
   
   .stats-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0 0.75rem;
   }
   
   .feature-card {

@@ -8,13 +8,14 @@
   z-index: 1000;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow);
+  width: 100%;
 }
 
 .navbar-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -359,7 +360,7 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .navbar-container {
-    max-width: 900px;
+    max-width: 1400px;
     padding: 0 1.5rem;
   }
 }

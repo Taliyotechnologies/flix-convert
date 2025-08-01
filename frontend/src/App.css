@@ -48,6 +48,8 @@ body {
   line-height: 1.6;
   font-size: 16px;
   overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
 }
 
 .App {
@@ -64,6 +66,7 @@ main {
   padding: 0;
   width: 100%;
   overflow-x: hidden;
+  min-height: calc(100vh - 70px);
 }
 
 /* Error Boundary */
@@ -95,9 +98,23 @@ main {
 /* Container */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
+  box-sizing: border-box;
+}
+
+/* Full width sections */
+.full-width {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.full-width .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
 }
 
 /* Typography */
