@@ -9,6 +9,7 @@ import Tools from './pages/Tools';
 import Login from './pages/Login';
 import SignUp from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import AdminPanel from './pages/AdminPanel';
 import ToolPage from './pages/ToolPage';
 import Company from './pages/Company';
 import About from './pages/About';
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/admin" element={<AdminPanel />} />
                 <Route path="/tool/:type" element={<ToolPage />} />
                 <Route path="/company" element={<Company />} />
                 <Route path="/about" element={<About />} />

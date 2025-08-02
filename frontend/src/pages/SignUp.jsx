@@ -96,68 +96,95 @@ const SignUp = () => {
           <div className="auth-container">
             <div className="auth-card">
               <div className="auth-header">
+                <div className="auth-icon">
+                  <span className="icon">✨</span>
+                </div>
                 <h1 className="auth-title">Create Account</h1>
-                <p className="auth-subtitle">Join ConvertFlix today</p>
+                <p className="auth-subtitle">Join ConvertFlix and unlock powerful file tools</p>
               </div>
 
               <form onSubmit={handleSubmit} className="auth-form">
                 <div className="form-group">
-                  <label htmlFor="name" className="form-label">Full Name</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className={`form-input ${errors.name ? 'error' : ''}`}
-                    placeholder="Enter your full name"
-                    autoComplete="name"
-                  />
+                  <label htmlFor="name" className="form-label">
+                    <span className="label-icon">👤</span>
+                    Full Name
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      className={`form-input ${errors.name ? 'error' : ''}`}
+                      placeholder="Enter your full name"
+                      autoComplete="name"
+                    />
+                    <span className="input-icon">👤</span>
+                  </div>
                   {errors.name && <span className="error-message">{errors.name}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email" className="form-label">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`form-input ${errors.email ? 'error' : ''}`}
-                    placeholder="Enter your email"
-                    autoComplete="email"
-                  />
+                  <label htmlFor="email" className="form-label">
+                    <span className="label-icon">📧</span>
+                    Email Address
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`form-input ${errors.email ? 'error' : ''}`}
+                      placeholder="Enter your email address"
+                      autoComplete="email"
+                    />
+                    <span className="input-icon">📧</span>
+                  </div>
                   {errors.email && <span className="error-message">{errors.email}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    className={`form-input ${errors.password ? 'error' : ''}`}
-                    placeholder="Create a password"
-                    autoComplete="new-password"
-                  />
+                  <label htmlFor="password" className="form-label">
+                    <span className="label-icon">🔒</span>
+                    Password
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className={`form-input ${errors.password ? 'error' : ''}`}
+                      placeholder="Create a strong password"
+                      autoComplete="new-password"
+                    />
+                    <span className="input-icon">🔒</span>
+                  </div>
                   {errors.password && <span className="error-message">{errors.password}</span>}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                  <input
-                    type="password"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
-                    placeholder="Confirm your password"
-                    autoComplete="new-password"
-                  />
+                  <label htmlFor="confirmPassword" className="form-label">
+                    <span className="label-icon">🔐</span>
+                    Confirm Password
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      value={formData.confirmPassword}
+                      onChange={handleChange}
+                      className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
+                      placeholder="Confirm your password"
+                      autoComplete="new-password"
+                    />
+                    <span className="input-icon">🔐</span>
+                  </div>
                   {errors.confirmPassword && <span className="error-message">{errors.confirmPassword}</span>}
                 </div>
 
@@ -170,11 +197,18 @@ const SignUp = () => {
                       onChange={handleChange}
                       className="checkbox-input"
                     />
+                    <span className="checkbox-custom"></span>
                     <span className="checkbox-text">
                       I agree to the{' '}
-                      <Link to="/terms" className="terms-link">Terms of Service</Link>
+                      <Link to="/terms" className="terms-link">
+                        <span className="link-icon">📋</span>
+                        Terms of Service
+                      </Link>
                       {' '}and{' '}
-                      <Link to="/privacy" className="terms-link">Privacy Policy</Link>
+                      <Link to="/privacy" className="terms-link">
+                        <span className="link-icon">🔒</span>
+                        Privacy Policy
+                      </Link>
                     </span>
                   </label>
                   {errors.agreeToTerms && <span className="error-message">{errors.agreeToTerms}</span>}
@@ -188,26 +222,31 @@ const SignUp = () => {
                   {isLoading ? (
                     <>
                       <div className="spinner"></div>
-                      Creating account...
+                      <span className="loading-text">Creating account...</span>
                     </>
                   ) : (
-                    'Create Account'
+                    <>
+                      <span className="btn-icon">🚀</span>
+                      Create Account
+                    </>
                   )}
                 </button>
               </form>
 
               <div className="auth-divider">
+                <span className="divider-line"></span>
                 <span className="divider-text">or sign up with</span>
+                <span className="divider-line"></span>
               </div>
 
               <div className="social-auth">
                 <button className="btn btn-social google">
                   <span className="social-icon">🔍</span>
-                  Continue with Google
+                  <span className="social-text">Continue with Google</span>
                 </button>
                 <button className="btn btn-social github">
                   <span className="social-icon">🐙</span>
-                  Continue with GitHub
+                  <span className="social-text">Continue with GitHub</span>
                 </button>
               </div>
 
@@ -215,7 +254,8 @@ const SignUp = () => {
                 <p className="auth-footer-text">
                   Already have an account?{' '}
                   <Link to="/login" className="auth-link">
-                    Sign in
+                    <span className="link-icon">🔑</span>
+                    Sign in here
                   </Link>
                 </p>
               </div>

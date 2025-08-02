@@ -12,8 +12,8 @@ const Navbar = () => {
   const location = useLocation();
 
   // Mock authentication state (replace with real auth)
-  const isAuthenticated = false;
-  const user = { name: 'John Doe', email: 'john@example.com' };
+  const isAuthenticated = true; // Changed to true to show admin features
+  const user = { name: 'Admin User', email: 'admin@flixconvert.com', role: 'admin' };
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -132,6 +132,11 @@ const Navbar = () => {
                   <Link to="/dashboard" className="dropdown-item">
                     Dashboard
                   </Link>
+                  {user.role === 'admin' && (
+                    <Link to="/admin" className="dropdown-item">
+                      Admin Panel
+                    </Link>
+                  )}
                   <button className="dropdown-item logout-btn">
                     Logout
                   </button>

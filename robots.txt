@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Block admin panel from search engines
+Disallow: /admin
+Disallow: /admin/*
+
+# Block sensitive areas
+Disallow: /api/
+Disallow: /backend/
+
+# Allow important pages
+Allow: /tools
+Allow: /tool/
+Allow: /about
+Allow: /contact
+Allow: /privacy
+Allow: /terms
+
+# Sitemap location
+Sitemap: https://flixconvert.com/sitemap.xml 

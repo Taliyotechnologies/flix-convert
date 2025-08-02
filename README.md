@@ -25,10 +25,13 @@ A modern, responsive web application for compressing and converting files instan
 - **Accessibility**: Keyboard navigation and screen reader support
 
 ### Admin Features
-- **Dashboard**: File processing statistics and logs
-- **Search & Filter**: Advanced file management
+- **Dashboard**: Real-time statistics and analytics
+- **File Management**: Advanced file search, filter, and bulk operations
+- **User Management**: User roles, permissions, and activity monitoring
+- **Analytics**: Traffic overview, performance metrics, and storage usage
+- **System Settings**: Application configuration and system information
 - **Export Tools**: CSV and report generation
-- **User Management**: Admin controls and monitoring
+- **Security**: Role-based access control and audit logs
 
 ## 🛠 Tech Stack
 
@@ -79,8 +82,10 @@ src/
 │   ├── Login.jsx       # Authentication
 │   ├── SignUp.jsx
 │   ├── Auth.css
-│   ├── Dashboard.jsx   # Admin dashboard
-│   └── Dashboard.css
+│   ├── Dashboard.jsx   # User dashboard
+│   ├── Dashboard.css
+│   ├── AdminPanel.jsx  # Admin panel
+│   └── AdminPanel.css
 ├── App.jsx             # Main app component
 ├── App.css
 ├── main.jsx            # App entry point
@@ -157,6 +162,32 @@ For support, email support@flixconvert.com or create an issue in this repository
 1. Run `npm run build`
 2. Upload the `dist` folder to your web server
 3. Configure your server for SPA routing
+
+## 🔐 Admin Panel Access
+
+### Admin Panel URL
+- **Production**: `https://flixconvert.com/admin`
+- **Development**: `http://localhost:3000/admin`
+
+### Admin Features
+- **Dashboard**: Real-time statistics and file processing metrics
+- **File Management**: Search, filter, delete, and export file logs
+- **User Management**: Manage user accounts, roles, and permissions
+- **Analytics**: Traffic overview, performance metrics, and storage usage
+- **System Settings**: Configure application settings and view system info
+- **Security**: Role-based access control with admin-only features
+
+### SEO Configuration
+- **Admin Panel**: Blocked from search engines (`noindex, nofollow`)
+- **Sitemap**: Includes all public pages with proper priorities
+- **Robots.txt**: Blocks sensitive areas while allowing public content
+- **Meta Tags**: Optimized for search engines and social sharing
+
+### Search Engine Optimization
+- **Sitemap**: `https://flixconvert.com/sitemap.xml`
+- **Robots.txt**: `https://flixconvert.com/robots.txt`
+- **Admin Panel**: Protected from search engine indexing
+- **Public Pages**: Fully optimized for SEO
 
 ## 🔒 Security Features
 
