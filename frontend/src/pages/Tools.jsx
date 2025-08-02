@@ -5,7 +5,7 @@ import {
   Music, 
   FileText, 
   ArrowRight,
-  Compress,
+  Minimize,
   FileImage
 } from 'lucide-react';
 import './Tools.css';
@@ -18,7 +18,7 @@ const Tools = () => {
         {
           name: 'Compress Image',
           description: 'Reduce image file size while maintaining quality',
-          icon: Compress,
+          icon: Minimize,
           path: '/tool/compress-image',
           color: '#10b981'
         },
@@ -37,7 +37,7 @@ const Tools = () => {
         {
           name: 'Compress Video',
           description: 'Reduce video file size with H.264 compression',
-          icon: Compress,
+          icon: Minimize,
           path: '/tool/compress-video',
           color: '#8b5cf6'
         },
@@ -56,7 +56,7 @@ const Tools = () => {
         {
           name: 'Compress Audio',
           description: 'Reduce audio file size with optimized compression',
-          icon: Compress,
+          icon: Minimize,
           path: '/tool/compress-audio',
           color: '#ef4444'
         },
@@ -75,7 +75,7 @@ const Tools = () => {
         {
           name: 'Compress PDF',
           description: 'Reduce PDF file size by optimizing content',
-          icon: Compress,
+          icon: Minimize,
           path: '/tool/compress-pdf',
           color: '#84cc16'
         },
