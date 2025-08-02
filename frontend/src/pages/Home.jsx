@@ -1,113 +1,186 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
-import './Home.css'
+import { Link } from 'react-router-dom';
+import { 
+  FileText, 
+  Image, 
+  Video, 
+  Music, 
+  Download, 
+  Zap, 
+  Shield, 
+  Clock,
+  ArrowRight
+} from 'lucide-react';
+import './Home.css';
 
 const Home = () => {
   const features = [
     {
-      icon: '⚡',
+      icon: Image,
+      title: 'Image Compression',
+      description: 'Compress JPEG, PNG, WebP images with up to 80% size reduction while maintaining quality.',
+      path: '/tool/compress-image'
+    },
+    {
+      icon: Video,
+      title: 'Video Compression',
+      description: 'Reduce video file sizes significantly with advanced H.264 compression algorithms.',
+      path: '/tool/compress-video'
+    },
+    {
+      icon: Music,
+      title: 'Audio Compression',
+      description: 'Compress audio files to MP3, AAC, and other formats with customizable quality.',
+      path: '/tool/compress-audio'
+    },
+    {
+      icon: FileText,
+      title: 'PDF Compression',
+      description: 'Reduce PDF file sizes by optimizing images and removing redundant data.',
+      path: '/tool/compress-pdf'
+    }
+  ];
+
+  const benefits = [
+    {
+      icon: Zap,
       title: 'Lightning Fast',
       description: 'Process files in seconds with our optimized algorithms'
     },
     {
-      icon: '🔒',
+      icon: Shield,
       title: 'Secure & Private',
-      description: 'Your files are encrypted and automatically deleted'
+      description: 'Your files are automatically deleted after 24 hours'
     },
     {
-      icon: '🌐',
-      title: 'Cross Platform',
-      description: 'Works on any device with a modern web browser'
+      icon: Download,
+      title: 'Free Downloads',
+      description: 'No registration required, download processed files instantly'
     },
     {
-      icon: '🎯',
-      title: 'Quality Preserved',
-      description: 'Maintain original quality while reducing file size'
-    },
-    {
-      icon: '📁',
-      title: 'Multi-format Support',
-      description: 'Support for images, audio, video, and documents'
-    },
-    {
-      icon: '💾',
-      title: 'Free Up to 10MB',
-      description: 'No registration required for files under 10MB'
+      icon: Clock,
+      title: '24-Hour Access',
+      description: 'Files are available for download for 24 hours'
     }
-  ]
+  ];
 
   return (
-    <>
-      <Helmet>
-        <title>ConvertFlix - Free File Compression & Conversion Tool</title>
-        <meta name="description" content="Compress and convert files instantly with ConvertFlix. Free up to 10MB. Fast, secure, and cross-platform file compression and conversion tools." />
-      </Helmet>
-
-      <div className="home">
-        {/* Hero Section */}
-        <section className="hero">
-          <div className="container hero-container">
-            <div className="hero-content">
-              <h1 className="hero-title">
-                Compress & Convert Files Instantly
-                <span className="hero-subtitle">— Free Up to 10MB</span>
-              </h1>
-              <p className="hero-description">
-                Fast, secure & cross-platform compression and conversion tools. 
-                Process your files in seconds with our optimized algorithms.
-              </p>
-              <div className="hero-buttons">
-                <Link to="/tools" className="btn btn-primary">
-                  Try Tools
-                </Link>
-                <Link to="/company" className="btn btn-secondary">
-                  Learn More
-                </Link>
-              </div>
-            </div>
-            <div className="hero-illustration">
-              <div className="file-stack">
-                <div className="file file-1">📄</div>
-                <div className="file file-2">🖼️</div>
-                <div className="file file-3">🎵</div>
-                <div className="file file-4">🎬</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="features">
-          <div className="container">
-            <h2 className="section-title">Why Choose ConvertFlix?</h2>
-            <div className="features-grid">
-              {features.map((feature, index) => (
-                <div key={index} className="feature-card card">
-                  <div className="feature-icon">{feature.icon}</div>
-                  <h3 className="feature-title">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="cta">
-          <div className="container">
-            <div className="cta-content">
-              <h2>Ready to Get Started?</h2>
-              <p>Join thousands of users who trust ConvertFlix for their file processing needs.</p>
+    <div className="home">
+      {/* Hero Section */}
+      <section className="hero">
+        <div className="container">
+          <div className="hero-content">
+            <h1 className="hero-title">
+              Convert & Compress Files
+              <span className="hero-accent"> Instantly</span>
+            </h1>
+            <p className="hero-description">
+              Transform your images, videos, audio, and PDFs with our powerful online tools. 
+              Compress files up to 80% smaller while maintaining quality, or convert between formats seamlessly.
+            </p>
+            <div className="hero-actions">
               <Link to="/tools" className="btn btn-primary">
-                Explore Tools
+                Get Started
+                <ArrowRight className="btn-icon" />
+              </Link>
+              <Link to="/tool/compress-image" className="btn btn-secondary">
+                Try Image Compression
               </Link>
             </div>
           </div>
-        </section>
-      </div>
-    </>
-  )
-}
+          <div className="hero-visual">
+            <div className="file-cards">
+              <div className="file-card image-card">
+                <Image className="file-icon" />
+                <span>Image</span>
+              </div>
+              <div className="file-card video-card">
+                <Video className="file-icon" />
+                <span>Video</span>
+              </div>
+              <div className="file-card audio-card">
+                <Music className="file-icon" />
+                <span>Audio</span>
+              </div>
+              <div className="file-card pdf-card">
+                <FileText className="file-icon" />
+                <span>PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-export default Home 
+      {/* Features Section */}
+      <section className="features">
+        <div className="container">
+          <div className="section-header">
+            <h2>Powerful File Tools</h2>
+            <p>Choose from our comprehensive suite of file processing tools</p>
+          </div>
+          <div className="features-grid">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <Link key={index} to={feature.path} className="feature-card">
+                  <div className="feature-icon">
+                    <Icon />
+                  </div>
+                  <h3>{feature.title}</h3>
+                  <p>{feature.description}</p>
+                  <div className="feature-arrow">
+                    <ArrowRight />
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="benefits">
+        <div className="container">
+          <div className="section-header">
+            <h2>Why Choose ConvertFlix?</h2>
+            <p>Experience the best file processing platform with these benefits</p>
+          </div>
+          <div className="benefits-grid">
+            {benefits.map((benefit, index) => {
+              const Icon = benefit.icon;
+              return (
+                <div key={index} className="benefit-card">
+                  <div className="benefit-icon">
+                    <Icon />
+                  </div>
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="cta">
+        <div className="container">
+          <div className="cta-content">
+            <h2>Ready to Start?</h2>
+            <p>Join thousands of users who trust ConvertFlix for their file processing needs</p>
+            <div className="cta-actions">
+              <Link to="/tools" className="btn btn-primary">
+                Explore All Tools
+                <ArrowRight className="btn-icon" />
+              </Link>
+              <Link to="/tool/compress-image" className="btn btn-secondary">
+                Try Now
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default Home; 

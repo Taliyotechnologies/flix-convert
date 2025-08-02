@@ -1,151 +1,139 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
-import './Tools.css'
+import { Link } from 'react-router-dom';
+import { 
+  Image, 
+  Video, 
+  Music, 
+  FileText, 
+  ArrowRight,
+  Compress,
+  FileImage
+} from 'lucide-react';
+import './Tools.css';
 
 const Tools = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all')
-
   const tools = [
     {
-      id: 'compress-image',
-      name: 'Compress Image',
-      description: 'Reduce image file size while maintaining quality',
-      category: 'compress',
-      icon: '🖼️',
-      formats: ['JPG', 'PNG', 'WebP'],
-      maxSize: '10MB'
+      category: 'Image Tools',
+      items: [
+        {
+          name: 'Compress Image',
+          description: 'Reduce image file size while maintaining quality',
+          icon: Compress,
+          path: '/tool/compress-image',
+          color: '#10b981'
+        },
+        {
+          name: 'Convert Image',
+          description: 'Convert between JPEG, PNG, WebP, and GIF formats',
+          icon: FileImage,
+          path: '/tool/convert-image',
+          color: '#3b82f6'
+        }
+      ]
     },
     {
-      id: 'compress-pdf',
-      name: 'Compress PDF',
-      description: 'Reduce PDF file size for easier sharing',
-      category: 'compress',
-      icon: '📄',
-      formats: ['PDF'],
-      maxSize: '10MB'
+      category: 'Video Tools',
+      items: [
+        {
+          name: 'Compress Video',
+          description: 'Reduce video file size with H.264 compression',
+          icon: Compress,
+          path: '/tool/compress-video',
+          color: '#8b5cf6'
+        },
+        {
+          name: 'Convert Video',
+          description: 'Convert between MP4, AVI, MOV, and WebM formats',
+          icon: Video,
+          path: '/tool/convert-video',
+          color: '#f59e0b'
+        }
+      ]
     },
     {
-      id: 'compress-video',
-      name: 'Compress Video',
-      description: 'Reduce video file size with quality control',
-      category: 'compress',
-      icon: '🎬',
-      formats: ['MP4', 'AVI', 'MOV'],
-      maxSize: '10MB'
+      category: 'Audio Tools',
+      items: [
+        {
+          name: 'Compress Audio',
+          description: 'Reduce audio file size with optimized compression',
+          icon: Compress,
+          path: '/tool/compress-audio',
+          color: '#ef4444'
+        },
+        {
+          name: 'Convert Audio',
+          description: 'Convert between MP3, WAV, OGG, and M4A formats',
+          icon: Music,
+          path: '/tool/convert-audio',
+          color: '#06b6d4'
+        }
+      ]
     },
     {
-      id: 'convert-audio',
-      name: 'Convert Audio',
-      description: 'Convert between audio formats',
-      category: 'convert',
-      icon: '🎵',
-      formats: ['MP3', 'WAV', 'AAC', 'OGG'],
-      maxSize: '10MB'
-    },
-    {
-      id: 'convert-image',
-      name: 'Convert Image',
-      description: 'Convert images between different formats',
-      category: 'convert',
-      icon: '🔄',
-      formats: ['JPG', 'PNG', 'WebP', 'GIF'],
-      maxSize: '10MB'
-    },
-    {
-      id: 'convert-document',
-      name: 'Convert Document',
-      description: 'Convert documents between formats',
-      category: 'convert',
-      icon: '📝',
-      formats: ['PDF', 'DOC', 'DOCX'],
-      maxSize: '10MB'
+      category: 'PDF Tools',
+      items: [
+        {
+          name: 'Compress PDF',
+          description: 'Reduce PDF file size by optimizing content',
+          icon: Compress,
+          path: '/tool/compress-pdf',
+          color: '#84cc16'
+        },
+        {
+          name: 'Convert PDF',
+          description: 'Convert PDF pages to image formats',
+          icon: FileText,
+          path: '/tool/convert-pdf',
+          color: '#f97316'
+        }
+      ]
     }
-  ]
-
-  const categories = [
-    { id: 'all', name: 'All Tools' },
-    { id: 'compress', name: 'Compress' },
-    { id: 'convert', name: 'Convert' }
-  ]
-
-  const filteredTools = selectedCategory === 'all' 
-    ? tools 
-    : tools.filter(tool => tool.category === selectedCategory)
+  ];
 
   return (
-    <>
-      <Helmet>
-        <title>Tools - ConvertFlix</title>
-        <meta name="description" content="Explore our collection of file compression and conversion tools. Free up to 10MB." />
-      </Helmet>
+    <div className="tools">
+      <div className="container">
+        <div className="tools-header">
+          <h1>All Tools</h1>
+          <p>Choose from our comprehensive suite of file processing tools</p>
+        </div>
 
-      <div className="tools-page">
-        <div className="container">
-          {/* Header */}
-          <div className="tools-header">
-            <h1 className="page-title">Our Tools</h1>
-            <p className="page-description">
-              Choose from our collection of powerful file processing tools. 
-              All tools are free for files up to 10MB.
-            </p>
-          </div>
-
-          {/* Category Filter */}
-          <div className="category-filter">
-            {categories.map(category => (
-              <button
-                key={category.id}
-                className={`category-btn ${selectedCategory === category.id ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(category.id)}
-              >
-                {category.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Tools Grid */}
-          <div className="tools-grid">
-            {filteredTools.map(tool => (
-              <Link 
-                key={tool.id} 
-                to={`/tool/${tool.id}`}
-                className="tool-card card"
-              >
-                <div className="tool-icon">{tool.icon}</div>
-                <h3 className="tool-name">{tool.name}</h3>
-                <p className="tool-description">{tool.description}</p>
-                <div className="tool-details">
-                  <div className="tool-formats">
-                    <span className="label">Formats:</span>
-                    <span className="formats">{tool.formats.join(', ')}</span>
-                  </div>
-                  <div className="tool-size">
-                    <span className="label">Max Size:</span>
-                    <span className="size">{tool.maxSize}</span>
-                  </div>
-                </div>
-                <div className="tool-arrow">→</div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Info Section */}
-          <div className="tools-info">
-            <div className="info-card card">
-              <h3>How It Works</h3>
-              <ol>
-                <li>Select a tool from our collection</li>
-                <li>Upload your file (up to 10MB)</li>
-                <li>Process and download your result</li>
-                <li>Files are automatically deleted after 24 hours</li>
-              </ol>
+        <div className="tools-grid">
+          {tools.map((category, categoryIndex) => (
+            <div key={categoryIndex} className="tool-category">
+              <h2 className="category-title">{category.category}</h2>
+              <div className="category-tools">
+                {category.items.map((tool, toolIndex) => {
+                  const Icon = tool.icon;
+                  return (
+                    <Link key={toolIndex} to={tool.path} className="tool-card">
+                      <div className="tool-icon" style={{ backgroundColor: tool.color }}>
+                        <Icon />
+                      </div>
+                      <div className="tool-content">
+                        <h3>{tool.name}</h3>
+                        <p>{tool.description}</p>
+                      </div>
+                      <ArrowRight className="tool-arrow" />
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+
+        <div className="tools-cta">
+          <h2>Need Help?</h2>
+          <p>Our tools are designed to be simple and intuitive. Just upload your file and let us handle the rest!</p>
+          <Link to="/tool/compress-image" className="btn btn-primary">
+            Try Image Compression
+            <ArrowRight className="btn-icon" />
+          </Link>
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Tools 
+export default Tools; 

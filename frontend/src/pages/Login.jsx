@@ -1,156 +1,150 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet-async'
-import './Auth.css'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { User, Lock, Eye, EyeOff } from 'lucide-react';
+import './Login.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: ''
-  })
-  const [errors, setErrors] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
+  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }))
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }))
-    }
-  }
-
-  const validateForm = () => {
-    const newErrors = {}
-
-    if (!formData.email) {
-      newErrors.email = 'Email is required'
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid'
-    }
-
-    if (!formData.password) {
-      newErrors.password = 'Password is required'
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters'
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+    setError('');
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     
-    if (!validateForm()) return
+    if (!formData.username || !formData.password) {
+      setError('Please fill in all fields');
+      return;
+    }
 
-    setIsLoading(true)
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      // In real app, handle login success/failure
-      console.log('Login attempt:', formData)
-    }, 1000)
-  }
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:5000/api/admin/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      // Store token
+      localStorage.setItem('adminToken', data.token);
+      
+      // Redirect to admin dashboard
+      navigate('/admin');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
-    <>
-      <Helmet>
-        <title>Login - ConvertFlix</title>
-        <meta name="description" content="Login to your ConvertFlix account to access premium features." />
-      </Helmet>
+    <div className="login-page">
+      <div className="container">
+        <div className="login-container">
+          <div className="login-card">
+            <div className="login-header">
+              <div className="login-icon">
+                <User />
+              </div>
+              <h1>Admin Login</h1>
+              <p>Access the admin dashboard to manage files</p>
+            </div>
 
-      <div className="auth-page">
-        <div className="container">
-          <div className="auth-container">
-            <div className="auth-card card">
-              <div className="auth-header">
-                <h1>Welcome Back</h1>
-                <p>Sign in to your account to continue</p>
+            <form onSubmit={handleSubmit} className="login-form">
+              {error && (
+                <div className="error-message">
+                  <p>{error}</p>
+                </div>
+              )}
+
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <div className="input-wrapper">
+                  <User className="input-icon" />
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    className="input"
+                    placeholder="Enter username"
+                    disabled={isLoading}
+                  />
+                </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="auth-form">
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <div className="input-wrapper">
+                  <Lock className="input-icon" />
                   <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={errors.email ? 'error' : ''}
-                    placeholder="Enter your email"
-                  />
-                  {errors.email && <span className="error-message">{errors.email}</span>}
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
+                    type={showPassword ? 'text' : 'password'}
                     id="password"
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    className={errors.password ? 'error' : ''}
-                    placeholder="Enter your password"
+                    className="input"
+                    placeholder="Enter password"
+                    disabled={isLoading}
                   />
-                  {errors.password && <span className="error-message">{errors.password}</span>}
+                  <button
+                    type="button"
+                    className="password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                    disabled={isLoading}
+                  >
+                    {showPassword ? <EyeOff /> : <Eye />}
+                  </button>
                 </div>
-
-                <div className="form-options">
-                  <label className="checkbox-label">
-                    <input type="checkbox" />
-                    <span>Remember me</span>
-                  </label>
-                  <Link to="/forgot-password" className="forgot-link">
-                    Forgot password?
-                  </Link>
-                </div>
-
-                <button 
-                  type="submit" 
-                  className="btn btn-primary auth-btn"
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Signing in...' : 'Sign In'}
-                </button>
-              </form>
-
-              <div className="auth-divider">
-                <span>or</span>
               </div>
 
-              <div className="social-auth">
-                <button className="btn btn-secondary social-btn">
-                  Continue with Google
-                </button>
-                <button className="btn btn-secondary social-btn">
-                  Continue with GitHub
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="btn btn-primary login-btn"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <>
+                    <div className="spinner"></div>
+                    Logging in...
+                  </>
+                ) : (
+                  'Login'
+                )}
+              </button>
+            </form>
 
-              <div className="auth-footer">
-                <p>
-                  Don't have an account?{' '}
-                  <Link to="/signup" className="auth-link">
-                    Sign up
-                  </Link>
-                </p>
-              </div>
+            <div className="login-footer">
+              <p>Default credentials: admin / admin123</p>
             </div>
           </div>
         </div>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Login 
+export default Login; 
