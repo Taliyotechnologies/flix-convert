@@ -1,361 +1,307 @@
-const sharp = require('sharp');
-const ffmpeg = require('fluent-ffmpeg');
-const { PDFDocument } = require('pdf-lib');
-const fs = require('fs');
-const path = require('path');
 const FileLog = require('../models/FileLog');
-
-// Helper function to get file type
-const getFileType = (mimetype) => {
-  if (mimetype.startsWith('image/')) return 'image';
-  if (mimetype.startsWith('video/')) return 'video';
-  if (mimetype.startsWith('audio/')) return 'audio';
-  if (mimetype === 'application/pdf') return 'pdf';
-  return null;
-};
-
-// Helper function to calculate saved percentage
-const calculateSavedPercent = (originalSize, processedSize) => {
-  return Math.round(((originalSize - processedSize) / originalSize) * 100);
-};
+const {
+  convertImage,
+  convertVideo,
+  convertAudio,
+  convertPDF,
+  getFileSize,
+  calculateSavedPercent,
+  generateOutputFilename
+} = require('../utils/fileProcessor');
+const path = require('path');
+const fs = require('fs-extra');
 
 // Image conversion
-const convertImage = async (req, res) => {
+const convertImageHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload an image file'
+      });
     }
 
-    const { file } = req;
-    const { format = 'jpeg' } = req.body;
-    const fileType = getFileType(file.mimetype);
+    const { format, quality = 80 } = req.body;
     
-    if (fileType !== 'image') {
-      return res.status(400).json({ error: 'Invalid file type. Only images are allowed.' });
+    if (!format) {
+      return res.status(400).json({
+        error: 'Format required',
+        message: 'Please specify the target format'
+      });
     }
 
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `converted-${file.filename.replace(/\.[^/.]+$/, '')}.${format}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Convert image using Sharp
-    let sharpInstance = sharp(file.path);
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = path.extname(req.file.originalname).slice(1);
     
-    switch (format.toLowerCase()) {
-      case 'jpeg':
-      case 'jpg':
-        sharpInstance = sharpInstance.jpeg({ quality: 80 });
-        break;
-      case 'png':
-        sharpInstance = sharpInstance.png({ compressionLevel: 6 });
-        break;
-      case 'webp':
-        sharpInstance = sharpInstance.webp({ quality: 80 });
-        break;
-      case 'gif':
-        sharpInstance = sharpInstance.gif();
-        break;
-      default:
-        return res.status(400).json({ error: 'Unsupported format. Supported formats: jpeg, png, webp, gif' });
-    }
-
-    await sharpInstance.toFile(fullOutputPath);
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    const outputFilename = generateOutputFilename(req.file.originalname, 'convert', format);
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
+    
+    // Convert image
+    await convertImage(inputPath, outputPath, format, parseInt(quality));
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: path.basename(outputPath),
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'image',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: format,
+      operation: 'convert'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'Image converted successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('Image conversion error:', error);
-    res.status(500).json({ error: 'Error converting image' });
+    res.status(500).json({
+      error: 'Conversion failed',
+      message: error.message
+    });
   }
 };
 
 // Video conversion
-const convertVideo = async (req, res) => {
+const convertVideoHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload a video file'
+      });
     }
 
-    const { file } = req;
-    const { format = 'mp4' } = req.body;
-    const fileType = getFileType(file.mimetype);
+    const { format } = req.body;
     
-    if (fileType !== 'video') {
-      return res.status(400).json({ error: 'Invalid file type. Only videos are allowed.' });
+    if (!format) {
+      return res.status(400).json({
+        error: 'Format required',
+        message: 'Please specify the target format'
+      });
     }
 
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `converted-${file.filename.replace(/\.[^/.]+$/, '')}.${format}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Convert video using FFmpeg
-    await new Promise((resolve, reject) => {
-      let ffmpegCommand = ffmpeg(file.path);
-
-      switch (format.toLowerCase()) {
-        case 'mp4':
-          ffmpegCommand = ffmpegCommand
-            .videoCodec('libx264')
-            .audioCodec('aac')
-            .outputOptions(['-crf 23']);
-          break;
-        case 'avi':
-          ffmpegCommand = ffmpegCommand
-            .videoCodec('libx264')
-            .audioCodec('mp3');
-          break;
-        case 'mov':
-          ffmpegCommand = ffmpegCommand
-            .videoCodec('libx264')
-            .audioCodec('aac');
-          break;
-        case 'webm':
-          ffmpegCommand = ffmpegCommand
-            .videoCodec('libvpx')
-            .audioCodec('libvorbis');
-          break;
-        default:
-          return res.status(400).json({ error: 'Unsupported format. Supported formats: mp4, avi, mov, webm' });
-      }
-
-      ffmpegCommand
-        .output(fullOutputPath)
-        .on('end', resolve)
-        .on('error', reject)
-        .run();
-    });
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = path.extname(req.file.originalname).slice(1);
+    
+    const outputFilename = generateOutputFilename(req.file.originalname, 'convert', format);
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
+    
+    // Convert video
+    await convertVideo(inputPath, outputPath, format);
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: path.basename(outputPath),
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'video',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: format,
+      operation: 'convert'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'Video converted successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('Video conversion error:', error);
-    res.status(500).json({ error: 'Error converting video' });
+    res.status(500).json({
+      error: 'Conversion failed',
+      message: error.message
+    });
   }
 };
 
 // Audio conversion
-const convertAudio = async (req, res) => {
+const convertAudioHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload an audio file'
+      });
     }
 
-    const { file } = req;
-    const { format = 'mp3' } = req.body;
-    const fileType = getFileType(file.mimetype);
+    const { format } = req.body;
     
-    if (fileType !== 'audio') {
-      return res.status(400).json({ error: 'Invalid file type. Only audio files are allowed.' });
+    if (!format) {
+      return res.status(400).json({
+        error: 'Format required',
+        message: 'Please specify the target format'
+      });
     }
 
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `converted-${file.filename.replace(/\.[^/.]+$/, '')}.${format}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Convert audio using FFmpeg
-    await new Promise((resolve, reject) => {
-      let ffmpegCommand = ffmpeg(file.path);
-
-      switch (format.toLowerCase()) {
-        case 'mp3':
-          ffmpegCommand = ffmpegCommand.audioCodec('mp3').audioBitrate(192);
-          break;
-        case 'wav':
-          ffmpegCommand = ffmpegCommand.audioCodec('pcm_s16le');
-          break;
-        case 'ogg':
-          ffmpegCommand = ffmpegCommand.audioCodec('libvorbis').audioBitrate(128);
-          break;
-        case 'm4a':
-          ffmpegCommand = ffmpegCommand.audioCodec('aac').audioBitrate(128);
-          break;
-        default:
-          return res.status(400).json({ error: 'Unsupported format. Supported formats: mp3, wav, ogg, m4a' });
-      }
-
-      ffmpegCommand
-        .output(fullOutputPath)
-        .on('end', resolve)
-        .on('error', reject)
-        .run();
-    });
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = path.extname(req.file.originalname).slice(1);
+    
+    const outputFilename = generateOutputFilename(req.file.originalname, 'convert', format);
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
+    
+    // Convert audio
+    await convertAudio(inputPath, outputPath, format);
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: path.basename(outputPath),
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'audio',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: format,
+      operation: 'convert'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'Audio converted successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('Audio conversion error:', error);
-    res.status(500).json({ error: 'Error converting audio' });
+    res.status(500).json({
+      error: 'Conversion failed',
+      message: error.message
+    });
   }
 };
 
-// PDF conversion (to images)
-const convertPdf = async (req, res) => {
+// PDF conversion
+const convertPDFHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload a PDF file'
+      });
     }
 
-    const { file } = req;
-    const { format = 'jpeg' } = req.body;
-    const fileType = getFileType(file.mimetype);
+    const { format } = req.body;
     
-    if (fileType !== 'pdf') {
-      return res.status(400).json({ error: 'Invalid file type. Only PDF files are allowed.' });
+    if (!format) {
+      return res.status(400).json({
+        error: 'Format required',
+        message: 'Please specify the target format'
+      });
     }
 
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `converted-${file.filename.replace(/\.[^/.]+$/, '')}.${format}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Convert PDF to image using Sharp
-    const pdfBuffer = fs.readFileSync(file.path);
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = 'pdf';
     
-    let sharpInstance = sharp(pdfBuffer, { page: 0 }); // Convert first page
+    const outputFilename = generateOutputFilename(req.file.originalname, 'convert', format);
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
     
-    switch (format.toLowerCase()) {
-      case 'jpeg':
-      case 'jpg':
-        sharpInstance = sharpInstance.jpeg({ quality: 80 });
-        break;
-      case 'png':
-        sharpInstance = sharpInstance.png({ compressionLevel: 6 });
-        break;
-      case 'webp':
-        sharpInstance = sharpInstance.webp({ quality: 80 });
-        break;
-      default:
-        return res.status(400).json({ error: 'Unsupported format. Supported formats: jpeg, png, webp' });
-    }
-
-    await sharpInstance.toFile(fullOutputPath);
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    // Convert PDF
+    await convertPDF(inputPath, outputPath, format);
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: path.basename(outputPath),
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'pdf',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: format,
+      operation: 'convert'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'PDF converted successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('PDF conversion error:', error);
-    res.status(500).json({ error: 'Error converting PDF' });
+    res.status(500).json({
+      error: 'Conversion failed',
+      message: error.message
+    });
   }
 };
 
 module.exports = {
-  convertImage,
-  convertVideo,
-  convertAudio,
-  convertPdf
+  convertImageHandler,
+  convertVideoHandler,
+  convertAudioHandler,
+  convertPDFHandler
 }; 

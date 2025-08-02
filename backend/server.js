@@ -1,37 +1,91 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
 const path = require('path');
-require('dotenv').config();
+const cron = require('node-cron');
+const fs = require('fs-extra');
 
+// Import routes
 const compressionRoutes = require('./routes/compression');
 const conversionRoutes = require('./routes/conversion');
 const adminRoutes = require('./routes/admin');
-const { startCleanupJob } = require('./utils/cleanupJob');
+
+// Import models
+const FileLog = require('./models/FileLog');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(helmet());
 app.use(cors());
-app.use(morgan('combined'));
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// MongoDB Connection
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://flixconvert_user:flixconvert123@cluster0.bscos9h.mongodb.net/flixconvert?retryWrites=true&w=majority&appName=Cluster0';
+
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('✅ Connected to MongoDB Atlas');
+})
+.catch((err) => {
+  console.error('❌ MongoDB connection error:', err);
+});
+
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 // Routes
 app.use('/api/compress', compressionRoutes);
 app.use('/api/convert', conversionRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Health check
+// Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'ConvertFlix API is running' });
+  res.json({ 
+    status: 'OK', 
+    message: 'ConvertFlix API is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Auto-delete expired files (runs every hour)
+cron.schedule('0 * * * *', async () => {
+  try {
+    const expiredFiles = await FileLog.find({
+      expiresAt: { $lt: new Date() }
+    });
+
+    for (const file of expiredFiles) {
+      try {
+        // Delete file from filesystem
+        const filePath = path.join(__dirname, file.filePath);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        }
+        
+        // Delete from database
+        await FileLog.findByIdAndDelete(file._id);
+        
+        console.log(`🗑️ Deleted expired file: ${file.fileName}`);
+      } catch (error) {
+        console.error(`Error deleting file ${file.fileName}:`, error);
+      }
+    }
+    
+    console.log(`🧹 Cleaned up ${expiredFiles.length} expired files`);
+  } catch (error) {
+    console.error('Error in cleanup cron job:', error);
+  }
 });
 
 // Error handling middleware
@@ -39,7 +93,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ 
     error: 'Something went wrong!',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
+    message: err.message 
   });
 });
 
@@ -48,19 +102,7 @@ app.use('*', (req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log('Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-    // Start cleanup job
-    startCleanupJob();
-  })
-  .catch((err) => {
-    console.error('MongoDB connection error:', err);
-    process.exit(1);
-  });
-
-module.exports = app; 
+app.listen(PORT, () => {
+  console.log(`🚀 ConvertFlix Backend running on port ${PORT}`);
+  console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+}); 

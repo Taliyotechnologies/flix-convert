@@ -1,18 +1,23 @@
 const express = require('express');
+const router = express.Router();
 const { upload, handleUploadError } = require('../middlewares/upload');
 const {
-  compressImage,
-  compressVideo,
-  compressAudio,
-  compressPdf
+  compressImageHandler,
+  compressVideoHandler,
+  compressAudioHandler,
+  compressPDFHandler
 } = require('../controllers/compressionController');
 
-const router = express.Router();
+// Image compression
+router.post('/image', upload.single('file'), handleUploadError, compressImageHandler);
 
-// Compression routes
-router.post('/image', upload.single('file'), handleUploadError, compressImage);
-router.post('/video', upload.single('file'), handleUploadError, compressVideo);
-router.post('/audio', upload.single('file'), handleUploadError, compressAudio);
-router.post('/pdf', upload.single('file'), handleUploadError, compressPdf);
+// Video compression
+router.post('/video', upload.single('file'), handleUploadError, compressVideoHandler);
+
+// Audio compression
+router.post('/audio', upload.single('file'), handleUploadError, compressAudioHandler);
+
+// PDF compression
+router.post('/pdf', upload.single('file'), handleUploadError, compressPDFHandler);
 
 module.exports = router; 

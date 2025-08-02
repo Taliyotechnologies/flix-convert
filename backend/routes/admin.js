@@ -1,22 +1,21 @@
 const express = require('express');
-const authMiddleware = require('../middlewares/auth');
+const router = express.Router();
+const { authMiddleware } = require('../middlewares/auth');
 const {
-  login,
-  getAllFiles,
-  downloadFile,
-  deleteFile,
-  getStats
+  loginHandler,
+  getFilesHandler,
+  downloadFileHandler,
+  deleteFileHandler,
+  getStatsHandler
 } = require('../controllers/adminController');
 
-const router = express.Router();
+// Admin login (no auth required)
+router.post('/login', loginHandler);
 
-// Public routes
-router.post('/login', login);
-
-// Protected routes
-router.get('/files', authMiddleware, getAllFiles);
-router.get('/files/:id/download', authMiddleware, downloadFile);
-router.delete('/files/:id', authMiddleware, deleteFile);
-router.get('/stats', authMiddleware, getStats);
+// Protected routes (require auth)
+router.get('/files', authMiddleware, getFilesHandler);
+router.get('/files/:id/download', authMiddleware, downloadFileHandler);
+router.delete('/files/:id', authMiddleware, deleteFileHandler);
+router.get('/stats', authMiddleware, getStatsHandler);
 
 module.exports = router; 

@@ -6,11 +6,6 @@ const fileLogSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  originalName: {
-    type: String,
-    required: true,
-    trim: true
-  },
   fileType: {
     type: String,
     required: true,
@@ -26,12 +21,6 @@ const fileLogSchema = new mongoose.Schema({
   },
   savedPercent: {
     type: Number,
-    required: true,
-    min: 0,
-    max: 100
-  },
-  filePath: {
-    type: String,
     required: true
   },
   uploadedAt: {
@@ -40,32 +29,32 @@ const fileLogSchema = new mongoose.Schema({
   },
   expiresAt: {
     type: Date,
-    required: true,
-    default: function() {
-      return new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours from now
-    }
+    required: true
   },
-  isExpired: {
-    type: Boolean,
-    default: false
+  filePath: {
+    type: String,
+    required: true
+  },
+  originalFormat: {
+    type: String,
+    required: true
+  },
+  processedFormat: {
+    type: String,
+    required: true
+  },
+  operation: {
+    type: String,
+    required: true,
+    enum: ['compress', 'convert']
   }
 }, {
   timestamps: true
 });
 
-// Index for automatic cleanup
+// Index for faster queries
 fileLogSchema.index({ expiresAt: 1 });
-fileLogSchema.index({ isExpired: 1 });
-
-// Method to check if file is expired
-fileLogSchema.methods.isFileExpired = function() {
-  return Date.now() > this.expiresAt;
-};
-
-// Pre-save middleware to update isExpired
-fileLogSchema.pre('save', function(next) {
-  this.isExpired = this.isFileExpired();
-  next();
-});
+fileLogSchema.index({ fileType: 1 });
+fileLogSchema.index({ operation: 1 });
 
 module.exports = mongoose.model('FileLog', fileLogSchema); 

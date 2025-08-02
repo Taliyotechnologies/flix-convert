@@ -1,287 +1,274 @@
-const sharp = require('sharp');
-const ffmpeg = require('fluent-ffmpeg');
-const { PDFDocument } = require('pdf-lib');
-const fs = require('fs');
-const path = require('path');
 const FileLog = require('../models/FileLog');
-
-// Helper function to get file type
-const getFileType = (mimetype) => {
-  if (mimetype.startsWith('image/')) return 'image';
-  if (mimetype.startsWith('video/')) return 'video';
-  if (mimetype.startsWith('audio/')) return 'audio';
-  if (mimetype === 'application/pdf') return 'pdf';
-  return null;
-};
-
-// Helper function to calculate saved percentage
-const calculateSavedPercent = (originalSize, processedSize) => {
-  return Math.round(((originalSize - processedSize) / originalSize) * 100);
-};
+const {
+  compressImage,
+  compressVideo,
+  compressAudio,
+  compressPDF,
+  getFileSize,
+  calculateSavedPercent,
+  generateOutputFilename
+} = require('../utils/fileProcessor');
+const path = require('path');
+const fs = require('fs-extra');
 
 // Image compression
-const compressImage = async (req, res) => {
+const compressImageHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload an image file'
+      });
     }
 
-    const { file } = req;
-    const fileType = getFileType(file.mimetype);
+    const { quality = 80 } = req.body;
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = path.extname(req.file.originalname).slice(1);
     
-    if (fileType !== 'image') {
-      return res.status(400).json({ error: 'Invalid file type. Only images are allowed.' });
-    }
-
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `compressed-${file.filename}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Compress image using Sharp
-    await sharp(file.path)
-      .jpeg({ quality: 60, progressive: true })
-      .toFile(fullOutputPath);
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    const outputFilename = generateOutputFilename(req.file.originalname, 'compress');
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
+    
+    // Compress image
+    await compressImage(inputPath, outputPath, parseInt(quality));
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: `compressed-${file.filename}`,
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'image',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: originalFormat,
+      operation: 'compress'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'Image compressed successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('Image compression error:', error);
-    res.status(500).json({ error: 'Error compressing image' });
+    res.status(500).json({
+      error: 'Compression failed',
+      message: error.message
+    });
   }
 };
 
 // Video compression
-const compressVideo = async (req, res) => {
+const compressVideoHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload a video file'
+      });
     }
 
-    const { file } = req;
-    const fileType = getFileType(file.mimetype);
+    const { quality = 'medium' } = req.body;
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = path.extname(req.file.originalname).slice(1);
     
-    if (fileType !== 'video') {
-      return res.status(400).json({ error: 'Invalid file type. Only videos are allowed.' });
-    }
-
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `compressed-${file.filename}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Compress video using FFmpeg
-    await new Promise((resolve, reject) => {
-      ffmpeg(file.path)
-        .videoCodec('libx264')
-        .audioCodec('aac')
-        .outputOptions(['-crf 28', '-preset medium'])
-        .output(fullOutputPath)
-        .on('end', resolve)
-        .on('error', reject)
-        .run();
-    });
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    const outputFilename = generateOutputFilename(req.file.originalname, 'compress');
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
+    
+    // Compress video
+    await compressVideo(inputPath, outputPath, quality);
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: `compressed-${file.filename}`,
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'video',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: originalFormat,
+      operation: 'compress'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'Video compressed successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('Video compression error:', error);
-    res.status(500).json({ error: 'Error compressing video' });
+    res.status(500).json({
+      error: 'Compression failed',
+      message: error.message
+    });
   }
 };
 
 // Audio compression
-const compressAudio = async (req, res) => {
+const compressAudioHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload an audio file'
+      });
     }
 
-    const { file } = req;
-    const fileType = getFileType(file.mimetype);
+    const { quality = 'medium' } = req.body;
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = path.extname(req.file.originalname).slice(1);
     
-    if (fileType !== 'audio') {
-      return res.status(400).json({ error: 'Invalid file type. Only audio files are allowed.' });
-    }
-
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `compressed-${file.filename}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Compress audio using FFmpeg
-    await new Promise((resolve, reject) => {
-      ffmpeg(file.path)
-        .audioCodec('aac')
-        .audioBitrate(128)
-        .output(fullOutputPath)
-        .on('end', resolve)
-        .on('error', reject)
-        .run();
-    });
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    const outputFilename = generateOutputFilename(req.file.originalname, 'compress');
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
+    
+    // Compress audio
+    await compressAudio(inputPath, outputPath, quality);
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: `compressed-${file.filename}`,
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'audio',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: originalFormat,
+      operation: 'compress'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'Audio compressed successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('Audio compression error:', error);
-    res.status(500).json({ error: 'Error compressing audio' });
+    res.status(500).json({
+      error: 'Compression failed',
+      message: error.message
+    });
   }
 };
 
 // PDF compression
-const compressPdf = async (req, res) => {
+const compressPDFHandler = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      return res.status(400).json({
+        error: 'No file uploaded',
+        message: 'Please upload a PDF file'
+      });
     }
 
-    const { file } = req;
-    const fileType = getFileType(file.mimetype);
+    const inputPath = req.file.path;
+    const originalSize = getFileSize(inputPath);
+    const originalFormat = 'pdf';
     
-    if (fileType !== 'pdf') {
-      return res.status(400).json({ error: 'Invalid file type. Only PDF files are allowed.' });
-    }
-
-    const originalSize = file.size;
-    const outputPath = path.join('uploads', `compressed-${file.filename}`);
-    const fullOutputPath = path.join(__dirname, '..', outputPath);
-
-    // Read and compress PDF
-    const pdfBytes = fs.readFileSync(file.path);
-    const pdfDoc = await PDFDocument.load(pdfBytes);
+    const outputFilename = generateOutputFilename(req.file.originalname, 'compress');
+    const outputPath = path.join(path.dirname(inputPath), outputFilename);
     
-    // Compress PDF by reducing image quality
-    const compressedPdfBytes = await pdfDoc.save({
-      useObjectStreams: true,
-      addDefaultPage: false
-    });
-
-    fs.writeFileSync(fullOutputPath, compressedPdfBytes);
-
-    const processedSize = fs.statSync(fullOutputPath).size;
+    // Compress PDF
+    await compressPDF(inputPath, outputPath);
+    
+    const processedSize = getFileSize(outputPath);
     const savedPercent = calculateSavedPercent(originalSize, processedSize);
-
-    // Save to database
+    
+    // Create file log
     const fileLog = new FileLog({
-      fileName: `compressed-${file.filename}`,
-      originalName: file.originalname,
+      fileName: req.file.originalname,
       fileType: 'pdf',
       originalSize,
       processedSize,
       savedPercent,
-      filePath: outputPath
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
+      filePath: path.relative(path.join(__dirname, '..'), outputPath),
+      originalFormat,
+      processedFormat: originalFormat,
+      operation: 'compress'
     });
-
+    
     await fileLog.save();
-
+    
     // Clean up original file
-    fs.unlinkSync(file.path);
-
+    await fs.unlink(inputPath);
+    
     res.json({
       success: true,
+      message: 'PDF compressed successfully',
       data: {
-        fileName: fileLog.fileName,
         originalSize,
         processedSize,
         savedPercent,
-        downloadUrl: `/uploads/${fileLog.fileName}`,
-        expiresAt: fileLog.expiresAt
+        downloadUrl: `/uploads/${outputFilename}`,
+        fileId: fileLog._id
       }
     });
-
+    
   } catch (error) {
     console.error('PDF compression error:', error);
-    res.status(500).json({ error: 'Error compressing PDF' });
+    res.status(500).json({
+      error: 'Compression failed',
+      message: error.message
+    });
   }
 };
 
 module.exports = {
-  compressImage,
-  compressVideo,
-  compressAudio,
-  compressPdf
+  compressImageHandler,
+  compressVideoHandler,
+  compressAudioHandler,
+  compressPDFHandler
 }; 

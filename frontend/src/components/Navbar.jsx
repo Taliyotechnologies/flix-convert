@@ -1,127 +1,107 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
-import { 
-  Sun, 
-  Moon, 
-  ChevronDown, 
-  User, 
-  LogOut,
-  FileText,
-  Image,
-  Video,
-  Music,
-  FileImage
-} from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
-  const { theme, toggleTheme, isDark } = useTheme();
-  const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
-  const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
-  const isLoggedIn = localStorage.getItem('adminToken');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const tools = [
-    { name: 'Compress Image', path: '/tool/compress-image', icon: Image },
-    { name: 'Convert Image', path: '/tool/convert-image', icon: FileImage },
-    { name: 'Compress Video', path: '/tool/compress-video', icon: Video },
-    { name: 'Convert Video', path: '/tool/convert-video', icon: Video },
-    { name: 'Compress Audio', path: '/tool/compress-audio', icon: Music },
-    { name: 'Convert Audio', path: '/tool/convert-audio', icon: Music },
-    { name: 'Compress PDF', path: '/tool/compress-pdf', icon: FileText },
-    { name: 'Convert PDF', path: '/tool/convert-pdf', icon: FileText },
-  ];
+  const isActive = (path) => location.pathname === path;
 
-  const handleLogout = () => {
-    localStorage.removeItem('adminToken');
-    window.location.reload();
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
     <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-logo">
-          <FileText className="logo-icon" />
-          <span>ConvertFlix</span>
-        </Link>
-
-        <div className="navbar-links">
-          <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
-            Home
+      <div className="container">
+        <div className="navbar-content">
+          {/* Logo */}
+          <Link to="/" className="navbar-logo">
+            <span className="logo-text">ConvertFlix</span>
           </Link>
-          
-          <div className="dropdown">
-            <button 
-              className={`nav-link dropdown-toggle ${location.pathname.startsWith('/tool') ? 'active' : ''}`}
-              onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
-            >
-              Tools
-              <ChevronDown className="dropdown-icon" />
-            </button>
+
+          {/* Desktop Navigation */}
+          <div className={`navbar-nav ${isMenuOpen ? 'active' : ''}`}>
+            <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
+              Home
+            </Link>
             
-            {isToolsDropdownOpen && (
-              <div className="dropdown-menu">
-                {tools.map((tool) => {
-                  const Icon = tool.icon;
-                  return (
-                    <Link
-                      key={tool.path}
-                      to={tool.path}
-                      className="dropdown-item"
-                      onClick={() => setIsToolsDropdownOpen(false)}
-                    >
-                      <Icon className="dropdown-item-icon" />
-                      {tool.name}
-                    </Link>
-                  );
-                })}
+            <div className="nav-dropdown">
+              <button 
+                className={`nav-link dropdown-toggle ${isActive('/tools') ? 'active' : ''}`}
+                onClick={toggleDropdown}
+              >
+                Tools
+                <span className="dropdown-arrow">▼</span>
+              </button>
+              <div className={`dropdown-menu ${isDropdownOpen ? 'active' : ''}`}>
+                <Link to="/tool/image" className="dropdown-item">Image Tools</Link>
+                <Link to="/tool/video" className="dropdown-item">Video Tools</Link>
+                <Link to="/tool/audio" className="dropdown-item">Audio Tools</Link>
+                <Link to="/tool/pdf" className="dropdown-item">PDF Tools</Link>
               </div>
-            )}
+            </div>
+            
+            <Link to="/tools" className={`nav-link ${isActive('/tools') ? 'active' : ''}`}>
+              All Tools
+            </Link>
           </div>
 
-          <Link to="/tools" className={`nav-link ${location.pathname === '/tools' ? 'active' : ''}`}>
-            All Tools
-          </Link>
-        </div>
-
-        <div className="navbar-actions">
-          <button 
-            className="theme-toggle"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
-          >
-            {isDark ? <Sun className="theme-icon" /> : <Moon className="theme-icon" />}
-          </button>
-
-          {isLoggedIn ? (
-            <div className="admin-dropdown">
-              <button 
-                className="admin-button"
-                onClick={() => setIsAdminDropdownOpen(!isAdminDropdownOpen)}
-              >
-                <User className="admin-icon" />
-                Admin
-                <ChevronDown className="dropdown-icon" />
-              </button>
-              
-              {isAdminDropdownOpen && (
-                <div className="dropdown-menu admin-dropdown-menu">
-                  <Link to="/admin" className="dropdown-item">
-                    Dashboard
-                  </Link>
-                  <button className="dropdown-item" onClick={handleLogout}>
-                    <LogOut className="dropdown-item-icon" />
-                    Logout
-                  </button>
-                </div>
-              )}
-            </div>
-          ) : (
-            <Link to="/login" className="login-button">
+          {/* Right side - Theme toggle and Login */}
+          <div className="navbar-actions">
+            <button 
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? '🌙' : '☀️'}
+            </button>
+            
+            <Link to="/login" className="btn btn-secondary login-btn">
               Login
             </Link>
-          )}
+
+            {/* Mobile menu button */}
+            <button 
+              className="mobile-menu-btn"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div className={`mobile-nav ${isMenuOpen ? 'active' : ''}`}>
+          <Link to="/" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
+            Home
+          </Link>
+          <Link to="/tools" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
+            All Tools
+          </Link>
+          <Link to="/tool/image" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
+            Image Tools
+          </Link>
+          <Link to="/tool/video" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
+            Video Tools
+          </Link>
+          <Link to="/tool/audio" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
+            Audio Tools
+          </Link>
+          <Link to="/tool/pdf" className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
+            PDF Tools
+          </Link>
         </div>
       </div>
     </nav>
