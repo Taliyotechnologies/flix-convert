@@ -1,5 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { 
+  BarChart3, 
+  FolderOpen, 
+  Users, 
+  TrendingUp, 
+  Settings, 
+  Download, 
+  Trash2, 
+  Edit, 
+  Pause,
+  CheckCircle,
+  Clock,
+  XCircle
+} from 'lucide-react';
 import './AdminPanel.css';
 
 const AdminPanel = () => {
@@ -126,7 +140,9 @@ const AdminPanel = () => {
     <div className="admin-dashboard">
       <div className="stats-grid">
         <div className="stat-card">
-          <div className="stat-icon">📁</div>
+          <div className="stat-icon">
+            <FolderOpen size={24} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{stats.totalFiles.toLocaleString()}</div>
             <div className="stat-label">Total Files</div>
@@ -134,7 +150,9 @@ const AdminPanel = () => {
         </div>
         
         <div className="stat-card">
-          <div className="stat-icon">💾</div>
+          <div className="stat-icon">
+            <BarChart3 size={24} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{formatBytes(stats.totalSizeSaved * 1024 * 1024)}</div>
             <div className="stat-label">Space Saved</div>
@@ -142,7 +160,9 @@ const AdminPanel = () => {
         </div>
         
         <div className="stat-card">
-          <div className="stat-icon">📊</div>
+          <div className="stat-icon">
+            <TrendingUp size={24} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{stats.averageCompressionRatio}%</div>
             <div className="stat-label">Avg Compression</div>
@@ -150,7 +170,9 @@ const AdminPanel = () => {
         </div>
         
         <div className="stat-card">
-          <div className="stat-icon">⚡</div>
+          <div className="stat-icon">
+            <Clock size={24} />
+          </div>
           <div className="stat-content">
             <div className="stat-value">{Object.values(stats.dailyStats).reduce((sum, day) => sum + day.count, 0)}</div>
             <div className="stat-label">Today's Files</div>
@@ -245,13 +267,15 @@ const AdminPanel = () => {
                 <td>{formatDate(file.uploadedAt)}</td>
                 <td>{formatDate(file.expiresAt)}</td>
                 <td className="actions">
-                  <button className="action-btn" title="Download">📥</button>
+                  <button className="action-btn" title="Download">
+                    <Download size={16} />
+                  </button>
                   <button 
                     className="action-btn delete" 
                     title="Delete"
                     onClick={() => handleDeleteFile(file.id)}
                   >
-                    🗑️
+                    <Trash2 size={16} />
                   </button>
                 </td>
               </tr>
@@ -294,9 +318,15 @@ const AdminPanel = () => {
                 </td>
                 <td>{formatDate(user.lastLogin)}</td>
                 <td className="actions">
-                  <button className="action-btn" title="Edit">✏️</button>
-                  <button className="action-btn" title="Suspend">⏸️</button>
-                  <button className="action-btn delete" title="Delete">🗑️</button>
+                  <button className="action-btn" title="Edit">
+                    <Edit size={16} />
+                  </button>
+                  <button className="action-btn" title="Suspend">
+                    <Pause size={16} />
+                  </button>
+                  <button className="action-btn delete" title="Delete">
+                    <Trash2 size={16} />
+                  </button>
                 </td>
               </tr>
             ))}
@@ -437,31 +467,36 @@ const AdminPanel = () => {
               className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
               onClick={() => setActiveTab('dashboard')}
             >
-              📊 Dashboard
+              <BarChart3 size={20} />
+              Dashboard
             </button>
             <button 
               className={`nav-item ${activeTab === 'files' ? 'active' : ''}`}
               onClick={() => setActiveTab('files')}
             >
-              📁 Files
+              <FolderOpen size={20} />
+              Files
             </button>
             <button 
               className={`nav-item ${activeTab === 'users' ? 'active' : ''}`}
               onClick={() => setActiveTab('users')}
             >
-              👥 Users
+              <Users size={20} />
+              Users
             </button>
             <button 
               className={`nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
               onClick={() => setActiveTab('analytics')}
             >
-              📈 Analytics
+              <TrendingUp size={20} />
+              Analytics
             </button>
             <button 
               className={`nav-item ${activeTab === 'settings' ? 'active' : ''}`}
               onClick={() => setActiveTab('settings')}
             >
-              ⚙️ Settings
+              <Settings size={20} />
+              Settings
             </button>
           </nav>
         </div>

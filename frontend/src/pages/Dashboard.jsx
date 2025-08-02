@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { 
+  FolderOpen, 
+  HardDrive, 
+  Zap, 
+  Target,
+  Search,
+  Download,
+  Trash2,
+  CheckCircle,
+  Clock,
+  XCircle
+} from 'lucide-react';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -103,13 +115,13 @@ const Dashboard = () => {
   const getStatusIcon = (status) => {
     switch (status) {
       case 'completed':
-        return '✅';
+        return <CheckCircle size={16} />;
       case 'processing':
-        return '⏳';
+        return <Clock size={16} />;
       case 'failed':
-        return '❌';
+        return <XCircle size={16} />;
       default:
-        return '⏳';
+        return <Clock size={16} />;
     }
   };
 
@@ -144,7 +156,9 @@ const Dashboard = () => {
           {/* Stats Cards */}
           <div className="stats-grid">
             <div className="stat-card">
-              <div className="stat-icon">📁</div>
+              <div className="stat-icon">
+                <FolderOpen size={24} />
+              </div>
               <div className="stat-content">
                 <div className="stat-value">{stats.totalFiles}</div>
                 <div className="stat-label">Total Files</div>
@@ -152,7 +166,9 @@ const Dashboard = () => {
             </div>
             
             <div className="stat-card">
-              <div className="stat-icon">💾</div>
+              <div className="stat-icon">
+                <HardDrive size={24} />
+              </div>
               <div className="stat-content">
                 <div className="stat-value">{stats.totalSize}</div>
                 <div className="stat-label">Total Size</div>
@@ -160,7 +176,9 @@ const Dashboard = () => {
             </div>
             
             <div className="stat-card">
-              <div className="stat-icon">⚡</div>
+              <div className="stat-icon">
+                <Zap size={24} />
+              </div>
               <div className="stat-content">
                 <div className="stat-value">{stats.processedToday}</div>
                 <div className="stat-label">Processed Today</div>
@@ -168,7 +186,9 @@ const Dashboard = () => {
             </div>
             
             <div className="stat-card">
-              <div className="stat-icon">🎯</div>
+              <div className="stat-icon">
+                <Target size={24} />
+              </div>
               <div className="stat-content">
                 <div className="stat-value">{stats.spaceSaved}</div>
                 <div className="stat-label">Space Saved</div>
@@ -187,7 +207,9 @@ const Dashboard = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="search-input"
                 />
-                <span className="search-icon">🔍</span>
+                <span className="search-icon">
+                  <Search size={16} />
+                </span>
               </div>
               
               <select
@@ -272,10 +294,10 @@ const Dashboard = () => {
                     <td className="file-date">{file.date}</td>
                     <td className="file-actions">
                       <button className="action-btn download-btn" title="Download">
-                        📥
+                        <Download size={16} />
                       </button>
                       <button className="action-btn delete-btn" title="Delete">
-                        🗑️
+                        <Trash2 size={16} />
                       </button>
                     </td>
                   </tr>
@@ -285,7 +307,9 @@ const Dashboard = () => {
 
             {filteredFiles.length === 0 && (
               <div className="empty-state">
-                <div className="empty-icon">📁</div>
+                <div className="empty-icon">
+                  <FolderOpen size={48} />
+                </div>
                 <h3 className="empty-title">No files found</h3>
                 <p className="empty-description">
                   {searchTerm || filterType !== 'all' 

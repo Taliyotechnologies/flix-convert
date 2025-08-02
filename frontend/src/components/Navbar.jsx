@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -110,7 +111,7 @@ const Navbar = () => {
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {isDark ? '🌞' : '🌙'}
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
           {isAuthenticated ? (
