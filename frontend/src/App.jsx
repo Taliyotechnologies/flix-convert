@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Tools from './pages/Tools';
 import Login from './pages/Login';
-import SignUp from './pages/Signup';
+import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import AdminPanel from './pages/AdminPanel';
 import ToolPage from './pages/ToolPage';
