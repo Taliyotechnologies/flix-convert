@@ -27,6 +27,13 @@ const Navbar = () => {
     setIsProfileDropdownOpen(false);
   };
 
+  const closeAllDropdowns = () => {
+    setIsToolsDropdownOpen(false);
+    setIsCompanyDropdownOpen(false);
+    setIsProfileDropdownOpen(false);
+    setIsMobileMenuOpen(false);
+  };
+
   const toolsItems = [
     { name: 'Compress Image', path: '/tool/compress-image' },
     { name: 'Compress PDF', path: '/tool/compress-pdf' },
@@ -47,13 +54,13 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         {/* Logo */}
-        <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+        <Link to="/" className="navbar-logo" onClick={closeAllDropdowns}>
           ConvertFlix
         </Link>
 
         {/* Desktop Navigation */}
         <div className="navbar-nav desktop-nav">
-          <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>
+          <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={closeAllDropdowns}>
             Home
           </Link>
           
@@ -66,16 +73,16 @@ const Navbar = () => {
             </button>
             {isToolsDropdownOpen && (
               <div className="dropdown-menu">
-                {toolsItems.map((item) => (
-                  <Link 
-                    key={item.path} 
-                    to={item.path} 
-                    className="dropdown-item"
-                    onClick={() => setIsToolsDropdownOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                                 {toolsItems.map((item) => (
+                   <Link 
+                     key={item.path} 
+                     to={item.path} 
+                     className="dropdown-item"
+                     onClick={closeAllDropdowns}
+                   >
+                     {item.name}
+                   </Link>
+                 ))}
               </div>
             )}
           </div>
@@ -89,16 +96,16 @@ const Navbar = () => {
             </button>
             {isCompanyDropdownOpen && (
               <div className="dropdown-menu">
-                {companyItems.map((item) => (
-                  <Link 
-                    key={item.path} 
-                    to={item.path} 
-                    className="dropdown-item"
-                    onClick={() => setIsCompanyDropdownOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                                 {companyItems.map((item) => (
+                   <Link 
+                     key={item.path} 
+                     to={item.path} 
+                     className="dropdown-item"
+                     onClick={closeAllDropdowns}
+                   >
+                     {item.name}
+                   </Link>
+                 ))}
               </div>
             )}
           </div>
@@ -130,14 +137,14 @@ const Navbar = () => {
                     <div className="profile-name">{user.name}</div>
                     <div className="profile-email">{user.email}</div>
                   </div>
-                  <Link to="/dashboard" className="dropdown-item">
-                    Dashboard
-                  </Link>
-                  {user.role === 'admin' && (
-                    <Link to="/admin" className="dropdown-item">
-                      Admin Panel
-                    </Link>
-                  )}
+                                     <Link to="/dashboard" className="dropdown-item" onClick={closeAllDropdowns}>
+                     Dashboard
+                   </Link>
+                   {user.role === 'admin' && (
+                     <Link to="/admin" className="dropdown-item" onClick={closeAllDropdowns}>
+                       Admin Panel
+                     </Link>
+                   )}
                   <button className="dropdown-item logout-btn">
                     Logout
                   </button>
@@ -169,25 +176,25 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
         <div className="mobile-nav">
-          <Link to="/" className="mobile-nav-link" onClick={closeMobileMenu}>
-            Home
-          </Link>
+                     <Link to="/" className="mobile-nav-link" onClick={closeAllDropdowns}>
+             Home
+           </Link>
           
           <div className="mobile-dropdown">
             <button className="mobile-dropdown-toggle">
               Tools
             </button>
             <div className="mobile-dropdown-menu">
-              {toolsItems.map((item) => (
-                <Link 
-                  key={item.path} 
-                  to={item.path} 
-                  className="mobile-dropdown-item"
-                  onClick={closeMobileMenu}
-                >
-                  {item.name}
-                </Link>
-              ))}
+                             {toolsItems.map((item) => (
+                 <Link 
+                   key={item.path} 
+                   to={item.path} 
+                   className="mobile-dropdown-item"
+                   onClick={closeAllDropdowns}
+                 >
+                   {item.name}
+                 </Link>
+               ))}
             </div>
           </div>
 
@@ -196,28 +203,28 @@ const Navbar = () => {
               Company
             </button>
             <div className="mobile-dropdown-menu">
-              {companyItems.map((item) => (
-                <Link 
-                  key={item.path} 
-                  to={item.path} 
-                  className="mobile-dropdown-item"
-                  onClick={closeMobileMenu}
-                >
-                  {item.name}
-                </Link>
-              ))}
+                             {companyItems.map((item) => (
+                 <Link 
+                   key={item.path} 
+                   to={item.path} 
+                   className="mobile-dropdown-item"
+                   onClick={closeAllDropdowns}
+                 >
+                   {item.name}
+                 </Link>
+               ))}
             </div>
           </div>
 
           {!isAuthenticated && (
-            <div className="mobile-auth">
-              <Link to="/login" className="btn btn-secondary full-width" onClick={closeMobileMenu}>
-                Login
-              </Link>
-              <Link to="/signup" className="btn btn-primary full-width" onClick={closeMobileMenu}>
-                Sign Up
-              </Link>
-            </div>
+                         <div className="mobile-auth">
+               <Link to="/login" className="btn btn-secondary full-width" onClick={closeAllDropdowns}>
+                 Login
+               </Link>
+               <Link to="/signup" className="btn btn-primary full-width" onClick={closeAllDropdowns}>
+                 Sign Up
+               </Link>
+             </div>
           )}
         </div>
       )}

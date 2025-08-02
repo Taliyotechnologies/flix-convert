@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Tools from './pages/Tools';
 import Login from './pages/Login';
@@ -26,6 +27,7 @@ function App() {
     <HelmetProvider>
       <ThemeProvider>
         <Router>
+          <ScrollToTop />
           <div className="App">
             <Navbar />
             <main>

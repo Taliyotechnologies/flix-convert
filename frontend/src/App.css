@@ -151,8 +151,26 @@ main {
   background: var(--text-secondary);
 }
 
-/* Focus styles */
+/* Focus styles - Remove outline for better UX */
 *:focus {
+  outline: none;
+}
+
+/* Remove focus outline for buttons and interactive elements */
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+a:focus {
+  outline: none;
+}
+
+/* Custom focus styles for accessibility */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
