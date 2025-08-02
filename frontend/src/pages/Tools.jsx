@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { Image, FileText, Video, Music, Film, Image as ImageIcon, Shield, Zap, Target, ArrowRight } from 'lucide-react';
 import './Tools.css';
 
 const Tools = () => {
@@ -11,7 +12,7 @@ const Tools = () => {
         {
           name: 'Compress Image',
           description: 'Reduce image file size while maintaining quality',
-          icon: '🖼️',
+          icon: <Image size={32} />,
           path: '/tool/compress-image',
           formats: ['JPG', 'PNG', 'WebP', 'GIF'],
           maxSize: '10MB'
@@ -19,7 +20,7 @@ const Tools = () => {
         {
           name: 'Compress PDF',
           description: 'Reduce PDF file size for easier sharing',
-          icon: '📄',
+          icon: <FileText size={32} />,
           path: '/tool/compress-pdf',
           formats: ['PDF'],
           maxSize: '10MB'
@@ -27,7 +28,7 @@ const Tools = () => {
         {
           name: 'Compress Video',
           description: 'Reduce video file size without losing quality',
-          icon: '🎥',
+          icon: <Video size={32} />,
           path: '/tool/compress-video',
           formats: ['MP4', 'AVI', 'MOV', 'MKV'],
           maxSize: '10MB'
@@ -40,7 +41,7 @@ const Tools = () => {
         {
           name: 'Convert Audio',
           description: 'Convert between different audio formats',
-          icon: '🎵',
+          icon: <Music size={32} />,
           path: '/tool/convert-audio',
           formats: ['MP3', 'WAV', 'AAC', 'OGG', 'FLAC'],
           maxSize: '10MB'
@@ -48,7 +49,7 @@ const Tools = () => {
         {
           name: 'Convert Video',
           description: 'Convert videos to different formats',
-          icon: '🎬',
+          icon: <Film size={32} />,
           path: '/tool/convert-video',
           formats: ['MP4', 'AVI', 'MOV', 'MKV', 'WebM'],
           maxSize: '10MB'
@@ -56,7 +57,7 @@ const Tools = () => {
         {
           name: 'Convert Image',
           description: 'Convert images between different formats',
-          icon: '🖼️',
+          icon: <ImageIcon size={32} />,
           path: '/tool/convert-image',
           formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP'],
           maxSize: '10MB'
@@ -106,7 +107,9 @@ const Tools = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="tool-arrow">→</div>
+                      <div className="tool-arrow">
+                        <ArrowRight size={20} />
+                      </div>
                     </Link>
                   ))}
                 </div>
@@ -118,7 +121,9 @@ const Tools = () => {
           <div className="info-section">
             <div className="info-grid">
               <div className="info-card">
-                <div className="info-icon">🔒</div>
+                <div className="info-icon">
+                  <Shield size={32} />
+                </div>
                 <h3 className="info-title">Privacy First</h3>
                 <p className="info-description">
                   Your files are automatically deleted after 24 hours. We never store or access your content.
@@ -126,7 +131,9 @@ const Tools = () => {
               </div>
               
               <div className="info-card">
-                <div className="info-icon">⚡</div>
+                <div className="info-icon">
+                  <Zap size={32} />
+                </div>
                 <h3 className="info-title">Lightning Fast</h3>
                 <p className="info-description">
                   Process files in seconds with our optimized algorithms and cloud infrastructure.
@@ -134,7 +141,9 @@ const Tools = () => {
               </div>
               
               <div className="info-card">
-                <div className="info-icon">🎯</div>
+                <div className="info-icon">
+                  <Target size={32} />
+                </div>
                 <h3 className="info-title">Quality Preserved</h3>
                 <p className="info-description">
                   Maintain original quality while reducing file size with intelligent compression.

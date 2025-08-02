@@ -1,37 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import { Zap, Shield, Globe, Sparkles, FolderOpen, Gift, FileText, Package, Sparkles as SparklesIcon } from 'lucide-react';
 import './Home.css';
 
 const Home = () => {
   const features = [
     {
-      icon: '⚡',
+      icon: <Zap size={32} />,
       title: 'Lightning Fast',
       description: 'Process files in seconds with our optimized algorithms'
     },
     {
-      icon: '🔒',
+      icon: <Shield size={32} />,
       title: 'Secure & Private',
       description: 'Your files are automatically deleted after 24 hours'
     },
     {
-      icon: '🌐',
+      icon: <Globe size={32} />,
       title: 'Cross Platform',
       description: 'Works on any device - Windows, Mac, Linux, Mobile'
     },
     {
-      icon: '✨',
+      icon: <Sparkles size={32} />,
       title: 'Quality Preserved',
       description: 'Maintain original quality while reducing file size'
     },
     {
-      icon: '📁',
+      icon: <FolderOpen size={32} />,
       title: 'Multi-format Support',
       description: 'Support for images, videos, PDFs, and audio files'
     },
     {
-      icon: '🎁',
+      icon: <Gift size={32} />,
       title: 'Free Up to 10MB',
       description: 'No registration required for files under 10MB'
     }
@@ -74,10 +75,16 @@ const Home = () => {
               </div>
               <div className="hero-illustration">
                 <div className="file-illustration">
-                  <div className="file-icon">📄</div>
+                  <div className="file-icon">
+                    <FileText size={48} />
+                  </div>
                   <div className="compression-arrow">→</div>
-                  <div className="compressed-file">📦</div>
-                  <div className="sparkles">✨</div>
+                  <div className="compressed-file">
+                    <Package size={48} />
+                  </div>
+                  <div className="sparkles">
+                    <SparklesIcon size={24} />
+                  </div>
                 </div>
               </div>
             </div>
