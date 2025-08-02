@@ -35,6 +35,11 @@ main {
   padding-top: 80px;
 }
 
+/* Admin layout overrides */
+.admin-layout main {
+  padding-top: 0;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;

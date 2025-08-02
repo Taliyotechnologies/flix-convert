@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route, useRouteError } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useRouteError, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Navbar from './components/Navbar';
@@ -25,35 +25,50 @@ import Error from './pages/Error';
 import './App.css';
 import './components/Footer.css';
 
+// Custom hook to check if current route is admin
+const useIsAdminRoute = () => {
+  const location = useLocation();
+  return location.pathname.startsWith('/admin');
+};
+
+// Wrapper component to conditionally render navbar and footer
+const AppContent = () => {
+  const isAdminRoute = useIsAdminRoute();
+  
+  return (
+    <div className="App">
+      {!isAdminRoute && <Navbar />}
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/tools" element={<Tools />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/dashboard" element={<DashboardLayout />} />
+          <Route path="/admin" element={<AdminLayout />} />
+          <Route path="/tool/:type" element={<ToolPage />} />
+          <Route path="/convert-pdf" element={<ConvertPdf />} />
+          <Route path="/compress-audio" element={<CompressAudio />} />
+          <Route path="/company" element={<Company />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </main>
+      {!isAdminRoute && <Footer />}
+    </div>
+  );
+};
+
 function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
         <Router>
           <ScrollToTop />
-          <div className="App">
-            <Navbar />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/tools" element={<Tools />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/dashboard" element={<DashboardLayout />} />
-                <Route path="/admin" element={<AdminLayout />} />
-                <Route path="/tool/:type" element={<ToolPage />} />
-                <Route path="/convert-pdf" element={<ConvertPdf />} />
-                <Route path="/compress-audio" element={<CompressAudio />} />
-                <Route path="/company" element={<Company />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="*" element={<Error />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
+          <AppContent />
         </Router>
       </ThemeProvider>
     </HelmetProvider>

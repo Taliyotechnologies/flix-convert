@@ -1,4 +1,11 @@
 /* Admin Panel Styles */
+.admin-layout {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .admin-panel {
   display: flex;
   min-height: 100vh;
