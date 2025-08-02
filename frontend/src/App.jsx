@@ -1,14 +1,14 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import Navbar from './components/Navbar.jsx'
-import Home from './pages/Home.jsx'
-import Tools from './pages/Tools.jsx'
-import Login from './pages/Login.jsx'
-import Signup from './pages/Signup.jsx'
-import Dashboard from './pages/Dashboard.jsx'
-import ToolPage from './pages/ToolPage.jsx'
-import Company from './pages/Company.jsx'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Tools from './pages/Tools'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Dashboard from './pages/Dashboard'
+import ToolPage from './pages/ToolPage'
+import Company from './pages/Company'
 
 function App() {
   return (
