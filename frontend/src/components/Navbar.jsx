@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ThemeContext } from '../App'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../hooks/useAuth.jsx'
 
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext)

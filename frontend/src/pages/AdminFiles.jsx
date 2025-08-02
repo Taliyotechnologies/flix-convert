@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { useAuth } from '../hooks/useAuth'
+import { useAuth } from '../hooks/useAuth.jsx'
 import { adminAPI, formatFileSize, formatDate } from '../services/api'
 
 const AdminFiles = ({ showToast }) => {

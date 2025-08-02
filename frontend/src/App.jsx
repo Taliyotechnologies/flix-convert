@@ -20,7 +20,7 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 import Toast from './components/Toast'
-import { AuthProvider } from './hooks/useAuth'
+import { AuthProvider } from './hooks/useAuth.jsx'
 
 // Theme context
 export const ThemeContext = React.createContext()
