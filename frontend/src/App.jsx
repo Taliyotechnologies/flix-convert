@@ -1,78 +1,39 @@
-import React from 'react';
-import { HashRouter as Router, Routes, Route, useRouteError, useLocation } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
-import { ThemeProvider } from './contexts/ThemeContext';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
-import Home from './pages/Home';
-import Tools from './pages/Tools';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import Dashboard from './pages/Dashboard';
-import DashboardLayout from './pages/DashboardLayout';
-import AdminPanel from './pages/AdminPanel';
-import AdminLayout from './pages/AdminLayout';
-import ToolPage from './pages/ToolPage';
-import ConvertPdf from './pages/ConvertPdf';
-import CompressAudio from './pages/CompressAudio';
-import Company from './pages/Company';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
-import Error from './pages/Error';
-import './App.css';
-import './components/Footer.css';
-
-// Custom hook to check if current route is admin
-const useIsAdminRoute = () => {
-  const location = useLocation();
-  return location.pathname.startsWith('/admin');
-};
-
-// Wrapper component to conditionally render navbar and footer
-const AppContent = () => {
-  const isAdminRoute = useIsAdminRoute();
-  
-  return (
-    <div className="App">
-      {!isAdminRoute && <Navbar />}
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tools" element={<Tools />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/dashboard" element={<DashboardLayout />} />
-          <Route path="/admin" element={<AdminLayout />} />
-          <Route path="/tool/:type" element={<ToolPage />} />
-          <Route path="/convert-pdf" element={<ConvertPdf />} />
-          <Route path="/compress-audio" element={<CompressAudio />} />
-          <Route path="/company" element={<Company />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </main>
-      {!isAdminRoute && <Footer />}
-    </div>
-  );
-};
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Tools from './pages/Tools'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Dashboard from './pages/Dashboard'
+import ToolPage from './pages/ToolPage'
+import Company from './pages/Company'
 
 function App() {
   return (
-    <HelmetProvider>
-      <ThemeProvider>
-        <Router>
-          <ScrollToTop />
-          <AppContent />
-        </Router>
-      </ThemeProvider>
-    </HelmetProvider>
-  );
+    <>
+      <Helmet>
+        <title>ConvertFlix - Free File Compression & Conversion Tool</title>
+        <meta name="description" content="ConvertFlix - Free file compression and conversion tool. Compress images, convert audio, and more instantly." />
+      </Helmet>
+      
+      <div className="app">
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/tools" element={<Tools />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/tool/:type" element={<ToolPage />} />
+            <Route path="/company" element={<Company />} />
+          </Routes>
+        </main>
+      </div>
+    </>
+  )
 }
 
-export default App; 
+export default App 

@@ -1,143 +1,174 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import './Company.css';
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
+import './Company.css'
 
 const Company = () => {
+  const team = [
+    {
+      name: 'Alex Johnson',
+      role: 'CEO & Founder',
+      bio: 'Passionate about making file processing accessible to everyone.',
+      avatar: '👨‍💼'
+    },
+    {
+      name: 'Sarah Chen',
+      role: 'CTO',
+      bio: 'Expert in cloud infrastructure and scalable systems.',
+      avatar: '👩‍💻'
+    },
+    {
+      name: 'Mike Rodriguez',
+      role: 'Lead Developer',
+      bio: 'Full-stack developer focused on user experience.',
+      avatar: '👨‍💻'
+    },
+    {
+      name: 'Emily Davis',
+      role: 'Product Manager',
+      bio: 'Dedicated to creating intuitive user experiences.',
+      avatar: '👩‍💼'
+    }
+  ]
+
+  const values = [
+    {
+      icon: '🔒',
+      title: 'Privacy First',
+      description: 'Your files are encrypted and automatically deleted after 24 hours.'
+    },
+    {
+      icon: '⚡',
+      title: 'Lightning Fast',
+      description: 'Process files in seconds with our optimized algorithms.'
+    },
+    {
+      icon: '🌍',
+      title: 'Accessible',
+      description: 'Free tools available to everyone, no registration required.'
+    },
+    {
+      icon: '🛡️',
+      title: 'Secure',
+      description: 'Enterprise-grade security for all your file processing needs.'
+    }
+  ]
+
   return (
     <>
       <Helmet>
-        <title>Company - ConvertFlix</title>
-        <meta name="description" content="Learn more about ConvertFlix and Taliyo Technologies - our mission to provide fast, secure file compression and conversion tools." />
+        <title>About Us - ConvertFlix</title>
+        <meta name="description" content="Learn about ConvertFlix, our mission, team, and commitment to providing free file processing tools." />
       </Helmet>
 
       <div className="company-page">
         <div className="container">
-          <div className="company-header">
-            <h1 className="company-title">About ConvertFlix</h1>
-            <p className="company-subtitle">
-              Empowering users with fast, secure, and reliable file processing tools
+          {/* Hero Section */}
+          <div className="company-hero">
+            <h1>About ConvertFlix</h1>
+            <p className="hero-subtitle">
+              Making file compression and conversion accessible to everyone
             </p>
           </div>
 
-          <div className="company-content">
-            <div className="company-section">
-              <h2>🏢 Our Company</h2>
+          {/* Mission Section */}
+          <section className="mission-section">
+            <div className="section-content">
+              <h2>Our Mission</h2>
               <p>
-                ConvertFlix is a product of <strong>Taliyo Technologies</strong>, a leading software development company 
-                specializing in innovative web applications and digital solutions. Founded with a vision to make 
-                technology accessible to everyone, we create tools that simplify complex tasks and enhance productivity.
+                At ConvertFlix, we believe that powerful file processing tools should be 
+                accessible to everyone. Whether you're a student, professional, or hobbyist, 
+                our free tools help you compress and convert files without the hassle of 
+                complex software or expensive subscriptions.
+              </p>
+              <p>
+                Founded in 2024, we've helped millions of users save time and storage space 
+                with our intuitive, web-based file processing platform. Our commitment to 
+                privacy, security, and user experience drives everything we do.
               </p>
             </div>
+          </section>
 
-            <div className="company-section">
-              <h2>🎯 Our Mission</h2>
-              <p>
-                At ConvertFlix, we believe that file processing should be simple, fast, and secure. 
-                Our mission is to provide professional-grade compression and conversion tools that 
-                anyone can use, regardless of their technical expertise. We're committed to making 
-                high-quality file processing tools accessible to everyone, from students to professionals.
-              </p>
+          {/* Values Section */}
+          <section className="values-section">
+            <h2>Our Values</h2>
+            <div className="values-grid">
+              {values.map((value, index) => (
+                <div key={index} className="value-card card">
+                  <div className="value-icon">{value.icon}</div>
+                  <h3>{value.title}</h3>
+                  <p>{value.description}</p>
+                </div>
+              ))}
             </div>
+          </section>
 
-            <div className="company-section">
-              <h2>🛠️ What We Do</h2>
-              <p>
-                We offer a comprehensive suite of file processing tools including:
-              </p>
-              <ul className="services-list">
-                <li><strong>📸 Image Compression:</strong> Optimize your images without losing quality</li>
-                <li><strong>📄 PDF Compression:</strong> Reduce PDF file sizes for easy sharing</li>
-                <li><strong>🎥 Video Compression:</strong> Compress videos for faster uploads</li>
-                <li><strong>🎵 Audio Conversion:</strong> Convert between audio formats seamlessly</li>
-                <li><strong>🖼️ Image Conversion:</strong> Convert images to different formats</li>
-                <li><strong>📊 File Format Conversion:</strong> Transform files between various formats</li>
-              </ul>
+          {/* Team Section */}
+          <section className="team-section">
+            <h2>Meet Our Team</h2>
+            <div className="team-grid">
+              {team.map((member, index) => (
+                <div key={index} className="team-card card">
+                  <div className="member-avatar">{member.avatar}</div>
+                  <h3>{member.name}</h3>
+                  <p className="member-role">{member.role}</p>
+                  <p className="member-bio">{member.bio}</p>
+                </div>
+              ))}
             </div>
+          </section>
 
-            <div className="company-section">
-              <h2>💎 Our Values</h2>
-              <div className="values-grid">
-                <div className="value-item">
-                  <span className="value-icon">🔒</span>
-                  <h3>Privacy First</h3>
-                  <p>Your files are automatically deleted after 24 hours. We never store or access your personal data.</p>
+          {/* Stats Section */}
+          <section className="stats-section">
+            <div className="stats-content">
+              <h2>Our Impact</h2>
+              <div className="stats-grid">
+                <div className="stat-item">
+                  <div className="stat-number">2M+</div>
+                  <div className="stat-label">Files Processed</div>
                 </div>
-                <div className="value-item">
-                  <span className="value-icon">🛡️</span>
-                  <h3>Security</h3>
-                  <p>Enterprise-grade encryption and secure processing ensure your files are protected at all times.</p>
+                <div className="stat-item">
+                  <div className="stat-number">500K+</div>
+                  <div className="stat-label">Happy Users</div>
                 </div>
-                <div className="value-item">
-                  <span className="value-icon">🎯</span>
-                  <h3>Simplicity</h3>
-                  <p>Easy-to-use tools designed for everyone, from beginners to advanced users.</p>
+                <div className="stat-item">
+                  <div className="stat-number">50TB+</div>
+                  <div className="stat-label">Storage Saved</div>
                 </div>
-                <div className="value-item">
-                  <span className="value-icon">⚡</span>
-                  <h3>Performance</h3>
-                  <p>Fast processing with optimized algorithms for quick and efficient file handling.</p>
+                <div className="stat-item">
+                  <div className="stat-number">99.9%</div>
+                  <div className="stat-label">Uptime</div>
                 </div>
               </div>
             </div>
+          </section>
 
-            <div className="company-section">
-              <h2>🚀 Taliyo Technologies</h2>
+          {/* Contact Section */}
+          <section className="contact-section">
+            <div className="contact-content">
+              <h2>Get in Touch</h2>
               <p>
-                <strong>Taliyo Technologies</strong> is a dynamic software development company that specializes in:
-              </p>
-              <ul className="taliyo-services">
-                <li><strong>🌐 Web Development:</strong> Modern, responsive web applications</li>
-                <li><strong>📱 Mobile Apps:</strong> Cross-platform mobile solutions</li>
-                <li><strong>☁️ Cloud Solutions:</strong> Scalable cloud infrastructure</li>
-                <li><strong>🤖 AI & Machine Learning:</strong> Intelligent automation systems</li>
-                <li><strong>🔧 Custom Software:</strong> Tailored solutions for businesses</li>
-                <li><strong>🎨 UI/UX Design:</strong> Beautiful and intuitive user interfaces</li>
-              </ul>
-            </div>
-
-            <div className="company-section">
-              <h2>👥 Our Team</h2>
-              <p>
-                Our team consists of experienced developers, designers, and technology enthusiasts 
-                who are passionate about creating innovative solutions. We combine technical expertise 
-                with creative thinking to deliver products that exceed expectations.
-              </p>
-            </div>
-
-            <div className="company-section">
-              <h2>🌍 Our Impact</h2>
-              <p>
-                Since our launch, ConvertFlix has helped thousands of users process millions of files. 
-                We're proud to serve a global community of creators, professionals, and everyday users 
-                who trust us with their file processing needs.
-              </p>
-            </div>
-
-            <div className="company-section">
-              <h2>📞 Contact Us</h2>
-              <p>
-                Have questions or suggestions? We'd love to hear from you! Reach out to our team at:
+                Have questions, suggestions, or feedback? We'd love to hear from you!
               </p>
               <div className="contact-info">
-                <p><strong>📧 Email:</strong> <a href="mailto:info@taliyotechnologies.com">info@taliyotechnologies.com</a></p>
-                <p><strong>🌐 Website:</strong> <a href="https://taliyotechnologies.com" target="_blank" rel="noopener noreferrer">taliyotechnologies.com</a></p>
-                <p><strong>📍 Location:</strong> India</p>
+                <div className="contact-item">
+                  <span className="contact-icon">📧</span>
+                  <span>hello@convertflix.com</span>
+                </div>
+                <div className="contact-item">
+                  <span className="contact-icon">🌐</span>
+                  <span>www.convertflix.com</span>
+                </div>
+                <div className="contact-item">
+                  <span className="contact-icon">📍</span>
+                  <span>San Francisco, CA</span>
+                </div>
               </div>
             </div>
-
-            <div className="company-section">
-              <h2>🔮 Future Vision</h2>
-              <p>
-                We're constantly working on new features and improvements. Our roadmap includes 
-                advanced AI-powered compression, batch processing capabilities, and integration 
-                with popular cloud storage services. Stay tuned for exciting updates!
-              </p>
-            </div>
-          </div>
+          </section>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Company; 
+export default Company 

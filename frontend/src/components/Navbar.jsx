@@ -1,116 +1,61 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useTheme } from '../contexts/ThemeContext';
-import { Sun, Moon, Menu, X } from 'lucide-react';
-import './Navbar.css';
+import React, { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { useTheme } from '../contexts/ThemeContext'
+import './Navbar.css'
 
 const Navbar = () => {
-  const { isDark, toggleTheme } = useTheme();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isToolsDropdownOpen, setIsToolsDropdownOpen] = useState(false);
-  const [isCompanyDropdownOpen, setIsCompanyDropdownOpen] = useState(false);
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
-  const location = useLocation();
+  const { theme, toggleTheme } = useTheme()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const location = useLocation()
 
-  // Mock authentication state (replace with real auth)
-  const isAuthenticated = true; // Changed to true to show admin features
-  const user = { name: 'Admin User', email: 'admin@flixconvert.com', role: 'admin' };
+  // Mock auth state - replace with actual auth context
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen)
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
-    setIsToolsDropdownOpen(false);
-    setIsCompanyDropdownOpen(false);
-    setIsProfileDropdownOpen(false);
-  };
-
-  const closeAllDropdowns = () => {
-    setIsToolsDropdownOpen(false);
-    setIsCompanyDropdownOpen(false);
-    setIsProfileDropdownOpen(false);
-    setIsMobileMenuOpen(false);
-  };
-
-  const toolsItems = [
-    { name: 'Compress Image', path: '/tool/compress-image' },
-    { name: 'Compress PDF', path: '/tool/compress-pdf' },
-    { name: 'Compress Video', path: '/tool/compress-video' },
-    { name: 'Compress Audio', path: '/compress-audio' },
-    { name: 'Convert Audio', path: '/tool/convert-audio' },
-    { name: 'Convert Video', path: '/tool/convert-video' },
-    { name: 'Convert Image', path: '/tool/convert-image' },
-    { name: 'Convert PDF', path: '/convert-pdf' }
-  ];
-
-  const companyItems = [
-    { name: 'About Us', path: '/about' },
-    { name: 'Contact', path: '/contact' },
-    { name: 'Privacy Policy', path: '/privacy' },
-    { name: 'Terms of Service', path: '/terms' }
-  ];
+  const isActive = (path) => location.pathname === path
 
   return (
     <nav className="navbar">
-      <div className="navbar-container">
+      <div className="container navbar-container">
         {/* Logo */}
-        <Link to="/" className="navbar-logo" onClick={closeAllDropdowns}>
+        <Link to="/" className="navbar-logo">
           ConvertFlix
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="navbar-nav desktop-nav">
-          <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={closeAllDropdowns}>
+        <div className={`navbar-nav ${isMenuOpen ? 'active' : ''}`}>
+          <Link 
+            to="/" 
+            className={`nav-link ${isActive('/') ? 'active' : ''}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
             Home
           </Link>
           
-          <div className="dropdown">
+          <div className="nav-dropdown">
             <button 
-              className={`nav-link dropdown-toggle ${isToolsDropdownOpen ? 'active' : ''}`}
-              onClick={() => setIsToolsDropdownOpen(!isToolsDropdownOpen)}
+              className={`nav-link dropdown-toggle ${isActive('/tools') ? 'active' : ''}`}
+              onClick={toggleDropdown}
             >
               Tools
             </button>
-            {isToolsDropdownOpen && (
-              <div className="dropdown-menu">
-                                 {toolsItems.map((item) => (
-                   <Link 
-                     key={item.path} 
-                     to={item.path} 
-                     className="dropdown-item"
-                     onClick={closeAllDropdowns}
-                   >
-                     {item.name}
-                   </Link>
-                 ))}
-              </div>
-            )}
+            <div className={`dropdown-menu ${isDropdownOpen ? 'active' : ''}`}>
+              <Link to="/tools" onClick={() => setIsMenuOpen(false)}>All Tools</Link>
+              <Link to="/tool/compress-image" onClick={() => setIsMenuOpen(false)}>Compress Image</Link>
+              <Link to="/tool/convert-audio" onClick={() => setIsMenuOpen(false)}>Convert Audio</Link>
+            </div>
           </div>
-
-          <div className="dropdown">
-            <button 
-              className={`nav-link dropdown-toggle ${isCompanyDropdownOpen ? 'active' : ''}`}
-              onClick={() => setIsCompanyDropdownOpen(!isCompanyDropdownOpen)}
-            >
-              Company
-            </button>
-            {isCompanyDropdownOpen && (
-              <div className="dropdown-menu">
-                                 {companyItems.map((item) => (
-                   <Link 
-                     key={item.path} 
-                     to={item.path} 
-                     className="dropdown-item"
-                     onClick={closeAllDropdowns}
-                   >
-                     {item.name}
-                   </Link>
-                 ))}
-              </div>
-            )}
-          </div>
+          
+          <Link 
+            to="/company" 
+            className={`nav-link ${isActive('/company') ? 'active' : ''}`}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Company
+          </Link>
         </div>
 
         {/* Right side - Theme toggle and Auth */}
@@ -120,118 +65,40 @@ const Navbar = () => {
             onClick={toggleTheme}
             aria-label="Toggle theme"
           >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            {theme === 'light' ? '🌙' : '🌞'}
           </button>
 
           {isAuthenticated ? (
-            <div className="profile-dropdown">
-              <button 
-                className="profile-button"
-                onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-              >
-                <div className="profile-avatar">
-                  {user.name.charAt(0).toUpperCase()}
-                </div>
+            <div className="user-menu">
+              <button className="user-avatar" onClick={toggleDropdown}>
+                👤
               </button>
-              {isProfileDropdownOpen && (
-                <div className="dropdown-menu profile-menu">
-                  <div className="profile-info">
-                    <div className="profile-name">{user.name}</div>
-                    <div className="profile-email">{user.email}</div>
-                  </div>
-                                     <Link to="/dashboard" className="dropdown-item" onClick={closeAllDropdowns}>
-                     Dashboard
-                   </Link>
-                   {user.role === 'admin' && (
-                     <Link to="/admin" className="dropdown-item" onClick={closeAllDropdowns}>
-                       Admin Panel
-                     </Link>
-                   )}
-                  <button className="dropdown-item logout-btn">
-                    Logout
-                  </button>
-                </div>
-              )}
+              <div className={`dropdown-menu ${isDropdownOpen ? 'active' : ''}`}>
+                <Link to="/dashboard">Dashboard</Link>
+                <button onClick={() => setIsAuthenticated(false)}>Logout</button>
+              </div>
             </div>
           ) : (
             <div className="auth-buttons">
-              <Link to="/login" className="btn btn-secondary">
-                Login
-              </Link>
-              <Link to="/signup" className="btn btn-primary">
-                Sign Up
-              </Link>
+              <Link to="/login" className="btn btn-secondary">Login</Link>
+              <Link to="/signup" className="btn btn-primary">Sign Up</Link>
             </div>
           )}
 
           {/* Mobile menu button */}
           <button 
-            className="mobile-menu-btn"
-            onClick={toggleMobileMenu}
-            aria-label="Toggle mobile menu"
+            className={`mobile-menu-btn ${isMenuOpen ? 'active' : ''}`}
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
           >
-            <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {isMobileMenuOpen && (
-        <div className="mobile-nav">
-                     <Link to="/" className="mobile-nav-link" onClick={closeAllDropdowns}>
-             Home
-           </Link>
-          
-          <div className="mobile-dropdown">
-            <button className="mobile-dropdown-toggle">
-              Tools
-            </button>
-            <div className="mobile-dropdown-menu">
-                             {toolsItems.map((item) => (
-                 <Link 
-                   key={item.path} 
-                   to={item.path} 
-                   className="mobile-dropdown-item"
-                   onClick={closeAllDropdowns}
-                 >
-                   {item.name}
-                 </Link>
-               ))}
-            </div>
-          </div>
-
-          <div className="mobile-dropdown">
-            <button className="mobile-dropdown-toggle">
-              Company
-            </button>
-            <div className="mobile-dropdown-menu">
-                             {companyItems.map((item) => (
-                 <Link 
-                   key={item.path} 
-                   to={item.path} 
-                   className="mobile-dropdown-item"
-                   onClick={closeAllDropdowns}
-                 >
-                   {item.name}
-                 </Link>
-               ))}
-            </div>
-          </div>
-
-          {!isAuthenticated && (
-                         <div className="mobile-auth">
-               <Link to="/login" className="btn btn-secondary full-width" onClick={closeAllDropdowns}>
-                 Login
-               </Link>
-               <Link to="/signup" className="btn btn-primary full-width" onClick={closeAllDropdowns}>
-                 Sign Up
-               </Link>
-             </div>
-          )}
-        </div>
-      )}
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar; 
+export default Navbar 

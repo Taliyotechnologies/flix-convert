@@ -7,8 +7,6 @@ yarn-error.log*
 # Build outputs
 dist/
 build/
-*.tgz
-*.tar.gz
 
 # Environment variables
 .env
@@ -22,7 +20,6 @@ build/
 .idea/
 *.swp
 *.swo
-*~
 
 # OS generated files
 .DS_Store
@@ -87,7 +84,7 @@ jspm_packages/
 .vuepress/dist
 
 # Serverless directories
-.serverless/
+.serverless
 
 # FuseBox cache
 .fusebox/
@@ -96,4 +93,4 @@ jspm_packages/
 .dynamodb/
 
 # TernJS port file
-.tern-port
+.tern-port 

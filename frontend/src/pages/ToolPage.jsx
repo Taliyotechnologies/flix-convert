@@ -1,182 +1,144 @@
-import React, { useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Image, FileText, Video, Music, Film, Upload, Download, AlertCircle, CheckCircle, FileDown } from 'lucide-react';
-import './ToolPage.css';
+import React, { useState, useRef } from 'react'
+import { useParams } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import './ToolPage.css'
 
 const ToolPage = () => {
-  const { type } = useParams();
-  const [file, setFile] = useState(null);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [result, setResult] = useState(null);
-  const [isDragOver, setIsDragOver] = useState(false);
-  const [showSignupPrompt, setShowSignupPrompt] = useState(false);
-  const fileInputRef = useRef(null);
+  const { type } = useParams()
+  const [file, setFile] = useState(null)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [processedFile, setProcessedFile] = useState(null)
+  const [dragActive, setDragActive] = useState(false)
+  const fileInputRef = useRef()
 
   const toolConfig = {
     'compress-image': {
-      title: 'Compress Image',
+      name: 'Compress Image',
       description: 'Reduce image file size while maintaining quality',
-      icon: <Image size={32} />,
+      icon: '🖼️',
       acceptedTypes: 'image/*',
-      maxSize: 10 * 1024 * 1024, // 10MB
-      formats: ['JPG', 'PNG', 'WebP', 'GIF']
+      maxSize: 10 * 1024 * 1024 // 10MB
     },
     'compress-pdf': {
-      title: 'Compress PDF',
+      name: 'Compress PDF',
       description: 'Reduce PDF file size for easier sharing',
-      icon: <FileText size={32} />,
+      icon: '📄',
       acceptedTypes: '.pdf',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['PDF']
+      maxSize: 10 * 1024 * 1024
     },
     'compress-video': {
-      title: 'Compress Video',
-      description: 'Reduce video file size without losing quality',
-      icon: <Video size={32} />,
+      name: 'Compress Video',
+      description: 'Reduce video file size with quality control',
+      icon: '🎬',
       acceptedTypes: 'video/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV']
+      maxSize: 10 * 1024 * 1024
     },
     'convert-audio': {
-      title: 'Convert Audio',
-      description: 'Convert between different audio formats',
-      icon: <Music size={32} />,
+      name: 'Convert Audio',
+      description: 'Convert between audio formats',
+      icon: '🎵',
       acceptedTypes: 'audio/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP3', 'WAV', 'AAC', 'OGG', 'FLAC']
-    },
-    'convert-video': {
-      title: 'Convert Video',
-      description: 'Convert videos to different formats',
-      icon: <Film size={32} />,
-      acceptedTypes: 'video/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV', 'WebM']
+      maxSize: 10 * 1024 * 1024
     },
     'convert-image': {
-      title: 'Convert Image',
+      name: 'Convert Image',
       description: 'Convert images between different formats',
-      icon: <Image size={32} />,
+      icon: '🔄',
       acceptedTypes: 'image/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP']
+      maxSize: 10 * 1024 * 1024
+    },
+    'convert-document': {
+      name: 'Convert Document',
+      description: 'Convert documents between formats',
+      icon: '📝',
+      acceptedTypes: '.pdf,.doc,.docx',
+      maxSize: 10 * 1024 * 1024
     }
-  };
+  }
 
-  const config = toolConfig[type] || toolConfig['compress-image'];
+  const config = toolConfig[type] || toolConfig['compress-image']
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  };
+  const handleDrag = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.type === 'dragenter' || e.type === 'dragover') {
+      setDragActive(true)
+    } else if (e.type === 'dragleave') {
+      setDragActive(false)
+    }
+  }
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    setIsDragOver(false);
+    e.preventDefault()
+    e.stopPropagation()
+    setDragActive(false)
     
-    const droppedFile = e.dataTransfer.files[0];
-    if (droppedFile) {
-      handleFileSelect(droppedFile);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      handleFile(e.dataTransfer.files[0])
     }
-  };
+  }
 
-  const handleFileSelect = (selectedFile) => {
+  const handleFile = (selectedFile) => {
     if (selectedFile.size > config.maxSize) {
-      setShowSignupPrompt(true);
-      return;
+      alert('File size exceeds 10MB limit')
+      return
     }
-
-    setFile(selectedFile);
-    setResult(null);
-    setShowSignupPrompt(false);
-  };
+    setFile(selectedFile)
+    setProcessedFile(null)
+  }
 
   const handleFileInput = (e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      handleFileSelect(selectedFile);
+    if (e.target.files && e.target.files[0]) {
+      handleFile(e.target.files[0])
     }
-  };
+  }
 
   const processFile = async () => {
-    if (!file) return;
+    if (!file) return
 
-    setIsProcessing(true);
+    setIsProcessing(true)
     
-    // Simulate processing
+    // Simulate processing delay
     setTimeout(() => {
-      const originalSize = file.size;
-      const compressedSize = Math.round(originalSize * 0.6); // Simulate 40% compression
-      const savedPercentage = Math.round((1 - compressedSize / originalSize) * 100);
+      const originalSize = file.size
+      const compressedSize = Math.round(originalSize * 0.7) // Simulate 30% compression
+      const savedPercent = Math.round((originalSize - compressedSize) / originalSize * 100)
       
-      setResult({
+      setProcessedFile({
+        name: file.name.replace(/\.[^/.]+$/, '') + '_processed.' + file.name.split('.').pop(),
+        size: compressedSize,
         originalSize,
-        compressedSize,
-        savedPercentage,
-        downloadUrl: URL.createObjectURL(file) // In real app, this would be the processed file
-      });
-      
-      setIsProcessing(false);
-    }, 2000);
-  };
+        savedPercent,
+        url: URL.createObjectURL(file) // In real app, this would be the processed file
+      })
+      setIsProcessing(false)
+    }, 2000)
+  }
+
+  const downloadFile = () => {
+    if (processedFile) {
+      const link = document.createElement('a')
+      link.href = processedFile.url
+      link.download = processedFile.name
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    }
+  }
 
   const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
-
-  const getFilePreview = () => {
-    if (!file) return null;
-
-    if (file.type.startsWith('image/')) {
-      return (
-        <div className="file-preview">
-          <img 
-            src={URL.createObjectURL(file)} 
-            alt="File preview" 
-            className="preview-image"
-          />
-        </div>
-      );
-    }
-
-    if (file.type.startsWith('video/')) {
-      return (
-        <div className="file-preview">
-          <video 
-            src={URL.createObjectURL(file)} 
-            controls 
-            className="preview-video"
-          />
-        </div>
-      );
-    }
-
-    return (
-      <div className="file-preview">
-        <div className="file-icon">{config.icon}</div>
-        <div className="file-info">
-          <div className="file-name">{file.name}</div>
-          <div className="file-size">{formatFileSize(file.size)}</div>
-        </div>
-      </div>
-    );
-  };
+    if (bytes === 0) return '0 Bytes'
+    const k = 1024
+    const sizes = ['Bytes', 'KB', 'MB', 'GB']
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+  }
 
   return (
     <>
       <Helmet>
-        <title>{config.title} - ConvertFlix</title>
-        <meta name="description" content={config.description} />
+        <title>{config.name} - ConvertFlix</title>
+        <meta name="description" content={`${config.description}. Free up to 10MB.`} />
       </Helmet>
 
       <div className="tool-page">
@@ -184,66 +146,27 @@ const ToolPage = () => {
           {/* Header */}
           <div className="tool-header">
             <div className="tool-icon">{config.icon}</div>
-            <h1 className="tool-title">{config.title}</h1>
+            <h1 className="tool-title">{config.name}</h1>
             <p className="tool-description">{config.description}</p>
-            <div className="tool-formats">
-              <span className="formats-label">Supported formats:</span>
-              <span className="formats-list">{config.formats.join(', ')}</span>
-            </div>
           </div>
 
-          {/* Upload Area */}
+          {/* File Upload Area */}
           <div className="upload-section">
-            {showSignupPrompt ? (
-              <div className="signup-prompt">
-                <div className="prompt-icon">
-                  <AlertCircle size={48} />
-                </div>
-                <h3 className="prompt-title">File Too Large</h3>
-                <p className="prompt-description">
-                  Your file exceeds the 10MB limit for free users. Sign up to process files up to 100MB.
-                </p>
-                <div className="prompt-features">
-                  <div className="feature">
-                    <CheckCircle size={20} />
-                    <span>Up to 100MB files</span>
-                  </div>
-                  <div className="feature">
-                    <CheckCircle size={20} />
-                    <span>Unlimited processing</span>
-                  </div>
-                  <div className="feature">
-                    <CheckCircle size={20} />
-                    <span>Priority processing</span>
-                  </div>
-                </div>
-                <div className="prompt-actions">
-                  <Link to="/signup" className="btn btn-primary">
-                    Sign Up Free
-                  </Link>
-                  <button 
-                    className="btn btn-secondary"
-                    onClick={() => setShowSignupPrompt(false)}
-                  >
-                    Try Smaller File
-                  </button>
-                </div>
-              </div>
-            ) : !file ? (
-              <div 
-                className={`upload-area ${isDragOver ? 'drag-over' : ''}`}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
+            {!file ? (
+              <div
+                className={`upload-area ${dragActive ? 'drag-active' : ''}`}
+                onDragEnter={handleDrag}
+                onDragLeave={handleDrag}
+                onDragOver={handleDrag}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
               >
-                <div className="upload-icon">
-                  <Upload size={48} />
+                <div className="upload-content">
+                  <div className="upload-icon">📁</div>
+                  <h3>Drop your file here or click to browse</h3>
+                  <p>Maximum file size: 10MB</p>
+                  <p className="accepted-types">Accepted: {config.acceptedTypes}</p>
                 </div>
-                <h3 className="upload-title">Drop your file here</h3>
-                <p className="upload-subtitle">or click to browse</p>
-                <p className="upload-limit">Maximum file size: {config.maxSize / (1024 * 1024)}MB</p>
-                <p className="upload-note">For larger files, <Link to="/signup" className="signup-link">sign up</Link> to unlock up to 100MB</p>
                 <input
                   ref={fileInputRef}
                   type="file"
@@ -253,75 +176,91 @@ const ToolPage = () => {
                 />
               </div>
             ) : (
-              <div className="file-section">
-                {getFilePreview()}
-                <div className="file-actions">
-                  <button 
-                    className="btn btn-primary"
-                    onClick={processFile}
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? (
-                      <>
-                        <div className="spinner"></div>
-                        Processing...
-                      </>
-                    ) : (
-                      `Process ${config.title.toLowerCase()}`
-                    )}
-                  </button>
+              <div className="file-preview">
+                <div className="file-info">
+                  <div className="file-icon">📄</div>
+                  <div className="file-details">
+                    <h3>{file.name}</h3>
+                    <p>{formatFileSize(file.size)}</p>
+                  </div>
                   <button 
                     className="btn btn-secondary"
-                    onClick={() => {
-                      setFile(null);
-                      setResult(null);
-                    }}
+                    onClick={() => setFile(null)}
                   >
-                    Choose Different File
+                    Remove
                   </button>
                 </div>
+                
+                {file.type.startsWith('image/') && (
+                  <div className="image-preview">
+                    <img src={URL.createObjectURL(file)} alt="Preview" />
+                  </div>
+                )}
+
+                <button 
+                  className="btn btn-primary process-btn"
+                  onClick={processFile}
+                  disabled={isProcessing}
+                >
+                  {isProcessing ? 'Processing...' : 'Process File'}
+                </button>
               </div>
             )}
           </div>
 
-          {/* Results */}
-          {result && (
+          {/* Results Section */}
+          {processedFile && (
             <div className="results-section">
-              <h2 className="results-title">Processing Complete!</h2>
-              <div className="results-grid">
-                <div className="result-card">
-                  <div className="result-label">Original Size</div>
-                  <div className="result-value">{formatFileSize(result.originalSize)}</div>
+              <h2>Processing Complete!</h2>
+              <div className="results-card card">
+                <div className="results-header">
+                  <h3>File Results</h3>
+                  <div className="compression-stats">
+                    <div className="stat">
+                      <span className="label">Original Size:</span>
+                      <span className="value">{formatFileSize(processedFile.originalSize)}</span>
+                    </div>
+                    <div className="stat">
+                      <span className="label">Compressed Size:</span>
+                      <span className="value">{formatFileSize(processedFile.size)}</span>
+                    </div>
+                    <div className="stat saved">
+                      <span className="label">Space Saved:</span>
+                      <span className="value">{processedFile.savedPercent}%</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="result-card">
-                  <div className="result-label">Compressed Size</div>
-                  <div className="result-value">{formatFileSize(result.compressedSize)}</div>
-                </div>
-                <div className="result-card">
-                  <div className="result-label">Space Saved</div>
-                  <div className="result-value saved">{result.savedPercentage}%</div>
-                </div>
-              </div>
-              <div className="download-section">
-                <a 
-                  href={result.downloadUrl} 
-                  download={`processed_${file.name}`}
-                  className="btn btn-primary btn-large"
+                
+                <button 
+                  className="btn btn-primary download-btn"
+                  onClick={downloadFile}
                 >
-                  <Download size={20} />
                   Download Processed File
-                </a>
-                <p className="expiry-note">
-                  <Clock size={16} />
-                  Auto-deleted in 24 hours
-                </p>
+                </button>
+                
+                <div className="expiry-notice">
+                  ⏰ Files are automatically deleted after 24 hours
+                </div>
               </div>
             </div>
           )}
+
+          {/* Info Section */}
+          <div className="tool-info">
+            <div className="info-card card">
+              <h3>How it works</h3>
+              <ol>
+                <li>Upload your file (max 10MB)</li>
+                <li>Our system processes your file securely</li>
+                <li>Download your processed file</li>
+                <li>Files are automatically deleted after 24 hours</li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ToolPage; 
+export default ToolPage 

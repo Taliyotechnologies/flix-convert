@@ -1,329 +1,237 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { 
-  FolderOpen, 
-  HardDrive, 
-  Zap, 
-  Target,
-  Search,
-  Download,
-  Trash2,
-  CheckCircle,
-  Clock,
-  XCircle
-} from 'lucide-react';
-import './Dashboard.css';
+import React, { useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+import './Dashboard.css'
 
 const Dashboard = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterType, setFilterType] = useState('all');
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filterType, setFilterType] = useState('all')
 
-  // Mock data
-  const stats = {
-    totalFiles: 1247,
-    totalSize: '2.4 GB',
-    processedToday: 23,
-    spaceSaved: '856 MB'
-  };
-
+  // Mock data - replace with actual API calls
   const fileLogs = [
     {
       id: 1,
-      name: 'presentation.pdf',
-      type: 'PDF',
-      originalSize: '2.4 MB',
-      compressedSize: '1.2 MB',
-      saved: '50%',
-      status: 'completed',
-      date: '2024-01-15 14:30'
+      fileName: 'image1.jpg',
+      fileType: 'image',
+      originalSize: '2.5MB',
+      compressedSize: '1.2MB',
+      savedPercent: 52,
+      processedAt: '2024-01-15 14:30',
+      status: 'completed'
     },
     {
       id: 2,
-      name: 'vacation_photos.jpg',
-      type: 'Image',
-      originalSize: '8.5 MB',
-      compressedSize: '3.2 MB',
-      saved: '62%',
-      status: 'completed',
-      date: '2024-01-15 13:45'
+      fileName: 'document.pdf',
+      fileType: 'document',
+      originalSize: '5.8MB',
+      compressedSize: '3.1MB',
+      savedPercent: 47,
+      processedAt: '2024-01-15 13:45',
+      status: 'completed'
     },
     {
       id: 3,
-      name: 'meeting_recording.mp4',
-      type: 'Video',
-      originalSize: '45.2 MB',
-      compressedSize: '28.1 MB',
-      saved: '38%',
-      status: 'processing',
-      date: '2024-01-15 12:20'
+      fileName: 'video.mp4',
+      fileType: 'video',
+      originalSize: '8.2MB',
+      compressedSize: '4.9MB',
+      savedPercent: 40,
+      processedAt: '2024-01-15 12:20',
+      status: 'completed'
     },
     {
       id: 4,
-      name: 'document.docx',
-      type: 'Document',
-      originalSize: '1.8 MB',
-      compressedSize: '1.1 MB',
-      saved: '39%',
-      status: 'completed',
-      date: '2024-01-15 11:15'
-    },
-    {
-      id: 5,
-      name: 'music_track.mp3',
-      type: 'Audio',
-      originalSize: '5.6 MB',
-      compressedSize: '4.2 MB',
-      saved: '25%',
-      status: 'failed',
-      date: '2024-01-15 10:30'
+      fileName: 'audio.wav',
+      fileType: 'audio',
+      originalSize: '3.1MB',
+      compressedSize: '1.8MB',
+      savedPercent: 42,
+      processedAt: '2024-01-15 11:15',
+      status: 'completed'
     }
-  ];
+  ]
 
-  const filteredFiles = fileLogs.filter(file => {
-    const matchesSearch = file.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesFilter = filterType === 'all' || file.type.toLowerCase() === filterType.toLowerCase();
-    return matchesSearch && matchesFilter;
-  });
+  const stats = {
+    totalFiles: 1247,
+    totalSpaceSaved: '2.3GB',
+    averageCompression: 45,
+    todayProcessed: 23
+  }
 
-  const handleSelectFile = (fileId) => {
-    setSelectedFiles(prev => 
-      prev.includes(fileId) 
-        ? prev.filter(id => id !== fileId)
-        : [...prev, fileId]
-    );
-  };
+  const filteredLogs = fileLogs.filter(log => {
+    const matchesSearch = log.fileName.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesFilter = filterType === 'all' || log.fileType === filterType
+    return matchesSearch && matchesFilter
+  })
 
-  const handleSelectAll = () => {
-    if (selectedFiles.length === filteredFiles.length) {
-      setSelectedFiles([]);
-    } else {
-      setSelectedFiles(filteredFiles.map(file => file.id));
+  const getFileTypeIcon = (type) => {
+    const icons = {
+      image: '🖼️',
+      document: '📄',
+      video: '🎬',
+      audio: '🎵'
     }
-  };
-
-  const handleDeleteSelected = () => {
-    if (selectedFiles.length > 0) {
-      if (confirm(`Are you sure you want to delete ${selectedFiles.length} file(s)?`)) {
-        // In real app, delete files from backend
-        alert('Files would be deleted here');
-        setSelectedFiles([]);
-      }
-    }
-  };
-
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case 'completed':
-        return <CheckCircle size={16} />;
-      case 'processing':
-        return <Clock size={16} />;
-      case 'failed':
-        return <XCircle size={16} />;
-      default:
-        return <Clock size={16} />;
-    }
-  };
+    return icons[type] || '📁'
+  }
 
   const getStatusColor = (status) => {
-    switch (status) {
-      case 'completed':
-        return 'success';
-      case 'processing':
-        return 'warning';
-      case 'failed':
-        return 'error';
-      default:
-        return 'warning';
-    }
-  };
+    return status === 'completed' ? 'success' : 'pending'
+  }
 
   return (
     <>
       <Helmet>
         <title>Dashboard - ConvertFlix</title>
-        <meta name="description" content="Manage your file processing history and account settings." />
+        <meta name="description" content="Admin dashboard for ConvertFlix file processing statistics." />
       </Helmet>
 
       <div className="dashboard">
         <div className="container">
           {/* Header */}
           <div className="dashboard-header">
-            <h1 className="dashboard-title">Dashboard</h1>
-            <p className="dashboard-subtitle">Manage your file processing history</p>
+            <h1>Dashboard</h1>
+            <p>Monitor file processing activity and statistics</p>
           </div>
 
           {/* Stats Cards */}
           <div className="stats-grid">
-            <div className="stat-card">
-              <div className="stat-icon">
-                <FolderOpen size={24} />
-              </div>
+            <div className="stat-card card">
+              <div className="stat-icon">📊</div>
               <div className="stat-content">
-                <div className="stat-value">{stats.totalFiles}</div>
-                <div className="stat-label">Total Files</div>
+                <h3>Total Files</h3>
+                <p className="stat-value">{stats.totalFiles.toLocaleString()}</p>
               </div>
             </div>
             
-            <div className="stat-card">
-              <div className="stat-icon">
-                <HardDrive size={24} />
-              </div>
+            <div className="stat-card card">
+              <div className="stat-icon">💾</div>
               <div className="stat-content">
-                <div className="stat-value">{stats.totalSize}</div>
-                <div className="stat-label">Total Size</div>
+                <h3>Space Saved</h3>
+                <p className="stat-value">{stats.totalSpaceSaved}</p>
               </div>
             </div>
             
-            <div className="stat-card">
-              <div className="stat-icon">
-                <Zap size={24} />
-              </div>
+            <div className="stat-card card">
+              <div className="stat-icon">📈</div>
               <div className="stat-content">
-                <div className="stat-value">{stats.processedToday}</div>
-                <div className="stat-label">Processed Today</div>
+                <h3>Avg Compression</h3>
+                <p className="stat-value">{stats.averageCompression}%</p>
               </div>
             </div>
             
-            <div className="stat-card">
-              <div className="stat-icon">
-                <Target size={24} />
-              </div>
+            <div className="stat-card card">
+              <div className="stat-icon">📅</div>
               <div className="stat-content">
-                <div className="stat-value">{stats.spaceSaved}</div>
-                <div className="stat-label">Space Saved</div>
+                <h3>Today's Files</h3>
+                <p className="stat-value">{stats.todayProcessed}</p>
               </div>
             </div>
           </div>
 
-          {/* Controls */}
-          <div className="dashboard-controls">
-            <div className="search-filter">
-              <div className="search-box">
-                <input
-                  type="text"
-                  placeholder="Search files..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="search-input"
-                />
-                <span className="search-icon">
-                  <Search size={16} />
-                </span>
-              </div>
-              
-              <select
-                value={filterType}
-                onChange={(e) => setFilterType(e.target.value)}
-                className="filter-select"
-              >
-                <option value="all">All Types</option>
-                <option value="image">Images</option>
-                <option value="video">Videos</option>
-                <option value="audio">Audio</option>
-                <option value="pdf">PDFs</option>
-                <option value="document">Documents</option>
-              </select>
+          {/* Filters and Search */}
+          <div className="filters-section">
+            <div className="search-box">
+              <input
+                type="text"
+                placeholder="Search files..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-
-            <div className="bulk-actions">
+            
+            <div className="filter-buttons">
               <button
-                onClick={handleSelectAll}
-                className="btn btn-secondary"
+                className={`filter-btn ${filterType === 'all' ? 'active' : ''}`}
+                onClick={() => setFilterType('all')}
               >
-                {selectedFiles.length === filteredFiles.length ? 'Deselect All' : 'Select All'}
+                All
               </button>
-              
-              {selectedFiles.length > 0 && (
-                <button
-                  onClick={handleDeleteSelected}
-                  className="btn btn-danger"
-                >
-                  Delete Selected ({selectedFiles.length})
-                </button>
-              )}
+              <button
+                className={`filter-btn ${filterType === 'image' ? 'active' : ''}`}
+                onClick={() => setFilterType('image')}
+              >
+                Images
+              </button>
+              <button
+                className={`filter-btn ${filterType === 'document' ? 'active' : ''}`}
+                onClick={() => setFilterType('document')}
+              >
+                Documents
+              </button>
+              <button
+                className={`filter-btn ${filterType === 'video' ? 'active' : ''}`}
+                onClick={() => setFilterType('video')}
+              >
+                Videos
+              </button>
+              <button
+                className={`filter-btn ${filterType === 'audio' ? 'active' : ''}`}
+                onClick={() => setFilterType('audio')}
+              >
+                Audio
+              </button>
             </div>
           </div>
 
           {/* File Logs Table */}
-          <div className="table-container">
-            <table className="file-logs-table">
-              <thead>
-                <tr>
-                  <th className="checkbox-cell">
-                    <input
-                      type="checkbox"
-                      checked={selectedFiles.length === filteredFiles.length && filteredFiles.length > 0}
-                      onChange={handleSelectAll}
-                      className="table-checkbox"
-                    />
-                  </th>
-                  <th>File Name</th>
-                  <th>Type</th>
-                  <th>Original Size</th>
-                  <th>Compressed Size</th>
-                  <th>Saved</th>
-                  <th>Status</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredFiles.map(file => (
-                  <tr key={file.id} className="file-row">
-                    <td className="checkbox-cell">
-                      <input
-                        type="checkbox"
-                        checked={selectedFiles.includes(file.id)}
-                        onChange={() => handleSelectFile(file.id)}
-                        className="table-checkbox"
-                      />
-                    </td>
-                    <td className="file-name">{file.name}</td>
-                    <td className="file-type">
-                      <span className="type-badge">{file.type}</span>
-                    </td>
-                    <td className="file-size">{file.originalSize}</td>
-                    <td className="file-size">{file.compressedSize}</td>
-                    <td className="file-saved">{file.saved}</td>
-                    <td className="file-status">
-                      <span className={`status-badge ${getStatusColor(file.status)}`}>
-                        {getStatusIcon(file.status)} {file.status}
-                      </span>
-                    </td>
-                    <td className="file-date">{file.date}</td>
-                    <td className="file-actions">
-                      <button className="action-btn download-btn" title="Download">
-                        <Download size={16} />
-                      </button>
-                      <button className="action-btn delete-btn" title="Delete">
-                        <Trash2 size={16} />
-                      </button>
-                    </td>
+          <div className="logs-section">
+            <div className="section-header">
+              <h2>Recent File Logs</h2>
+              <button className="btn btn-secondary">Export Data</button>
+            </div>
+            
+            <div className="logs-table card">
+              <table>
+                <thead>
+                  <tr>
+                    <th>File</th>
+                    <th>Type</th>
+                    <th>Original Size</th>
+                    <th>Compressed Size</th>
+                    <th>Saved</th>
+                    <th>Processed</th>
+                    <th>Status</th>
+                    <th>Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-
-            {filteredFiles.length === 0 && (
-              <div className="empty-state">
-                <div className="empty-icon">
-                  <FolderOpen size={48} />
-                </div>
-                <h3 className="empty-title">No files found</h3>
-                <p className="empty-description">
-                  {searchTerm || filterType !== 'all' 
-                    ? 'Try adjusting your search or filter criteria'
-                    : 'Start processing files to see them here'
-                  }
-                </p>
-              </div>
-            )}
+                </thead>
+                <tbody>
+                  {filteredLogs.map(log => (
+                    <tr key={log.id}>
+                      <td className="file-cell">
+                        <div className="file-info">
+                          <span className="file-icon">{getFileTypeIcon(log.fileType)}</span>
+                          <span className="file-name">{log.fileName}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <span className="file-type">{log.fileType}</span>
+                      </td>
+                      <td>{log.originalSize}</td>
+                      <td>{log.compressedSize}</td>
+                      <td>
+                        <span className="saved-percent">{log.savedPercent}%</span>
+                      </td>
+                      <td>{log.processedAt}</td>
+                      <td>
+                        <span className={`status ${getStatusColor(log.status)}`}>
+                          {log.status}
+                        </span>
+                      </td>
+                      <td>
+                        <div className="actions">
+                          <button className="action-btn">Download</button>
+                          <button className="action-btn delete">Delete</button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Dashboard; 
+export default Dashboard 

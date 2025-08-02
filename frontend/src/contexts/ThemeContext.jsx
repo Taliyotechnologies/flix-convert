@@ -1,54 +1,49 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
-const ThemeContext = createContext();
+const ThemeContext = createContext()
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext)
+  if (!context) {
+    throw new Error('useTheme must be used within a ThemeProvider')
+  }
+  return context
+}
 
 export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem('theme');
-    if (saved) {
-      return saved === 'dark';
+  const [theme, setTheme] = useState(() => {
+    // Check localStorage first
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      return savedTheme
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
-  });
+    
+    // Check system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark'
+    }
+    
+    return 'light'
+  })
 
   useEffect(() => {
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    document.body.className = isDark ? 'dark' : 'light';
-    
-    const root = document.documentElement;
-    if (isDark) {
-      root.style.setProperty('--bg-primary', '#121212');
-      root.style.setProperty('--bg-secondary', '#1e1e1e');
-      root.style.setProperty('--text-primary', '#ffffff');
-      root.style.setProperty('--text-secondary', '#b0b0b0');
-      root.style.setProperty('--border-color', '#333333');
-      root.style.setProperty('--accent-color', '#6366f1');
-      root.style.setProperty('--accent-hover', '#4f46e5');
-    } else {
-      root.style.setProperty('--bg-primary', '#f8f8f8');
-      root.style.setProperty('--bg-secondary', '#ffffff');
-      root.style.setProperty('--text-primary', '#1a1a1a');
-      root.style.setProperty('--text-secondary', '#666666');
-      root.style.setProperty('--border-color', '#e5e5e5');
-      root.style.setProperty('--accent-color', '#6366f1');
-      root.style.setProperty('--accent-hover', '#4f46e5');
-    }
-  }, [isDark]);
+    // Update body class and localStorage
+    document.body.className = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
+    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light')
+  }
 
   const value = {
-    isDark,
+    theme,
     toggleTheme
-  };
+  }
 
   return (
     <ThemeContext.Provider value={value}>
       {children}
     </ThemeContext.Provider>
-  );
-};
-
-export const useTheme = () => useContext(ThemeContext); 
+  )
+} 

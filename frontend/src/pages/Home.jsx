@@ -1,91 +1,77 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Zap, Shield, Globe, Sparkles, FolderOpen, Gift, FileText, Package, Sparkles as SparklesIcon } from 'lucide-react';
-import './Home.css';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
+import './Home.css'
 
 const Home = () => {
   const features = [
     {
-      icon: <Zap size={32} />,
+      icon: '⚡',
       title: 'Lightning Fast',
       description: 'Process files in seconds with our optimized algorithms'
     },
     {
-      icon: <Shield size={32} />,
+      icon: '🔒',
       title: 'Secure & Private',
-      description: 'Your files are automatically deleted after 24 hours'
+      description: 'Your files are encrypted and automatically deleted'
     },
     {
-      icon: <Globe size={32} />,
+      icon: '🌐',
       title: 'Cross Platform',
-      description: 'Works on any device - Windows, Mac, Linux, Mobile'
+      description: 'Works on any device with a modern web browser'
     },
     {
-      icon: <Sparkles size={32} />,
+      icon: '🎯',
       title: 'Quality Preserved',
       description: 'Maintain original quality while reducing file size'
     },
     {
-      icon: <FolderOpen size={32} />,
+      icon: '📁',
       title: 'Multi-format Support',
-      description: 'Support for images, videos, PDFs, and audio files'
+      description: 'Support for images, audio, video, and documents'
     },
     {
-      icon: <Gift size={32} />,
+      icon: '💾',
       title: 'Free Up to 10MB',
       description: 'No registration required for files under 10MB'
     }
-  ];
+  ]
 
   return (
     <>
       <Helmet>
-        <title>ConvertFlix - Compress & Convert Files Instantly — Free Up to 10MB</title>
-        <meta name="description" content="Fast, secure & cross-platform compression and conversion tool. Free up to 10MB. Support for images, videos, PDFs, and audio files." />
-        <meta name="keywords" content="file compression, file conversion, image compression, video compression, PDF compression, audio conversion" />
-        <meta property="og:title" content="ConvertFlix - Compress & Convert Files Instantly" />
-        <meta property="og:description" content="Fast, secure & cross-platform compression and conversion tool. Free up to 10MB." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://convertflix.com" />
-        <link rel="canonical" href="https://convertflix.com" />
+        <title>ConvertFlix - Free File Compression & Conversion Tool</title>
+        <meta name="description" content="Compress and convert files instantly with ConvertFlix. Free up to 10MB. Fast, secure, and cross-platform file compression and conversion tools." />
       </Helmet>
 
       <div className="home">
         {/* Hero Section */}
         <section className="hero">
-          <div className="container">
+          <div className="container hero-container">
             <div className="hero-content">
-              <div className="hero-text">
-                <h1 className="hero-title">
-                  Compress & Convert Files Instantly — Free Up to 10MB
-                </h1>
-                <p className="hero-subtitle">
-                  Fast, secure & cross-platform compression and conversion tool. 
-                  Support for images, videos, PDFs, and audio files.
-                </p>
-                <div className="hero-buttons">
-                  <Link to="/tools" className="btn btn-primary">
-                    Try Tools
-                  </Link>
-                  <Link to="/about" className="btn btn-secondary">
-                    Learn More
-                  </Link>
-                </div>
+              <h1 className="hero-title">
+                Compress & Convert Files Instantly
+                <span className="hero-subtitle">— Free Up to 10MB</span>
+              </h1>
+              <p className="hero-description">
+                Fast, secure & cross-platform compression and conversion tools. 
+                Process your files in seconds with our optimized algorithms.
+              </p>
+              <div className="hero-buttons">
+                <Link to="/tools" className="btn btn-primary">
+                  Try Tools
+                </Link>
+                <Link to="/company" className="btn btn-secondary">
+                  Learn More
+                </Link>
               </div>
-              <div className="hero-illustration">
-                <div className="file-illustration">
-                  <div className="file-icon">
-                    <FileText size={48} />
-                  </div>
-                  <div className="compression-arrow">→</div>
-                  <div className="compressed-file">
-                    <Package size={48} />
-                  </div>
-                  <div className="sparkles">
-                    <SparklesIcon size={24} />
-                  </div>
-                </div>
+            </div>
+            <div className="hero-illustration">
+              <div className="file-stack">
+                <div className="file file-1">📄</div>
+                <div className="file file-2">🖼️</div>
+                <div className="file file-3">🎵</div>
+                <div className="file file-4">🎬</div>
               </div>
             </div>
           </div>
@@ -94,15 +80,10 @@ const Home = () => {
         {/* Features Section */}
         <section className="features">
           <div className="container">
-            <div className="features-header">
-              <h2 className="section-title">Why Choose ConvertFlix?</h2>
-              <p className="section-subtitle">
-                Professional-grade tools with enterprise-level security
-              </p>
-            </div>
+            <h2 className="section-title">Why Choose ConvertFlix?</h2>
             <div className="features-grid">
               {features.map((feature, index) => (
-                <div key={index} className="feature-card fade-in">
+                <div key={index} className="feature-card card">
                   <div className="feature-icon">{feature.icon}</div>
                   <h3 className="feature-title">{feature.title}</h3>
                   <p className="feature-description">{feature.description}</p>
@@ -113,22 +94,20 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="cta-section">
+        <section className="cta">
           <div className="container">
             <div className="cta-content">
-              <h2 className="cta-title">Ready to Get Started?</h2>
-              <p className="cta-subtitle">
-                Join thousands of users who trust ConvertFlix for their file processing needs
-              </p>
-              <Link to="/tools" className="btn btn-primary btn-large">
-                Start Converting Now
+              <h2>Ready to Get Started?</h2>
+              <p>Join thousands of users who trust ConvertFlix for their file processing needs.</p>
+              <Link to="/tools" className="btn btn-primary">
+                Explore Tools
               </Link>
             </div>
           </div>
         </section>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Home; 
+export default Home 

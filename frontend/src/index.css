@@ -1,4 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+:root {
+  /* Light theme colors */
+  --bg-primary: #f8f8f8;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666666;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #1d4ed8;
+  --border-color: #e5e7eb;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.dark {
+  /* Dark theme colors */
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --accent-primary: #60a5fa;
+  --accent-secondary: #3b82f6;
+  --border-color: #374151;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
 
 * {
   margin: 0;
@@ -6,148 +30,105 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #root {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Basic page styles for simple pages */
-.company-page,
-.about-page,
-.contact-page,
-.privacy-page,
-.terms-page {
-  padding: 80px 0;
-  background-color: var(--bg-primary);
-  min-height: 100vh;
-}
-
-.company-header,
-.about-header,
-.contact-header,
-.privacy-header,
-.terms-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.company-title,
-.about-title,
-.contact-title,
-.privacy-title,
-.terms-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-  color: var(--text-primary);
-}
-
-.company-subtitle,
-.about-subtitle,
-.contact-subtitle,
-.privacy-subtitle,
-.terms-subtitle {
-  font-size: 1.125rem;
-  color: var(--text-secondary);
-}
-
-.company-content,
-.about-content,
-.contact-content,
-.privacy-content,
-.terms-content {
-  max-width: 800px;
+/* Utility classes */
+.container {
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.company-section,
-.privacy-section,
-.terms-section {
-  margin-bottom: 40px;
-}
-
-.company-section h2,
-.privacy-section h2,
-.terms-section h2 {
-  font-size: 1.5rem;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
   font-weight: 600;
-  margin-bottom: 16px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-secondary);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: transparent;
   color: var(--text-primary);
+  border: 2px solid var(--border-color);
 }
 
-.company-section p,
-.privacy-section p,
-.terms-section p {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 16px;
-}
-
-.company-section ul {
-  color: var(--text-secondary);
-  line-height: 1.7;
-  padding-left: 20px;
-}
-
-.company-section li {
-  margin-bottom: 8px;
-}
-
-.contact-info {
-  margin-top: 24px;
-  padding: 20px;
+.btn-secondary:hover {
   background-color: var(--bg-secondary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  border-color: var(--accent-primary);
 }
 
-.contact-info p {
-  margin-bottom: 8px;
+.card {
+  background-color: var(--bg-secondary);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: all 0.2s ease;
 }
 
-/* Responsive adjustments */
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
-  .company-title,
-  .about-title,
-  .contact-title,
-  .privacy-title,
-  .terms-title {
-    font-size: 2rem;
+  .container {
+    padding: 0 0.75rem;
   }
   
-  .company-subtitle,
-  .about-subtitle,
-  .contact-subtitle,
-  .privacy-subtitle,
-  .terms-subtitle {
-    font-size: 1rem;
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
   }
   
-  .company-header,
-  .about-header,
-  .contact-header,
-  .privacy-header,
-  .terms-header {
-    margin-bottom: 40px;
+  .card {
+    padding: 1.25rem;
   }
 }
 
 @media (max-width: 480px) {
-  .company-title,
-  .about-title,
-  .contact-title,
-  .privacy-title,
-  .terms-title {
-    font-size: 1.75rem;
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+  
+  .card {
+    padding: 1rem;
   }
 } 
