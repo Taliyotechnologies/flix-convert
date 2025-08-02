@@ -57,7 +57,17 @@ main {
   padding-top: 80px;
 }
 
-/* Admin layout overrides */
+/* Admin layout overrides - more aggressive */
+body.admin-layout main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+body.admin-layout .App main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
 .admin-layout {
   padding-top: 0;
   margin-top: 0;
@@ -71,6 +81,40 @@ main {
 .admin-layout .admin-panel {
   padding-top: 0;
   margin-top: 0;
+}
+
+/* Force remove padding from all elements in admin layout */
+body.admin-layout * {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Specific override for main element */
+body.admin-layout main,
+html.admin-layout main,
+.admin-layout main,
+.no-padding main {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Additional overrides for html and body */
+html.admin-layout,
+body.admin-layout {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.no-padding * {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .container {
