@@ -14,6 +14,8 @@ import DashboardLayout from './pages/DashboardLayout';
 import AdminPanel from './pages/AdminPanel';
 import AdminLayout from './pages/AdminLayout';
 import ToolPage from './pages/ToolPage';
+import ConvertPdf from './pages/ConvertPdf';
+import CompressAudio from './pages/CompressAudio';
 import Company from './pages/Company';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -40,6 +42,8 @@ function App() {
                 <Route path="/dashboard" element={<DashboardLayout />} />
                 <Route path="/admin" element={<AdminLayout />} />
                 <Route path="/tool/:type" element={<ToolPage />} />
+                <Route path="/convert-pdf" element={<ConvertPdf />} />
+                <Route path="/compress-audio" element={<CompressAudio />} />
                 <Route path="/company" element={<Company />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />

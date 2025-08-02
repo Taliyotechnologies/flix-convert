@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Image, FileText, Video, Music, Film, Image as ImageIcon, Shield, Zap, Target, ArrowRight } from 'lucide-react';
+import { Image, FileText, Video, Music, Film, Image as ImageIcon, Shield, Zap, Target, ArrowRight, FileDown, Upload, Download, Settings, Clock, CheckCircle } from 'lucide-react';
 import './Tools.css';
 
 const Tools = () => {
@@ -157,7 +157,9 @@ const Tools = () => {
             <h2 className="section-title">How It Works</h2>
             <div className="steps-grid">
               <div className="step">
-                <div className="step-number">1</div>
+                <div className="step-icon">
+                  <Upload size={32} />
+                </div>
                 <h3 className="step-title">Upload File</h3>
                 <p className="step-description">
                   Drag and drop your file or click to browse. Support for files up to 10MB.
@@ -165,7 +167,9 @@ const Tools = () => {
               </div>
               
               <div className="step">
-                <div className="step-number">2</div>
+                <div className="step-icon">
+                  <Settings size={32} />
+                </div>
                 <h3 className="step-title">Process</h3>
                 <p className="step-description">
                   Our servers process your file using advanced algorithms for optimal results.
@@ -173,12 +177,44 @@ const Tools = () => {
               </div>
               
               <div className="step">
-                <div className="step-number">3</div>
+                <div className="step-icon">
+                  <Download size={32} />
+                </div>
                 <h3 className="step-title">Download</h3>
                 <p className="step-description">
                   Download your processed file instantly. Link expires in 24 hours.
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* Signup CTA */}
+          <div className="signup-cta">
+            <div className="cta-content">
+              <div className="cta-icon">
+                <CheckCircle size={48} />
+              </div>
+              <h2 className="cta-title">Need to process larger files?</h2>
+              <p className="cta-description">
+                Sign up for free to unlock unlimited file processing and larger file sizes up to 100MB.
+              </p>
+              <div className="cta-features">
+                <div className="feature">
+                  <CheckCircle size={20} />
+                  <span>Up to 100MB files</span>
+                </div>
+                <div className="feature">
+                  <CheckCircle size={20} />
+                  <span>Unlimited processing</span>
+                </div>
+                <div className="feature">
+                  <CheckCircle size={20} />
+                  <span>Priority processing</span>
+                </div>
+              </div>
+              <Link to="/signup" className="btn btn-primary btn-large">
+                Sign Up Free
+              </Link>
             </div>
           </div>
         </div>

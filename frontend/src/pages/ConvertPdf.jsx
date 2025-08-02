@@ -1,70 +1,33 @@
 import React, { useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Image, FileText, Video, Music, Film, Upload, Download, AlertCircle, CheckCircle, FileDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { FileText, FileDown, Upload, Download, AlertCircle, CheckCircle, Clock, Settings } from 'lucide-react';
 import './ToolPage.css';
 
-const ToolPage = () => {
-  const { type } = useParams();
+const ConvertPdf = () => {
   const [file, setFile] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [showSignupPrompt, setShowSignupPrompt] = useState(false);
+  const [selectedFormat, setSelectedFormat] = useState('docx');
   const fileInputRef = useRef(null);
 
-  const toolConfig = {
-    'compress-image': {
-      title: 'Compress Image',
-      description: 'Reduce image file size while maintaining quality',
-      icon: <Image size={32} />,
-      acceptedTypes: 'image/*',
-      maxSize: 10 * 1024 * 1024, // 10MB
-      formats: ['JPG', 'PNG', 'WebP', 'GIF']
-    },
-    'compress-pdf': {
-      title: 'Compress PDF',
-      description: 'Reduce PDF file size for easier sharing',
-      icon: <FileText size={32} />,
-      acceptedTypes: '.pdf',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['PDF']
-    },
-    'compress-video': {
-      title: 'Compress Video',
-      description: 'Reduce video file size without losing quality',
-      icon: <Video size={32} />,
-      acceptedTypes: 'video/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV']
-    },
-    'convert-audio': {
-      title: 'Convert Audio',
-      description: 'Convert between different audio formats',
-      icon: <Music size={32} />,
-      acceptedTypes: 'audio/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP3', 'WAV', 'AAC', 'OGG', 'FLAC']
-    },
-    'convert-video': {
-      title: 'Convert Video',
-      description: 'Convert videos to different formats',
-      icon: <Film size={32} />,
-      acceptedTypes: 'video/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV', 'WebM']
-    },
-    'convert-image': {
-      title: 'Convert Image',
-      description: 'Convert images between different formats',
-      icon: <Image size={32} />,
-      acceptedTypes: 'image/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP']
-    }
+  const config = {
+    title: 'Convert PDF',
+    description: 'Convert PDF files to Word, Excel, PowerPoint, and image formats',
+    icon: <FileText size={32} />,
+    acceptedTypes: '.pdf',
+    maxSize: 10 * 1024 * 1024, // 10MB
+    formats: ['PDF'],
+    outputFormats: [
+      { value: 'docx', label: 'Word Document (.docx)', icon: <FileText size={20} /> },
+      { value: 'xlsx', label: 'Excel Spreadsheet (.xlsx)', icon: <FileText size={20} /> },
+      { value: 'pptx', label: 'PowerPoint (.pptx)', icon: <FileText size={20} /> },
+      { value: 'jpg', label: 'Image (.jpg)', icon: <FileText size={20} /> },
+      { value: 'png', label: 'Image (.png)', icon: <FileText size={20} /> }
+    ]
   };
-
-  const config = toolConfig[type] || toolConfig['compress-image'];
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -112,14 +75,13 @@ const ToolPage = () => {
     // Simulate processing
     setTimeout(() => {
       const originalSize = file.size;
-      const compressedSize = Math.round(originalSize * 0.6); // Simulate 40% compression
-      const savedPercentage = Math.round((1 - compressedSize / originalSize) * 100);
+      const convertedSize = Math.round(originalSize * 0.8); // Simulate conversion
       
       setResult({
         originalSize,
-        compressedSize,
-        savedPercentage,
-        downloadUrl: URL.createObjectURL(file) // In real app, this would be the processed file
+        convertedSize,
+        downloadUrl: URL.createObjectURL(file), // In real app, this would be the converted file
+        format: selectedFormat
       });
       
       setIsProcessing(false);
@@ -137,30 +99,6 @@ const ToolPage = () => {
   const getFilePreview = () => {
     if (!file) return null;
 
-    if (file.type.startsWith('image/')) {
-      return (
-        <div className="file-preview">
-          <img 
-            src={URL.createObjectURL(file)} 
-            alt="File preview" 
-            className="preview-image"
-          />
-        </div>
-      );
-    }
-
-    if (file.type.startsWith('video/')) {
-      return (
-        <div className="file-preview">
-          <video 
-            src={URL.createObjectURL(file)} 
-            controls 
-            className="preview-video"
-          />
-        </div>
-      );
-    }
-
     return (
       <div className="file-preview">
         <div className="file-icon">{config.icon}</div>
@@ -175,8 +113,8 @@ const ToolPage = () => {
   return (
     <>
       <Helmet>
-        <title>{config.title} - ConvertFlix</title>
-        <meta name="description" content={config.description} />
+        <title>Convert PDF - ConvertFlix</title>
+        <meta name="description" content="Convert PDF files to Word, Excel, PowerPoint, and image formats. Free up to 10MB." />
       </Helmet>
 
       <div className="tool-page">
@@ -240,7 +178,7 @@ const ToolPage = () => {
                 <div className="upload-icon">
                   <Upload size={48} />
                 </div>
-                <h3 className="upload-title">Drop your file here</h3>
+                <h3 className="upload-title">Drop your PDF here</h3>
                 <p className="upload-subtitle">or click to browse</p>
                 <p className="upload-limit">Maximum file size: {config.maxSize / (1024 * 1024)}MB</p>
                 <p className="upload-note">For larger files, <Link to="/signup" className="signup-link">sign up</Link> to unlock up to 100MB</p>
@@ -255,6 +193,24 @@ const ToolPage = () => {
             ) : (
               <div className="file-section">
                 {getFilePreview()}
+                
+                {/* Format Selection */}
+                <div className="format-selection">
+                  <h3 className="format-title">Select Output Format</h3>
+                  <div className="format-grid">
+                    {config.outputFormats.map((format) => (
+                      <button
+                        key={format.value}
+                        className={`format-option ${selectedFormat === format.value ? 'selected' : ''}`}
+                        onClick={() => setSelectedFormat(format.value)}
+                      >
+                        <div className="format-icon">{format.icon}</div>
+                        <div className="format-label">{format.label}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="file-actions">
                   <button 
                     className="btn btn-primary"
@@ -264,10 +220,13 @@ const ToolPage = () => {
                     {isProcessing ? (
                       <>
                         <div className="spinner"></div>
-                        Processing...
+                        Converting...
                       </>
                     ) : (
-                      `Process ${config.title.toLowerCase()}`
+                      <>
+                        <Settings size={20} />
+                        Convert to {selectedFormat.toUpperCase()}
+                      </>
                     )}
                   </button>
                   <button 
@@ -287,29 +246,29 @@ const ToolPage = () => {
           {/* Results */}
           {result && (
             <div className="results-section">
-              <h2 className="results-title">Processing Complete!</h2>
+              <h2 className="results-title">Conversion Complete!</h2>
               <div className="results-grid">
                 <div className="result-card">
                   <div className="result-label">Original Size</div>
                   <div className="result-value">{formatFileSize(result.originalSize)}</div>
                 </div>
                 <div className="result-card">
-                  <div className="result-label">Compressed Size</div>
-                  <div className="result-value">{formatFileSize(result.compressedSize)}</div>
+                  <div className="result-label">Converted Size</div>
+                  <div className="result-value">{formatFileSize(result.convertedSize)}</div>
                 </div>
                 <div className="result-card">
-                  <div className="result-label">Space Saved</div>
-                  <div className="result-value saved">{result.savedPercentage}%</div>
+                  <div className="result-label">Format</div>
+                  <div className="result-value">{result.format.toUpperCase()}</div>
                 </div>
               </div>
               <div className="download-section">
                 <a 
                   href={result.downloadUrl} 
-                  download={`processed_${file.name}`}
+                  download={`converted_${file.name.replace('.pdf', '')}.${result.format}`}
                   className="btn btn-primary btn-large"
                 >
                   <Download size={20} />
-                  Download Processed File
+                  Download Converted File
                 </a>
                 <p className="expiry-note">
                   <Clock size={16} />
@@ -324,4 +283,4 @@ const ToolPage = () => {
   );
 };
 
-export default ToolPage; 
+export default ConvertPdf; 

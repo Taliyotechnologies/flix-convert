@@ -38,9 +38,11 @@ const Navbar = () => {
     { name: 'Compress Image', path: '/tool/compress-image' },
     { name: 'Compress PDF', path: '/tool/compress-pdf' },
     { name: 'Compress Video', path: '/tool/compress-video' },
+    { name: 'Compress Audio', path: '/compress-audio' },
     { name: 'Convert Audio', path: '/tool/convert-audio' },
     { name: 'Convert Video', path: '/tool/convert-video' },
-    { name: 'Convert Image', path: '/tool/convert-image' }
+    { name: 'Convert Image', path: '/tool/convert-image' },
+    { name: 'Convert PDF', path: '/convert-pdf' }
   ];
 
   const companyItems = [

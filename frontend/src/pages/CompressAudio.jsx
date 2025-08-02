@@ -1,70 +1,31 @@
 import React, { useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Image, FileText, Video, Music, Film, Upload, Download, AlertCircle, CheckCircle, FileDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Music, FileDown, Upload, Download, AlertCircle, CheckCircle, Clock, Settings, Volume2 } from 'lucide-react';
 import './ToolPage.css';
 
-const ToolPage = () => {
-  const { type } = useParams();
+const CompressAudio = () => {
   const [file, setFile] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [showSignupPrompt, setShowSignupPrompt] = useState(false);
+  const [selectedQuality, setSelectedQuality] = useState('high');
   const fileInputRef = useRef(null);
 
-  const toolConfig = {
-    'compress-image': {
-      title: 'Compress Image',
-      description: 'Reduce image file size while maintaining quality',
-      icon: <Image size={32} />,
-      acceptedTypes: 'image/*',
-      maxSize: 10 * 1024 * 1024, // 10MB
-      formats: ['JPG', 'PNG', 'WebP', 'GIF']
-    },
-    'compress-pdf': {
-      title: 'Compress PDF',
-      description: 'Reduce PDF file size for easier sharing',
-      icon: <FileText size={32} />,
-      acceptedTypes: '.pdf',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['PDF']
-    },
-    'compress-video': {
-      title: 'Compress Video',
-      description: 'Reduce video file size without losing quality',
-      icon: <Video size={32} />,
-      acceptedTypes: 'video/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV']
-    },
-    'convert-audio': {
-      title: 'Convert Audio',
-      description: 'Convert between different audio formats',
-      icon: <Music size={32} />,
-      acceptedTypes: 'audio/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP3', 'WAV', 'AAC', 'OGG', 'FLAC']
-    },
-    'convert-video': {
-      title: 'Convert Video',
-      description: 'Convert videos to different formats',
-      icon: <Film size={32} />,
-      acceptedTypes: 'video/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['MP4', 'AVI', 'MOV', 'MKV', 'WebM']
-    },
-    'convert-image': {
-      title: 'Convert Image',
-      description: 'Convert images between different formats',
-      icon: <Image size={32} />,
-      acceptedTypes: 'image/*',
-      maxSize: 10 * 1024 * 1024,
-      formats: ['JPG', 'PNG', 'WebP', 'GIF', 'BMP']
-    }
+  const config = {
+    title: 'Compress Audio',
+    description: 'Reduce audio file size while maintaining quality',
+    icon: <Music size={32} />,
+    acceptedTypes: 'audio/*',
+    maxSize: 10 * 1024 * 1024, // 10MB
+    formats: ['MP3', 'WAV', 'AAC', 'OGG', 'FLAC'],
+    qualityOptions: [
+      { value: 'high', label: 'High Quality (320kbps)', description: 'Best quality, larger file size' },
+      { value: 'medium', label: 'Medium Quality (192kbps)', description: 'Good balance of quality and size' },
+      { value: 'low', label: 'Low Quality (128kbps)', description: 'Smaller file size, reduced quality' }
+    ]
   };
-
-  const config = toolConfig[type] || toolConfig['compress-image'];
 
   const handleDragOver = (e) => {
     e.preventDefault();
@@ -112,14 +73,16 @@ const ToolPage = () => {
     // Simulate processing
     setTimeout(() => {
       const originalSize = file.size;
-      const compressedSize = Math.round(originalSize * 0.6); // Simulate 40% compression
+      const compressionRatios = { high: 0.7, medium: 0.5, low: 0.3 };
+      const compressedSize = Math.round(originalSize * compressionRatios[selectedQuality]);
       const savedPercentage = Math.round((1 - compressedSize / originalSize) * 100);
       
       setResult({
         originalSize,
         compressedSize,
         savedPercentage,
-        downloadUrl: URL.createObjectURL(file) // In real app, this would be the processed file
+        quality: selectedQuality,
+        downloadUrl: URL.createObjectURL(file) // In real app, this would be the compressed file
       });
       
       setIsProcessing(false);
@@ -137,30 +100,6 @@ const ToolPage = () => {
   const getFilePreview = () => {
     if (!file) return null;
 
-    if (file.type.startsWith('image/')) {
-      return (
-        <div className="file-preview">
-          <img 
-            src={URL.createObjectURL(file)} 
-            alt="File preview" 
-            className="preview-image"
-          />
-        </div>
-      );
-    }
-
-    if (file.type.startsWith('video/')) {
-      return (
-        <div className="file-preview">
-          <video 
-            src={URL.createObjectURL(file)} 
-            controls 
-            className="preview-video"
-          />
-        </div>
-      );
-    }
-
     return (
       <div className="file-preview">
         <div className="file-icon">{config.icon}</div>
@@ -175,8 +114,8 @@ const ToolPage = () => {
   return (
     <>
       <Helmet>
-        <title>{config.title} - ConvertFlix</title>
-        <meta name="description" content={config.description} />
+        <title>Compress Audio - ConvertFlix</title>
+        <meta name="description" content="Compress audio files while maintaining quality. Free up to 10MB." />
       </Helmet>
 
       <div className="tool-page">
@@ -240,7 +179,7 @@ const ToolPage = () => {
                 <div className="upload-icon">
                   <Upload size={48} />
                 </div>
-                <h3 className="upload-title">Drop your file here</h3>
+                <h3 className="upload-title">Drop your audio file here</h3>
                 <p className="upload-subtitle">or click to browse</p>
                 <p className="upload-limit">Maximum file size: {config.maxSize / (1024 * 1024)}MB</p>
                 <p className="upload-note">For larger files, <Link to="/signup" className="signup-link">sign up</Link> to unlock up to 100MB</p>
@@ -255,6 +194,29 @@ const ToolPage = () => {
             ) : (
               <div className="file-section">
                 {getFilePreview()}
+                
+                {/* Quality Selection */}
+                <div className="quality-selection">
+                  <h3 className="quality-title">Select Compression Quality</h3>
+                  <div className="quality-grid">
+                    {config.qualityOptions.map((option) => (
+                      <button
+                        key={option.value}
+                        className={`quality-option ${selectedQuality === option.value ? 'selected' : ''}`}
+                        onClick={() => setSelectedQuality(option.value)}
+                      >
+                        <div className="quality-icon">
+                          <Volume2 size={20} />
+                        </div>
+                        <div className="quality-content">
+                          <div className="quality-label">{option.label}</div>
+                          <div className="quality-description">{option.description}</div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="file-actions">
                   <button 
                     className="btn btn-primary"
@@ -264,10 +226,13 @@ const ToolPage = () => {
                     {isProcessing ? (
                       <>
                         <div className="spinner"></div>
-                        Processing...
+                        Compressing...
                       </>
                     ) : (
-                      `Process ${config.title.toLowerCase()}`
+                      <>
+                        <Settings size={20} />
+                        Compress Audio
+                      </>
                     )}
                   </button>
                   <button 
@@ -287,7 +252,7 @@ const ToolPage = () => {
           {/* Results */}
           {result && (
             <div className="results-section">
-              <h2 className="results-title">Processing Complete!</h2>
+              <h2 className="results-title">Compression Complete!</h2>
               <div className="results-grid">
                 <div className="result-card">
                   <div className="result-label">Original Size</div>
@@ -301,15 +266,19 @@ const ToolPage = () => {
                   <div className="result-label">Space Saved</div>
                   <div className="result-value saved">{result.savedPercentage}%</div>
                 </div>
+                <div className="result-card">
+                  <div className="result-label">Quality</div>
+                  <div className="result-value">{result.quality.charAt(0).toUpperCase() + result.quality.slice(1)}</div>
+                </div>
               </div>
               <div className="download-section">
                 <a 
                   href={result.downloadUrl} 
-                  download={`processed_${file.name}`}
+                  download={`compressed_${file.name}`}
                   className="btn btn-primary btn-large"
                 >
                   <Download size={20} />
-                  Download Processed File
+                  Download Compressed File
                 </a>
                 <p className="expiry-note">
                   <Clock size={16} />
@@ -324,4 +293,4 @@ const ToolPage = () => {
   );
 };
 
-export default ToolPage; 
+export default CompressAudio; 
