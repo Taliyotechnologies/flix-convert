@@ -12,6 +12,7 @@ import SignUp from './pages/SignUp';
 import Dashboard from './pages/Dashboard';
 import DashboardLayout from './pages/DashboardLayout';
 import AdminPanel from './pages/AdminPanel';
+import AdminLayout from './pages/AdminLayout';
 import ToolPage from './pages/ToolPage';
 import Company from './pages/Company';
 import About from './pages/About';
@@ -37,7 +38,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/dashboard" element={<DashboardLayout />} />
-                <Route path="/admin" element={<AdminPanel />} />
+                <Route path="/admin" element={<AdminLayout />} />
                 <Route path="/tool/:type" element={<ToolPage />} />
                 <Route path="/company" element={<Company />} />
                 <Route path="/about" element={<About />} />

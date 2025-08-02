@@ -5,8 +5,10 @@ import './About.css';
 
 const About = () => {
   const stats = [
-    { number: '50K+', label: 'Files Processed', icon: <Server size={24} /> },
+    { number: '2M+', label: 'Files Processed', icon: <Server size={24} /> },
     { number: '99.9%', label: 'Uptime', icon: <TrendingUp size={24} /> },
+    { number: '150+', label: 'Countries Served', icon: <Globe size={24} /> },
+    { number: '50K+', label: 'Happy Users', icon: <Users size={24} /> },
     { number: '24/7', label: 'Support', icon: <Clock size={24} /> },
     { number: '100%', label: 'Secure', icon: <Lock size={24} /> }
   ];
@@ -90,6 +92,11 @@ const About = () => {
           {/* Stats Section */}
           <section className="stats-section">
             <h2 className="section-title">Our Impact</h2>
+            <p className="impact-description">
+              Since our launch, we've made a significant impact on how people process and manage their files. 
+              Our commitment to excellence has resulted in impressive numbers that reflect our dedication to 
+              providing the best possible service to our global community.
+            </p>
             <div className="stats-grid">
               {stats.map((stat, index) => (
                 <div key={index} className="stat-card">
@@ -98,6 +105,16 @@ const About = () => {
                   <div className="stat-label">{stat.label}</div>
                 </div>
               ))}
+            </div>
+            <div className="impact-highlight">
+              <div className="highlight-content">
+                <h3>Trusted by Professionals Worldwide</h3>
+                <p>
+                  From individual creators to enterprise teams, our tools have become an essential part of 
+                  daily workflows. We've helped users save countless hours and storage space while maintaining 
+                  the highest quality standards in file processing.
+                </p>
+              </div>
             </div>
           </section>
 
