@@ -4,241 +4,269 @@ const { PDFDocument } = require('pdf-lib');
 const fs = require('fs-extra');
 const path = require('path');
 
-// Image compression using Sharp
-const compressImage = async (inputPath, outputPath, quality = 80) => {
-  try {
-    await sharp(inputPath)
-      .jpeg({ quality })
-      .toFile(outputPath);
-    
-    return true;
-  } catch (error) {
-    throw new Error(`Image compression failed: ${error.message}`);
-  }
-};
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, '../uploads');
+fs.ensureDirSync(uploadsDir);
 
-// Image conversion using Sharp
-const convertImage = async (inputPath, outputPath, format, quality = 80) => {
+// Image compression and conversion
+const processImage = async (file, operation, targetFormat = null) => {
   try {
-    let sharpInstance = sharp(inputPath);
+    const originalSize = file.size;
+    const originalFormat = path.extname(file.originalname).toLowerCase().slice(1);
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
     
-    switch (format.toLowerCase()) {
-      case 'jpeg':
-      case 'jpg':
-        sharpInstance = sharpInstance.jpeg({ quality });
-        break;
-      case 'png':
-        sharpInstance = sharpInstance.png({ quality });
-        break;
-      case 'webp':
-        sharpInstance = sharpInstance.webp({ quality });
-        break;
-      case 'gif':
-        sharpInstance = sharpInstance.gif();
-        break;
-      case 'bmp':
-        sharpInstance = sharpInstance.bmp();
-        break;
-      case 'tiff':
-        sharpInstance = sharpInstance.tiff({ quality });
-        break;
-      default:
-        throw new Error('Unsupported image format');
+    let outputPath;
+    let outputFormat = originalFormat;
+    
+    if (operation === 'convert' && targetFormat) {
+      outputFormat = targetFormat;
+      outputPath = path.join(uploadsDir, `${fileName}.${outputFormat}`);
+    } else {
+      outputPath = path.join(uploadsDir, `${fileName}.${outputFormat}`);
+    }
+    
+    let sharpInstance = sharp(file.buffer);
+    
+    // Apply compression for both compress and convert operations
+    if (operation === 'compress') {
+      sharpInstance = sharpInstance.jpeg({ quality: 80, progressive: true });
+    } else if (operation === 'convert') {
+      switch (outputFormat) {
+        case 'jpeg':
+        case 'jpg':
+          sharpInstance = sharpInstance.jpeg({ quality: 85, progressive: true });
+          break;
+        case 'png':
+          sharpInstance = sharpInstance.png({ compressionLevel: 8 });
+          break;
+        case 'webp':
+          sharpInstance = sharpInstance.webp({ quality: 85 });
+          break;
+        case 'avif':
+          sharpInstance = sharpInstance.avif({ quality: 85 });
+          break;
+        default:
+          sharpInstance = sharpInstance.jpeg({ quality: 85 });
+      }
     }
     
     await sharpInstance.toFile(outputPath);
-    return true;
+    
+    const stats = await fs.stat(outputPath);
+    const compressedSize = stats.size;
+    
+    return {
+      fileName: path.basename(outputPath),
+      originalSize,
+      compressedSize,
+      originalFormat,
+      convertedFormat: outputFormat,
+      filePath: outputPath
+    };
   } catch (error) {
-    throw new Error(`Image conversion failed: ${error.message}`);
+    throw new Error(`Image processing failed: ${error.message}`);
   }
 };
 
-// Video compression using FFmpeg
-const compressVideo = async (inputPath, outputPath, quality = 'medium') => {
+// Video compression and conversion
+const processVideo = async (file, operation, targetFormat = null) => {
   return new Promise((resolve, reject) => {
-    let command = ffmpeg(inputPath);
-    
-    switch (quality) {
-      case 'low':
-        command = command.videoCodec('libx264').outputOptions(['-crf 28']);
-        break;
-      case 'medium':
-        command = command.videoCodec('libx264').outputOptions(['-crf 23']);
-        break;
-      case 'high':
-        command = command.videoCodec('libx264').outputOptions(['-crf 18']);
-        break;
-      default:
-        command = command.videoCodec('libx264').outputOptions(['-crf 23']);
+    try {
+      const originalSize = file.size;
+      const originalFormat = path.extname(file.originalname).toLowerCase().slice(1);
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      
+      let outputFormat = originalFormat;
+      if (operation === 'convert' && targetFormat) {
+        outputFormat = targetFormat;
+      }
+      
+      const outputPath = path.join(uploadsDir, `${fileName}.${outputFormat}`);
+      
+      let ffmpegCommand = ffmpeg(file.buffer);
+      
+      if (operation === 'compress') {
+        // Compress video with reduced bitrate
+        ffmpegCommand = ffmpegCommand
+          .videoCodec('libx264')
+          .audioCodec('aac')
+          .videoBitrate('1000k')
+          .audioBitrate('128k')
+          .outputOptions(['-preset', 'medium']);
+      } else if (operation === 'convert') {
+        // Convert to target format
+        switch (outputFormat) {
+          case 'mp4':
+            ffmpegCommand = ffmpegCommand
+              .videoCodec('libx264')
+              .audioCodec('aac')
+              .outputOptions(['-preset', 'medium']);
+            break;
+          case 'avi':
+            ffmpegCommand = ffmpegCommand
+              .videoCodec('libx264')
+              .audioCodec('mp3');
+            break;
+          case 'mov':
+            ffmpegCommand = ffmpegCommand
+              .videoCodec('libx264')
+              .audioCodec('aac');
+            break;
+          case 'webm':
+            ffmpegCommand = ffmpegCommand
+              .videoCodec('libvpx-vp9')
+              .audioCodec('libopus');
+            break;
+          default:
+            ffmpegCommand = ffmpegCommand
+              .videoCodec('libx264')
+              .audioCodec('aac');
+        }
+      }
+      
+      ffmpegCommand
+        .output(outputPath)
+        .on('end', async () => {
+          try {
+            const stats = await fs.stat(outputPath);
+            const compressedSize = stats.size;
+            
+            resolve({
+              fileName: path.basename(outputPath),
+              originalSize,
+              compressedSize,
+              originalFormat,
+              convertedFormat: outputFormat,
+              filePath: outputPath
+            });
+          } catch (error) {
+            reject(new Error(`Failed to get file stats: ${error.message}`));
+          }
+        })
+        .on('error', (error) => {
+          reject(new Error(`Video processing failed: ${error.message}`));
+        })
+        .run();
+    } catch (error) {
+      reject(new Error(`Video processing setup failed: ${error.message}`));
     }
-    
-    command
-      .audioCodec('aac')
-      .output(outputPath)
-      .on('end', () => resolve(true))
-      .on('error', (err) => reject(new Error(`Video compression failed: ${err.message}`)))
-      .run();
   });
 };
 
-// Video conversion using FFmpeg
-const convertVideo = async (inputPath, outputPath, format) => {
+// Audio compression and conversion
+const processAudio = async (file, operation, targetFormat = null) => {
   return new Promise((resolve, reject) => {
-    let command = ffmpeg(inputPath);
-    
-    switch (format.toLowerCase()) {
-      case 'mp4':
-        command = command.videoCodec('libx264').audioCodec('aac');
-        break;
-      case 'avi':
-        command = command.videoCodec('libxvid').audioCodec('mp3');
-        break;
-      case 'mov':
-        command = command.videoCodec('libx264').audioCodec('aac');
-        break;
-      case 'webm':
-        command = command.videoCodec('libvpx').audioCodec('libvorbis');
-        break;
-      case 'mkv':
-        command = command.videoCodec('libx264').audioCodec('aac');
-        break;
-      default:
-        reject(new Error('Unsupported video format'));
-        return;
+    try {
+      const originalSize = file.size;
+      const originalFormat = path.extname(file.originalname).toLowerCase().slice(1);
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}`;
+      
+      let outputFormat = originalFormat;
+      if (operation === 'convert' && targetFormat) {
+        outputFormat = targetFormat;
+      }
+      
+      const outputPath = path.join(uploadsDir, `${fileName}.${outputFormat}`);
+      
+      let ffmpegCommand = ffmpeg(file.buffer);
+      
+      if (operation === 'compress') {
+        // Compress audio with reduced bitrate
+        ffmpegCommand = ffmpegCommand
+          .audioCodec('aac')
+          .audioBitrate('128k');
+      } else if (operation === 'convert') {
+        // Convert to target format
+        switch (outputFormat) {
+          case 'mp3':
+            ffmpegCommand = ffmpegCommand.audioCodec('mp3');
+            break;
+          case 'aac':
+            ffmpegCommand = ffmpegCommand.audioCodec('aac');
+            break;
+          case 'ogg':
+            ffmpegCommand = ffmpegCommand.audioCodec('libvorbis');
+            break;
+          case 'wav':
+            ffmpegCommand = ffmpegCommand.audioCodec('pcm_s16le');
+            break;
+          case 'flac':
+            ffmpegCommand = ffmpegCommand.audioCodec('flac');
+            break;
+          default:
+            ffmpegCommand = ffmpegCommand.audioCodec('aac');
+        }
+      }
+      
+      ffmpegCommand
+        .output(outputPath)
+        .on('end', async () => {
+          try {
+            const stats = await fs.stat(outputPath);
+            const compressedSize = stats.size;
+            
+            resolve({
+              fileName: path.basename(outputPath),
+              originalSize,
+              compressedSize,
+              originalFormat,
+              convertedFormat: outputFormat,
+              filePath: outputPath
+            });
+          } catch (error) {
+            reject(new Error(`Failed to get file stats: ${error.message}`));
+          }
+        })
+        .on('error', (error) => {
+          reject(new Error(`Audio processing failed: ${error.message}`));
+        })
+        .run();
+    } catch (error) {
+      reject(new Error(`Audio processing setup failed: ${error.message}`));
     }
-    
-    command
-      .output(outputPath)
-      .on('end', () => resolve(true))
-      .on('error', (err) => reject(new Error(`Video conversion failed: ${err.message}`)))
-      .run();
   });
 };
 
-// Audio compression using FFmpeg
-const compressAudio = async (inputPath, outputPath, quality = 'medium') => {
-  return new Promise((resolve, reject) => {
-    let command = ffmpeg(inputPath);
-    
-    switch (quality) {
-      case 'low':
-        command = command.audioCodec('mp3').audioBitrate('64k');
-        break;
-      case 'medium':
-        command = command.audioCodec('mp3').audioBitrate('128k');
-        break;
-      case 'high':
-        command = command.audioCodec('mp3').audioBitrate('320k');
-        break;
-      default:
-        command = command.audioCodec('mp3').audioBitrate('128k');
-    }
-    
-    command
-      .output(outputPath)
-      .on('end', () => resolve(true))
-      .on('error', (err) => reject(new Error(`Audio compression failed: ${err.message}`)))
-      .run();
-  });
-};
-
-// Audio conversion using FFmpeg
-const convertAudio = async (inputPath, outputPath, format) => {
-  return new Promise((resolve, reject) => {
-    let command = ffmpeg(inputPath);
-    
-    switch (format.toLowerCase()) {
-      case 'mp3':
-        command = command.audioCodec('mp3');
-        break;
-      case 'wav':
-        command = command.audioCodec('pcm_s16le');
-        break;
-      case 'flac':
-        command = command.audioCodec('flac');
-        break;
-      case 'aac':
-        command = command.audioCodec('aac');
-        break;
-      case 'ogg':
-        command = command.audioCodec('libvorbis');
-        break;
-      case 'm4a':
-        command = command.audioCodec('aac');
-        break;
-      default:
-        reject(new Error('Unsupported audio format'));
-        return;
-    }
-    
-    command
-      .output(outputPath)
-      .on('end', () => resolve(true))
-      .on('error', (err) => reject(new Error(`Audio conversion failed: ${err.message}`)))
-      .run();
-  });
-};
-
-// PDF compression using PDF-lib
-const compressPDF = async (inputPath, outputPath) => {
+// PDF compression
+const processPDF = async (file, operation) => {
   try {
-    const pdfBytes = await fs.readFile(inputPath);
-    const pdfDoc = await PDFDocument.load(pdfBytes);
+    const originalSize = file.size;
+    const originalFormat = 'pdf';
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.pdf`;
+    const outputPath = path.join(uploadsDir, fileName);
     
-    // PDF-lib doesn't have built-in compression, so we'll use a different approach
-    // For now, we'll just copy the file and let the client handle compression
-    await fs.copy(inputPath, outputPath);
+    // For PDF compression, we'll use a simple approach
+    // In a production environment, you might want to use more sophisticated PDF compression
+    const pdfDoc = await PDFDocument.load(file.buffer);
     
-    return true;
+    // Remove unnecessary metadata and compress
+    const compressedPdfBytes = await pdfDoc.save({
+      useObjectStreams: true,
+      addDefaultPage: false
+    });
+    
+    await fs.writeFile(outputPath, compressedPdfBytes);
+    
+    const stats = await fs.stat(outputPath);
+    const compressedSize = stats.size;
+    
+    return {
+      fileName,
+      originalSize,
+      compressedSize,
+      originalFormat,
+      convertedFormat: 'pdf',
+      filePath: outputPath
+    };
   } catch (error) {
-    throw new Error(`PDF compression failed: ${error.message}`);
-  }
-};
-
-// PDF conversion (to images) using PDF-lib
-const convertPDF = async (inputPath, outputPath, format) => {
-  try {
-    // For PDF conversion, we'll use a different approach
-    // This is a placeholder - in a real implementation, you might use pdf2pic or similar
-    throw new Error('PDF conversion not implemented yet');
-  } catch (error) {
-    throw new Error(`PDF conversion failed: ${error.message}`);
-  }
-};
-
-// Get file size in bytes
-const getFileSize = (filePath) => {
-  const stats = fs.statSync(filePath);
-  return stats.size;
-};
-
-// Calculate saved percentage
-const calculateSavedPercent = (originalSize, processedSize) => {
-  return Math.round(((originalSize - processedSize) / originalSize) * 100);
-};
-
-// Generate output filename
-const generateOutputFilename = (originalName, operation, format = null) => {
-  const nameWithoutExt = path.parse(originalName).name;
-  const timestamp = Date.now();
-  
-  if (operation === 'convert' && format) {
-    return `${nameWithoutExt}-converted-${timestamp}.${format}`;
-  } else {
-    return `${nameWithoutExt}-compressed-${timestamp}.${path.extname(originalName).slice(1)}`;
+    throw new Error(`PDF processing failed: ${error.message}`);
   }
 };
 
 module.exports = {
-  compressImage,
-  convertImage,
-  compressVideo,
-  convertVideo,
-  compressAudio,
-  convertAudio,
-  compressPDF,
-  convertPDF,
-  getFileSize,
-  calculateSavedPercent,
-  generateOutputFilename
+  processImage,
+  processVideo,
+  processAudio,
+  processPDF,
+  uploadsDir
 }; 

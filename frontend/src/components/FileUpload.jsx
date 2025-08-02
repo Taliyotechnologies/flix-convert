@@ -1,124 +1,226 @@
-import React, { useCallback, useState } from 'react';
-import './FileUpload.css';
+import React, { useState, useRef } from 'react'
+import { formatFileSize } from '../services/api'
 
-const FileUpload = ({ file, onFileSelect, acceptedTypes }) => {
-  const [isDragOver, setIsDragOver] = useState(false);
+const FileUpload = ({ 
+  onFileSelect, 
+  onProcess, 
+  fileType, 
+  operation, 
+  supportedFormats = [],
+  maxSize = 10 * 1024 * 1024, // 10MB
+  showToast 
+}) => {
+  const [file, setFile] = useState(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [result, setResult] = useState(null)
+  const fileInputRef = useRef(null)
 
-  const getAcceptedMimeTypes = (type) => {
-    const mimeTypes = {
-      image: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/bmp', 'image/tiff'],
-      video: ['video/mp4', 'video/avi', 'video/mov', 'video/wmv', 'video/flv', 'video/webm', 'video/mkv'],
-      audio: ['audio/mp3', 'audio/wav', 'audio/flac', 'audio/aac', 'audio/ogg', 'audio/m4a'],
-      pdf: ['application/pdf']
-    };
-    return mimeTypes[type] || mimeTypes.image;
-  };
+  const handleFileSelect = (selectedFile) => {
+    if (!selectedFile) return
 
-  const formatFileSize = (bytes) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
-
-  const validateFile = (file) => {
-    const maxSize = 100 * 1024 * 1024; // 100MB
-    const acceptedTypes = getAcceptedMimeTypes(acceptedTypes);
-
-    if (file.size > maxSize) {
-      throw new Error('File size must be less than 100MB');
+    // Check file size
+    if (selectedFile.size > maxSize) {
+      showToast(`File size must be less than ${formatFileSize(maxSize)}`, 'error')
+      return
     }
 
-    if (!acceptedTypes.includes(file.type)) {
-      throw new Error('Invalid file type. Please select a valid file.');
+    // Check file type
+    const fileExtension = selectedFile.name.split('.').pop().toLowerCase()
+    if (supportedFormats.length > 0 && !supportedFormats.includes(fileExtension)) {
+      showToast(`Unsupported file format. Supported formats: ${supportedFormats.join(', ')}`, 'error')
+      return
     }
 
-    return true;
-  };
+    setFile(selectedFile)
+    setResult(null)
+    onFileSelect?.(selectedFile)
+  }
 
-  const handleFileSelect = useCallback((selectedFile) => {
-    try {
-      validateFile(selectedFile);
-      onFileSelect(selectedFile);
-    } catch (error) {
-      alert(error.message);
-    }
-  }, [onFileSelect, acceptedTypes]);
+  const handleDragOver = (e) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }
 
-  const handleDrop = useCallback((e) => {
-    e.preventDefault();
-    setIsDragOver(false);
+  const handleDragLeave = (e) => {
+    e.preventDefault()
+    setIsDragging(false)
+  }
 
-    const droppedFile = e.dataTransfer.files[0];
+  const handleDrop = (e) => {
+    e.preventDefault()
+    setIsDragging(false)
+    
+    const droppedFile = e.dataTransfer.files[0]
     if (droppedFile) {
-      handleFileSelect(droppedFile);
+      handleFileSelect(droppedFile)
     }
-  }, [handleFileSelect]);
+  }
 
-  const handleDragOver = useCallback((e) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  }, []);
+  const handleFileInputChange = (e) => {
+    const selectedFile = e.target.files[0]
+    handleFileSelect(selectedFile)
+  }
 
-  const handleDragLeave = useCallback((e) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  }, []);
+  const handleProcess = async () => {
+    if (!file) return
 
-  const handleFileInput = useCallback((e) => {
-    const selectedFile = e.target.files[0];
-    if (selectedFile) {
-      handleFileSelect(selectedFile);
+    setIsProcessing(true)
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const response = await onProcess(formData)
+      setResult(response.data)
+      showToast(`${operation} completed successfully!`, 'success')
+    } catch (error) {
+      console.error('Processing error:', error)
+      showToast(error.response?.data?.message || `${operation} failed`, 'error')
+    } finally {
+      setIsProcessing(false)
     }
-  }, [handleFileSelect]);
+  }
+
+  const handleDownload = () => {
+    if (!result) return
+
+    const link = document.createElement('a')
+    link.href = `https://flix-convert.onrender.com/api/admin/files/${result.fileId}/download`
+    link.download = result.fileName
+    link.click()
+  }
+
+  const resetForm = () => {
+    setFile(null)
+    setResult(null)
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''
+    }
+  }
 
   return (
-    <div className="file-upload">
-      <div
-        className={`upload-area ${isDragOver ? 'drag-over' : ''} ${file ? 'has-file' : ''}`}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-      >
-        {!file ? (
-          <>
-            <div className="upload-icon">📁</div>
-            <h3>Drag & Drop your file here</h3>
-            <p>or</p>
-            <label className="btn btn-primary">
-              Choose File
-              <input
-                type="file"
-                accept={getAcceptedMimeTypes(acceptedTypes).join(',')}
-                onChange={handleFileInput}
-                style={{ display: 'none' }}
-              />
-            </label>
-            <p className="upload-info">
-              Maximum file size: 100MB<br />
-              Supported formats: {getAcceptedMimeTypes(acceptedTypes).map(type => type.split('/')[1]).join(', ')}
+    <div className="max-w-4xl mx-auto">
+      {/* File Upload Area */}
+      <div className="mb-8">
+        <div
+          className={`file-upload-area ${isDragging ? 'dragover' : ''}`}
+          onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+          onClick={() => fileInputRef.current?.click()}
+        >
+          <div className="text-6xl mb-4">📁</div>
+          <h3 className="text-xl font-semibold mb-2">
+            {file ? 'File Selected' : 'Drop your file here'}
+          </h3>
+          <p className="text-text-secondary mb-4">
+            {file 
+              ? `${file.name} (${formatFileSize(file.size)})`
+              : `or click to browse. Max size: ${formatFileSize(maxSize)}`
+            }
+          </p>
+          {supportedFormats.length > 0 && (
+            <p className="text-sm text-text-secondary">
+              Supported formats: {supportedFormats.join(', ')}
             </p>
-          </>
-        ) : (
-          <div className="file-info">
-            <div className="file-icon">📄</div>
-            <div className="file-details">
-              <h3>{file.name}</h3>
-              <p>Size: {formatFileSize(file.size)}</p>
-              <p>Type: {file.type}</p>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            onChange={handleFileInputChange}
+            accept={supportedFormats.map(format => `.${format}`).join(',')}
+            className="hidden"
+          />
+        </div>
+      </div>
+
+      {/* Process Button */}
+      {file && !result && (
+        <div className="text-center mb-8">
+          <button
+            onClick={handleProcess}
+            disabled={isProcessing}
+            className="btn btn-primary text-lg px-8 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isProcessing ? (
+              <>
+                <span className="loading"></span>
+                Processing...
+              </>
+            ) : (
+              `Process ${file.name}`
+            )}
+          </button>
+        </div>
+      )}
+
+      {/* Results */}
+      {result && (
+        <div className="card">
+          <h3 className="text-xl font-semibold mb-4 text-center">
+            ✅ {operation} Completed Successfully!
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="text-center">
+              <h4 className="font-semibold mb-2">Original File</h4>
+              <p className="text-text-secondary">{result.originalName}</p>
+              <p className="text-lg font-semibold text-primary">
+                {formatFileSize(result.originalSize)}
+              </p>
             </div>
+            
+            <div className="text-center">
+              <h4 className="font-semibold mb-2">Processed File</h4>
+              <p className="text-text-secondary">{result.fileName}</p>
+              <p className="text-lg font-semibold text-success">
+                {formatFileSize(result.compressedSize)}
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center mb-6">
+            <div className="inline-block bg-success/10 text-success px-4 py-2 rounded-lg">
+              <span className="font-semibold">{result.percentSaved}%</span> size reduction
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="text-center p-4 bg-hover rounded-lg">
+              <h5 className="font-semibold mb-1">Original Format</h5>
+              <p className="text-text-secondary">{result.originalFormat.toUpperCase()}</p>
+            </div>
+            
+            <div className="text-center p-4 bg-hover rounded-lg">
+              <h5 className="font-semibold mb-1">New Format</h5>
+              <p className="text-text-secondary">{result.convertedFormat.toUpperCase()}</p>
+            </div>
+          </div>
+
+          <div className="text-center mb-4">
+            <p className="text-sm text-text-secondary">
+              ⏰ This file will be automatically deleted after 24 hours
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4">
             <button
-              className="btn btn-secondary remove-btn"
-              onClick={() => onFileSelect(null)}
+              onClick={handleDownload}
+              className="btn btn-success"
             >
-              Remove
+              📥 Download File
+            </button>
+            <button
+              onClick={resetForm}
+              className="btn btn-secondary"
+            >
+              🔄 Process Another File
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default FileUpload; 
+export default FileUpload 

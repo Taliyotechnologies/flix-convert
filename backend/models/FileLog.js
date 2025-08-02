@@ -3,24 +3,39 @@ const mongoose = require('mongoose');
 const fileLogSchema = new mongoose.Schema({
   fileName: {
     type: String,
-    required: true,
-    trim: true
+    required: true
+  },
+  originalName: {
+    type: String,
+    required: true
   },
   fileType: {
     type: String,
     required: true,
     enum: ['image', 'video', 'audio', 'pdf']
   },
+  operation: {
+    type: String,
+    required: true,
+    enum: ['compress', 'convert']
+  },
   originalSize: {
     type: Number,
     required: true
   },
-  processedSize: {
+  compressedSize: {
     type: Number,
     required: true
   },
-  savedPercent: {
-    type: Number,
+  originalFormat: {
+    type: String,
+    required: true
+  },
+  convertedFormat: {
+    type: String
+  },
+  filePath: {
+    type: String,
     required: true
   },
   uploadedAt: {
@@ -31,30 +46,22 @@ const fileLogSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  filePath: {
-    type: String,
-    required: true
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    default: null
   },
-  originalFormat: {
-    type: String,
-    required: true
+  ipAddress: {
+    type: String
   },
-  processedFormat: {
-    type: String,
-    required: true
-  },
-  operation: {
-    type: String,
-    required: true,
-    enum: ['compress', 'convert']
+  userAgent: {
+    type: String
   }
-}, {
-  timestamps: true
 });
 
 // Index for faster queries
 fileLogSchema.index({ expiresAt: 1 });
+fileLogSchema.index({ uploadedAt: -1 });
 fileLogSchema.index({ fileType: 1 });
-fileLogSchema.index({ operation: 1 });
 
 module.exports = mongoose.model('FileLog', fileLogSchema); 
